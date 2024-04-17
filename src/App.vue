@@ -4,10 +4,10 @@
 
 <template>
   <div>
-    <n-button>Default</n-button>
+    <n-button class="btn-df">Default</n-button>
   </div>
 </template>
 
-<style scoped>
+<style scoped type="scss">
 
 </style>
