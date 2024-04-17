@@ -4,7 +4,7 @@
 
 <template>
   <div>
-    main content
+    <n-button>Default</n-button>
   </div>
 </template>
 
