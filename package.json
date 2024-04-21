@@ -12,11 +12,13 @@
     "minireset.css": "^0.0.7",
     "naive-ui": "^2.38.1",
     "normalize.css": "^8.0.1",
+    "pinyin-pro": "^3.20.2",
     "vue": "^3.4.21"
   },
   "devDependencies": {
     "@types/node": "^20.12.7",
     "@vitejs/plugin-vue": "^5.0.4",
+    "sass": "^1.75.0",
     "typescript": "^5.2.2",
     "unplugin-auto-import": "^0.17.5",
     "unplugin-vue-components": "^0.26.0",
