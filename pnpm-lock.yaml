@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  lodash:
+    specifier: ^4.17.21
+    version: 4.17.21
   minireset.css:
     specifier: ^0.0.7
     version: 0.0.7
@@ -20,6 +23,9 @@ dependencies:
   vue:
     specifier: ^3.4.21
     version: 3.4.23(typescript@5.4.5)
+  vue-router:
+    specifier: ^4.3.2
+    version: 4.3.2(vue@3.4.23)
 
 devDependencies:
   '@types/node':
@@ -574,6 +580,10 @@ packages:
     dependencies:
       '@vue/compiler-dom': 3.4.23
       '@vue/shared': 3.4.23
+
+  /@vue/devtools-api@6.6.1:
+    resolution: {integrity: sha512-LgPscpE3Vs0x96PzSSB4IGVSZXZBZHpfxs+ZA1d+VEPwHdOXowy/Y2CsvCAIFrf+ssVU1pD1jidj505EpUnfbA==}
+    dev: false
 
   /@vue/language-core@2.0.13(typescript@5.4.5):
     resolution: {integrity: sha512-oQgM+BM66SU5GKtUMLQSQN0bxHFkFpLSSAiY87wVziPaiNQZuKVDt/3yA7GB9PiQw0y/bTNL0bOc0jM/siYjKg==}
@@ -1299,6 +1309,15 @@ packages:
       vue: ^3.0.0
     dependencies:
       evtd: 0.2.4
+      vue: 3.4.23(typescript@5.4.5)
+    dev: false
+
+  /vue-router@4.3.2(vue@3.4.23):
+    resolution: {integrity: sha512-hKQJ1vDAZ5LVkKEnHhmm1f9pMiWIBNGF5AwU67PdH7TyXCj/a4hTccuUuYCAMgJK6rO/NVYtQIEN3yL8CECa7Q==}
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      '@vue/devtools-api': 6.6.1
       vue: 3.4.23(typescript@5.4.5)
     dev: false
 
