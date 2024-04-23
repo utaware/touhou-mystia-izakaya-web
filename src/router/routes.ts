@@ -1,12 +1,22 @@
 import type { RouteRecordRaw } from 'vue-router'
 
-import characterRare from '@/view/characterRare.vue'
+import layout from '@/layout/index.vue'
+
+import character from '@/view/character/index.vue'
 
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    name: 'characterRare',
-    component: () => characterRare,
+    name: 'layout',
+    component: layout,
+    redirect: '/character',
+    children: [
+      {
+        path: '/character',
+        name: 'character',
+        component: character
+      }
+    ]
   }
 ]
 

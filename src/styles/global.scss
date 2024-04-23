@@ -1,0 +1,16 @@
+$scrollbarWidth: 6px;
+
+::-webkit-scrollbar {
+  width: $scrollbarWidth;
+  height: $scrollbarWidth;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: calc($scrollbarWidth);
+  background: rgba(221, 222, 224);
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 0;
+  background: transparent;
+}

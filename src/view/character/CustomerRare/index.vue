@@ -9,24 +9,15 @@ const getImagePath = (name: string): string => {
 </script>
 
 <template>
-  <div class="container">
-    <span v-for="({ name }, index) in character_rare" :key="index" class="bg">
-      <n-avatar
-        :size="84"
-        :src="getImagePath(name)"
-      />
-    </span>
-  </div>
+  <span v-for="({ name }, index) in character_rare" :key="index" class="bg">
+    <n-avatar
+      :size="84"
+      :src="getImagePath(name)"
+    />
+  </span>
 </template>
 
 <style scoped lang="scss">
-.container {
-  display: flex;
-  padding: 8px;
-  width: 100vw;
-  flex-wrap: wrap;
-  align-items: flex-start;
-}
 .bg {
   margin: 8px;
   display: inline-block;
