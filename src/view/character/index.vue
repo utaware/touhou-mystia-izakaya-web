@@ -14,10 +14,10 @@ import CustomerRare from './CustomerRare/index.vue';
         :tabs-padding="20"
         pane-style="padding: 20px;"
       >
-        <n-tab-pane name="稀有顾客">
+        <n-tab-pane name="稀有顾客" display-directive="show">
           <CustomerRare />
         </n-tab-pane>
-        <n-tab-pane name="普通顾客">
+        <n-tab-pane name="普通顾客" display-directive="show">
           ROCKLIFE
         </n-tab-pane>
       </n-tabs>

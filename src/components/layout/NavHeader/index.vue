@@ -61,7 +61,8 @@ const navList: TNavItem[] = [
     height: 100%;
     .item {
       margin-right: 16px;
-      font-size: 18px;
+      font-size: 16px;
+      color: var(--color-common-text);
     }
   }
 }
