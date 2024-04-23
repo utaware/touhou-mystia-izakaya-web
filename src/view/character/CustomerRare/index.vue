@@ -41,19 +41,22 @@ const handlerClickAvatar = (item: TCharacterRare) => {
     </n-space>
   </div>
   <!-- avatar -->
-  <span
-    v-for="(item, index) in customerList"
-    :key="index"
-    class="bg"
-    :class="{ disabled: item.disabled.value }"
-    @click="handlerClickAvatar(item)"
-  >
-    <n-avatar
-      :size="84"
-      :src="item.src"
-      :alt="item.name"
-    />
-  </span>
+  <div class="avatar-panel">
+    <span
+      v-for="(item, index) in customerList"
+      :key="index"
+      class="bg"
+      :class="{ disabled: item.disabled.value }"
+      @click="handlerClickAvatar(item)"
+    >
+      <n-avatar
+        class="avatar"
+        :size="84"
+        :src="item.src"
+        :alt="item.name"
+      />
+    </span>
+  </div>
 </template>
 
 <style scoped lang="scss">
@@ -63,17 +66,24 @@ const handlerClickAvatar = (item: TCharacterRare) => {
   justify-content: space-between;
   align-items: center;
 }
+.avatar-panel {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 100px);
+  justify-content: space-around;
+  gap: 8px;
+}
 .bg {
-  margin: 8px;
   display: inline-block;
   padding: 8px;
   width: 100px;
   height: 100px;
-  background-image: url('@/assets/bg.png');
-  background-size: 100px 100px;
-  background-repeat: no-repeat;
+  background: url('@/assets/bg.png') no-repeat;
+  background-size: 100%;
   &.disabled {
     opacity: 0.5;
+  }
+  &:last-child {
+    margin-right: auto;
   }
 }
 </style>
