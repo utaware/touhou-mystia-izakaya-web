@@ -18,7 +18,7 @@ import CustomerRare from './CustomerRare/index.vue';
           <CustomerRare />
         </n-tab-pane>
         <n-tab-pane name="普通顾客" display-directive="show">
-          ROCKLIFE
+          普通顾客
         </n-tab-pane>
       </n-tabs>
     </n-card>

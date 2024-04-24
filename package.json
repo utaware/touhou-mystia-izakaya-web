@@ -14,7 +14,7 @@
     "naive-ui": "^2.38.1",
     "normalize.css": "^8.0.1",
     "pinyin-pro": "^3.20.2",
-    "vue": "^3.4.21",
+    "vue": "^3.4.25",
     "vue-router": "^4.3.2"
   },
   "devDependencies": {
