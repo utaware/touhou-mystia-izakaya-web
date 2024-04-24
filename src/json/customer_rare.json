@@ -1566,24 +1566,6 @@
     ]
   },
   {
-    "name": "摩多罗隐岐奈",
-    "place": "???",
-    "price": "???",
-    "bonus_card": "-",
-    "punish_card": "-",
-    "reward": "",
-    "task": "",
-    "like_tags": [
-      "-"
-    ],
-    "hate_tags": [
-      "-"
-    ],
-    "beverage_tags": [
-      "-"
-    ]
-  },
-  {
     "name": "二岩猯藏",
     "place": "DLC9 特殊",
     "price": "1000-1200",
@@ -1612,78 +1594,6 @@
     ]
   },
   {
-    "name": "芙兰朵露",
-    "place": "???",
-    "price": "???",
-    "bonus_card": "-",
-    "punish_card": "-",
-    "reward": "",
-    "task": "",
-    "like_tags": [
-      "-"
-    ],
-    "hate_tags": [
-      "-"
-    ],
-    "beverage_tags": [
-      "-"
-    ]
-  },
-  {
-    "name": "若鹭姬",
-    "place": "???",
-    "price": "???",
-    "bonus_card": "-",
-    "punish_card": "-",
-    "reward": "",
-    "task": "",
-    "like_tags": [
-      "-"
-    ],
-    "hate_tags": [
-      "-"
-    ],
-    "beverage_tags": [
-      "-"
-    ]
-  },
-  {
-    "name": "八意永琳",
-    "place": "???",
-    "price": "???",
-    "bonus_card": "-",
-    "punish_card": "-",
-    "reward": "",
-    "task": "",
-    "like_tags": [
-      "-"
-    ],
-    "hate_tags": [
-      "-"
-    ],
-    "beverage_tags": [
-      "-"
-    ]
-  },
-  {
-    "name": "稀神探女",
-    "place": "???",
-    "price": "???",
-    "bonus_card": "-",
-    "punish_card": "-",
-    "reward": "",
-    "task": "",
-    "like_tags": [
-      "-"
-    ],
-    "hate_tags": [
-      "-"
-    ],
-    "beverage_tags": [
-      "-"
-    ]
-  },
-  {
     "name": "八云紫",
     "place": "DLC9 特殊",
     "price": "4000-6000",
@@ -1709,60 +1619,6 @@
       "高酒精",
       "古典",
       "中酒精"
-    ]
-  },
-  {
-    "name": "四级映姬",
-    "place": "???",
-    "price": "???",
-    "bonus_card": "-",
-    "punish_card": "-",
-    "reward": "",
-    "task": "",
-    "like_tags": [
-      "-"
-    ],
-    "hate_tags": [
-      "-"
-    ],
-    "beverage_tags": [
-      "-"
-    ]
-  },
-  {
-    "name": "宫出口瑞灵",
-    "place": "???",
-    "price": "???",
-    "bonus_card": "-",
-    "punish_card": "-",
-    "reward": "",
-    "task": "",
-    "like_tags": [
-      "-"
-    ],
-    "hate_tags": [
-      "-"
-    ],
-    "beverage_tags": [
-      "-"
-    ]
-  },
-  {
-    "name": "神绮",
-    "place": "DLC9 特殊",
-    "price": "4000-6000",
-    "bonus_card": "-",
-    "punish_card": "-",
-    "reward": "",
-    "task": "",
-    "like_tags": [
-      "-"
-    ],
-    "hate_tags": [
-      "-"
-    ],
-    "beverage_tags": [
-      "-"
     ]
   }
 ]

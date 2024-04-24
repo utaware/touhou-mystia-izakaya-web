@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import CustomerRare from './CustomerRare/index.vue';
+import CustomerSpecial from './CustomerSpecial/index.vue';
 </script>
 
 <template>
@@ -19,6 +20,9 @@ import CustomerRare from './CustomerRare/index.vue';
         </n-tab-pane>
         <n-tab-pane name="普通顾客" display-directive="show">
           普通顾客
+        </n-tab-pane>
+        <n-tab-pane name="特殊顾客" display-directive="show">
+          <CustomerSpecial />
         </n-tab-pane>
       </n-tabs>
     </n-card>

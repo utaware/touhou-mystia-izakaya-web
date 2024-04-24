@@ -1,40 +1,25 @@
 <script setup lang="ts">
-import { characterRare } from '@/json'
-
-import { getAssetsUrl, word2PY } from '@/utils'
+import { customerRare, type TCustomerRare } from '@/material'
 
 import { SettingOutlined } from '@vicons/antd'
 
-import { reactive, ref, Ref, toRefs } from 'vue'
+import { reactive } from 'vue'
 
 import CustomerRareModal from './modal.vue'
 
-const getImagePath = (name: string): string => {
-  return getAssetsUrl(`character-rare/${word2PY(name)}.png`)
-}
-
 const state = reactive({
-  customerModalShow: true,
+  customerModalShow: false,
   isFastEditMode: false,
+  currentCustomer: customerRare[0],
+  customerRare
 })
 
-const { customerModalShow } = toRefs(state)
-
-type TCharacterRare = typeof characterRare[number] & {
-  disabled: Ref<boolean>,
-  src: string
-}
-
-const customerList :TCharacterRare[] = characterRare.map((v) => {
-  const result = { ...v, disabled: ref(false), src: getImagePath(v.name) }
-  return result
-})
-
-const handlerClickAvatar = function (item: TCharacterRare) {
+const handlerClickAvatar = function (item: TCustomerRare) {
   if (state.isFastEditMode) {
-    item.disabled.value = !item.disabled.value
+    item.disabled = !item.disabled
   } else {
-    customerModalShow.value = true
+    state.currentCustomer = item
+    state.customerModalShow = true
   }
 }
 
@@ -64,10 +49,10 @@ const handleModalVisible = (value: boolean) => {
   <!-- avatar -->
   <div class="avatar-panel">
     <span
-      v-for="(item, index) in customerList"
+      v-for="(item, index) in state.customerRare"
       :key="index"
-      class="bg"
-      :class="{ disabled: item.disabled.value }"
+      class="item"
+      :class="{ disabled: item.disabled }"
       @click="handlerClickAvatar(item)"
     >
       <n-avatar
@@ -80,7 +65,8 @@ const handleModalVisible = (value: boolean) => {
   </div>
   <!-- modal -->
   <CustomerRareModal
-    :show="customerModalShow"
+    :show="state.customerModalShow"
+    :customer="state.currentCustomer"
     :handleModalVisible="handleModalVisible"
   />
 </template>
@@ -88,28 +74,26 @@ const handleModalVisible = (value: boolean) => {
 <style scoped lang="scss">
 .control {
   display: flex;
-  padding: 8px;
   justify-content: space-between;
   align-items: center;
 }
 .avatar-panel {
+  margin-top: 16px;
   display: grid;
   grid-template-columns: repeat(auto-fill, 100px);
   justify-content: space-around;
   gap: 8px;
-}
-.bg {
-  display: inline-block;
-  padding: 8px;
-  width: 100px;
-  height: 100px;
-  background: url('@/assets/bg.png') no-repeat;
-  background-size: 100%;
-  &.disabled {
-    opacity: 0.5;
-  }
-  &:last-child {
-    margin-right: auto;
+  .item {
+    display: inline-block;
+    padding: 8px;
+    width: 100px;
+    height: 100px;
+    background: url('@/assets/bg.png') no-repeat;
+    background-size: 100%;
+    cursor: pointer;
+    &.disabled {
+      opacity: 0.5;
+    }
   }
 }
 </style>

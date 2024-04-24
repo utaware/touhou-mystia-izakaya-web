@@ -1,34 +1,40 @@
 <script setup lang="ts">
-import { defineProps } from 'vue'
+import { defineProps, computed } from 'vue'
+import { type TCustomerRare } from '@/material'
 
 interface PropsType {
   show: boolean;
+  customer: TCustomerRare;
   handleModalVisible: (value: boolean) => void
 }
 
-defineProps<PropsType>()
+const props = defineProps<PropsType>()
+
+const customer = computed(() => props.customer)
 </script>
 
 <template>
-  <n-modal
-    :show="show"
-    :on-update:show="handleModalVisible"
-  >
+  <!-- modal -->
+  <n-modal :show="show" :on-update:show="handleModalVisible">
+    <!-- card -->
     <n-card
       style="width: 600px"
-      title="模态框"
+      :title="customer.name"
       :bordered="false"
       size="huge"
       role="dialog"
       aria-modal="true"
     >
-      <template #header-extra>
-        噢！
-      </template>
-      内容
-      <template #footer>
-        尾部
-      </template>
+      <div class="wrapper">
+        <n-avatar
+          class="avatar"
+          :size="84"
+          :src="customer.src"
+          :alt="customer.name"
+          round
+        />
+      </div>
+      <!-- avatar -->
     </n-card>
   </n-modal>
 </template>
