@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, computed } from 'vue'
+import { defineProps } from 'vue'
 import { type TCustomerRare } from '@/material'
 
 interface PropsType {
@@ -8,9 +8,7 @@ interface PropsType {
   handleModalVisible: (value: boolean) => void
 }
 
-const props = defineProps<PropsType>()
-
-const customer = computed(() => props.customer)
+defineProps<PropsType>()
 </script>
 
 <template>
@@ -25,20 +23,44 @@ const customer = computed(() => props.customer)
       role="dialog"
       aria-modal="true"
     >
-      <div class="wrapper">
-        <n-avatar
-          class="avatar"
-          :size="84"
-          :src="customer.src"
-          :alt="customer.name"
-          round
-        />
+      <div class="container">
+        <!-- left -->
+        <n-space class="left" justify="center">
+          <!-- avatar -->
+          <n-avatar
+            class="avatar"
+            :size="84"
+            :src="customer.src"
+            :alt="customer.name"
+            round
+          />
+          <!-- dlc -->
+          <div class="dlc">{{ customer.dlc }}</div>
+          <!-- 所属 -->
+          <div class="place">{{ customer.place }}</div>
+          <!-- 持有金 -->
+          <div class="price">{{ customer.price }}(円)</div>
+        </n-space>
+        <!-- right -->
+        <div class="right">
+          <!-- 料理喜好 -->
+          <!-- 料理讨厌 -->
+          <!-- 酒水喜好 -->
+        </div>
       </div>
-      <!-- avatar -->
     </n-card>
   </n-modal>
 </template>
 
 <style scoped lang="scss">
-
+.container {
+  display: flex;
+  justify-content: space-between;
+  .left {
+    flex: 0;
+  }
+  .right {
+    flex: 1;
+  }
+}
 </style>
