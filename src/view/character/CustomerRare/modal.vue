@@ -2,6 +2,8 @@
 import { defineProps } from 'vue'
 import { type TCustomerRare } from '@/material'
 
+import CommonTags from '@/components/common/tags/index.vue'
+
 interface PropsType {
   show: boolean;
   customer: TCustomerRare;
@@ -16,16 +18,17 @@ defineProps<PropsType>()
   <n-modal :show="show" :on-update:show="handleModalVisible">
     <!-- card -->
     <n-card
+      class="card-wrapper"
       style="width: 600px"
-      :title="customer.name"
       :bordered="false"
+      :segmented="false"
       size="huge"
       role="dialog"
       aria-modal="true"
     >
       <div class="container">
         <!-- left -->
-        <n-space class="left" justify="center">
+        <n-space class="left" justify="center" align="center" vertical>
           <!-- avatar -->
           <n-avatar
             class="avatar"
@@ -34,6 +37,8 @@ defineProps<PropsType>()
             :alt="customer.name"
             round
           />
+          <!-- name -->
+          <div class="name">{{ customer.name }}</div>
           <!-- dlc -->
           <div class="dlc">{{ customer.dlc }}</div>
           <!-- 所属 -->
@@ -42,25 +47,30 @@ defineProps<PropsType>()
           <div class="price">{{ customer.price }}(円)</div>
         </n-space>
         <!-- right -->
-        <div class="right">
+        <n-space class="right" vertical>
           <!-- 料理喜好 -->
+          <common-tags :value="customer.like_tags" category="like" />
           <!-- 料理讨厌 -->
+          <common-tags :value="customer.hate_tags" category="hate" />
           <!-- 酒水喜好 -->
-        </div>
+          <common-tags :value="customer.beverage_tags" category="beverage" />
+        </n-space>
       </div>
     </n-card>
   </n-modal>
 </template>
 
 <style scoped lang="scss">
+.card-wrapper {
+  background-color: var(--color-common-brown);
+}
 .container {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  column-gap: 28px;
+  grid-template-columns: 120px auto;
+  grid-template-areas: 'a c';
   .left {
-    flex: 0;
-  }
-  .right {
-    flex: 1;
+    font-weight: bold;
   }
 }
 </style>
