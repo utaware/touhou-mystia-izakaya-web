@@ -1,15 +1,23 @@
 <script setup lang="ts">
+import { useRouter, RouteLocationRaw } from 'vue-router'
+
+const router = useRouter()
+
 interface TNavItem {
   text: string,
-  color: string
+  path: string
 }
 
 const navList: TNavItem[] = [
-  { text: '顾客', color: 'green' },
-  { text: '料理', color: 'orange' },
-  { text: '酒水', color: 'blue' },
-  { text: '食材', color: 'yellow' },
+  { text: '顾客', path: '/character' },
+  { text: '料理', path: '/recipes' },
+  { text: '酒水', path: '/beverages' },
+  { text: '食材', path: '/ingredients'},
 ]
+
+const handleRouterChange = (path: RouteLocationRaw) => {
+  return router.push(path)
+}
 </script>
 
 <template>
@@ -24,11 +32,13 @@ const navList: TNavItem[] = [
     <!-- list -->
     <n-space class="nav-header-list">
       <n-button
-        v-for="({ text }, index) in navList"
+        v-for="({ text, path }, index) in navList"
         class="item"
         :key="index"
-        text>
-          {{ text }}
+        quaternary
+        @click="handleRouterChange(path)"
+      >
+        {{ text }}
       </n-button>
     </n-space>
   </div>
