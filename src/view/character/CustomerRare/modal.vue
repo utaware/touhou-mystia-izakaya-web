@@ -49,11 +49,11 @@ defineProps<PropsType>()
         <!-- right -->
         <n-space class="right" vertical>
           <!-- 料理喜好 -->
-          <common-tags :value="customer.like_tags" category="like" />
+          <!-- <common-tags :value="customer.like_tags" category="like" /> -->
           <!-- 料理讨厌 -->
-          <common-tags :value="customer.hate_tags" category="hate" />
+          <!-- <common-tags :value="customer.hate_tags" category="hate" /> -->
           <!-- 酒水喜好 -->
-          <common-tags :value="customer.beverage_tags" category="beverage" />
+          <!-- <common-tags :value="customer.beverage_tags" category="beverage" /> -->
         </n-space>
       </div>
     </n-card>

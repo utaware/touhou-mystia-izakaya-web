@@ -2,9 +2,7 @@ import { defineStore } from 'pinia'
 
 import { beverages, type TBeverages } from '@/material'
 
-interface TBeveragesMaps {
-  [key: string]: TBeverages[]
-}
+import { generatorMapWithTags, type TGeneratorMap } from '@/utils'
 
 export const useBeveragesStore = defineStore('beverages', {
   state: () => ({
@@ -18,15 +16,8 @@ export const useBeveragesStore = defineStore('beverages', {
       const flatTags = this.enableBeverages.map(v => v.beverage_tags).flat()
       return Array.from(new Set(flatTags))
     },
-    beverageMaps (): TBeveragesMaps {
-      return this.enableBeverages.reduce((total: TBeveragesMaps, current: TBeverages) => {
-        const { beverage_tags } = current
-        beverage_tags.forEach((tag) => {
-          total[tag] ??= []
-          total[tag].push(current)
-        })
-        return total
-      }, {})
+    beverageMaps (): TGeneratorMap<TBeverages[]> {
+      return generatorMapWithTags(this.enableBeverages, 'beverage_tags')
     },
     getBeveragesWithTag(): (tags: string[]) => TBeverages[] {
       return (tags: string[]) => {

@@ -1,37 +1,37 @@
 <script setup lang="ts">
-import { reactive, computed } from 'vue'
-
-import { beverages } from '@/material'
+import { ref, computed } from 'vue'
 
 import { useBeveragesStore } from '@/pinia'
 
 import { calcMatchTags } from '@/utils'
 
+import TagsItem from '@/components/common/tags/index.vue'
+
 const beveragesStore = useBeveragesStore()
 
 const { allBeverageTags } = beveragesStore
 
-const state = reactive({
-  beverages,
-  beverageCheckItems: allBeverageTags,
-  checkAll: false,
-})
-
-const handleClickReset = () => {
-  state.beverageCheckItems = []
-}
+const beverageCheckTags = ref(allBeverageTags.map((value) => {
+  return { value, checked: false }
+}))
 
 const filterBeverages = computed(() => {
-  const checkItems = state.beverageCheckItems
-  return beveragesStore.getBeveragesWithTag(checkItems).map((v) => {
-    return { ...v, ...calcMatchTags(v.beverage_tags, checkItems) }
+  const checked_tags = beverageCheckTags.value.filter(v => v.checked).map(v => v.value)
+  return beveragesStore.getBeveragesWithTag(checked_tags).map((v) => {
+    return { ...v, ...calcMatchTags(v.beverage_tags, checked_tags) }
   }).sort((a, b) => {
     const [m, n] = [a, b].map((v) => v.match_tags.length)
     return n - m
   })
 })
 
-console.log('refresh')
+const handleClickTags = (item: { value: string, checked: boolean }) => {
+  item.checked = !item.checked
+}
+
+const handleClickReset = () => {
+  beverageCheckTags.value.forEach(v => v.checked = false)
+}
 </script>
 
 <template>
@@ -40,17 +40,19 @@ console.log('refresh')
     <!-- card -->
     <n-card>
       <!-- filter -->
-      <n-button @click="handleClickReset">清除</n-button>
-      <n-checkbox-group v-model:value="state.beverageCheckItems">
-        <n-space item-style="display: flex;">
-          <n-checkbox
-            v-for="(item, index) in allBeverageTags"
-            :key="index"
-            :label="item"
-            :value="item"
-          />
-        </n-space>
-      </n-checkbox-group>
+      <!-- tags -->
+      <n-space>
+        <n-tag @click="handleClickReset">清除</n-tag>
+        <tags-item
+          v-for="(item, index) in beverageCheckTags"
+          :key="index"
+          :value="item.value"
+          :class="{ disabled: !item.checked }"
+          category="beverage"
+          @click="handleClickTags(item)"
+        />
+      </n-space>
+      <!-- divider -->
       <n-divider />
       <!-- content -->
       <ul class="beverages-list">
@@ -59,7 +61,7 @@ console.log('refresh')
           v-for="(item, index) in filterBeverages"
           :key="index"
         >
-          <n-badge :value="item.match_count">
+          <n-badge :value="item.match_count" type="info">
             <i :class="item.namePY" class="beverages-sprite"></i>
           </n-badge>
           <span>{{ item.name }}</span>
@@ -73,7 +75,7 @@ console.log('refresh')
 .beverages-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, 84px);
-  gap: 24px;
+  gap: 16px;
   justify-content: space-between;
   .item {
     font-weight: bolder;
