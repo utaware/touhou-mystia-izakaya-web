@@ -30,10 +30,5 @@ import CustomerSpecial from './CustomerSpecial/index.vue';
 </template>
 
 <style scoped lang="scss">
-.character-page {
-  display: flex;
-  padding: 12px;
-  flex-wrap: wrap;
-  align-items: flex-start;
-}
+
 </style>

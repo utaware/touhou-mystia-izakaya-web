@@ -6,9 +6,14 @@ import NavHeader from '@/components/layout/NavHeader/index.vue';
 <template>
   <div class="main">
     <NavHeader/>
-    <router-view></router-view>
+    <div class="page-wapper">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
 <style scoped lang="scss">
+.page-wapper {
+  padding: 12px;
+}
 </style>
