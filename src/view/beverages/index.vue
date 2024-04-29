@@ -62,7 +62,7 @@ const handleClickReset = () => {
           :key="index"
         >
           <n-badge :value="item.match_count" type="info">
-            <i :class="item.namePY" class="beverages-sprite"></i>
+            <i :class="item.namePY" class="beverages-sprite-item"></i>
           </n-badge>
           <span>{{ item.name }}</span>
         </li>
