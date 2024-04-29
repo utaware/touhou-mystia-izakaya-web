@@ -1,6 +1,7 @@
 [
   {
     "name": "妖怪兔",
+    "namePY": "yaoguaitu",
     "dlc": "DLC0",
     "place": [
       "妖怪兽道",
@@ -27,6 +28,7 @@
   },
   {
     "name": "妖怪猫",
+    "namePY": "yaoguaimao",
     "dlc": "DLC0",
     "place": [
       "妖怪兽道",
@@ -53,6 +55,7 @@
   },
   {
     "name": "妖怪狸",
+    "namePY": "yaoguaili",
     "dlc": "DLC0",
     "place": [
       "妖怪兽道",
@@ -79,6 +82,7 @@
   },
   {
     "name": "妖怪狐",
+    "namePY": "yaoguaihu",
     "dlc": "DLC0",
     "place": [
       "妖怪兽道",
@@ -101,6 +105,7 @@
   },
   {
     "name": "蟒蛇精",
+    "namePY": "mangshejing",
     "dlc": "DLC0",
     "place": [
       "妖怪兽道",
@@ -121,6 +126,7 @@
   },
   {
     "name": "人类小孩",
+    "namePY": "renleixiaohai",
     "dlc": "DLC0",
     "place": [
       "人间之里"
@@ -142,6 +148,7 @@
   },
   {
     "name": "人类男性",
+    "namePY": "renleinanxing",
     "dlc": "DLC0",
     "place": [
       "人间之里",
@@ -165,6 +172,7 @@
   },
   {
     "name": "人类女性",
+    "namePY": "renleinvxing",
     "dlc": "DLC0",
     "place": [
       "人间之里",
@@ -187,6 +195,7 @@
   },
   {
     "name": "人类长者",
+    "namePY": "renleichangzhe",
     "dlc": "DLC0",
     "place": [
       "人间之里",
@@ -206,6 +215,7 @@
   },
   {
     "name": "左卫门",
+    "namePY": "zuoweimen",
     "dlc": "DLC0",
     "place": [
       "人间之里",
@@ -224,6 +234,7 @@
   },
   {
     "name": "座敷童子",
+    "namePY": "zuofutongzi",
     "dlc": "DLC0",
     "place": [
       "博丽神社"
@@ -244,6 +255,7 @@
   },
   {
     "name": "河童",
+    "namePY": "hetong",
     "dlc": "DLC0",
     "place": [
       "博丽神社",
@@ -267,6 +279,7 @@
   },
   {
     "name": "地精",
+    "namePY": "dijing",
     "dlc": "DLC0",
     "place": [
       null
@@ -287,6 +300,7 @@
   },
   {
     "name": "鸦天狗",
+    "namePY": "yatiangou",
     "dlc": "DLC0",
     "place": [
       "博丽神社",
@@ -308,6 +322,7 @@
   },
   {
     "name": "妖精",
+    "namePY": "yaojing",
     "dlc": "DLC0",
     "place": [
       "红魔馆",
@@ -333,6 +348,7 @@
   },
   {
     "name": "白狼天狗",
+    "namePY": "bailangtiangou",
     "dlc": "DLC1",
     "place": [
       "妖怪之山"
@@ -358,6 +374,7 @@
   },
   {
     "name": "山姥",
+    "namePY": "shanlao",
     "dlc": "DLC1",
     "place": [
       "妖怪之山"
@@ -381,6 +398,7 @@
   },
   {
     "name": "山童",
+    "namePY": "shantong",
     "dlc": "DLC1",
     "place": [
       "妖怪之山"
@@ -402,6 +420,7 @@
   },
   {
     "name": "魔法使",
+    "namePY": "mofashi",
     "dlc": "DLC1",
     "place": [
       "魔法森林"
@@ -427,6 +446,7 @@
   },
   {
     "name": "森之妖精",
+    "namePY": "senzhiyaojing",
     "dlc": "DLC1",
     "place": [
       "魔法森林"
@@ -453,6 +473,7 @@
   },
   {
     "name": "迷之人形",
+    "namePY": "mizhirenxing",
     "dlc": "DLC1",
     "place": [
       "魔法森林"
@@ -477,6 +498,7 @@
   },
   {
     "name": "土蜘蛛",
+    "namePY": "tuzhizhu",
     "dlc": "DLC2",
     "place": [
       "旧地狱"
@@ -505,6 +527,7 @@
   },
   {
     "name": "鬼",
+    "namePY": "gui",
     "dlc": "DLC2",
     "place": [
       "旧地狱"
@@ -529,6 +552,7 @@
   },
   {
     "name": "骨女",
+    "namePY": "gunv",
     "dlc": "DLC2",
     "place": [
       "旧地狱"
@@ -554,6 +578,7 @@
   },
   {
     "name": "地狱鸦",
+    "namePY": "diyuya",
     "dlc": "DLC2",
     "place": [
       "地灵殿"
@@ -579,6 +604,7 @@
   },
   {
     "name": "姑获鸟",
+    "namePY": "guhuoniao",
     "dlc": "DLC2",
     "place": [
       "地灵殿"
@@ -602,6 +628,7 @@
   },
   {
     "name": "豹女",
+    "namePY": "baonv",
     "dlc": "DLC2",
     "place": [
       "地灵殿"
@@ -626,6 +653,7 @@
   },
   {
     "name": "僧侣",
+    "namePY": "senglv",
     "dlc": "DLC3",
     "place": [
       "命莲寺"
@@ -648,6 +676,7 @@
   },
   {
     "name": "妖怪鼠",
+    "namePY": "yaoguaishu",
     "dlc": "DLC3",
     "place": [
       "命莲寺"
@@ -670,6 +699,7 @@
   },
   {
     "name": "八尺大人",
+    "namePY": "bachidaren",
     "dlc": "DLC3",
     "place": [
       "命莲寺"
@@ -692,6 +722,7 @@
   },
   {
     "name": "道士",
+    "namePY": "daoshi",
     "dlc": "DLC3",
     "place": [
       "神灵庙"
@@ -714,6 +745,7 @@
   },
   {
     "name": "僵尸",
+    "namePY": "jiangshi",
     "dlc": "DLC3",
     "place": [
       "神灵庙"
@@ -727,6 +759,7 @@
   },
   {
     "name": "仙人",
+    "namePY": "xianren",
     "dlc": "DLC3",
     "place": [
       "神灵庙"
@@ -751,6 +784,7 @@
   },
   {
     "name": "小人族",
+    "namePY": "xiaorenzu",
     "dlc": "DLC4",
     "place": [
       "辉针城"
@@ -774,6 +808,7 @@
   },
   {
     "name": "不良少年",
+    "namePY": "buliangshaonian",
     "dlc": "DLC4",
     "place": [
       "辉针城"
@@ -797,6 +832,7 @@
   },
   {
     "name": "不良少女",
+    "namePY": "buliangshaonv",
     "dlc": "DLC4",
     "place": [
       "辉针城"
@@ -819,6 +855,7 @@
   },
   {
     "name": "玩具兵",
+    "namePY": "wanjubing",
     "dlc": "DLC4",
     "place": [
       "辉针城"
@@ -840,6 +877,7 @@
   },
   {
     "name": "铃兰花精",
+    "namePY": "linglanhuajing",
     "dlc": "DLC4",
     "place": [
       "太阳花田"
@@ -861,6 +899,7 @@
   },
   {
     "name": "太阳花精",
+    "namePY": "taiyanghuajing",
     "dlc": "DLC4",
     "place": [
       "太阳花田"
@@ -882,6 +921,7 @@
   },
   {
     "name": "玫瑰花精",
+    "namePY": "meiguihuajing",
     "dlc": "DLC4",
     "place": [
       "太阳花田"
@@ -903,6 +943,7 @@
   },
   {
     "name": "影女",
+    "namePY": "yingnv",
     "dlc": "DLC4",
     "place": [
       "太阳花田"
@@ -926,6 +967,7 @@
   },
   {
     "name": "纸牌兵",
+    "namePY": "zhipaibing",
     "dlc": "DLC5",
     "place": [
       "魔界"
@@ -948,6 +990,7 @@
   },
   {
     "name": "小丑",
+    "namePY": "xiaochou",
     "dlc": "DLC5",
     "place": [
       "魔界"
@@ -970,6 +1013,7 @@
   },
   {
     "name": "疯帽匠",
+    "namePY": "fengmaojiang",
     "dlc": "DLC5",
     "place": [
       "魔界"
@@ -992,6 +1036,7 @@
   },
   {
     "name": "月人",
+    "namePY": "yueren",
     "dlc": "DLC5",
     "place": [
       "月之都"
@@ -1015,6 +1060,7 @@
   },
   {
     "name": "捣药兔",
+    "namePY": "daoyaotu",
     "dlc": "DLC5",
     "place": [
       "月之都"
@@ -1038,6 +1084,7 @@
   },
   {
     "name": "月之使者",
+    "namePY": "yuezhishizhe",
     "dlc": "DLC5",
     "place": [
       "月之都"

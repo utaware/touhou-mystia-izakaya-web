@@ -1,16 +1,13 @@
 import customer_rare from '@/json/customer_rare.json'
 
-import { getAssetsUrl, word2PY } from '@/utils'
+import { getAssetsUrl } from '@/utils'
 
 const customerRare = customer_rare.map((item) => {
-  const { name } = item
-  const [ dlc, place ] = item.place.split(' ')
+  const { namePY } = item
   return {
     ...item,
     disabled: false,
-    src: getAssetsUrl(`character-rare/${word2PY(name)}.png`),
-    dlc,
-    place
+    src: getAssetsUrl(`character-rare/${namePY}.png`),
   }
 })
 

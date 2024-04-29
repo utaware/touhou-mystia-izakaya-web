@@ -1,6 +1,7 @@
 [
   {
     "name": "海苔",
+    "namePY": "haitai",
     "type": "蔬菜",
     "ingredient_tags": [
       "素",
@@ -9,6 +10,7 @@
   },
   {
     "name": "黄油",
+    "namePY": "huangyou",
     "type": "其他",
     "ingredient_tags": [
       "重油"
@@ -16,6 +18,7 @@
   },
   {
     "name": "面粉",
+    "namePY": "mianfen",
     "type": "其他",
     "ingredient_tags": [
       "饱腹"
@@ -23,6 +26,7 @@
   },
   {
     "name": "猪肉",
+    "namePY": "zhurou",
     "type": "肉类",
     "ingredient_tags": [
       "肉"
@@ -30,6 +34,7 @@
   },
   {
     "name": "豆腐",
+    "namePY": "doufu",
     "type": "蔬菜",
     "ingredient_tags": [
       "素",
@@ -39,6 +44,7 @@
   },
   {
     "name": "鸡蛋",
+    "namePY": "jidan",
     "type": "其他",
     "ingredient_tags": [
       "生"
@@ -46,6 +52,7 @@
   },
   {
     "name": "露水",
+    "namePY": "lushui",
     "type": "其他",
     "ingredient_tags": [
       "清淡"
@@ -53,6 +60,7 @@
   },
   {
     "name": "蘑菇",
+    "namePY": "mogu",
     "type": "蔬菜",
     "ingredient_tags": [
       "素",
@@ -62,6 +70,7 @@
   },
   {
     "name": "蝉蜕",
+    "namePY": "chantui",
     "type": "其他",
     "ingredient_tags": [
       "猎奇"
@@ -69,6 +78,7 @@
   },
   {
     "name": "牛肉",
+    "namePY": "niurou",
     "type": "肉类",
     "ingredient_tags": [
       "肉"
@@ -76,6 +86,7 @@
   },
   {
     "name": "洋葱",
+    "namePY": "yangcong",
     "type": "蔬菜",
     "ingredient_tags": [
       "素",
@@ -84,6 +95,7 @@
   },
   {
     "name": "蜂蜜",
+    "namePY": "fengmi",
     "type": "其他",
     "ingredient_tags": [
       "甜"
@@ -91,6 +103,7 @@
   },
   {
     "name": "糯米",
+    "namePY": "nuomi",
     "type": "其他",
     "ingredient_tags": [
       "－"
@@ -98,6 +111,7 @@
   },
   {
     "name": "月光草",
+    "namePY": "yueguangcao",
     "type": "其他",
     "ingredient_tags": [
       "清淡",
@@ -108,6 +122,7 @@
   },
   {
     "name": "萝卜",
+    "namePY": "luobu",
     "type": "蔬菜",
     "ingredient_tags": [
       "素",
@@ -116,6 +131,7 @@
   },
   {
     "name": "土豆",
+    "namePY": "tudou",
     "type": "蔬菜",
     "ingredient_tags": [
       "素",
@@ -124,6 +140,7 @@
   },
   {
     "name": "八目鳗",
+    "namePY": "bamuman",
     "type": "海鲜",
     "ingredient_tags": [
       "水产",
@@ -133,6 +150,7 @@
   },
   {
     "name": "辣椒",
+    "namePY": "lajiao",
     "type": "其他",
     "ingredient_tags": [
       "辣"
@@ -140,6 +158,7 @@
   },
   {
     "name": "竹笋",
+    "namePY": "zhusun",
     "type": "蔬菜",
     "ingredient_tags": [
       "素",
@@ -148,6 +167,7 @@
   },
   {
     "name": "虾",
+    "namePY": "xia",
     "type": "海鲜",
     "ingredient_tags": [
       "水产",
@@ -156,6 +176,7 @@
   },
   {
     "name": "桃子",
+    "namePY": "taozi",
     "type": "其他",
     "ingredient_tags": [
       "甜",
@@ -164,6 +185,7 @@
   },
   {
     "name": "冰块",
+    "namePY": "bingkuai",
     "type": "其他",
     "ingredient_tags": [
       "凉爽"
@@ -171,6 +193,7 @@
   },
   {
     "name": "鳟鱼",
+    "namePY": "zunyu",
     "type": "海鲜",
     "ingredient_tags": [
       "水产",
@@ -179,6 +202,7 @@
   },
   {
     "name": "野猪肉",
+    "namePY": "yezhurou",
     "type": "肉类",
     "ingredient_tags": [
       "肉"
@@ -186,6 +210,7 @@
   },
   {
     "name": "竹子",
+    "namePY": "zhuzi",
     "type": "其他",
     "ingredient_tags": [
       "适合拍照"
@@ -193,6 +218,7 @@
   },
   {
     "name": "极上金枪鱼",
+    "namePY": "jishangjinqiangyu",
     "type": "海鲜",
     "ingredient_tags": [
       "水产",
@@ -204,6 +230,7 @@
   },
   {
     "name": "南瓜",
+    "namePY": "nangua",
     "type": "蔬菜",
     "ingredient_tags": [
       "素",
@@ -212,6 +239,7 @@
   },
   {
     "name": "三文鱼",
+    "namePY": "sanwenyu",
     "type": "海鲜",
     "ingredient_tags": [
       "水产",
@@ -221,6 +249,7 @@
   },
   {
     "name": "白果",
+    "namePY": "baiguo",
     "type": "其他",
     "ingredient_tags": [
       "适合拍照"
@@ -228,6 +257,7 @@
   },
   {
     "name": "和牛",
+    "namePY": "heniu",
     "type": "肉类",
     "ingredient_tags": [
       "肉",
@@ -237,6 +267,7 @@
   },
   {
     "name": "黑毛猪肉",
+    "namePY": "heimaozhurou",
     "type": "肉类",
     "ingredient_tags": [
       "肉",
@@ -246,6 +277,7 @@
   },
   {
     "name": "松露",
+    "namePY": "songlu",
     "type": "蔬菜",
     "ingredient_tags": [
       "素",
@@ -257,6 +289,7 @@
   },
   {
     "name": "河豚",
+    "namePY": "hetun",
     "type": "海鲜",
     "ingredient_tags": [
       "水产",
@@ -266,6 +299,7 @@
   },
   {
     "name": "幻昙华",
+    "namePY": "huantanhua",
     "type": "其他",
     "ingredient_tags": [
       "高级",
@@ -276,6 +310,7 @@
   },
   {
     "name": "鹿肉",
+    "namePY": "lurou",
     "type": "肉类",
     "ingredient_tags": [
       "肉"
@@ -283,6 +318,7 @@
   },
   {
     "name": "金枪鱼",
+    "namePY": "jinqiangyu",
     "type": "海鲜",
     "ingredient_tags": [
       "水产",
@@ -292,6 +328,7 @@
   },
   {
     "name": "黄瓜",
+    "namePY": "huanggua",
     "type": "蔬菜",
     "ingredient_tags": [
       "素",
@@ -301,6 +338,7 @@
   },
   {
     "name": "黑盐",
+    "namePY": "heiyan",
     "type": "其他",
     "ingredient_tags": [
       "咸"
@@ -308,6 +346,7 @@
   },
   {
     "name": "奶油",
+    "namePY": "naiyou",
     "type": "其他",
     "ingredient_tags": [
       "家常",
@@ -317,6 +356,7 @@
   },
   {
     "name": "章鱼",
+    "namePY": "zhangyu",
     "type": "海鲜",
     "ingredient_tags": [
       "水产",
@@ -326,6 +366,7 @@
   },
   {
     "name": "葡萄",
+    "namePY": "putao",
     "type": "其他",
     "ingredient_tags": [
       "甜",
@@ -334,6 +375,7 @@
   },
   {
     "name": "螃蟹",
+    "namePY": "pangxie",
     "type": "海鲜",
     "ingredient_tags": [
       "水产",
@@ -343,6 +385,7 @@
   },
   {
     "name": "海胆",
+    "namePY": "haidan",
     "type": "海鲜",
     "ingredient_tags": [
       "水产",
@@ -354,6 +397,7 @@
   },
   {
     "name": "芝士",
+    "namePY": "zhishi",
     "type": "其他",
     "ingredient_tags": [
       "高级",
@@ -363,6 +407,7 @@
   },
   {
     "name": "柠檬",
+    "namePY": "ningmeng",
     "type": "其他",
     "ingredient_tags": [
       "酸",
@@ -371,6 +416,7 @@
   },
   {
     "name": "地瓜",
+    "namePY": "digua",
     "type": "其他",
     "ingredient_tags": [
       "饱腹"
@@ -378,6 +424,7 @@
   },
   {
     "name": "板栗",
+    "namePY": "banli",
     "type": "蔬菜",
     "ingredient_tags": [
       "素",
@@ -386,6 +433,7 @@
   },
   {
     "name": "松子",
+    "namePY": "songzi",
     "type": "其他",
     "ingredient_tags": [
       "招牌",
@@ -395,6 +443,7 @@
   },
   {
     "name": "莲子",
+    "namePY": "lianzi",
     "type": "其他",
     "ingredient_tags": [
       "招牌",
@@ -404,6 +453,7 @@
   },
   {
     "name": "并蒂莲",
+    "namePY": "bingdilian",
     "type": "其他",
     "ingredient_tags": [
       "清淡",
@@ -415,6 +465,7 @@
   },
   {
     "name": "西红柿",
+    "namePY": "xihongshi",
     "type": "蔬菜",
     "ingredient_tags": [
       "素"
@@ -422,6 +473,7 @@
   },
   {
     "name": "红豆",
+    "namePY": "hongdou",
     "type": "其他",
     "ingredient_tags": [
       "家常"
@@ -429,6 +481,7 @@
   },
   {
     "name": "梅子",
+    "namePY": "meizi",
     "type": "其他",
     "ingredient_tags": [
       "小巧",
@@ -437,6 +490,7 @@
   },
   {
     "name": "鲜花",
+    "namePY": "xianhua",
     "type": "其他",
     "ingredient_tags": [
       "梦幻",
@@ -445,6 +499,7 @@
   },
   {
     "name": "香椿",
+    "namePY": "xiangchun",
     "type": "蔬菜",
     "ingredient_tags": [
       "素",
@@ -453,6 +508,7 @@
   },
   {
     "name": "薜茘",
+    "namePY": "bili",
     "type": "其他",
     "ingredient_tags": [
       "凉爽",
@@ -461,6 +517,7 @@
   },
   {
     "name": "可可豆",
+    "namePY": "kekedou",
     "type": "其他",
     "ingredient_tags": [
       "甜",
@@ -469,6 +526,7 @@
   },
   {
     "name": "银耳",
+    "namePY": "yiner",
     "type": "其他",
     "ingredient_tags": [
       "菌类",
@@ -477,6 +535,7 @@
   },
   {
     "name": "西兰花",
+    "namePY": "xilanhua",
     "type": "蔬菜",
     "ingredient_tags": [
       "素",
