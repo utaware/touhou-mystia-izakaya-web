@@ -1,18 +1,22 @@
 <script setup lang="ts">
-import { customerRare, type TCustomerRare } from '@/material'
+import { customerRare, customerPlace, type TCustomerRare } from '@/material'
 
 import { SettingOutlined } from '@vicons/antd'
 
-import { reactive } from 'vue'
+import { ref, reactive, computed } from 'vue'
 
-import CustomerRareModal from './modal.vue'
+import CustomerDetailModal from './CustomerDetailModal/index.vue'
+import FilterCustomerModal from './FilterCustomerModal/index.vue'
 
 const state = reactive({
   customerModalShow: false,
+  modalFilterShow: false,
   isFastEditMode: false,
   currentCustomer: customerRare[0],
   customerRare
 })
+
+const placeFilters = ref<string[]>(customerPlace)
 
 const handlerClickAvatar = function (item: TCustomerRare) {
   if (state.isFastEditMode) {
@@ -30,13 +34,28 @@ const handlerSwitchChange = function (value: boolean) {
 const handleModalVisible = (value: boolean) => {
   state.customerModalShow = value
 }
+
+const toggleFilterModalShow = (value: boolean) => {
+  state.modalFilterShow = value
+}
+
+const openFilterModal = () => toggleFilterModalShow(true)
+
+const closeFilterModal = (value: string[]) => {
+  placeFilters.value = value
+  toggleFilterModalShow(false)
+}
+
+const customerList = computed(() => {
+  return customerRare.filter(({ place }) => placeFilters.value.includes(place))
+})
 </script>
 
 <template>
   <!-- control -->
   <div class="control">
     <!-- button -->
-    <n-button class="config">
+    <n-button class="config" @click="openFilterModal">
       <n-space>
         <n-icon :component="SettingOutlined"/>设置
       </n-space>
@@ -49,7 +68,7 @@ const handleModalVisible = (value: boolean) => {
   <!-- avatar -->
   <div class="avatar-panel">
     <span
-      v-for="(item, index) in state.customerRare"
+      v-for="(item, index) in customerList"
       :key="index"
       class="item"
       :class="{ disabled: item.disabled }"
@@ -64,10 +83,16 @@ const handleModalVisible = (value: boolean) => {
     </span>
   </div>
   <!-- modal -->
-  <CustomerRareModal
+  <customer-detail-modal
     :show="state.customerModalShow"
     :customer="state.currentCustomer"
     :handleModalVisible="handleModalVisible"
+  />
+  <filter-customer-modal
+    v-model:show="state.modalFilterShow"
+    :checked-places="placeFilters"
+    :all-places="customerPlace"
+    @enter="closeFilterModal"
   />
 </template>
 
