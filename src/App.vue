@@ -1,9 +1,11 @@
 <script setup lang="ts">
-
+import { zhCN } from 'naive-ui'
 </script>
 
 <template>
-  <router-view></router-view>
+  <n-config-provider :locale="zhCN">
+    <router-view></router-view>
+  </n-config-provider>
 </template>
 
 <style scoped lang="scss">

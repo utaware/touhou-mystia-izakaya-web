@@ -1,9 +1,13 @@
 <script setup lang="ts">
-import { customerRare, customerPlace, type TCustomerRare } from '@/material'
+import { customerRare, type TCustomerRare } from '@/material'
 
 import { SettingOutlined } from '@vicons/antd'
 
-import { ref, reactive, computed } from 'vue'
+import { reactive } from 'vue'
+
+import { useCustomerRareStore } from '@/pinia'
+
+import { storeToRefs } from 'pinia'
 
 import CustomerDetailModal from './CustomerDetailModal/index.vue'
 import FilterCustomerModal from './FilterCustomerModal/index.vue'
@@ -16,7 +20,9 @@ const state = reactive({
   customerRare
 })
 
-const placeFilters = ref<string[]>(customerPlace)
+const customerRareStore = useCustomerRareStore()
+
+const { filterCustomerWithName } = storeToRefs(customerRareStore)
 
 const handlerClickAvatar = function (item: TCustomerRare) {
   if (state.isFastEditMode) {
@@ -40,15 +46,6 @@ const toggleFilterModalShow = (value: boolean) => {
 }
 
 const openFilterModal = () => toggleFilterModalShow(true)
-
-const closeFilterModal = (value: string[]) => {
-  placeFilters.value = value
-  toggleFilterModalShow(false)
-}
-
-const customerList = computed(() => {
-  return customerRare.filter(({ place }) => placeFilters.value.includes(place))
-})
 </script>
 
 <template>
@@ -68,7 +65,7 @@ const customerList = computed(() => {
   <!-- avatar -->
   <div class="avatar-panel">
     <span
-      v-for="(item, index) in customerList"
+      v-for="(item, index) in filterCustomerWithName"
       :key="index"
       class="item"
       :class="{ disabled: item.disabled }"
@@ -90,9 +87,6 @@ const customerList = computed(() => {
   />
   <filter-customer-modal
     v-model:show="state.modalFilterShow"
-    :checked-places="placeFilters"
-    :all-places="customerPlace"
-    @enter="closeFilterModal"
   />
 </template>
 
