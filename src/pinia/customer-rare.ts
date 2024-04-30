@@ -2,6 +2,8 @@ import { defineStore } from 'pinia'
 
 import { customerPlace, customerRare, type TCustomerRare } from '@/material'
 
+export { type TCustomerRare }
+
 export const useCustomerRareStore = defineStore('customerRare', {
   state: () => ({
     place: customerPlace,
