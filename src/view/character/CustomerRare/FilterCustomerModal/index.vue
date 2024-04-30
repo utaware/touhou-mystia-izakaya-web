@@ -1,13 +1,15 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 
-import { CloseCircleFilled } from '@vicons/antd'
+import { storeToRefs } from 'pinia'
 
 import { useCustomerRareStore, TCustomerRare } from '@/pinia'
 
+import { CloseCircleFilled } from '@vicons/antd'
+
 import TransferPicker from './transfer.vue'
 
-defineProps<{ show: boolean }>()
+const props = defineProps<{ show: boolean }>()
 
 const emit = defineEmits<{
   'update:show': [value: boolean],
@@ -15,11 +17,13 @@ const emit = defineEmits<{
 
 const customerRareStore = useCustomerRareStore()
 
-const { place, customer, activeCustomerNames, acvitePlace, setActiveCustomer } = customerRareStore
+const { activeCustomerNames, acvitePlace } = storeToRefs(customerRareStore)
 
-const enabledPlaceList = ref<string[]>([...acvitePlace])
+const { place, customer, setActiveCustomer, setActivePlace } = customerRareStore
 
-const enabledCustomer = ref<string[]>([...activeCustomerNames])
+const enabledPlaceList = ref<string[]>([])
+
+const enabledCustomer = ref<string[]>([])
 
 const selectCustomerOptions = computed(() => {
   return customer
@@ -38,6 +42,7 @@ const selectPlaceOptions = place.map((v) => {
 
 const handleModalEnter = () => {
   setActiveCustomer(enabledCustomer.value)
+  setActivePlace(enabledPlaceList.value)
   emit('update:show', false)
 }
 
@@ -47,9 +52,20 @@ const handleModalClose = () => {
 
 const handleRemoveItem = (item: TCustomerRare) => {
   const { name } = item
-  const index = enabledCustomer.value.indexOf(name)
-  enabledCustomer.value.splice(index, 1)
+  const target = enabledCustomer.value
+  const index = target.indexOf(name)
+  target.splice(index, 1)
 }
+
+watch(
+  () => props.show,
+  (isOpen) => {
+    if (isOpen) {
+      enabledPlaceList.value = [...acvitePlace.value]
+      enabledCustomer.value = [...activeCustomerNames.value]
+    }
+  }
+)
 </script>
 
 <template>

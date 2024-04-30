@@ -65,9 +65,9 @@ const handleSelectOrClearAll = () => {
           <n-checkbox
             class="item"
             size="small"
-            v-for="({ label, value, disabled = false }, index) in options"
+            v-for="({ label, value: itemValue, disabled = false }, index) in options"
             :key="index"
-            :value="value"
+            :value="itemValue"
             :label="label"
             :disabled="disabled"
           />

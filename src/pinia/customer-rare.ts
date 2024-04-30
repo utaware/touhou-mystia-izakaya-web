@@ -20,6 +20,9 @@ export const useCustomerRareStore = defineStore('customerRare', {
   actions: {
     setActiveCustomer (value: string[]) {
       this.activeCustomerNames = value
+    },
+    setActivePlace (value: string[]) {
+      this.acvitePlace = value
     }
   },
   persist: true,
