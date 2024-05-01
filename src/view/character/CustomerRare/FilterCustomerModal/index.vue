@@ -123,8 +123,8 @@ watch(
         </transfer-picker>
         <!-- button -->
         <n-space justify="space-between" :wrap-item="false">
-          <n-button class="btn-item" @click="handleModalClose">取消</n-button>
-          <n-button class="btn-item" @click="handleModalEnter">确认</n-button>
+          <n-button class="btn-item" secondary type="error" @click="handleModalClose">取消</n-button>
+          <n-button class="btn-item" secondary type="info" @click="handleModalEnter">确认</n-button>
         </n-space>
       </div>
     </n-card>
