@@ -49,7 +49,7 @@ const handleRouterChange = (path: RouteLocationRaw) => {
   display: flex;
   height: 54px;
   justify-content: space-between;
-  border-bottom: 1px solid var(--color-common-border);
+  border-bottom: 1px solid var(--color-tab-border);
   &-prefix {
     padding: 8px 16px;
     display: flex;
@@ -58,7 +58,7 @@ const handleRouterChange = (path: RouteLocationRaw) => {
       display: inline-block;
       width: 32px;
       height: 38px;
-      background: url('public/favicon.png') no-repeat;
+      background: url('/favicon.png') no-repeat;
     }
     .title {
       margin-left: 16px;
@@ -72,7 +72,7 @@ const handleRouterChange = (path: RouteLocationRaw) => {
     .item {
       margin-right: 16px;
       font-size: 16px;
-      color: var(--color-common-text);
+      color: var(--color-text);
     }
   }
 }

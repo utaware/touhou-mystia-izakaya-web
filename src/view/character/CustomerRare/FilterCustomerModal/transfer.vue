@@ -82,13 +82,11 @@ const handleSelectOrClearAll = () => {
 </template>
 
 <style scoped lang="scss">
-$border-color: rgb(224, 224, 230);
-
 .customer-transfer {
   display: grid;
   grid-template-columns: max-content auto;
   height: 300px;
-  border: 1px solid $border-color;
+  border: 1px solid var(--color-border);
   border-radius: 3px;
   .left {
     display: flex;
@@ -103,7 +101,7 @@ $border-color: rgb(224, 224, 230);
       line-height: 40px;
       font-size: 12px;
       .count-text {
-        color: rgb(118, 124, 130);
+        color: var(--color-header-extra-text);
       }
     }
     .list {
@@ -117,14 +115,14 @@ $border-color: rgb(224, 224, 230);
           font-size: 12px;
           border-radius: 5px;
           &:hover {
-            background-color: rgb(243, 243, 245);
+            background-color: var(--color-item-pending);
           }
         }
       }
     }
   }
   .right {
-    border-left: 1px solid $border-color;
+    border-left: 1px solid var(--color-border);
     padding: 12px;
     overflow: scroll;
   }

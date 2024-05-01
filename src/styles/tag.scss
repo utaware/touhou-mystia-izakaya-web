@@ -1,0 +1,39 @@
+$color-tag-beverage-text: rgb(155, 89, 37);
+$color-tag-beverage-border: rgb(90, 126, 135);
+$color-tag-beverage-background: rgb(176, 207, 215);
+
+$color-tag-hate-text: rgb(229, 13, 13);
+$color-tag-hate-border: rgb(0, 0, 0);
+$color-tag-hate-background: rgb(93, 69, 58);
+
+$color-tag-like-text: rgb(131, 0, 0);
+$color-tag-like-border: rgb(157, 84, 55);
+$color-tag-like-background: rgb(230, 180, 166);
+
+:export {
+  colorTagBeverageText: $color-tag-beverage-text;
+  colorTagBeverageBorder: $color-tag-beverage-border;
+  colorTagBeverageBackground: $color-tag-beverage-background;
+
+  colorTagHateText: $color-tag-hate-text;
+  colorTagHateBorder: $color-tag-hate-border;
+  colorTagHateBackground: $color-tag-hate-background;
+
+  colorTagLikeText: $color-tag-like-text;
+  colorTagLikeBorder: $color-tag-like-border;
+  colorTagLikeBackground: $color-tag-like-background;
+}
+
+:root {
+  --color-tag-beverage-text: rgb(155, 89, 37);
+  --color-tag-beverage-border: rgb(90, 126, 135);
+  --color-tag-beverage-background: rgb(176, 207, 215);
+
+  --color-tag-hate-text: rgb(229, 13, 13);
+  --color-tag-hate-border: rgb(0, 0, 0);
+  --color-tag-hate-background: rgb(93, 69, 58);
+
+  --color-tag-like-text: rgb(131, 0, 0);
+  --color-tag-like-border: rgb(157, 84, 55);
+  --color-tag-like-background: rgb(230, 180, 166);
+}

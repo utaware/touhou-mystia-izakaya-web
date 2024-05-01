@@ -11,6 +11,7 @@ import { storeToRefs } from 'pinia'
 
 import CustomerDetailModal from './CustomerDetailModal/index.vue'
 import FilterCustomerModal from './FilterCustomerModal/index.vue'
+import SelectCustomerPanel from './SelectCustomerPanel/index.vue'
 
 const state = reactive({
   customerModalShow: false,
@@ -62,22 +63,28 @@ const openFilterModal = () => toggleFilterModalShow(true)
       <n-switch :on-update:value="handlerSwitchChange"/>快速编辑
     </n-space>
   </div>
-  <!-- avatar -->
-  <div class="avatar-panel">
-    <span
-      v-for="(item, index) in filterCustomerWithName"
-      :key="index"
-      class="item"
-      :class="{ disabled: item.disabled }"
-      @click="handlerClickAvatar(item)"
-    >
-      <n-avatar
-        class="avatar"
-        :size="84"
-        :src="item.src"
-        :alt="item.name"
-      />
-    </span>
+  <div class="content">
+    <!-- avatar -->
+    <div class="avatar-panel">
+      <span
+        v-for="(item, index) in filterCustomerWithName"
+        :key="index"
+        class="item"
+        :class="{ disabled: item.disabled }"
+        @click="handlerClickAvatar(item)"
+      >
+        <n-avatar
+          class="avatar"
+          :size="84"
+          :src="item.src"
+          :alt="item.name"
+        />
+      </span>
+    </div>
+    <!-- config -->
+    <select-customer-panel
+      :customer="state.currentCustomer"
+    />
   </div>
   <!-- modal -->
   <customer-detail-modal
@@ -95,6 +102,11 @@ const openFilterModal = () => toggleFilterModalShow(true)
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.content {
+  display: grid;
+  column-gap: 24px;
+  grid-template-columns: 1fr 1fr;
 }
 .avatar-panel {
   margin-top: 16px;
