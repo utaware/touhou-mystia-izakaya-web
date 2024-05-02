@@ -2,6 +2,7 @@
 import { TCustomerRare } from '@/pinia'
 
 import CommonTag from '@/components/common/tags/index.vue'
+import EditPanel from './panel.vue'
 
 defineProps<{
   customer: TCustomerRare
@@ -59,17 +60,25 @@ defineProps<{
         </n-space>
       </div>
     </div>
+    <!-- select -->
+    <edit-panel
+
+    />
   </div>
 </template>
 
 <style scoped lang="scss">
 .customer-panel {
-  padding: 24px;
-  border-left: 1px solid var(--color-border);
+  display: grid;
+  grid-template-rows: max-content auto;
+  row-gap: 12px;
   .info {
+    padding: 16px;
     display: grid;
     grid-template-columns: max-content auto;
     column-gap: 40px;
+    border: 1px solid var(--color-tab-border);
+    border-radius: 4px;
     .header {
       display: grid;
       row-gap: 4px;

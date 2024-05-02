@@ -2,7 +2,7 @@ import type { RouteRecordRaw } from 'vue-router'
 
 import layout from '@/layout/index.vue'
 
-import character from '@/view/character/index.vue'
+import customerRare from '@/view/customer-rare/index.vue'
 import beverages from '@/view/beverages/index.vue'
 
 const routes: RouteRecordRaw[] = [
@@ -10,12 +10,12 @@ const routes: RouteRecordRaw[] = [
     path: '/',
     name: 'layout',
     component: layout,
-    redirect: 'character',
+    redirect: 'customer-rare',
     children: [
       {
-        path: 'character',
-        name: 'character',
-        component: character
+        path: 'customer-rare',
+        name: 'customer-rare',
+        component: customerRare
       },
       {
         path: 'beverages',
