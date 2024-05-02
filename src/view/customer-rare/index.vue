@@ -1,12 +1,18 @@
 <script setup lang="ts">
 import { customerRare, type TCustomerRare } from '@/material'
 
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 
 import SelectCustomerPanel from './SelectCustomerPanel/index.vue'
+
 import CustomerView from './PanelView/customer.vue'
+import RecipesView from './PanelView/recipes.vue'
 
 const currentCustomer = ref<TCustomerRare>(customerRare[0])
+
+const state = reactive({
+  activeTabName: 'recipes',
+})
 </script>
 
 <template>
@@ -15,12 +21,17 @@ const currentCustomer = ref<TCustomerRare>(customerRare[0])
     <!-- left: 可选视图切换 -->
     <n-card content-style="padding: 0;">
       <!-- views -->
-      <n-tabs type="segment" animated pane-style="padding: 12px;">
+      <n-tabs
+        v-model:value="state.activeTabName"
+        type="segment"
+        animated
+        pane-style="padding: 12px;"
+      >
         <n-tab-pane name="customer" tab="顾客">
           <customer-view v-model:customer="currentCustomer" />
         </n-tab-pane>
         <n-tab-pane name="recipes" tab="料理">
-          料理
+          <recipes-view />
         </n-tab-pane>
         <n-tab-pane name="beverages" tab="酒水">
           酒水

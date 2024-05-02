@@ -3,6 +3,7 @@ import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 
 export * from './beverages'
+export * from './recipes'
 export * from './customer-rare'
 
 const pinia = createPinia()
