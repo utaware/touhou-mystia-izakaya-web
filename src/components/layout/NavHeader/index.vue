@@ -9,7 +9,7 @@ interface TNavItem {
 }
 
 const navList: TNavItem[] = [
-  { text: '顾客', path: '/character' },
+  { text: '顾客', path: '/customer-rare' },
   { text: '料理', path: '/recipes' },
   { text: '酒水', path: '/beverages' },
   { text: '食材', path: '/ingredients'},
