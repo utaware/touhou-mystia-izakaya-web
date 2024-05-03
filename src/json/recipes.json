@@ -161,25 +161,6 @@
   },
   {
     "dlc": "DLC0",
-    "name": "黑暗物质",
-    "namePY": "heianwuzhi",
-    "tool": "任意",
-    "time_lv1": "任意",
-    "time_lv50": "任意",
-    "level": 1,
-    "from": "料理制作失败",
-    "ingredients": [
-      "任意"
-    ],
-    "positive_tags": [
-      "黑暗物质"
-    ],
-    "negative_tags": [
-      ""
-    ]
-  },
-  {
-    "dlc": "DLC0",
     "name": "臭豆腐",
     "namePY": "choudoufu",
     "tool": "油锅",

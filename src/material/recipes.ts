@@ -2,9 +2,10 @@ import recipesJSON from '@/json/recipes.json'
 
 import { getUnionTags } from '@/utils'
 
-const recipes = recipesJSON.map((item) => {
+const recipes = recipesJSON.map((item, index) => {
   return {
     ...item,
+    index,
     disabled: false,
   }
 })

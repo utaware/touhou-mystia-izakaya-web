@@ -33,6 +33,7 @@ declare module 'vue' {
     NTransfer: typeof import('naive-ui')['NTransfer']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Sprite: typeof import('./src/components/common/sprite/index.vue')['default']
     Tags: typeof import('./src/components/common/tags/index.vue')['default']
   }
 }
