@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-import { useRecipesStore, TCustomerRare } from '@/pinia'
+import { useBeveragesStore, TCustomerRare } from '@/pinia'
 
 import SpriteItem from '@/components/common/sprite/index.vue'
 
@@ -9,21 +9,20 @@ import { orderBy } from 'lodash'
 
 import { getMatchResult } from '@/utils'
 
-const recipesStore = useRecipesStore()
+const beveragesStore = useBeveragesStore()
 
 const props = defineProps<{
   customer: TCustomerRare
 }>()
 
 const recipes = computed(() => {
-  return orderBy(recipesStore.recipes.map((item) => {
-    const { like_tags, hate_tags } = props.customer
-    const { positive_tags } = item
-    const { isMatch: like_match_tags } = getMatchResult(like_tags, positive_tags)
-    const { isMatch: hate_match_tags } = getMatchResult(hate_tags, positive_tags)
-    const value = like_match_tags.length - hate_match_tags.length
+  return orderBy(beveragesStore.beverages.map((item) => {
+    const { beverage_tags } = props.customer
+    const { beverage_tags: customer_tags } = item
+    const { isMatch: beverage_match_tags } = getMatchResult(customer_tags, beverage_tags)
+    const value = beverage_match_tags.length
     const text = String(value)
-    return { ...item, like_match_tags, hate_match_tags, value, text }
+    return { ...item, beverage_match_tags, value, text }
   }), ['value'], ['desc'])
 })
 </script>
@@ -33,7 +32,7 @@ const recipes = computed(() => {
   <div class="wrapper">
     <!-- config -->
     <!-- view -->
-    <ul class="recipes-view">
+    <ul class="beverages-view">
       <li
         class="item"
         v-for="(item, index) in recipes"
@@ -46,20 +45,19 @@ const recipes = computed(() => {
         >
           <sprite-item
             :index="item.index"
-            :width="48"
-            :height="48"
+            :width="64"
+            :height="64"
             :title="item.name"
-            type="recipes"
+            type="beverages"
           />
         </n-badge>
-        <!-- <span>{{ item.name }}</span> -->
       </li>
     </ul>
   </div>
 </template>
 
 <style scoped lang="scss">
-.recipes-view {
+.beverages-view {
   display: grid;
   gap: 12px;
   grid-template-columns: repeat(auto-fill, 64px);

@@ -11,7 +11,7 @@ const props = defineProps<{
 const typeOptions = {
   recipes: { total: 163 },
   beverages: { total: 46 },
-  ingredients: { total: 59 },
+  ingredients: { total: 61 },
   tools: { total: 5 },
 }
 
@@ -49,7 +49,7 @@ const computedStyles = computed(() => {
   background-image: url('@/assets/sprite/beverages-sprite.jpeg');
 }
 .ingredients {
-  background-image: url('@/assets/sprite/ingredients-sprite.jpeg');
+  background-image: url('@/assets/sprite/ingredients-sprite.png');
 }
 .tools {
   background-image: url('@/assets/sprite/tools-sprite.jpeg');

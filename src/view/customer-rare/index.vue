@@ -7,6 +7,8 @@ import SelectCustomerPanel from './SelectCustomerPanel/index.vue'
 
 import CustomerView from './PanelView/customer.vue'
 import RecipesView from './PanelView/recipes.vue'
+import BeveragesView from './PanelView/beverages.vue'
+import IngredientsView from './PanelView/ingredients.vue'
 
 const state = reactive({
   activeTabName: 'recipes',
@@ -33,10 +35,10 @@ const state = reactive({
           <recipes-view :customer="state.currentCustomer" />
         </n-tab-pane>
         <n-tab-pane name="beverages" tab="酒水">
-          酒水
+          <beverages-view :customer="state.currentCustomer" />
         </n-tab-pane>
         <n-tab-pane name="ingredients" tab="食材">
-          食材
+          <ingredients-view :customer="state.currentCustomer" />
         </n-tab-pane>
       </n-tabs>
     </n-card>
