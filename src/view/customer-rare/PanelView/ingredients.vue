@@ -29,8 +29,8 @@ const ingredients = computed(() => {
       >
         <sprite-item
           :index="item.index"
-          :width="64"
-          :height="64"
+          :width="48"
+          :height="48"
           :title="item.name"
           type="ingredients"
         />

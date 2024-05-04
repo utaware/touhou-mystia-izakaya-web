@@ -23,11 +23,10 @@ const computedStyles = computed(() => {
   const x = index % count
   const y = Math.floor(index / count)
   const reSizeX = Math.min(total, count) * width
-  const reSizeY = Math.ceil(total / count) * height
   return {
     width: `${width}px`,
     height: `${height}px`,
-    backgroundSize: `${reSizeX}px ${reSizeY}px`,
+    backgroundSize: `${reSizeX}px`,
     backgroundPosition: `-${x * width}px -${y * height}px`,
   }
 })
@@ -43,13 +42,13 @@ const computedStyles = computed(() => {
   background-repeat: no-repeat;
 }
 .recipes {
-  background-image: url('@/assets/sprite/recipes-sprite.png');
+  background-image: url('@/assets/sprite/recipes-sprite.webp');
 }
 .beverages {
-  background-image: url('@/assets/sprite/beverages-sprite.jpeg');
+  background-image: url('@/assets/sprite/beverages-sprite.webp');
 }
 .ingredients {
-  background-image: url('@/assets/sprite/ingredients-sprite.png');
+  background-image: url('@/assets/sprite/ingredients-sprite.webp');
 }
 .tools {
   background-image: url('@/assets/sprite/tools-sprite.webp');
