@@ -61,6 +61,9 @@ export const useRecipesStore = defineStore('recipes', {
     allToolOptions (state): TOptionItem[] {
       return mapSelectOptions(state.allTools)
     },
+    getToolIndex (state): (name: string) => number {
+      return (name: string): number => state.allTools.indexOf(name)
+    },
     currentToolIndex (state): number {
       const { currentRecipe: { tool }, allTools } = state
       return allTools.indexOf(tool)
@@ -73,4 +76,4 @@ export const useRecipesStore = defineStore('recipes', {
   }
 })
 
-export { type TRecipeItem }
+export type { TRecipeItem, TRecipeMatchItem }

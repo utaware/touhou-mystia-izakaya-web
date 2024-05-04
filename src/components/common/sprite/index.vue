@@ -6,6 +6,7 @@ const props = defineProps<{
   type: 'recipes' | 'beverages' | 'ingredients' | 'tools',
   width: number,
   height: number,
+  title?: string,
 }>()
 
 const typeOptions = {
@@ -33,7 +34,12 @@ const computedStyles = computed(() => {
 </script>
 
 <template>
-  <i class="sprite" :class="type" :style="computedStyles"></i>
+  <i
+    class="sprite"
+    :class="type"
+    :style="computedStyles"
+    :title="title"
+  ></i>
 </template>
 
 <style scoped lang="scss">

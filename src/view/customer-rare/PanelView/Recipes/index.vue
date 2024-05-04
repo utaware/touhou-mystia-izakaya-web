@@ -5,20 +5,30 @@ import { storeToRefs } from 'pinia'
 
 import { SettingOutlined } from '@vicons/antd'
 
-import { useRecipesStore, type TRecipeItem } from '@/pinia'
-
-import SpriteItem from '@/components/common/sprite/index.vue'
+import { useRecipesStore, useIngredientsStore, type TRecipeItem } from '@/pinia'
 
 import detailModal from './detail.vue'
 import filterModal from './filter.vue'
 
-import { columns } from './table'
+import { createColumns, getRowKey, pagination } from './table/index.tsx'
 
 const recipesStore = useRecipesStore()
+const ingredientsStore = useIngredientsStore()
+
+const { getIngredientIndex } = ingredientsStore
 
 const {
   getRecipesWithCustomerRare: recipes,
+}: {
+  getRecipesWithCustomerRare: TRecipeItem[]
 } = storeToRefs(recipesStore)
+
+const { getToolIndex } = recipesStore
+
+const columns = createColumns({
+  getIngredientIndex,
+  getToolIndex,
+})
 
 const detailModalShow = ref(false)
 const filterModalShow = ref(false)
@@ -47,32 +57,11 @@ const openFilterModal = () => {
     <!-- view -->
     <n-data-table
       class="view"
+      :row-key="getRowKey"
       :columns="columns"
       :data="recipes"
-      row-key="name"
+      :pagination="pagination"
     />
-    <ul class="recipes-view">
-      <li
-        class="item"
-        v-for="(item, index) in recipes"
-        :key="index"
-      >
-        <n-badge
-          :value="item.badge_text"
-          show-zero
-          type="error"
-          @click="handleClickItem(item)"
-        >
-          <sprite-item
-            :index="item.index"
-            :width="48"
-            :height="48"
-            :title="item.name"
-            type="recipes"
-          />
-        </n-badge>
-      </li>
-    </ul>
     <!-- modal -->
     <detail-modal v-model:show="detailModalShow" />
     <filter-modal v-model:show="filterModalShow"/>
@@ -83,13 +72,6 @@ const openFilterModal = () => {
 .wrapper {
   .config {
     display: flex;
-    justify-content: space-between;
-  }
-  .recipes-view {
-    margin-top: 24px;
-    display: grid;
-    gap: 12px;
-    grid-template-columns: repeat(auto-fill, 64px);
     justify-content: space-between;
   }
   .view {
