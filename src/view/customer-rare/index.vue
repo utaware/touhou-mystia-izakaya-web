@@ -1,14 +1,23 @@
 <script setup lang="ts">
-import { customerRare } from '@/material'
+import { reactive, ref } from 'vue'
 
-import { reactive } from 'vue'
+import { customerRare } from '@/material'
 
 import SelectCustomerPanel from './SelectCustomerPanel/index.vue'
 
-import CustomerView from './PanelView/customer.vue'
-import RecipesView from './PanelView/recipes.vue'
+import CustomerView from './PanelView/Customer/index.vue'
+import RecipesView from './PanelView/Recipes/index.vue'
 import BeveragesView from './PanelView/beverages.vue'
 import IngredientsView from './PanelView/ingredients.vue'
+
+const tabPanes = [
+  { name: 'customer', tab: '顾客', component: CustomerView },
+  { name: 'recipes', tab: '料理', component: RecipesView },
+  { name: 'beverages', tab: '酒水', component: BeveragesView },
+  { name: 'ingredients', tab: '食材', component: IngredientsView },
+]
+
+const activeTabName = ref<string>('recipes')
 
 const state = reactive({
   activeTabName: 'recipes',
@@ -23,27 +32,27 @@ const state = reactive({
     <n-card content-style="padding: 0;">
       <!-- views -->
       <n-tabs
-        v-model:value="state.activeTabName"
+        v-model:value="activeTabName"
         type="segment"
         animated
         pane-style="padding: 12px;"
       >
-        <n-tab-pane name="customer" tab="顾客">
-          <customer-view v-model:customer="state.currentCustomer" />
-        </n-tab-pane>
-        <n-tab-pane name="recipes" tab="料理">
-          <recipes-view :customer="state.currentCustomer" />
-        </n-tab-pane>
-        <n-tab-pane name="beverages" tab="酒水">
-          <beverages-view :customer="state.currentCustomer" />
-        </n-tab-pane>
-        <n-tab-pane name="ingredients" tab="食材">
-          <ingredients-view :customer="state.currentCustomer" />
+        <n-tab-pane
+          v-for="(item) in tabPanes"
+          :key="item.name"
+          display-directive="show"
+          :name="item.name"
+          :tab="item.tab"
+        >
+          <component
+            :is="item.component"
+            v-model:customer="state.currentCustomer"
+          />
         </n-tab-pane>
       </n-tabs>
     </n-card>
     <!-- right: 信息整合 -->
-    <select-customer-panel :customer="state.currentCustomer" />
+    <select-customer-panel />
   </div>
 </template>
 

@@ -1,12 +1,15 @@
 <script setup lang="ts">
-import { TCustomerRare } from '@/pinia'
+import { storeToRefs } from 'pinia'
 
 import CommonTag from '@/components/common/tags/index.vue'
+
+import { useCustomerRareStore } from '@/pinia'
+
 import EditPanel from './panel.vue'
 
-defineProps<{
-  customer: TCustomerRare
-}>()
+const customerRareStore = useCustomerRareStore()
+
+const { currentCustomer: customer } = storeToRefs(customerRareStore)
 </script>
 
 <template>
@@ -61,9 +64,7 @@ defineProps<{
       </div>
     </div>
     <!-- select -->
-    <edit-panel
-
-    />
+    <edit-panel />
   </div>
 </template>
 

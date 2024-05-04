@@ -3,7 +3,7 @@ import { ref, computed, watch } from 'vue'
 
 import { storeToRefs } from 'pinia'
 
-import { useCustomerRareStore, TCustomerRare } from '@/pinia'
+import { useCustomerRareStore, type TCustomerRare } from '@/pinia'
 
 import { CloseCircleFilled } from '@vicons/antd'
 
@@ -19,25 +19,21 @@ const customerRareStore = useCustomerRareStore()
 
 const { activeCustomerNames, acvitePlace } = storeToRefs(customerRareStore)
 
-const { place, customer, setActiveCustomer, setActivePlace } = customerRareStore
+const { allCustomer, selectPlaceOptions, setActiveCustomer, setActivePlace } = customerRareStore
 
 const enabledPlaceList = ref<string[]>([])
 
 const enabledCustomer = ref<string[]>([])
 
 const selectCustomerOptions = computed(() => {
-  return customer
+  return allCustomer
     .filter(({ place }) => enabledPlaceList.value.includes(place))
     .map(({ name }) => ({ label: name, value: name }))
 })
 
 const selectCustomerList = computed(() => {
-  return customer
+  return allCustomer
     .filter(({ name }) => enabledCustomer.value.includes(name))
-})
-
-const selectPlaceOptions = place.map((v) => {
-  return { label: v, value: v }
 })
 
 const handleModalEnter = () => {

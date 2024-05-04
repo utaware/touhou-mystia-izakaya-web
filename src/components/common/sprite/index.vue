@@ -22,7 +22,7 @@ const computedStyles = computed(() => {
   const { total } = typeOptions[type]
   const x = index % count
   const y = Math.floor(index / count)
-  const reSizeX = count * width
+  const reSizeX = Math.min(total, count) * width
   const reSizeY = Math.ceil(total / count) * height
   return {
     width: `${width}px`,
@@ -52,6 +52,6 @@ const computedStyles = computed(() => {
   background-image: url('@/assets/sprite/ingredients-sprite.png');
 }
 .tools {
-  background-image: url('@/assets/sprite/tools-sprite.jpeg');
+  background-image: url('@/assets/sprite/tools-sprite.webp');
 }
 </style>

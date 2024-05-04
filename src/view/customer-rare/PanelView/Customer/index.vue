@@ -7,15 +7,7 @@ import { SettingOutlined } from '@vicons/antd'
 
 import { useCustomerRareStore, TCustomerRare } from '@/pinia'
 
-import FilterCustomerModal from '../FilterCustomerModal/index.vue'
-
-defineProps<{
-  customer: TCustomerRare
-}>()
-
-const emit = defineEmits<{
-  'update:customer': [value: TCustomerRare]
-}>()
+import FilterModal from './FilterModal/index.vue'
 
 const customerRareStore = useCustomerRareStore()
 
@@ -23,14 +15,12 @@ const { filterCustomerWithName } = storeToRefs(customerRareStore)
 
 const modalFilterShow = ref(false)
 
-const toggleFilterModalShow = (value: boolean) => {
-  modalFilterShow.value = value
+const openFilterModal = () => {
+  modalFilterShow.value = true
 }
 
-const openFilterModal = () => toggleFilterModalShow(true)
-
 const handlerClickCustomer = function (item: TCustomerRare) {
-  emit('update:customer', item)
+  customerRareStore.setCurrentCustomer(item)
 }
 </script>
 
@@ -63,7 +53,7 @@ const handlerClickCustomer = function (item: TCustomerRare) {
       </span>
     </div>
     <!-- modal -->
-    <filter-customer-modal v-model:show="modalFilterShow" />
+    <filter-modal v-model:show="modalFilterShow" />
   </div>
 </template>
 
