@@ -10,9 +10,16 @@ const recipes = recipesJSON.map((item, index) => {
   }
 })
 
+const tools = ['烤架', '料理台', '油锅', '蒸锅', '煮锅']
+
 const recipesPositiveTags = getUnionTags(recipes, 'positive_tags')
 const recipesNegativeTags = getUnionTags(recipes, 'negative_tags')
 
 export type TRecipeItem = typeof recipes[number]
 
-export { recipes, recipesPositiveTags, recipesNegativeTags }
+export {
+  tools,
+  recipes,
+  recipesPositiveTags,
+  recipesNegativeTags
+}

@@ -7,8 +7,8 @@ import SelectCustomerPanel from './SelectCustomerPanel/index.vue'
 
 import CustomerView from './PanelView/Customer/index.vue'
 import RecipesView from './PanelView/Recipes/index.vue'
-import BeveragesView from './PanelView/beverages.vue'
-import IngredientsView from './PanelView/ingredients.vue'
+import BeveragesView from './PanelView/Beverages/index.vue'
+import IngredientsView from './PanelView/Ingredients/index.vue'
 
 const tabPanes = [
   { name: 'customer', tab: '顾客', component: CustomerView },

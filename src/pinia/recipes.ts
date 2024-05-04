@@ -1,6 +1,11 @@
 import { defineStore } from 'pinia'
 
-import { recipes, recipesPositiveTags, recipesNegativeTags } from '@/material'
+import {
+  recipes,
+  tools,
+  recipesPositiveTags,
+  recipesNegativeTags
+} from '@/material'
 import type { TRecipeItem } from '@/material'
 
 import { mapSelectOptions, getMatchResult } from '@/utils'
@@ -18,6 +23,7 @@ interface TRecipeMatchItem extends TRecipeItem {
 
 interface State {
   allRecipes: TRecipeItem[],
+  allTools: string[],
   recipesPositiveTags: string[],
   recipesNegativeTags: string[],
   currentRecipe: TRecipeItem,
@@ -26,6 +32,7 @@ interface State {
 export const useRecipesStore = defineStore('recipes', {
   state: (): State => ({
     allRecipes: recipes,
+    allTools: tools,
     recipesPositiveTags,
     recipesNegativeTags,
     currentRecipe: recipes[0],
@@ -50,6 +57,13 @@ export const useRecipesStore = defineStore('recipes', {
       })
       const order = orderBy(result, ['match_recipe_point'], ['desc'])
       return order
+    },
+    allToolOptions (state): TOptionItem[] {
+      return mapSelectOptions(state.allTools)
+    },
+    currentToolIndex (state): number {
+      const { currentRecipe: { tool }, allTools } = state
+      return allTools.indexOf(tool)
     }
   },
   actions: {

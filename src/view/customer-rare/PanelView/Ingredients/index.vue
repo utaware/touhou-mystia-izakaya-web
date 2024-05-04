@@ -1,15 +1,11 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-import { useIngredientsStore, TCustomerRare } from '@/pinia'
+import { useIngredientsStore } from '@/pinia'
 
 import SpriteItem from '@/components/common/sprite/index.vue'
 
 const ingredientsStore = useIngredientsStore()
-
-defineProps<{
-  customer: TCustomerRare
-}>()
 
 const ingredients = computed(() => {
   return ingredientsStore.ingredients
@@ -43,7 +39,7 @@ const ingredients = computed(() => {
 .ingredients-view {
   display: grid;
   gap: 12px;
-  grid-template-columns: repeat(auto-fill, 64px);
+  grid-template-columns: repeat(auto-fill, 48px);
   justify-content: space-between;
 }
 </style>

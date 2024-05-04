@@ -27,9 +27,6 @@ const $attrs = useAttrs()
   border-width: 2px;
   border-style: solid;
   font-weight: bold;
-  &.disabled {
-    opacity: 0.2;
-  }
 }
 .like {
   background-color: rgb(230, 180, 166);

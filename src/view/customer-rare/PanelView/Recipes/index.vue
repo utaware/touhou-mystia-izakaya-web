@@ -3,28 +3,33 @@ import { ref } from 'vue'
 
 import { storeToRefs } from 'pinia'
 
+import { SettingOutlined } from '@vicons/antd'
+
 import { useRecipesStore, type TRecipeItem } from '@/pinia'
 
 import SpriteItem from '@/components/common/sprite/index.vue'
 
-import recipesDetail from './detail.vue'
+import detailModal from './detail.vue'
+import filterModal from './filter.vue'
+
+import { columns } from './table'
 
 const recipesStore = useRecipesStore()
 
 const {
-  negativeTagOptions,
-  positiveTagOptions,
   getRecipesWithCustomerRare: recipes,
 } = storeToRefs(recipesStore)
 
-const selectedPositiveTags = ref([])
-const selectedNegativeTags = ref([])
-
 const detailModalShow = ref(false)
+const filterModalShow = ref(false)
 
 const handleClickItem = (item: TRecipeItem) => {
   recipesStore.setCurrentRecipe(item)
   detailModalShow.value = true
+}
+
+const openFilterModal = () => {
+  filterModalShow.value = true
 }
 </script>
 
@@ -33,10 +38,19 @@ const handleClickItem = (item: TRecipeItem) => {
   <div class="wrapper">
     <!-- config -->
     <div class="config">
-      <n-select v-model:value="selectedPositiveTags" multiple :options="positiveTagOptions" />
-      <n-select v-model:value="selectedNegativeTags" multiple :options="negativeTagOptions" />
+      <n-button class="config" @click="openFilterModal">
+        <n-space>
+          <n-icon :component="SettingOutlined"/>设置
+        </n-space>
+      </n-button>
     </div>
     <!-- view -->
+    <n-data-table
+      class="view"
+      :columns="columns"
+      :data="recipes"
+      row-key="name"
+    />
     <ul class="recipes-view">
       <li
         class="item"
@@ -47,6 +61,7 @@ const handleClickItem = (item: TRecipeItem) => {
           :value="item.badge_text"
           show-zero
           type="error"
+          @click="handleClickItem(item)"
         >
           <sprite-item
             :index="item.index"
@@ -54,15 +69,13 @@ const handleClickItem = (item: TRecipeItem) => {
             :height="48"
             :title="item.name"
             type="recipes"
-            @click="handleClickItem(item)"
           />
         </n-badge>
       </li>
     </ul>
     <!-- modal -->
-    <n-modal v-model:show="detailModalShow">
-      <recipes-detail />
-    </n-modal>
+    <detail-modal v-model:show="detailModalShow" />
+    <filter-modal v-model:show="filterModalShow"/>
   </div>
 </template>
 
@@ -78,6 +91,9 @@ const handleClickItem = (item: TRecipeItem) => {
     gap: 12px;
     grid-template-columns: repeat(auto-fill, 64px);
     justify-content: space-between;
+  }
+  .view {
+    margin-top: 12px;
   }
 }
 </style>
