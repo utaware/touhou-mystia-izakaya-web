@@ -5,9 +5,9 @@ import { storeToRefs } from 'pinia'
 
 import { SettingOutlined } from '@vicons/antd'
 
-import { useRecipesStore, useIngredientsStore, type TRecipeItem } from '@/pinia'
+import { useRecipesStore, useIngredientsStore } from '@/pinia'
+import type { TRecipeMatchItem } from '@/pinia'
 
-import detailModal from './detail.vue'
 import filterModal from './filter.vue'
 
 import { createColumns, getRowKey, pagination } from './table/index.tsx'
@@ -19,27 +19,32 @@ const { getIngredientIndex } = ingredientsStore
 
 const {
   getRecipesWithCustomerRare: recipes,
-}: {
-  getRecipesWithCustomerRare: TRecipeItem[]
 } = storeToRefs(recipesStore)
 
-const { getToolIndex } = recipesStore
+const {
+  getToolIndex,
+  setCurrentRecipe,
+} = recipesStore
 
 const columns = createColumns({
   getIngredientIndex,
   getToolIndex,
 })
 
-const detailModalShow = ref(false)
 const filterModalShow = ref(false)
 
-const handleClickItem = (item: TRecipeItem) => {
-  recipesStore.setCurrentRecipe(item)
-  detailModalShow.value = true
+const handleClickItem = (item: TRecipeMatchItem) => {
+  setCurrentRecipe(item)
 }
 
 const openFilterModal = () => {
   filterModalShow.value = true
+}
+
+const rowProps = (item: TRecipeMatchItem) => {
+  return {
+    onClick: () => handleClickItem(item)
+  }
 }
 </script>
 
@@ -57,13 +62,14 @@ const openFilterModal = () => {
     <!-- view -->
     <n-data-table
       class="view"
+      striped
       :row-key="getRowKey"
       :columns="columns"
       :data="recipes"
       :pagination="pagination"
+      :row-props="rowProps"
     />
     <!-- modal -->
-    <detail-modal v-model:show="detailModalShow" />
     <filter-modal v-model:show="filterModalShow"/>
   </div>
 </template>
@@ -76,6 +82,11 @@ const openFilterModal = () => {
   }
   .view {
     margin-top: 12px;
+  }
+  ::v-deep {
+    td.sort-columns {
+      background-color: #fff;
+    }
   }
 }
 </style>

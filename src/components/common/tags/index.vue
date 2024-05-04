@@ -4,6 +4,7 @@ import { defineProps, useAttrs } from 'vue'
 interface PropsType {
   category: 'like' | 'hate' | 'beverage';
   value: string;
+  disabled?: boolean;
 }
 
 defineProps<PropsType>()
@@ -15,6 +16,7 @@ const $attrs = useAttrs()
   <n-tag
     class="item"
     v-bind="$attrs"
+    :disabled="disabled"
     :bordered="false"
     :class="category"
   >

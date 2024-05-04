@@ -13,7 +13,6 @@ import type { TOptionItem } from '@/utils'
 
 import { useCustomerRareStore } from '@/pinia'
 
-import { orderBy } from 'lodash'
 interface TRecipeMatchItem extends TRecipeItem {
   like_match_tags: string[],
   hate_match_tags: string[],
@@ -53,10 +52,15 @@ export const useRecipesStore = defineStore('recipes', {
         const { isMatch: hate_match_tags } = getMatchResult(hate_tags, positive_tags)
         const match_recipe_point = like_match_tags.length - hate_match_tags.length
         const badge_text = String(match_recipe_point)
-        return { ...item, like_match_tags, hate_match_tags, match_recipe_point, badge_text }
+        return {
+          ...item,
+          like_match_tags,
+          hate_match_tags,
+          match_recipe_point,
+          badge_text
+        }
       })
-      const order = orderBy(result, ['match_recipe_point'], ['desc'])
-      return order
+      return result
     },
     allToolOptions (state): TOptionItem[] {
       return mapSelectOptions(state.allTools)
@@ -64,10 +68,6 @@ export const useRecipesStore = defineStore('recipes', {
     getToolIndex (state): (name: string) => number {
       return (name: string): number => state.allTools.indexOf(name)
     },
-    currentToolIndex (state): number {
-      const { currentRecipe: { tool }, allTools } = state
-      return allTools.indexOf(tool)
-    }
   },
   actions: {
     setCurrentRecipe (item: TRecipeItem) {

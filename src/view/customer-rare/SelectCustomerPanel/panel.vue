@@ -1,5 +1,11 @@
 <script setup lang="ts">
+import { storeToRefs } from 'pinia'
 
+import { useRecipesStore } from '@/pinia'
+
+const recipesStore = useRecipesStore()
+
+const { currentRecipe } = storeToRefs(recipesStore)
 </script>
 
 <template>

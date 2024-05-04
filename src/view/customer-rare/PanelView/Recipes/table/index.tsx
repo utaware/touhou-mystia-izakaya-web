@@ -1,26 +1,12 @@
-import { NBadge, NButton, NIcon } from 'naive-ui'
-import type { DataTableColumns, DataTableSortState } from 'naive-ui'
+import { NBadge, NSpace } from 'naive-ui'
+import type { DataTableColumns } from 'naive-ui'
 
 import SpriteItem from '@/components/common/sprite/index.vue'
+import TagItem from '@/components/common/tags/index.vue'
 
-import {
-  SortAscendingOutlined,
-  SortDescendingOutlined,
-  SmallDashOutlined
-} from '@vicons/antd'
+import type { TRecipeMatchItem } from '@/pinia'
 
-import { type TRecipeMatchItem } from '@/pinia'
-
-const renderSorterIcon = (order: DataTableSortState['order']) => {
-  switch (order) {
-    case 'ascend':
-      return SortDescendingOutlined
-    case 'descend':
-      return SortAscendingOutlined
-    default:
-      return SmallDashOutlined
-  }
-}
+import { renderSorterIcon } from './sortMatchPoint.tsx'
 
 export const createColumns = ({
   getIngredientIndex,
@@ -33,9 +19,32 @@ export const createColumns = ({
 }): DataTableColumns<TRecipeMatchItem> => {
   return [
     {
+      type: 'expand',
+      renderExpand ({ positive_tags, like_match_tags, hate_match_tags }: TRecipeMatchItem) {
+        const match_tags = [like_match_tags, hate_match_tags].flat()
+        const isNoMatchTag = (item: string): boolean => !match_tags.includes(item)
+        const isHateTag = (item: string): boolean => hate_match_tags.includes(item)
+        return (
+          <NSpace>
+          {
+            positive_tags.map((item) => {
+              return (<TagItem
+                disabled={isNoMatchTag(item)}
+                category={isHateTag(item) ? 'hate' : 'like'}
+                value={item}
+              />)
+            })
+          }
+          </NSpace>
+        )
+      }
+    },
+    {
       title: '匹配数',
       key: 'match_recipe_point',
       sorter: 'default',
+      className: 'sort-columns',
+      defaultSortOrder: 'descend',
       render ({ badge_text }) {
         return  <NBadge
           value={badge_text}
@@ -43,7 +52,7 @@ export const createColumns = ({
           type="error"
         />
       },
-      renderSorterIcon: ({ order }) => <NIcon size={24} component={renderSorterIcon(order)} />
+      renderSorterIcon
     },
     {
       title: '料理',
@@ -73,6 +82,9 @@ export const createColumns = ({
           title={tool}
           type="tools"
         />
+      },
+      filter (value, row) {
+        return value === row.tool
       }
     },
     {
@@ -95,15 +107,6 @@ export const createColumns = ({
           </>
         )
       }
-    },
-    {
-      title: '操作',
-      key: 'handle',
-      render: () => (
-        <NButton strong tertiary size="small">
-          详情
-        </NButton>
-      )
     },
   ]
 }

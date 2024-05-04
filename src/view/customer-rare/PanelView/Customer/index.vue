@@ -5,13 +5,16 @@ import { storeToRefs } from 'pinia'
 
 import { SettingOutlined } from '@vicons/antd'
 
-import { useCustomerRareStore, TCustomerRare } from '@/pinia'
+import { useCustomerRareStore, type TCustomerRare } from '@/pinia'
+import store from '@/pinia'
 
 import FilterModal from './FilterModal/index.vue'
 
-const customerRareStore = useCustomerRareStore()
+const customerRareStore = useCustomerRareStore(store)
 
 const { filterCustomerWithName } = storeToRefs(customerRareStore)
+
+const { setCurrentCustomer } = customerRareStore
 
 const modalFilterShow = ref(false)
 
@@ -19,8 +22,8 @@ const openFilterModal = () => {
   modalFilterShow.value = true
 }
 
-const handlerClickCustomer = function (item: TCustomerRare) {
-  customerRareStore.setCurrentCustomer(item)
+const handlerClickCustomer = (item: TCustomerRare) => {
+  setCurrentCustomer(item)
 }
 </script>
 

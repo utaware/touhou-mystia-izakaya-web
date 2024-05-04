@@ -45,6 +45,7 @@ const computedStyles = computed(() => {
 <style scoped lang="scss">
 .sprite {
   display: inline-block;
+  vertical-align: middle;
   background-repeat: no-repeat;
 }
 .recipes {

@@ -27,7 +27,7 @@ export const useCustomerRareStore = defineStore('customerRare', {
     },
     selectPlaceOptions (state): TOptionItem[] {
       return mapSelectOptions(state.allPlace)
-    }
+    },
   },
   actions: {
     setActiveCustomer (value: string[]) {

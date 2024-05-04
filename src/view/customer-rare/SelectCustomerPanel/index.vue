@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 
-import CommonTag from '@/components/common/tags/index.vue'
+import TagItem from '@/components/common/tags/index.vue'
 
 import { useCustomerRareStore } from '@/pinia'
 
@@ -36,7 +36,7 @@ const { currentCustomer: customer } = storeToRefs(customerRareStore)
       <div class="list">
         <n-space>
           <!-- like -->
-            <common-tag
+            <tag-item
               :value="item"
               category="like"
               v-for="(item) in customer.like_tags"
@@ -45,7 +45,7 @@ const { currentCustomer: customer } = storeToRefs(customerRareStore)
         </n-space>
         <!-- hate -->
         <n-space>
-          <common-tag
+          <tag-item
             :value="item"
             category="hate"
             v-for="(item) in customer.hate_tags"
@@ -54,7 +54,7 @@ const { currentCustomer: customer } = storeToRefs(customerRareStore)
         </n-space>
         <!-- beverage -->
         <n-space>
-          <common-tag
+          <tag-item
             :value="item"
             category="beverage"
             v-for="(item) in customer.beverage_tags"
