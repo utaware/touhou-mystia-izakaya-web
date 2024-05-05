@@ -3,13 +3,23 @@ import { storeToRefs } from 'pinia'
 
 import TagItem from '@/components/common/tags/index.vue'
 
-import { useCustomerRareStore } from '@/pinia'
+import { useCustomerRareStore, useRecipesStore } from '@/pinia'
 
 import EditPanel from './panel.vue'
 
 const customerRareStore = useCustomerRareStore()
+const recipesStore = useRecipesStore()
 
 const { currentCustomer: customer } = storeToRefs(customerRareStore)
+const { currentRecipe } = storeToRefs(recipesStore)
+
+const isActiveTag = (
+  item: string,
+  key: 'like_match_tags' | 'hate_match_tags'
+): boolean | null => {
+  return currentRecipe.value && currentRecipe.value[key].includes(item)
+}
+
 </script>
 
 <template>
@@ -37,6 +47,7 @@ const { currentCustomer: customer } = storeToRefs(customerRareStore)
         <n-space>
           <!-- like -->
             <tag-item
+              :disabled="!isActiveTag(item, 'like_match_tags')"
               :value="item"
               category="like"
               v-for="(item) in customer.like_tags"
@@ -46,6 +57,7 @@ const { currentCustomer: customer } = storeToRefs(customerRareStore)
         <!-- hate -->
         <n-space>
           <tag-item
+          :disabled="!isActiveTag(item, 'hate_match_tags')"
             :value="item"
             category="hate"
             v-for="(item) in customer.hate_tags"

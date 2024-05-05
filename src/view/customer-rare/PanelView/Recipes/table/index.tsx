@@ -6,8 +6,6 @@ import TagItem from '@/components/common/tags/index.vue'
 
 import type { TRecipeMatchItem } from '@/pinia'
 
-import { renderSorterIcon } from './sortMatchPoint.tsx'
-
 export const createColumns = ({
   getIngredientIndex,
   getToolIndex,
@@ -40,11 +38,9 @@ export const createColumns = ({
       }
     },
     {
-      title: '匹配数',
+      title: '匹配度',
       key: 'match_recipe_point',
-      sorter: 'default',
       className: 'sort-columns',
-      defaultSortOrder: 'descend',
       render ({ badge_text }) {
         return  <NBadge
           value={badge_text}
@@ -52,7 +48,6 @@ export const createColumns = ({
           type="error"
         />
       },
-      renderSorterIcon
     },
     {
       title: '料理',

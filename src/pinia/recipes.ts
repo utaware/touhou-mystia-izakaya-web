@@ -25,7 +25,7 @@ interface State {
   allTools: string[],
   recipesPositiveTags: string[],
   recipesNegativeTags: string[],
-  currentRecipe: TRecipeItem,
+  currentRecipe: TRecipeMatchItem | null,
 }
 
 export const useRecipesStore = defineStore('recipes', {
@@ -34,7 +34,7 @@ export const useRecipesStore = defineStore('recipes', {
     allTools: tools,
     recipesPositiveTags,
     recipesNegativeTags,
-    currentRecipe: recipes[0],
+    currentRecipe: null,
   }),
   getters: {
     positiveTagOptions (): TOptionItem[] {
@@ -70,7 +70,7 @@ export const useRecipesStore = defineStore('recipes', {
     },
   },
   actions: {
-    setCurrentRecipe (item: TRecipeItem) {
+    setCurrentRecipe (item: TRecipeMatchItem) {
       this.currentRecipe = item
     }
   }

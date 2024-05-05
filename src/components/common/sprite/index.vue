@@ -1,13 +1,20 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   index: number,
-  type: 'recipes' | 'beverages' | 'ingredients' | 'tools',
-  width: number,
-  height: number,
+  type?: 'recipes' | 'beverages' | 'ingredients' | 'tools',
+  width?: number,
+  height?: number,
+  size?: number,
   title?: string,
-}>()
+}>(), {
+  index: 0,
+  type: 'recipes',
+  width: 32,
+  height: 32,
+  title: '',
+})
 
 const typeOptions = {
   recipes: { total: 163 },
@@ -19,16 +26,18 @@ const typeOptions = {
 const count = 10
 
 const computedStyles = computed(() => {
-  const { index, type, width, height } = props
+  const { index, type, width, height, size } = props
   const { total } = typeOptions[type]
   const x = index % count
   const y = Math.floor(index / count)
-  const reSizeX = Math.min(total, count) * width
+  const w = size || width
+  const h = size || height
+  const reSizeX = Math.min(total, count) * w
   return {
-    width: `${width}px`,
-    height: `${height}px`,
+    width: `${w}px`,
+    height: `${h}px`,
     backgroundSize: `${reSizeX}px`,
-    backgroundPosition: `-${x * width}px -${y * height}px`,
+    backgroundPosition: `-${x * w}px -${y * h}px`,
   }
 })
 </script>

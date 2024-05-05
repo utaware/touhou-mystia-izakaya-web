@@ -23,10 +23,12 @@ declare module 'vue' {
     NH2: typeof import('naive-ui')['NH2']
     NH3: typeof import('naive-ui')['NH3']
     NIcon: typeof import('naive-ui')['NIcon']
+    NInput: typeof import('naive-ui')['NInput']
     NLabel: typeof import('naive-ui')['NLabel']
     NModal: typeof import('naive-ui')['NModal']
     NModalProvider: typeof import('naive-ui')['NModalProvider']
     NPopover: typeof import('naive-ui')['NPopover']
+    NRadio: typeof import('naive-ui')['NRadio']
     NScrollbar: typeof import('naive-ui')['NScrollbar']
     NSelect: typeof import('naive-ui')['NSelect']
     NSpace: typeof import('naive-ui')['NSpace']
@@ -39,5 +41,6 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     Sprite: typeof import('./src/components/common/sprite/index.vue')['default']
     Tags: typeof import('./src/components/common/tags/index.vue')['default']
+    Unknow: typeof import('./src/components/common/sprite/unknow.vue')['default']
   }
 }

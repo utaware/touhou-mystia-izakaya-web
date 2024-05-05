@@ -11,16 +11,40 @@ const {
   allToolOptions,
 } = recipesStore
 
-const state = reactive({
+const model = reactive({
   selectedPositiveTags: [],
   selectedNegativeTags: [],
   selectedTools: [],
+  searchName: '',
 })
+
+
+defineProps<{
+  show: boolean,
+}>()
+
+const emit = defineEmits<{
+  'update:show': [value: boolean],
+  filter: [value: {}]
+}>()
+
+const handleModalEnter = () => {
+  emit('filter', model)
+  emit('update:show', false)
+}
+
+const handleModalClose = () => {
+  emit('update:show', false)
+}
 </script>
 
 <template>
   <!-- wrapper -->
-  <n-modal>
+  <n-modal
+    :show="show"
+    :on-update:show="handleModalClose"
+    display-directive="show"
+  >
     <!-- card -->
     <n-card
       style="width: 600px"
@@ -32,27 +56,36 @@ const state = reactive({
       <n-form
         class="filter-form"
         label-placement="left"
+        :model="model"
         :label-width="80"
         :show-feedback="false"
       >
         <!-- 正特性 -->
         <n-form-item label="正特性 : ">
-          <n-select v-model:value="state.selectedPositiveTags" multiple :options="positiveTagOptions"
+          <n-select v-model:value="model.selectedPositiveTags" multiple :options="positiveTagOptions"
           />
         </n-form-item>
         <!-- 反特性 -->
         <n-form-item label="反特性 : ">
-          <n-select v-model:value="state.selectedNegativeTags" multiple :options="negativeTagOptions" />
+          <n-select v-model:value="model.selectedNegativeTags" multiple :options="negativeTagOptions" />
         </n-form-item>
         <!-- 厨具 -->
         <n-form-item label="厨具 : ">
-          <n-select v-model:value="state.selectedTools" multiple :options="allToolOptions" />
+          <n-select v-model:value="model.selectedTools" multiple :options="allToolOptions" />
+        </n-form-item>
+        <!-- 匹配度 -->
+        <n-form-item label="匹配度 : ">
+          <n-select v-model:value="model.selectedTools" multiple :options="allToolOptions" />
+        </n-form-item>
+        <!-- 输入筛选 -->
+        <n-form-item label="名称 : ">
+          <n-input v-model:value="model.searchName" />
         </n-form-item>
       </n-form>
       <!-- handle -->
       <div class="handle">
-        <n-button secondary type="error">取消</n-button>
-        <n-button secondary type="info">确定</n-button>
+        <n-button secondary type="error" @click="handleModalClose">取消</n-button>
+        <n-button secondary type="info" @click="handleModalEnter">确定</n-button>
       </div>
     </n-card>
   </n-modal>
