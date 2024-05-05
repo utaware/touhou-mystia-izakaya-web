@@ -1,8 +1,10 @@
+import { SelectOption } from 'naive-ui'
+
 import { defineStore } from 'pinia'
 
 import { customerPlace, customerRare, type TCustomerRare } from '@/material'
 
-import { mapSelectOptions, type TOptionItem } from '@/utils'
+import { mapSelectOptions } from '@/utils/options'
 
 interface State {
   allPlace: string[],
@@ -25,7 +27,7 @@ export const useCustomerRareStore = defineStore('customerRare', {
       const { allCustomer, activeCustomerNames } = state
       return allCustomer.filter(({ name }) => activeCustomerNames.includes(name))
     },
-    selectPlaceOptions (state): TOptionItem[] {
+    selectPlaceOptions (state): SelectOption[] {
       return mapSelectOptions(state.allPlace)
     },
   },

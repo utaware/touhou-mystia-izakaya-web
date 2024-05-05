@@ -3,7 +3,7 @@ import { ref, computed } from 'vue'
 
 import { useBeveragesStore } from '@/pinia'
 
-import { calcMatchTags } from '@/utils'
+import { getMatchResult } from '@/utils/tag'
 
 import TagsItem from '@/components/common/tags/index.vue'
 
@@ -18,9 +18,9 @@ const beverageCheckTags = ref(allBeverageTags.map((value) => {
 const filterBeverages = computed(() => {
   const checked_tags = beverageCheckTags.value.filter(v => v.checked).map(v => v.value)
   return beveragesStore.getBeveragesWithTag(checked_tags).map((v) => {
-    return { ...v, ...calcMatchTags(v.beverage_tags, checked_tags) }
+    return { ...v, ...getMatchResult(v.beverage_tags, checked_tags) }
   }).sort((a, b) => {
-    const [m, n] = [a, b].map((v) => v.match_tags.length)
+    const [m, n] = [a, b].map((v) => v.isMatch.length)
     return n - m
   })
 })
@@ -61,7 +61,7 @@ const handleClickReset = () => {
           v-for="(item, index) in filterBeverages"
           :key="index"
         >
-          <n-badge :value="item.match_count" type="info">
+          <n-badge :value="item.isMatch.length" type="info">
             <i :class="item.namePY" class="beverages-sprite-item"></i>
           </n-badge>
           <span>{{ item.name }}</span>

@@ -1,5 +1,7 @@
 import { defineStore } from 'pinia'
 
+import type { SelectOption } from 'naive-ui'
+
 import {
   recipes,
   tools,
@@ -8,8 +10,9 @@ import {
 } from '@/material'
 import type { TRecipeItem } from '@/material'
 
-import { mapSelectOptions, getMatchResult } from '@/utils'
-import type { TOptionItem } from '@/utils'
+import { mapSelectOptions } from '@/utils/options'
+import { getMatchResult } from '@/utils/tag'
+import { filterRecipesWithForm } from '@/utils/recipes'
 
 import { useCustomerRareStore } from '@/pinia'
 
@@ -20,12 +23,20 @@ interface TRecipeMatchItem extends TRecipeItem {
   match_recipe_point: number,
 }
 
+interface TFilterForm {
+  selectedPositiveTags: string[],
+  selectedNegativeTags: string[],
+  selectedTools: string[],
+  searchName: string,
+}
+
 interface State {
   allRecipes: TRecipeItem[],
   allTools: string[],
   recipesPositiveTags: string[],
   recipesNegativeTags: string[],
   currentRecipe: TRecipeMatchItem | null,
+  filterForm: TFilterForm,
 }
 
 export const useRecipesStore = defineStore('recipes', {
@@ -35,12 +46,18 @@ export const useRecipesStore = defineStore('recipes', {
     recipesPositiveTags,
     recipesNegativeTags,
     currentRecipe: null,
+    filterForm: {
+      selectedPositiveTags: [],
+      selectedNegativeTags: [],
+      selectedTools: [],
+      searchName: '',
+    }
   }),
   getters: {
-    positiveTagOptions (): TOptionItem[] {
+    positiveTagOptions (): SelectOption[] {
       return mapSelectOptions(this.recipesPositiveTags)
     },
-    negativeTagOptions (): TOptionItem[] {
+    negativeTagOptions (): SelectOption[] {
       return mapSelectOptions(this.recipesNegativeTags)
     },
     getRecipesWithCustomerRare (state): TRecipeMatchItem[] {
@@ -62,18 +79,30 @@ export const useRecipesStore = defineStore('recipes', {
       })
       return result
     },
-    allToolOptions (state): TOptionItem[] {
+    allToolOptions (state): SelectOption[] {
       return mapSelectOptions(state.allTools)
     },
     getToolIndex (state): (name: string) => number {
       return (name: string): number => state.allTools.indexOf(name)
     },
+    getFilterRecipes (): TRecipeMatchItem[] {
+      return filterRecipesWithForm(this.getRecipesWithCustomerRare, this.filterForm)
+    },
+    getMatchPointOptions (): SelectOption[] {
+      const items = this.getRecipesWithCustomerRare.map(
+        ({ match_recipe_point }: TRecipeMatchItem) => match_recipe_point
+      )
+      return mapSelectOptions(items)
+    }
   },
   actions: {
     setCurrentRecipe (item: TRecipeMatchItem) {
       this.currentRecipe = item
+    },
+    setFilterForm (item: TFilterForm) {
+      this.filterForm = item
     }
   }
 })
 
-export type { TRecipeItem, TRecipeMatchItem }
+export type { TRecipeItem, TRecipeMatchItem, TFilterForm }

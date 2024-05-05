@@ -20,7 +20,7 @@ const ingredientsStore = useIngredientsStore()
 const { getIngredientIndex } = ingredientsStore
 
 const {
-  getRecipesWithCustomerRare: recipes,
+  getFilterRecipes: recipes,
 } = storeToRefs(recipesStore)
 
 const {
@@ -53,10 +53,6 @@ const rowProps = (item: TRecipeMatchItem) => {
 const tableData = computed(() => {
   return orderBy(recipes.value, ['match_recipe_point'], [tableOrder.value])
 })
-
-const handleFilterTableData = (state: {}) => {
-  console.log(state)
-}
 </script>
 
 <template>
@@ -94,7 +90,6 @@ const handleFilterTableData = (state: {}) => {
     <!-- modal -->
     <filter-modal
       v-model:show="filterModalShow"
-      @filter="handleFilterTableData"
     />
   </div>
 </template>
@@ -108,11 +103,6 @@ const handleFilterTableData = (state: {}) => {
   }
   .view {
     margin-top: 12px;
-  }
-  ::v-deep {
-    td.sort-columns {
-      background-color: #fff;
-    }
   }
 }
 </style>

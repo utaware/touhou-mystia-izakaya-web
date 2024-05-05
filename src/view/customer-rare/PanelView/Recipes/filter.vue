@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 
 import { useRecipesStore } from '@/pinia'
 
@@ -9,15 +9,16 @@ const {
   negativeTagOptions,
   positiveTagOptions,
   allToolOptions,
+  setFilterForm,
 } = recipesStore
 
-const model = reactive({
+const model = ref({
   selectedPositiveTags: [],
   selectedNegativeTags: [],
+  selectedMatchPoints: [],
   selectedTools: [],
-  searchName: '',
+  searchName: ''
 })
-
 
 defineProps<{
   show: boolean,
@@ -25,11 +26,10 @@ defineProps<{
 
 const emit = defineEmits<{
   'update:show': [value: boolean],
-  filter: [value: {}]
 }>()
 
 const handleModalEnter = () => {
-  emit('filter', model)
+  setFilterForm({ ...model.value })
   emit('update:show', false)
 }
 
@@ -56,13 +56,16 @@ const handleModalClose = () => {
       <n-form
         class="filter-form"
         label-placement="left"
-        :model="model"
         :label-width="80"
         :show-feedback="false"
       >
         <!-- 正特性 -->
         <n-form-item label="正特性 : ">
-          <n-select v-model:value="model.selectedPositiveTags" multiple :options="positiveTagOptions"
+          <n-select
+            v-model:value="model.selectedPositiveTags"
+            multiple
+            :options="positiveTagOptions"
+            clearable
           />
         </n-form-item>
         <!-- 反特性 -->
@@ -75,7 +78,7 @@ const handleModalClose = () => {
         </n-form-item>
         <!-- 匹配度 -->
         <n-form-item label="匹配度 : ">
-          <n-select v-model:value="model.selectedTools" multiple :options="allToolOptions" />
+          <n-select v-model:value="model.selectedMatchPoints" multiple :options="allToolOptions" />
         </n-form-item>
         <!-- 输入筛选 -->
         <n-form-item label="名称 : ">
