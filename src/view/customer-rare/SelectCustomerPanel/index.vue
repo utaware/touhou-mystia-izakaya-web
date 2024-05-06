@@ -15,7 +15,7 @@ const { currentRecipe } = storeToRefs(recipesStore)
 
 const isActiveTag = (
   item: string,
-  key: 'like_match_tags' | 'hate_match_tags'
+  key: 'match_like_tags' | 'match_hate_tags'
 ): boolean | null => {
   return currentRecipe.value && currentRecipe.value[key].includes(item)
 }
@@ -47,7 +47,7 @@ const isActiveTag = (
         <n-space>
           <!-- like -->
             <tag-item
-              :disabled="!isActiveTag(item, 'like_match_tags')"
+              :disabled="!isActiveTag(item, 'match_like_tags')"
               :value="item"
               category="like"
               v-for="(item) in customer.like_tags"
@@ -57,7 +57,7 @@ const isActiveTag = (
         <!-- hate -->
         <n-space>
           <tag-item
-          :disabled="!isActiveTag(item, 'hate_match_tags')"
+          :disabled="!isActiveTag(item, 'match_hate_tags')"
             :value="item"
             category="hate"
             v-for="(item) in customer.hate_tags"

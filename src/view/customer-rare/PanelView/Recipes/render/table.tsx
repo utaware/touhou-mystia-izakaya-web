@@ -17,10 +17,10 @@ export const createColumns = ({
   return [
     {
       type: 'expand',
-      renderExpand ({ positive_tags, like_match_tags, hate_match_tags }: TRecipeMatchItem) {
-        const match_tags = [like_match_tags, hate_match_tags].flat()
+      renderExpand ({ positive_tags, match_like_tags, match_hate_tags }: TRecipeMatchItem) {
+        const match_tags = [match_like_tags, match_hate_tags].flat()
         const isNoMatchTag = (item: string): boolean => !match_tags.includes(item)
-        const isHateTag = (item: string): boolean => hate_match_tags.includes(item)
+        const isHateTag = (item: string): boolean => match_hate_tags.includes(item)
         return (
           <NSpace>
           {

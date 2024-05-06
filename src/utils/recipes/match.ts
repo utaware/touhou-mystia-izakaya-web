@@ -2,10 +2,10 @@ import type { TRecipeItem, TCustomerRare } from '@/material'
 
 import { getMatchResult } from '@/utils/tag'
 interface TRecipeMatchItem extends TRecipeItem {
-  like_match_tags: string[],
-  hate_match_tags: string[],
-  badge_text: string,
+  match_like_tags: string[],
+  match_hate_tags: string[],
   match_recipe_point: number,
+  badge_text: string,
 }
 
 export type { TRecipeMatchItem }
@@ -14,14 +14,14 @@ export function matchRecipesWithCustomer (recipes: TRecipeItem[], customer: TCus
   const { like_tags, hate_tags } = customer
   return recipes.map((item: TRecipeItem) => {
     const { positive_tags } = item
-    const { isMatch: like_match_tags } = getMatchResult(like_tags, positive_tags)
-    const { isMatch: hate_match_tags } = getMatchResult(hate_tags, positive_tags)
-    const match_recipe_point = like_match_tags.length - hate_match_tags.length
+    const { isMatch: match_like_tags } = getMatchResult(like_tags, positive_tags)
+    const { isMatch: match_hate_tags } = getMatchResult(hate_tags, positive_tags)
+    const match_recipe_point = match_like_tags.length - match_hate_tags.length
     const badge_text = String(match_recipe_point)
     return {
       ...item,
-      like_match_tags,
-      hate_match_tags,
+      match_like_tags,
+      match_hate_tags,
       match_recipe_point,
       badge_text
     }

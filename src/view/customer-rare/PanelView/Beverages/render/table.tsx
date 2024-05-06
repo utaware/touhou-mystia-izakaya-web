@@ -14,13 +14,13 @@ export const createColumns = ({
   return [
     {
       type: 'expand',
-      renderExpand ({ match_tags, beverage_tags }: TBeverageMatchItem) {
+      renderExpand ({ match_beverage_tags, beverage_tags }: TBeverageMatchItem) {
         return (
           <NSpace>
           {
             beverage_tags.map((item) => {
               return (<TagItem
-                disabled={!match_tags.includes(item)}
+                disabled={!match_beverage_tags.includes(item)}
                 category="beverage"
                 value={item}
               />)
