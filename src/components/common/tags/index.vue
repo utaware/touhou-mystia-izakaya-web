@@ -1,22 +1,21 @@
 <script setup lang="ts">
-import { defineProps, useAttrs } from 'vue'
+import { defineProps } from 'vue'
 
-interface PropsType {
-  category: 'like' | 'hate' | 'beverage';
+import type { TagProps } from 'naive-ui'
+
+import { TCustomerTagType } from '@/material'
+
+interface PropsType extends /*@vue-ignore*/ TagProps {
+  category: TCustomerTagType;
   value: string;
-  disabled?: boolean;
 }
 
 defineProps<PropsType>()
-
-const $attrs = useAttrs()
 </script>
 
 <template>
   <n-tag
     class="item"
-    v-bind="$attrs"
-    :disabled="disabled"
     :bordered="false"
     :class="category"
   >

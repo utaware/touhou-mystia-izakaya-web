@@ -2,6 +2,8 @@ import { defineStore } from 'pinia'
 
 import type { SelectOption } from 'naive-ui'
 
+import { union } from 'lodash'
+
 import {
   recipes,
   tools,
@@ -11,24 +13,11 @@ import {
 import type { TRecipeItem } from '@/material'
 
 import { mapSelectOptions } from '@/utils/options'
-import { getMatchResult } from '@/utils/tag'
-import { filterRecipesWithForm } from '@/utils/recipes'
+import { filterRecipesWithForm, matchRecipesWithCustomer, sortOrderRecipes } from '@/utils/recipes'
+import type { TFilterForm, TRecipeMatchItem } from '@/utils/recipes'
+import type { TSortOrderValue } from '@/utils/order'
 
 import { useCustomerRareStore } from '@/pinia'
-
-interface TRecipeMatchItem extends TRecipeItem {
-  like_match_tags: string[],
-  hate_match_tags: string[],
-  badge_text: string,
-  match_recipe_point: number,
-}
-
-interface TFilterForm {
-  selectedPositiveTags: string[],
-  selectedNegativeTags: string[],
-  selectedTools: string[],
-  searchName: string,
-}
 
 interface State {
   allRecipes: TRecipeItem[],
@@ -37,6 +26,7 @@ interface State {
   recipesNegativeTags: string[],
   currentRecipe: TRecipeMatchItem | null,
   filterForm: TFilterForm,
+  sortOrder: TSortOrderValue,
 }
 
 export const useRecipesStore = defineStore('recipes', {
@@ -50,49 +40,42 @@ export const useRecipesStore = defineStore('recipes', {
       selectedPositiveTags: [],
       selectedNegativeTags: [],
       selectedTools: [],
+      selectedMatchPoints: [],
       searchName: '',
-    }
+    },
+    sortOrder: 'desc',
   }),
   getters: {
+    // 正特性标签 - select
     positiveTagOptions (): SelectOption[] {
       return mapSelectOptions(this.recipesPositiveTags)
     },
+    // 负特性标签 - select
     negativeTagOptions (): SelectOption[] {
       return mapSelectOptions(this.recipesNegativeTags)
     },
-    getRecipesWithCustomerRare (state): TRecipeMatchItem[] {
+    // 标签匹配 - page
+    getRecipesWithCustomerRare (): TRecipeMatchItem[] {
       const { currentCustomer } = useCustomerRareStore()
-      const { like_tags, hate_tags } = currentCustomer
-      const result = state.allRecipes.map((item: TRecipeItem) => {
-        const { positive_tags } = item
-        const { isMatch: like_match_tags } = getMatchResult(like_tags, positive_tags)
-        const { isMatch: hate_match_tags } = getMatchResult(hate_tags, positive_tags)
-        const match_recipe_point = like_match_tags.length - hate_match_tags.length
-        const badge_text = String(match_recipe_point)
-        return {
-          ...item,
-          like_match_tags,
-          hate_match_tags,
-          match_recipe_point,
-          badge_text
-        }
-      })
-      return result
+      return matchRecipesWithCustomer(this.allRecipes, currentCustomer)
     },
+    // 厨具选项 - select
     allToolOptions (state): SelectOption[] {
       return mapSelectOptions(state.allTools)
     },
-    getToolIndex (state): (name: string) => number {
-      return (name: string): number => state.allTools.indexOf(name)
-    },
+    // 条件筛选&排序 - table
     getFilterRecipes (): TRecipeMatchItem[] {
-      return filterRecipesWithForm(this.getRecipesWithCustomerRare, this.filterForm)
+      const filterData = filterRecipesWithForm(this.getRecipesWithCustomerRare, this.filterForm)
+      const orderData = sortOrderRecipes(filterData, this.sortOrder)
+      return orderData
     },
+    // 匹配度 - select
     getMatchPointOptions (): SelectOption[] {
       const items = this.getRecipesWithCustomerRare.map(
         ({ match_recipe_point }: TRecipeMatchItem) => match_recipe_point
       )
-      return mapSelectOptions(items)
+      const options = union(items).sort((a, b) => b - a)
+      return mapSelectOptions(options)
     }
   },
   actions: {
@@ -101,6 +84,9 @@ export const useRecipesStore = defineStore('recipes', {
     },
     setFilterForm (item: TFilterForm) {
       this.filterForm = item
+    },
+    setSortOrder (value: TSortOrderValue) {
+      this.sortOrder = value
     }
   }
 })

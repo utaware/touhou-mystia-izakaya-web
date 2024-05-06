@@ -1,40 +1,32 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, watch } from 'vue'
 
 import { storeToRefs } from 'pinia'
 
 import { SettingOutlined } from '@vicons/antd'
 
-import { useRecipesStore, useIngredientsStore } from '@/pinia'
+import { useRecipesStore } from '@/pinia'
 import type { TRecipeMatchItem } from '@/pinia'
 
 import filterModal from './filter.vue'
 
-import { createColumns, getRowKey, pagination } from './table/index.tsx'
-
-import { orderBy } from 'lodash'
+import { createColumns, getRowKey, pagination } from './render/table.tsx'
 
 const recipesStore = useRecipesStore()
-const ingredientsStore = useIngredientsStore()
-
-const { getIngredientIndex } = ingredientsStore
 
 const {
   getFilterRecipes: recipes,
+  sortOrder,
 } = storeToRefs(recipesStore)
 
 const {
-  getToolIndex,
   setCurrentRecipe,
+  setSortOrder,
 } = recipesStore
 
-const columns = createColumns({
-  getIngredientIndex,
-  getToolIndex,
-})
+const columns = createColumns({})
 
 const filterModalShow = ref(false)
-const tableOrder = ref<'desc' | 'asc'>('desc')
 
 const handleClickItem = (item: TRecipeMatchItem) => {
   setCurrentRecipe(item)
@@ -50,8 +42,11 @@ const rowProps = (item: TRecipeMatchItem) => {
   }
 }
 
-const tableData = computed(() => {
-  return orderBy(recipes.value, ['match_recipe_point'], [tableOrder.value])
+const tableEl = ref()
+
+// 排序&筛选后回到第1页
+watch(recipes, () => {
+  tableEl.value.page(1)
 })
 </script>
 
@@ -68,12 +63,13 @@ const tableData = computed(() => {
       </n-button>
       <!-- 排序 -->
       <n-space>
-        <n-button text>匹配度({{ tableOrder }})</n-button>
+        <n-button text>匹配度({{ sortOrder }})</n-button>
         <n-switch
           :round="false"
           checked-value="desc"
           unchecked-value="asc"
-          v-model:value="tableOrder"
+          :value="sortOrder"
+          :on-update:value="setSortOrder"
         />
       </n-space>
     </div>
@@ -81,9 +77,10 @@ const tableData = computed(() => {
     <n-data-table
       class="view"
       striped
+      ref="tableEl"
       :row-key="getRowKey"
       :columns="columns"
-      :data="tableData"
+      :data="recipes"
       :pagination="pagination"
       :row-props="rowProps"
     />

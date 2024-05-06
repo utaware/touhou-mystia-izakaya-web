@@ -1,19 +1,16 @@
 import { defineStore } from 'pinia'
 
-import { ingredients, type TIngredientsItem } from '@/material'
-
-export { type TIngredientsItem }
+import { ingredients, ingredientNames,  } from '@/material'
+import type { TIngredientsItem } from '@/material'
 
 export const useIngredientsStore = defineStore('ingredients', {
   state: () => ({
-    ingredients
+    ingredients,
+    ingredientNames,
   }),
   getters: {
-    ingredientNames (state): string[] {
-      return state.ingredients.map(({ name }) => name)
-    },
-    getIngredientIndex (): (name: string) => number {
-      return (name) => this.ingredientNames.indexOf(name)
-    }
+    
   }
 })
+
+export { type TIngredientsItem }

@@ -6,13 +6,12 @@ import TagItem from '@/components/common/tags/index.vue'
 
 import type { TRecipeMatchItem } from '@/pinia'
 
+import { getToolIndex } from '@/utils/recipes'
+import { getIngredientIndex } from '@/utils/ingredients'
+
 export const createColumns = ({
-  getIngredientIndex,
-  getToolIndex,
   spriteSize = 28,
 }: {
-  getIngredientIndex: (item: string) => number,
-  getToolIndex: (name: string) => number,
   spriteSize?: number,
 }): DataTableColumns<TRecipeMatchItem> => {
   return [

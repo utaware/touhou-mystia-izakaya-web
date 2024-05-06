@@ -12,6 +12,8 @@ const ingredients = ingredientsJSON.map((item, index) => {
 
 const ingredientTags = getUnionTags(ingredients, 'ingredient_tags')
 
+const ingredientNames = ingredients.map(({name}) => name)
+
 export type TIngredientsItem = typeof ingredients[number]
 
-export { ingredients, ingredientTags }
+export { ingredients, ingredientTags, ingredientNames }

@@ -8,10 +8,13 @@ interface TFilterForm {
   selectedPositiveTags: string[],
   selectedNegativeTags: string[],
   selectedTools: string[],
+  selectedMatchPoints: number[],
   searchName: string,
 }
 
 type TRecpieFilterFunc = (item: TRecipeMatchItem) => boolean
+
+export type { TFilterForm }
 
 export function getRecipeFilterMethod (form: TFilterForm): TRecpieFilterFunc[] {
   return getKeys(form)
@@ -29,6 +32,10 @@ export function getRecipeFilterMethod (form: TFilterForm): TRecpieFilterFunc[] {
         case 'selectedTools':
           return ({ tool }: TRecipeMatchItem) => {
             return form[key].includes(tool)
+          }
+        case 'selectedMatchPoints':
+          return ({ match_recipe_point }: TRecipeMatchItem) => {
+            return form[key].includes(match_recipe_point)
           }
         case 'searchName':
           return ({ name }: TRecipeMatchItem) => {

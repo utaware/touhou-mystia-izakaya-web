@@ -21,6 +21,8 @@ const customerRare = customer_rare.map((item) => {
   }
 })
 
+export type TCustomerTagType = 'like' | 'hate' | 'beverage'
+
 export type TCustomerRare = typeof customerRare[number]
 
 export { customerRare, customerDLC, customerPlace }

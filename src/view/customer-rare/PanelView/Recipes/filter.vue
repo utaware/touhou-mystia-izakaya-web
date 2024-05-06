@@ -1,7 +1,11 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { reactive, watch } from 'vue'
+
+import { storeToRefs } from 'pinia'
 
 import { useRecipesStore } from '@/pinia'
+
+import { renderToolsLabel, renderSelectTags } from './render/select'
 
 const recipesStore = useRecipesStore()
 
@@ -12,7 +16,11 @@ const {
   setFilterForm,
 } = recipesStore
 
-const model = ref({
+const {
+  getMatchPointOptions
+} = storeToRefs(recipesStore)
+
+const model = reactive({
   selectedPositiveTags: [],
   selectedNegativeTags: [],
   selectedMatchPoints: [],
@@ -20,34 +28,23 @@ const model = ref({
   searchName: ''
 })
 
-defineProps<{
-  show: boolean,
-}>()
-
-const emit = defineEmits<{
-  'update:show': [value: boolean],
-}>()
-
-const handleModalEnter = () => {
-  setFilterForm({ ...model.value })
-  emit('update:show', false)
-}
-
-const handleModalClose = () => {
-  emit('update:show', false)
-}
+watch(
+  model,
+  (model) => setFilterForm(model),
+  { deep: true }
+)
 </script>
 
 <template>
   <!-- wrapper -->
-  <n-modal
-    :show="show"
-    :on-update:show="handleModalClose"
+  <n-drawer
+    :width="320"
+    :show-mask="false"
     display-directive="show"
   >
     <!-- card -->
-    <n-card
-      style="width: 600px"
+    <n-drawer-content
+      title="料理筛选"
       :bordered="false"
       :segmented="false"
       size="huge"
@@ -55,7 +52,6 @@ const handleModalClose = () => {
       <!-- form -->
       <n-form
         class="filter-form"
-        label-placement="left"
         :label-width="80"
         :show-feedback="false"
       >
@@ -65,33 +61,46 @@ const handleModalClose = () => {
             v-model:value="model.selectedPositiveTags"
             multiple
             :options="positiveTagOptions"
+            :render-tag="renderSelectTags({ category: 'like' })"
             clearable
           />
         </n-form-item>
         <!-- 反特性 -->
         <n-form-item label="反特性 : ">
-          <n-select v-model:value="model.selectedNegativeTags" multiple :options="negativeTagOptions" />
+          <n-select
+            v-model:value="model.selectedNegativeTags"
+            multiple
+            :options="negativeTagOptions"
+            :render-tag="renderSelectTags({ category: 'hate' })"
+            clearable
+          />
         </n-form-item>
         <!-- 厨具 -->
         <n-form-item label="厨具 : ">
-          <n-select v-model:value="model.selectedTools" multiple :options="allToolOptions" />
+          <n-select
+            v-model:value="model.selectedTools"
+            multiple
+            :options="allToolOptions"
+            :render-label="renderToolsLabel"
+            clearable
+          />
         </n-form-item>
         <!-- 匹配度 -->
         <n-form-item label="匹配度 : ">
-          <n-select v-model:value="model.selectedMatchPoints" multiple :options="allToolOptions" />
+          <n-select
+            v-model:value="model.selectedMatchPoints"
+            multiple
+            :options="getMatchPointOptions"
+            clearable
+          />
         </n-form-item>
         <!-- 输入筛选 -->
         <n-form-item label="名称 : ">
-          <n-input v-model:value="model.searchName" />
+          <n-input v-model:value="model.searchName" clearable />
         </n-form-item>
       </n-form>
-      <!-- handle -->
-      <div class="handle">
-        <n-button secondary type="error" @click="handleModalClose">取消</n-button>
-        <n-button secondary type="info" @click="handleModalEnter">确定</n-button>
-      </div>
-    </n-card>
-  </n-modal>
+    </n-drawer-content>
+  </n-drawer>
 </template>
 
 <style scoped lang="scss">
