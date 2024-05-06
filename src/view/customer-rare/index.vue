@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
-
-import { customerRare } from '@/material'
+import { ref } from 'vue'
 
 import SelectCustomerPanel from './SelectCustomerPanel/index.vue'
 
@@ -17,12 +15,7 @@ const tabPanes = [
   { name: 'ingredients', tab: '食材', component: IngredientsView },
 ]
 
-const activeTabName = ref<string>('recipes')
-
-const state = reactive({
-  activeTabName: 'recipes',
-  currentCustomer: customerRare[0],
-})
+const activeTabName = ref<string>('beverages')
 </script>
 
 <template>
@@ -44,10 +37,7 @@ const state = reactive({
           :name="item.name"
           :tab="item.tab"
         >
-          <component
-            :is="item.component"
-            v-model:customer="state.currentCustomer"
-          />
+          <component :is="item.component" />
         </n-tab-pane>
       </n-tabs>
     </n-card>

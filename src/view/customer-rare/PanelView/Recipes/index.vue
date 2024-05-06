@@ -28,17 +28,13 @@ const columns = createColumns({})
 
 const filterModalShow = ref(false)
 
-const handleClickItem = (item: TRecipeMatchItem) => {
-  setCurrentRecipe(item)
-}
-
 const openFilterModal = () => {
   filterModalShow.value = true
 }
 
 const rowProps = (item: TRecipeMatchItem) => {
   return {
-    onClick: () => handleClickItem(item)
+    onClick: () => setCurrentRecipe(item)
   }
 }
 

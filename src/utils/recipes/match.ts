@@ -1,4 +1,4 @@
-import { TRecipeItem, TCustomerRare } from '@/material'
+import type { TRecipeItem, TCustomerRare } from '@/material'
 
 import { getMatchResult } from '@/utils/tag'
 interface TRecipeMatchItem extends TRecipeItem {

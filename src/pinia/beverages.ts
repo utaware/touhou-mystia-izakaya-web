@@ -1,29 +1,35 @@
 import { defineStore } from 'pinia'
+import { useCustomerRareStore } from '@/pinia'
 
-import { beverages, type TBeverageItem } from '@/material'
+import { beverages, beverageTags } from '@/material'
+import type { TBeverageItem } from '@/material'
 
-import { generatorMapWithTags, type TGeneratorMap } from '@/utils'
+import { matchBeveragesWithCustomer, type TBeverageMatchItem } from '@/utils/beverages'
+
+interface State {
+  beverages: TBeverageItem[],
+  beverageTags: string[],
+  currentBeverage: TBeverageItem | null,
+}
 
 export const useBeveragesStore = defineStore('beverages', {
-  state: () => ({
+  state: (): State => ({
     beverages,
+    beverageTags,
+    currentBeverage: null,
   }),
   getters: {
-    enableBeverages (state): TBeverageItem[] {
-      return state.beverages.filter(v => !v.disabled)
-    },
-    allBeverageTags (): string[] {
-      const flatTags = this.enableBeverages.map(v => v.beverage_tags).flat()
-      return Array.from(new Set(flatTags))
-    },
-    beverageMaps (): TGeneratorMap<TBeverageItem[]> {
-      return generatorMapWithTags(this.enableBeverages, 'beverage_tags')
-    },
-    getBeveragesWithTag(): (tags: string[]) => TBeverageItem[] {
-      return (tags: string[]) => {
-        const target = tags.map(t => this.beverageMaps[t]).flat()
-        return Array.from(new Set<TBeverageItem>(target))
-      }
+    // 标签匹配 - page
+    getBeverageWithCurrentCustomer (): TBeverageMatchItem[] {
+      const { currentCustomer } = useCustomerRareStore()
+      return matchBeveragesWithCustomer(this.beverages, currentCustomer)
     }
-  }
+  },
+  actions: {
+    setCurrentBeverage (item: TBeverageMatchItem) {
+      this.currentBeverage = item
+    }
+  },
 })
+
+export type { TBeverageItem, TBeverageMatchItem }

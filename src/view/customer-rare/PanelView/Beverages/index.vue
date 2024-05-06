@@ -1,66 +1,52 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { storeToRefs } from 'pinia'
 
-import { useBeveragesStore, TCustomerRare } from '@/pinia'
+import { useBeveragesStore } from '@/pinia'
+import type { TBeverageMatchItem } from '@/pinia'
 
-import SpriteItem from '@/components/common/sprite/index.vue'
+import { createColumns, pagination, getRowKey } from './render/table'
 
-import { orderBy } from 'lodash'
-
-import { getMatchResult } from '@/utils'
+const columns = createColumns({})
 
 const beveragesStore = useBeveragesStore()
 
-const props = defineProps<{
-  customer: TCustomerRare
-}>()
+const { getBeverageWithCurrentCustomer: beverages } = storeToRefs(beveragesStore)
 
-const recipes = computed(() => {
-  return orderBy(beveragesStore.beverages.map((item) => {
-    const { beverage_tags } = props.customer
-    const { beverage_tags: customer_tags } = item
-    const { isMatch: beverage_match_tags } = getMatchResult(customer_tags, beverage_tags)
-    const value = beverage_match_tags.length
-    const text = String(value)
-    return { ...item, beverage_match_tags, value, text }
-  }), ['value'], ['desc'])
-})
+const { setCurrentBeverage } = beveragesStore
+
+const rowProps = (item: TBeverageMatchItem) => {
+  return {
+    onClick: () => setCurrentBeverage(item)
+  }
+}
 </script>
 
 <template>
   <!-- wrapper -->
   <div class="wrapper">
     <!-- config -->
+    <div class="config">
+      <!-- 标签选择 -->
+      <!-- <n-select v-model:value="value" :options="options" /> -->
+    </div>
     <!-- view -->
-    <ul class="beverages-view">
-      <li
-        class="item"
-        v-for="(item, index) in recipes"
-        :key="index"
-      >
-        <n-badge
-          :value="item.text"
-          show-zero
-          type="error"
-        >
-          <sprite-item
-            :index="item.index"
-            :width="64"
-            :height="64"
-            :title="item.name"
-            type="beverages"
-          />
-        </n-badge>
-      </li>
-    </ul>
+    <n-data-table
+      class="beverages-view"
+      striped
+      ref="tableEl"
+      :row-key="getRowKey"
+      :columns="columns"
+      :data="beverages"
+      :pagination="pagination"
+      :row-props="rowProps"
+    />
   </div>
 </template>
 
 <style scoped lang="scss">
-.beverages-view {
-  display: grid;
-  gap: 12px;
-  grid-template-columns: repeat(auto-fill, 64px);
-  justify-content: space-between;
+.wrapper {
+  .beverages-view {
+    margin-top: 12px;
+  }
 }
 </style>

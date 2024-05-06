@@ -40,7 +40,7 @@ const isActiveTag = (
         <!-- place -->
         <span class="place bold">{{ customer.dlc }} {{ customer.place }}</span>
         <!-- price -->
-        <span class="price bold">持有金: {{ customer.price }}(円)</span>
+        <span class="text-price bold">持有金: {{ customer.price }}(円)</span>
       </div>
       <!-- tags -->
       <div class="list">
@@ -99,9 +99,6 @@ const isActiveTag = (
       color: var(--color-text);
       .name {
         font-size: 18px;
-      }
-      .price {
-        color: rgb(255, 217, 103);
       }
     }
     .list {
