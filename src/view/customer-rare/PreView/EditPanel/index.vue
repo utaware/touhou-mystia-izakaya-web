@@ -4,6 +4,7 @@ import { storeToRefs } from 'pinia'
 import { useRecipesStore, useBeveragesStore } from '@/pinia'
 
 import SpritePending from '@/components/common/sprite/pending.vue'
+import IconAdd from './iconAdd.vue'
 
 const recipesStore = useRecipesStore()
 const beveragesStore = useBeveragesStore()
@@ -15,6 +16,7 @@ const { currentBeverage } = storeToRefs(beveragesStore)
 
 <template>
   <n-card class="edit-panel">
+    <!-- preview -->
     <div class="config">
       <!-- 料理 -->
       <sprite-pending
@@ -22,7 +24,17 @@ const { currentBeverage } = storeToRefs(beveragesStore)
         :item="currentRecipe"
         :size="48"
       />
+      <!-- + -->
+      <IconAdd />
       <!-- 酒水 -->
+      <sprite-pending
+        type="beverages"
+        :item="currentBeverage"
+        :size="48"
+      />
+      <!-- + -->
+      <IconAdd />
+      <!-- 食材 -->
       <sprite-pending
         type="beverages"
         :item="currentBeverage"
@@ -33,5 +45,8 @@ const { currentBeverage } = storeToRefs(beveragesStore)
 </template>
 
 <style scoped lang="scss">
-
+.config {
+  display: flex;
+  align-items: center;
+}
 </style>

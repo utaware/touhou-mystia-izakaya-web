@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-import SelectCustomerPanel from './SelectCustomerPanel/index.vue'
+import PreView from './PreView/index.vue'
 
 import CustomerView from './PanelView/Customer/index.vue'
 import RecipesView from './PanelView/Recipes/index.vue'
@@ -42,7 +42,7 @@ const activeTabName = ref<string>('beverages')
       </n-tabs>
     </n-card>
     <!-- right: 信息整合 -->
-    <select-customer-panel />
+    <pre-view />
   </div>
 </template>
 
