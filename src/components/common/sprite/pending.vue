@@ -12,7 +12,7 @@ interface CurrentItem {
 interface Propstype {
   size?: number;
   type: TSpriteType;
-  item: null | CurrentItem;
+  item: null | undefined | CurrentItem;
 }
 
 defineProps<Propstype>()

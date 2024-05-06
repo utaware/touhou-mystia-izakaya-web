@@ -1,15 +1,11 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-
 import { useIngredientsStore } from '@/pinia'
 
 import SpriteItem from '@/components/common/sprite/index.vue'
 
 const ingredientsStore = useIngredientsStore()
 
-const ingredients = computed(() => {
-  return ingredientsStore.ingredients
-})
+const { ingredients, addSelectRecipeIngredients } = ingredientsStore
 </script>
 
 <template>
@@ -22,6 +18,7 @@ const ingredients = computed(() => {
         class="item"
         v-for="(item, index) in ingredients"
         :key="index"
+        @click="addSelectRecipeIngredients(item)"
       >
         <sprite-item
           :index="item.index"
