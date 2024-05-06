@@ -1,30 +1,32 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 
-import { useRecipesStore } from '@/pinia'
+import { useRecipesStore, useBeveragesStore } from '@/pinia'
 
-import SpriteUnknow from '@/components/common/sprite/unknow.vue'
-import SpriteItem from '@/components/common/sprite/index.vue'
+import SpritePending from '@/components/common/sprite/pending.vue'
 
 const recipesStore = useRecipesStore()
+const beveragesStore = useBeveragesStore()
 
 const { currentRecipe } = storeToRefs(recipesStore)
+const { currentBeverage } = storeToRefs(beveragesStore)
 
 </script>
 
 <template>
   <n-card class="edit-panel">
     <div class="config">
-      <sprite-item
-        v-if="currentRecipe"
-        catogory="recipe"
-        :index="currentRecipe.index"
-        :title="currentRecipe.name"
-        :size="64"
+      <!-- 料理 -->
+      <sprite-pending
+        type="recipes"
+        :item="currentRecipe"
+        :size="48"
       />
-      <sprite-unknow
-        v-else
-        :size="64"
+      <!-- 酒水 -->
+      <sprite-pending
+        type="beverages"
+        :item="currentBeverage"
+        :size="48"
       />
     </div>
   </n-card>

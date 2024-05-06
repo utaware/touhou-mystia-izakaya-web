@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
+import type { TSpriteType } from '@/utils/tag'
+
 const props = withDefaults(defineProps<{
   index: number,
-  type?: 'recipes' | 'beverages' | 'ingredients' | 'tools',
+  type?: TSpriteType,
   width?: number,
   height?: number,
   size?: number,
@@ -43,12 +45,12 @@ const computedStyles = computed(() => {
 </script>
 
 <template>
-  <i
+  <span
     class="sprite"
     :class="type"
     :style="computedStyles"
     :title="title"
-  ></i>
+  ></span>
 </template>
 
 <style scoped lang="scss">

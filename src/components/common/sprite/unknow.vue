@@ -18,6 +18,7 @@ const styles = {
 <style scoped lang="scss">
 .unknow {
   display: inline-block;
+  vertical-align: middle;
   background: url('@/assets/unknown.jpg') no-repeat;
   background-size: cover;
 }

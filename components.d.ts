@@ -39,6 +39,7 @@ declare module 'vue' {
     NTabs: typeof import('naive-ui')['NTabs']
     NTag: typeof import('naive-ui')['NTag']
     NTransfer: typeof import('naive-ui')['NTransfer']
+    Pending: typeof import('./src/components/common/sprite/pending.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Sprite: typeof import('./src/components/common/sprite/index.vue')['default']

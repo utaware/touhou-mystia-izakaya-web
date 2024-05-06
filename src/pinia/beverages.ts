@@ -9,7 +9,7 @@ import { matchBeveragesWithCustomer, type TBeverageMatchItem } from '@/utils/bev
 interface State {
   beverages: TBeverageItem[],
   beverageTags: string[],
-  currentBeverage: TBeverageItem | null,
+  currentBeverage: TBeverageMatchItem | null,
 }
 
 export const useBeveragesStore = defineStore('beverages', {
@@ -23,7 +23,7 @@ export const useBeveragesStore = defineStore('beverages', {
     getBeverageWithCurrentCustomer (): TBeverageMatchItem[] {
       const { currentCustomer } = useCustomerRareStore()
       return matchBeveragesWithCustomer(this.beverages, currentCustomer)
-    }
+    },
   },
   actions: {
     setCurrentBeverage (item: TBeverageMatchItem) {

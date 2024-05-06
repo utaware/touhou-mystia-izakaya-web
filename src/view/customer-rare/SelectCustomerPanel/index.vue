@@ -1,25 +1,23 @@
 <script setup lang="ts">
+import { Ref } from 'vue'
+
 import { storeToRefs } from 'pinia'
 
 import TagItem from '@/components/common/tags/index.vue'
 
-import { useCustomerRareStore, useRecipesStore } from '@/pinia'
+import { useCustomerRareStore, useRecipesStore, useBeveragesStore } from '@/pinia'
+
+import { isMatchItem } from '@/utils'
 
 import EditPanel from './panel.vue'
 
 const customerRareStore = useCustomerRareStore()
 const recipesStore = useRecipesStore()
+const beveragesStore = useBeveragesStore()
 
 const { currentCustomer: customer } = storeToRefs(customerRareStore)
 const { currentRecipe } = storeToRefs(recipesStore)
-
-const isActiveTag = (
-  item: string,
-  key: 'match_like_tags' | 'match_hate_tags'
-): boolean | null => {
-  return currentRecipe.value && currentRecipe.value[key].includes(item)
-}
-
+const { currentBeverage } = storeToRefs(beveragesStore)
 </script>
 
 <template>
@@ -47,7 +45,7 @@ const isActiveTag = (
         <n-space>
           <!-- like -->
             <tag-item
-              :disabled="!isActiveTag(item, 'match_like_tags')"
+              :disabled="!isMatchItem(item, currentRecipe?.match_like_tags)"
               :value="item"
               category="like"
               v-for="(item) in customer.like_tags"
@@ -57,7 +55,7 @@ const isActiveTag = (
         <!-- hate -->
         <n-space>
           <tag-item
-          :disabled="!isActiveTag(item, 'match_hate_tags')"
+            :disabled="!isMatchItem(item, currentRecipe?.match_hate_tags)"
             :value="item"
             category="hate"
             v-for="(item) in customer.hate_tags"
@@ -67,6 +65,7 @@ const isActiveTag = (
         <!-- beverage -->
         <n-space>
           <tag-item
+            :disabled="!isMatchItem(item, currentBeverage?.beverage_tags)"
             :value="item"
             category="beverage"
             v-for="(item) in customer.beverage_tags"
