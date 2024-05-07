@@ -4,8 +4,6 @@ import type { SelectRenderTag, SelectRenderLabel } from 'naive-ui'
 import SpriteItem from '@/components/common/sprite/index.vue'
 import TagItem from '@/components/common/tags/index.vue'
 
-import { getToolIndex } from '@/utils/recipes'
-
 export const renderToolsLabel: SelectRenderLabel = (option) => {
   const text = String(option.label)
   return (
@@ -13,7 +11,7 @@ export const renderToolsLabel: SelectRenderLabel = (option) => {
       <SpriteItem
         size={24}
         type="tools"
-        index={getToolIndex(text)}
+        name={text}
       />
       { text }
     </NSpace>

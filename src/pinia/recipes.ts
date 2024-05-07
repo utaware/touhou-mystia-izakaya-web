@@ -6,7 +6,7 @@ import { union } from 'lodash'
 
 import {
   recipes,
-  tools,
+  allTools,
   recipesPositiveTags,
   recipesNegativeTags
 } from '@/material'
@@ -33,7 +33,7 @@ interface State {
 export const useRecipesStore = defineStore('recipes', {
   state: (): State => ({
     allRecipes: recipes,
-    allTools: tools,
+    allTools,
     recipesPositiveTags,
     recipesNegativeTags,
     currentRecipe: null,

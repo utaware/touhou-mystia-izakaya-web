@@ -7,7 +7,7 @@ import { getIndexWithName, spriteCountOptions } from '@/material'
 
 const props = withDefaults(defineProps<{
   index?: number,
-  type?: TSpriteType,
+  type: TSpriteType,
   width?: number,
   height?: number,
   size?: number,
@@ -15,7 +15,6 @@ const props = withDefaults(defineProps<{
   name?: string,
 }>(), {
   index: 0,
-  type: 'recipes',
   width: 32,
   height: 32,
   title: '海鲜味噌汤',

@@ -14,6 +14,7 @@ export const tools = extendItemIndex(toolsJSON)
 
 export const customerDLC = getUnionKeys(customerRare, 'dlc')
 export const customerPlace = getUnionKeys(customerRare, 'place')
+export const allTools = getUnionKeys(tools, 'name')
 
 export const recipesPositiveTags = getUnionTags(recipes, 'positive_tags')
 export const recipesNegativeTags = getUnionTags(recipes, 'negative_tags')

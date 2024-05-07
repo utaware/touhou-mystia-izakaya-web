@@ -6,9 +6,6 @@ import TagItem from '@/components/common/tags/index.vue'
 
 import type { TRecipeMatchItem } from '@/pinia'
 
-import { getToolIndex } from '@/utils/recipes'
-import { getIngredientIndex } from '@/utils/ingredients'
-
 export const createColumns = ({
   spriteSize = 28,
 }: {
@@ -54,8 +51,7 @@ export const createColumns = ({
       render ({ index }) {
         return <SpriteItem
           index={index}
-          width={spriteSize}
-          height={spriteSize}
+          size={spriteSize}
           type="recipes"
         />
       }
@@ -70,9 +66,8 @@ export const createColumns = ({
       key: 'tool',
       render ({ tool }) {
         return <SpriteItem
-          index={getToolIndex(tool)}
-          width={spriteSize}
-          height={spriteSize}
+          name={tool}
+          size={spriteSize}
           title={tool}
           type="tools"
         />
@@ -90,9 +85,8 @@ export const createColumns = ({
           {
             ingredients.map((ingredient) => (
               <SpriteItem
-                index={getIngredientIndex(ingredient)}
-                width={spriteSize}
-                height={spriteSize}
+                name={ingredient}
+                size={spriteSize}
                 title={ingredient}
                 type="ingredients"
               />)
