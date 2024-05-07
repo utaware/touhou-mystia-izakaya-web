@@ -3,16 +3,15 @@ import { storeToRefs } from 'pinia'
 
 import TagItem from '@/components/common/tags/index.vue'
 
-import { useCustomerRareStore, useRecipesStore, useBeveragesStore } from '@/pinia'
+import { useCustomerRareStore, useBeveragesStore } from '@/pinia'
 
 import { isMatchItem, getCustomerRareSrc } from '@/utils'
 
 const customerRareStore = useCustomerRareStore()
-const recipesStore = useRecipesStore()
 const beveragesStore = useBeveragesStore()
 
-const { currentCustomer: customer } = storeToRefs(customerRareStore)
-const { currentRecipe } = storeToRefs(recipesStore)
+const { currentCustomer: customer, getCurrentMatchTags } = storeToRefs(customerRareStore)
+
 const { currentBeverage } = storeToRefs(beveragesStore)
 </script>
 
@@ -36,10 +35,10 @@ const { currentBeverage } = storeToRefs(beveragesStore)
     </div>
     <!-- tags -->
     <div class="list">
+      <!-- like -->
       <n-space>
-        <!-- like -->
           <tag-item
-            :disabled="!isMatchItem(item, currentRecipe?.match_like_tags)"
+            :disabled="!getCurrentMatchTags.like.includes(item)"
             :value="item"
             category="like"
             v-for="(item) in customer.like_tags"
@@ -49,7 +48,7 @@ const { currentBeverage } = storeToRefs(beveragesStore)
       <!-- hate -->
       <n-space>
         <tag-item
-          :disabled="!isMatchItem(item, currentRecipe?.match_hate_tags)"
+          :disabled="!getCurrentMatchTags.hate.includes(item)"
           :value="item"
           category="hate"
           v-for="(item) in customer.hate_tags"

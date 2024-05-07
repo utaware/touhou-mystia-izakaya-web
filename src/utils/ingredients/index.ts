@@ -1,14 +1,18 @@
-import { ingredientsNames, ingredients } from '@/material'
+import { getIndexWithName, ingredients } from '@/material'
 
 import type { TIngredientsItem } from '@/material'
 
-export const getIngredientIndex = (name: string): number => {
-  return ingredientsNames.indexOf(name)
+import { union } from 'lodash'
+
+export function getTagsWithNames (list: string[]): string[][] {
+  return list.map((name) => {
+    const index = getIndexWithName('ingredients', name)
+    const item: TIngredientsItem = ingredients[index]
+    const tags = item.ingredient_tags
+    return tags
+  })
 }
 
-export const getIngredientItems = (names: string[]): TIngredientsItem[] => {
-  return names.map((name) => {
-    const index = getIngredientIndex(name)
-    return ingredients[index]
-  })
+export function getUnionTagsWithNames (list: string[]): string[] {
+  return union(getTagsWithNames(list).flat())
 }
