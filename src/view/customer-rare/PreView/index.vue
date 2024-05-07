@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import DemandPanel from './DemandPanel/index.vue'
 import EditPanel from './EditPanel/index.vue'
 import InfoPanel from './InfoPanel/index.vue'
 </script>
@@ -6,8 +7,10 @@ import InfoPanel from './InfoPanel/index.vue'
 <template>
   <!-- panel -->
   <div class="pre-view">
+    <!-- demand -->
+    <demand-panel />
     <!-- info -->
-    <Info-Panel />
+    <info-panel />
     <!-- edit -->
     <edit-panel />
   </div>
@@ -16,7 +19,7 @@ import InfoPanel from './InfoPanel/index.vue'
 <style scoped lang="scss">
 .pre-view {
   display: grid;
-  grid-template-rows: max-content auto;
+  grid-template-rows: min-content max-content auto;
   row-gap: 12px;
 }
 </style>

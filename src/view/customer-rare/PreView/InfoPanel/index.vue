@@ -20,6 +20,8 @@ const {
 const customerRareStore = useCustomerRareStore()
 
 const { currentCustomer: customer } = storeToRefs(customerRareStore)
+
+const { setDemandBeverageTag, setDemandRecipeTag } = customerRareStore
 </script>
 
 <template>
@@ -44,13 +46,14 @@ const { currentCustomer: customer } = storeToRefs(customerRareStore)
     <div class="list">
       <!-- like -->
       <n-space>
-          <tag-item
-            :disabled="!isActiveTags(item, match_like_tags)"
-            :value="item"
-            category="like"
-            v-for="(item) in customer.like_tags"
-            :key="item"
-          />
+        <tag-item
+          :disabled="!isActiveTags(item, match_like_tags)"
+          :value="item"
+          category="like"
+          v-for="(item) in customer.like_tags"
+          :key="item"
+          @click="setDemandRecipeTag(item)"
+        />
       </n-space>
       <!-- hate -->
       <n-space>
@@ -70,6 +73,7 @@ const { currentCustomer: customer } = storeToRefs(customerRareStore)
           category="beverage"
           v-for="(item) in customer.beverage_tags"
           :key="item"
+          @click.stop="setDemandBeverageTag(item)"
         />
       </n-space>
     </div>

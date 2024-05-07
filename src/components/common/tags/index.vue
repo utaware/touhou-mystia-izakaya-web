@@ -26,6 +26,10 @@ defineProps<PropsType>()
   border-width: 2px;
   border-style: solid;
   font-weight: bold;
+  cursor: pointer;
+  &.n-tag--disabled {
+    cursor: pointer !important;
+  }
 }
 .like {
   background-color: rgb(230, 180, 166);

@@ -16,6 +16,8 @@ interface State {
   currentCustomer: TCustomerRare;
   acvitePlace: string[],
   activeCustomerNames: string[],
+  demandRecipeTag: string,
+  demandBeverageTag: string,
 }
 
 export const useCustomerRareStore = defineStore('customerRare', {
@@ -24,7 +26,9 @@ export const useCustomerRareStore = defineStore('customerRare', {
     allCustomer: customerRare,
     currentCustomer: customerRare[0],
     acvitePlace: customerPlace,
-    activeCustomerNames: new Array(),
+    activeCustomerNames: [],
+    demandRecipeTag: '',
+    demandBeverageTag: '',
   }),
   getters: {
     filterCustomerWithName (state): TCustomerRare[] {
@@ -52,7 +56,13 @@ export const useCustomerRareStore = defineStore('customerRare', {
     },
     setCurrentCustomer (item: TCustomerRare) {
       this.currentCustomer = item
-    }
+    },
+    setDemandRecipeTag (item: string) {
+      this.demandRecipeTag = item
+    },
+    setDemandBeverageTag (item: string) {
+      this.demandBeverageTag = item
+    },
   },
   persist: true,
 })
