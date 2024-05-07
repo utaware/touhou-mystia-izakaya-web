@@ -16,6 +16,7 @@ interface State {
   currentCustomer: TCustomerRare;
   acvitePlace: string[],
   activeCustomerNames: string[],
+  // 需求
   demandRecipeTag: string,
   demandBeverageTag: string,
 }
@@ -64,7 +65,16 @@ export const useCustomerRareStore = defineStore('customerRare', {
       this.demandBeverageTag = item
     },
   },
-  persist: true,
+  persist: {
+    // 仅存储稀客相关选择
+    paths: [
+      'allPlace',
+      'allCustomer',
+      'currentCustomer',
+      'acvitePlace',
+      'activeCustomerNames',
+    ]
+  },
 })
 
 export { type TCustomerRare }
