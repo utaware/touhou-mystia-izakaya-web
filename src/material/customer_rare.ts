@@ -25,4 +25,8 @@ export type TCustomerTagType = 'like' | 'hate' | 'beverage'
 
 export type TCustomerRare = typeof customerRare[number]
 
-export { customerRare, customerDLC, customerPlace }
+export {
+  customerRare,
+  customerDLC,
+  customerPlace,
+}

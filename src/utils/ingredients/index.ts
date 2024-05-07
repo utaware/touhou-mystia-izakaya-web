@@ -1,9 +1,9 @@
-import { ingredientNames, ingredients } from '@/material'
+import { ingredientsNames, ingredients } from '@/material'
 
 import type { TIngredientsItem } from '@/material'
 
 export const getIngredientIndex = (name: string): number => {
-  return ingredientNames.indexOf(name)
+  return ingredientsNames.indexOf(name)
 }
 
 export const getIngredientItems = (names: string[]): TIngredientsItem[] => {

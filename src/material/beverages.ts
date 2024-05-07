@@ -1,6 +1,6 @@
 import beveragesJSON from '@/json/beverages.json'
 
-import { getUnionTags } from '@/utils'
+import { getUnionTags, getNames, getIndexMaps } from '@/utils'
 
 const beverages = beveragesJSON.map((item, index) => {
   return {
@@ -12,6 +12,15 @@ const beverages = beveragesJSON.map((item, index) => {
 
 const beverageTags = getUnionTags(beverages, 'beverage_tags')
 
+const beverageNames = getNames(beverages)
+
+const beveragesIndexMaps = getIndexMaps(beverages)
+
 export type TBeverageItem = typeof beverages[number]
 
-export { beverages, beverageTags }
+export {
+  beverages,
+  beverageTags,
+  beverageNames,
+  beveragesIndexMaps,
+}

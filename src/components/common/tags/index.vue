@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { defineProps } from 'vue'
-
 import type { TagProps } from 'naive-ui'
 
 import { TCustomerTagType } from '@/material'

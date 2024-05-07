@@ -1,20 +1,20 @@
 import { defineStore } from 'pinia'
 
-import { ingredients, ingredientNames } from '@/material'
+import { ingredients, ingredientsNames } from '@/material'
 import type { TIngredientsItem } from '@/material'
 
 import { FixLengthArray } from '@/utils/object'
 
 interface State {
   ingredients: TIngredientsItem[],
-  ingredientNames: string[],
+  ingredientsNames: string[],
   selectRecipeIngredients: FixLengthArray<TIngredientsItem>,
 }
 
 export const useIngredientsStore = defineStore('ingredients', {
   state: (): State => ({
     ingredients,
-    ingredientNames,
+    ingredientsNames,
     selectRecipeIngredients: new FixLengthArray(0),
   }),
   getters: {

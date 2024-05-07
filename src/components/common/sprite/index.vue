@@ -1,37 +1,35 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-import type { TSpriteType } from '@/utils/tag'
+import type { TSpriteType } from '@/material'
+
+import { getIndexWithName, spriteCountOptions } from '@/material'
 
 const props = withDefaults(defineProps<{
-  index: number,
+  index?: number,
   type?: TSpriteType,
   width?: number,
   height?: number,
   size?: number,
   title?: string,
+  name?: string,
 }>(), {
   index: 0,
   type: 'recipes',
   width: 32,
   height: 32,
-  title: '',
+  title: '海鲜味噌汤',
+  name: '海鲜味噌汤',
 })
-
-const typeOptions = {
-  recipes: { total: 163 },
-  beverages: { total: 46 },
-  ingredients: { total: 61 },
-  tools: { total: 5 },
-}
 
 const count = 10
 
 const computedStyles = computed(() => {
-  const { index, type, width, height, size } = props
-  const { total } = typeOptions[type]
-  const x = index % count
-  const y = Math.floor(index / count)
+  const { index, type, width, height, size, name } = props
+  const total = spriteCountOptions[type]
+  const relIndex = index || getIndexWithName(type, name)
+  const x = relIndex % count
+  const y = Math.floor(relIndex / count)
   const w = size || width
   const h = size || height
   const reSizeX = Math.min(total, count) * w
@@ -58,6 +56,12 @@ const computedStyles = computed(() => {
   display: inline-block;
   vertical-align: middle;
   background-repeat: no-repeat;
+}
+.customer-rare {
+  background-image: url('@/assets/sprite/character-rare-sprite.png');
+}
+.customer-normal {
+  background-image: url('@/assets/sprite/character-normal-sprite.webp');
 }
 .recipes {
   background-image: url('@/assets/sprite/recipes-sprite.webp');
