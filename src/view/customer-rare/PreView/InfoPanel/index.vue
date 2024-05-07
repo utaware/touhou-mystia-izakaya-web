@@ -7,7 +7,11 @@ import { useCustomerRareStore } from '@/pinia'
 
 import { getCustomerRareSrc } from '@/utils'
 
+import { useDemandSelect } from '@/hooks/demand'
+
 import { useActiveCustomerInfo } from './hooks/active'
+
+const customerRareStore = useCustomerRareStore()
 
 const {
   match_like_tags,
@@ -17,11 +21,9 @@ const {
   isActiveTags,
 } = useActiveCustomerInfo()
 
-const customerRareStore = useCustomerRareStore()
+const { handleChangePositiveTag, handleChangeBeverageTag } = useDemandSelect()
 
 const { currentCustomer: customer } = storeToRefs(customerRareStore)
-
-const { setDemandBeverageTag, setDemandRecipeTag } = customerRareStore
 </script>
 
 <template>
@@ -52,7 +54,7 @@ const { setDemandBeverageTag, setDemandRecipeTag } = customerRareStore
           category="like"
           v-for="(item) in customer.like_tags"
           :key="item"
-          @click="setDemandRecipeTag(item)"
+          @click="handleChangePositiveTag(item)"
         />
       </n-space>
       <!-- hate -->
@@ -73,7 +75,7 @@ const { setDemandBeverageTag, setDemandRecipeTag } = customerRareStore
           category="beverage"
           v-for="(item) in customer.beverage_tags"
           :key="item"
-          @click.stop="setDemandBeverageTag(item)"
+          @click.stop="handleChangeBeverageTag(item)"
         />
       </n-space>
     </div>

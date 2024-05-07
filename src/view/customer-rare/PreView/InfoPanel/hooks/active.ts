@@ -1,4 +1,4 @@
-import { computed, type Ref } from 'vue'
+import { computed } from 'vue'
 
 import { useCustomerRareStore, useBeveragesStore } from '@/pinia'
 

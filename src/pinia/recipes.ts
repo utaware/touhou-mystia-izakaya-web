@@ -89,8 +89,8 @@ export const useRecipesStore = defineStore('recipes', {
       const { initSelectRecipeIngredients } = useIngredientsStore()
       initSelectRecipeIngredients(5 - length)
     },
-    setFilterForm (item: TFilterForm) {
-      this.filterForm = item
+    setFilterForm <T extends TFilterForm, U extends keyof TFilterForm>(key: U, value: T[U]) {
+      this.filterForm[key] = value
     },
     setSortOrder (value: TSortOrderValue) {
       this.sortOrder = value

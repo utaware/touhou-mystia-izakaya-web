@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { reactive, watch } from 'vue'
-
 import { storeToRefs } from 'pinia'
 
 import { useRecipesStore } from '@/pinia'
@@ -13,26 +11,12 @@ const {
   negativeTagOptions,
   positiveTagOptions,
   allToolOptions,
-  setFilterForm,
+  filterForm,
 } = recipesStore
 
 const {
   getMatchPointOptions
 } = storeToRefs(recipesStore)
-
-const model = reactive({
-  selectedPositiveTags: [],
-  selectedNegativeTags: [],
-  selectedMatchPoints: [],
-  selectedTools: [],
-  searchName: ''
-})
-
-watch(
-  model,
-  (model) => setFilterForm(model),
-  { deep: true }
-)
 </script>
 
 <template>
@@ -40,6 +24,7 @@ watch(
   <n-drawer
     :width="320"
     :show-mask="false"
+    :mask-closable="false"
     display-directive="show"
   >
     <!-- card -->
@@ -47,6 +32,7 @@ watch(
       title="料理筛选"
       :bordered="false"
       :segmented="false"
+      closable
       size="huge"
     >
       <!-- form -->
@@ -58,7 +44,7 @@ watch(
         <!-- 正特性 -->
         <n-form-item label="正特性 : ">
           <n-select
-            v-model:value="model.selectedPositiveTags"
+            v-model:value="filterForm.selectedPositiveTags"
             multiple
             :options="positiveTagOptions"
             :render-tag="renderSelectTags({ category: 'like' })"
@@ -68,7 +54,7 @@ watch(
         <!-- 反特性 -->
         <n-form-item label="反特性 : ">
           <n-select
-            v-model:value="model.selectedNegativeTags"
+            v-model:value="filterForm.selectedNegativeTags"
             multiple
             :options="negativeTagOptions"
             :render-tag="renderSelectTags({ category: 'hate' })"
@@ -78,7 +64,7 @@ watch(
         <!-- 厨具 -->
         <n-form-item label="厨具 : ">
           <n-select
-            v-model:value="model.selectedTools"
+            v-model:value="filterForm.selectedTools"
             multiple
             :options="allToolOptions"
             :render-label="renderToolsLabel"
@@ -88,7 +74,7 @@ watch(
         <!-- 匹配度 -->
         <n-form-item label="匹配度 : ">
           <n-select
-            v-model:value="model.selectedMatchPoints"
+            v-model:value="filterForm.selectedMatchPoints"
             multiple
             :options="getMatchPointOptions"
             clearable
@@ -96,7 +82,7 @@ watch(
         </n-form-item>
         <!-- 输入筛选 -->
         <n-form-item label="名称 : ">
-          <n-input v-model:value="model.searchName" clearable />
+          <n-input v-model:value="filterForm.searchName" clearable />
         </n-form-item>
       </n-form>
     </n-drawer-content>

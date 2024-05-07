@@ -3,6 +3,10 @@ import { storeToRefs } from 'pinia'
 
 import { useBeveragesStore, useRecipesStore, useCustomerRareStore } from '@/pinia'
 
+import { useDemandSelect } from '@/hooks/demand'
+
+const { handleChangePositiveTag } = useDemandSelect()
+
 const recipesStore = useRecipesStore()
 const beveragesStore = useBeveragesStore()
 const customerStore = useCustomerRareStore()
@@ -18,7 +22,8 @@ const { demandRecipeTag, demandBeverageTag } = storeToRefs(customerStore)
     <!-- 菜谱需求 -->
     <n-select
       class="left"
-      v-model:value="demandRecipeTag"
+      :value="demandRecipeTag"
+      :on-update:value="handleChangePositiveTag"
       :options="positiveTagOptions"
       placeholder="菜谱需求"
       filterable
