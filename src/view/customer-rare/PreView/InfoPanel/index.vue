@@ -5,7 +5,7 @@ import TagItem from '@/components/common/tags/index.vue'
 
 import { useCustomerRareStore, useRecipesStore, useBeveragesStore } from '@/pinia'
 
-import { isMatchItem } from '@/utils'
+import { isMatchItem, getCustomerRareSrc } from '@/utils'
 
 const customerRareStore = useCustomerRareStore()
 const recipesStore = useRecipesStore()
@@ -23,7 +23,7 @@ const { currentBeverage } = storeToRefs(beveragesStore)
     <div class="header">
       <!-- avatar -->
       <n-avatar
-        :src="customer.src"
+        :src="getCustomerRareSrc(customer)"
         :size="64"
         round
       />

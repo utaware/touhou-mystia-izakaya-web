@@ -10,6 +10,8 @@ import store from '@/pinia'
 
 import FilterModal from './FilterModal/index.vue'
 
+import { getCustomerRareSrc } from '@/utils'
+
 const customerRareStore = useCustomerRareStore(store)
 
 const { filterCustomerWithName } = storeToRefs(customerRareStore)
@@ -43,13 +45,12 @@ const handlerClickCustomer = (item: TCustomerRare) => {
         v-for="(item, index) in filterCustomerWithName"
         :key="index"
         class="item"
-        :class="{ disabled: item.disabled }"
         @click="handlerClickCustomer(item)"
       >
         <n-avatar
           class="avatar"
           :size="84"
-          :src="item.src"
+          :src="getCustomerRareSrc(item)"
           :alt="item.name"
           :title="item.name"
         />

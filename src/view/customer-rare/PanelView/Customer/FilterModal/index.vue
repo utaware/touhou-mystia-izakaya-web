@@ -9,6 +9,8 @@ import { CloseCircleFilled } from '@vicons/antd'
 
 import TransferPicker from './transfer.vue'
 
+import { getCustomerRareSrc } from '@/utils'
+
 const props = defineProps<{ show: boolean }>()
 
 const emit = defineEmits<{
@@ -103,7 +105,7 @@ watch(
               :key="index">
               <!-- avatar -->
               <n-avatar
-                :src="item.src"
+                :src="getCustomerRareSrc(item)"
                 :title="item.name"
                 :size="64"
                 round
