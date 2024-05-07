@@ -34,13 +34,13 @@ export const useCustomerRareStore = defineStore('customerRare', {
     selectPlaceOptions (state): SelectOption[] {
       return mapSelectOptions(state.allPlace)
     },
-    getCurrentMatchTags (): TRecipeMatchResult {
+    getRecipeMatchTags (): TRecipeMatchResult | null {
       const { currentRecipe } = useRecipesStore()
       const { currentCustomer } = useCustomerRareStore()
       const { selectRecipeIngredients } = useIngredientsStore()
       return currentRecipe
         ? matchRecipeAndIngredients(currentCustomer, currentRecipe, selectRecipeIngredients)
-        : { like: [], hate: [] }
+        : null
     }
   },
   actions: {

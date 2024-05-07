@@ -3,16 +3,23 @@ import { storeToRefs } from 'pinia'
 
 import TagItem from '@/components/common/tags/index.vue'
 
-import { useCustomerRareStore, useBeveragesStore } from '@/pinia'
+import { useCustomerRareStore } from '@/pinia'
 
-import { isMatchItem, getCustomerRareSrc } from '@/utils'
+import { getCustomerRareSrc } from '@/utils'
+
+import { useActiveCustomerInfo } from './hooks/active'
+
+const {
+  match_like_tags,
+  match_hate_tags,
+  match_beverage_tags,
+  total_point,
+  isActiveTags,
+} = useActiveCustomerInfo()
 
 const customerRareStore = useCustomerRareStore()
-const beveragesStore = useBeveragesStore()
 
-const { currentCustomer: customer, getCurrentMatchTags } = storeToRefs(customerRareStore)
-
-const { currentBeverage } = storeToRefs(beveragesStore)
+const { currentCustomer: customer } = storeToRefs(customerRareStore)
 </script>
 
 <template>
@@ -27,18 +34,18 @@ const { currentBeverage } = storeToRefs(beveragesStore)
         round
       />
       <!-- name -->
-      <h2 class="name bold">{{ customer.name }}</h2>
+      <h2 class="name bold">{{ customer.name }} - {{ total_point }}</h2>
       <!-- place -->
       <span class="place bold">{{ customer.dlc }} {{ customer.place }}</span>
       <!-- price -->
-      <span class="text-price bold">持有金: {{ customer.price }}(円)</span>
+      <span class="text-price bold">持有金 : {{ customer.price }}(円)</span>
     </div>
     <!-- tags -->
     <div class="list">
       <!-- like -->
       <n-space>
           <tag-item
-            :disabled="!getCurrentMatchTags.like.includes(item)"
+            :disabled="!isActiveTags(item, match_like_tags)"
             :value="item"
             category="like"
             v-for="(item) in customer.like_tags"
@@ -48,7 +55,7 @@ const { currentBeverage } = storeToRefs(beveragesStore)
       <!-- hate -->
       <n-space>
         <tag-item
-          :disabled="!getCurrentMatchTags.hate.includes(item)"
+          :disabled="!isActiveTags(item, match_hate_tags)"
           :value="item"
           category="hate"
           v-for="(item) in customer.hate_tags"
@@ -58,7 +65,7 @@ const { currentBeverage } = storeToRefs(beveragesStore)
       <!-- beverage -->
       <n-space>
         <tag-item
-          :disabled="!isMatchItem(item, currentBeverage?.beverage_tags)"
+          :disabled="!isActiveTags(item, match_beverage_tags)"
           :value="item"
           category="beverage"
           v-for="(item) in customer.beverage_tags"

@@ -16,34 +16,39 @@ const { currentBeverage } = storeToRefs(beveragesStore)
 </script>
 
 <template>
-  <n-card class="edit-panel">
-    <!-- preview -->
-    <div class="config">
-      <!-- 料理 -->
-      <sprite-pending
-        type="recipes"
-        :name="currentRecipe?.name"
-        :size="48"
-      />
-      <!-- + -->
-      <IconAdd />
-      <!-- 酒水 -->
-      <sprite-pending
-        type="beverages"
-        :name="currentBeverage?.name"
-        :size="48"
-      />
-      <!-- + -->
-      <IconAdd />
-      <!-- 食材 -->
-      <IngredientsList />
+  <n-card>
+    <div class="edit-panel">
+      <!-- preview -->
+      <n-space class="config">
+        <!-- 料理 -->
+        <sprite-pending
+          type="recipes"
+          :name="currentRecipe?.name"
+          :size="48"
+        />
+        <!-- + -->
+        <IconAdd />
+        <!-- 酒水 -->
+        <sprite-pending
+          type="beverages"
+          :name="currentBeverage?.name"
+          :size="48"
+        />
+        <!-- + -->
+        <IconAdd />
+        <!-- 食材 -->
+        <IngredientsList />
+      </n-space>
+      <!-- handle -->
+      <n-button type="info" secondary>保存</n-button>
     </div>
   </n-card>
 </template>
 
 <style scoped lang="scss">
-.config {
+.edit-panel {
   display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 </style>

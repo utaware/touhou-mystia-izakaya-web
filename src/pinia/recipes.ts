@@ -13,7 +13,7 @@ import {
 import type { TRecipeItem } from '@/material'
 
 import { mapSelectOptions } from '@/utils/options'
-import { filterRecipesWithForm, matchRecipesWithCustomer, sortOrderRecipes } from '@/utils/recipes'
+import { filterRecipesWithForm, getTableDataWithCustomer, sortOrderRecipes } from '@/utils/recipes'
 import type { TFilterForm, TRecipeMatchItem } from '@/utils/recipes'
 import type { TSortOrderValue } from '@/utils/order'
 
@@ -57,7 +57,7 @@ export const useRecipesStore = defineStore('recipes', {
     // 标签匹配 - page
     getRecipesWithCustomerRare (): TRecipeMatchItem[] {
       const { currentCustomer } = useCustomerRareStore()
-      return matchRecipesWithCustomer(this.allRecipes, currentCustomer)
+      return getTableDataWithCustomer(this.allRecipes, currentCustomer)
     },
     // 厨具选项 - select
     allToolOptions (state): SelectOption[] {
