@@ -22,7 +22,7 @@ const { currentBeverage } = storeToRefs(beveragesStore)
       <!-- 料理 -->
       <sprite-pending
         type="recipes"
-        :item="currentRecipe"
+        :name="currentRecipe?.name"
         :size="48"
       />
       <!-- + -->
@@ -30,7 +30,7 @@ const { currentBeverage } = storeToRefs(beveragesStore)
       <!-- 酒水 -->
       <sprite-pending
         type="beverages"
-        :item="currentBeverage"
+        :name="currentBeverage?.name"
         :size="48"
       />
       <!-- + -->

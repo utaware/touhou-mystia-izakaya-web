@@ -10,11 +10,10 @@ import {
   recipesPositiveTags,
   recipesNegativeTags
 } from '@/material'
-import type { TRecipeItem, TIngredientsItem } from '@/material'
+import type { TRecipeItem } from '@/material'
 
 import { mapSelectOptions } from '@/utils/options'
 import { filterRecipesWithForm, matchRecipesWithCustomer, sortOrderRecipes } from '@/utils/recipes'
-import { getIngredientItems } from '@/utils/ingredients'
 import type { TFilterForm, TRecipeMatchItem } from '@/utils/recipes'
 import type { TSortOrderValue } from '@/utils/order'
 
@@ -79,8 +78,8 @@ export const useRecipesStore = defineStore('recipes', {
       return mapSelectOptions(options)
     },
     // 食材 - preview
-    currentRecipeIngredients (): TIngredientsItem[] {
-      return this.currentRecipe ? getIngredientItems(this.currentRecipe.ingredients) : []
+    currentRecipeIngredients (): string[] {
+      return this.currentRecipe ? this.currentRecipe.ingredients : []
     }
   },
   actions: {

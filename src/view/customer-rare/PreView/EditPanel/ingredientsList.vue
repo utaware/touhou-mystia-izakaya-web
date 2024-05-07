@@ -35,7 +35,7 @@ const emptyCount = computed(() => {
       <sprite-pending
         v-for="(item, index) in currentRecipeIngredients"
         type="ingredients"
-        :item="item"
+        :name="item"
         :key="`recipe-${index}`"
         :size="size"
       />
@@ -43,7 +43,7 @@ const emptyCount = computed(() => {
       <sprite-pending
         v-for="(item, index) in selectRecipeIngredients"
         type="ingredients"
-        :item="item"
+        :name="item"
         :key="`ingredient-${index}`"
         :size="size"
         @click="removeSelectRecipeIngredients(index)"

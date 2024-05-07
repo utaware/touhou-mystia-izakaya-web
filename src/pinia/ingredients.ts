@@ -8,7 +8,7 @@ import { FixLengthArray } from '@/utils/object'
 interface State {
   ingredients: TIngredientsItem[],
   ingredientsNames: string[],
-  selectRecipeIngredients: FixLengthArray<TIngredientsItem>,
+  selectRecipeIngredients: FixLengthArray<string>,
 }
 
 export const useIngredientsStore = defineStore('ingredients', {
@@ -24,7 +24,7 @@ export const useIngredientsStore = defineStore('ingredients', {
     initSelectRecipeIngredients (count: number) {
       this.selectRecipeIngredients = new FixLengthArray(count)
     },
-    addSelectRecipeIngredients (item: TIngredientsItem) {
+    addSelectRecipeIngredients (item: string) {
       this.selectRecipeIngredients.add(item)
     },
     removeSelectRecipeIngredients (index: number) {

@@ -2,17 +2,12 @@
 import SpriteUnknow from '@/components/common/sprite/unknow.vue'
 import SpriteItem from '@/components/common/sprite/index.vue'
 
-import type { TSpriteType } from '@/utils/tag'
-
-interface CurrentItem {
-  name: string;
-  index: number;
-}
+import type { TSpriteType } from '@/material'
 
 interface Propstype {
   size?: number;
   type: TSpriteType;
-  item: null | undefined | CurrentItem;
+  name: undefined | string;
 }
 
 defineProps<Propstype>()
@@ -20,10 +15,10 @@ defineProps<Propstype>()
 
 <template>
   <sprite-item
-    v-if="item"
+    v-if="name"
     :type="type"
-    :index="item.index"
-    :title="item.name"
+    :name="name"
+    :title="name"
     :size="size"
   />
   <sprite-unknow

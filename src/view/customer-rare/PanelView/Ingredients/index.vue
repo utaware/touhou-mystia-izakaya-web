@@ -18,7 +18,7 @@ const { ingredients, addSelectRecipeIngredients } = ingredientsStore
         class="item"
         v-for="(item, index) in ingredients"
         :key="index"
-        @click="addSelectRecipeIngredients(item)"
+        @click="addSelectRecipeIngredients(item.name)"
       >
         <sprite-item
           :index="item.index"
