@@ -12,10 +12,13 @@ import { matchRecipeAndIngredients, type TRecipeMatchResult } from '@/utils/reci
 
 import { getEvaluateColor, getMaxLevel } from '@/utils'
 
+import { findIndex, pullAt } from 'lodash'
+
 interface Tbookmark {
   customer: string,
   recipe: string,
   beverage: string,
+  uuid: string,
   ingredients: string[],
 }
 
@@ -107,6 +110,10 @@ export const useCustomerRareStore = defineStore('customerRare', {
     },
     saveBookmark (item: Tbookmark) {
       this.bookmark.push(item)
+    },
+    deleteBookmark (uuid: string) {
+      const index = findIndex(this.bookmark, { uuid })
+      pullAt(this.bookmark, index)
     }
   },
   persist: {

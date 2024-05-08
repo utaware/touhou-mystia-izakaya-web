@@ -16,9 +16,10 @@ const { getCurrentBookmark } = storeToRefs(customerStore)
     <div class="bookmark-panel">
       <bookmark-item
         class="item"
-        v-for="(item, index) in getCurrentBookmark"
+        v-for="(item) in getCurrentBookmark"
         v-bind="item"
-        :index="`${item.beverage} + ${index}`"
+        :key="item.uuid"
+        :size="48"
       />
     </div>
   </n-card>

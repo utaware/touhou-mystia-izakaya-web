@@ -1,11 +1,20 @@
 <script setup lang="ts">
-import { Tbookmark } from '@/pinia'
+import { useCustomerRareStore } from '@/pinia'
+import type { Tbookmark } from '@/pinia'
 
 import IconAdd from '@/components/common/icon/add.vue'
 import SpriteItem from '@/components/common/sprite/index.vue'
 import IngredientsList from './ingredients.vue'
 
-const props = defineProps<Tbookmark>()
+interface propsType extends Tbookmark {
+  size: number;
+}
+
+const props = defineProps<propsType>()
+
+const customerStore = useCustomerRareStore()
+
+const { deleteBookmark } = customerStore
 </script>
 
 <template>
@@ -16,7 +25,7 @@ const props = defineProps<Tbookmark>()
       <sprite-item
         type="recipes"
         :name="recipe"
-        :size="48"
+        :size="size"
         :title="recipe"
       />
       <!-- + -->
@@ -25,7 +34,7 @@ const props = defineProps<Tbookmark>()
       <sprite-item
         type="beverages"
         :name="beverage"
-        :size="48"
+        :size="size"
         :title="beverage"
       />
       <!-- + -->
@@ -35,7 +44,7 @@ const props = defineProps<Tbookmark>()
     </n-space>
     <!-- handler -->
     <n-space>
-      <n-button secondary type="error">删除</n-button>
+      <n-button secondary type="error" @click="deleteBookmark(uuid)">删除</n-button>
       <n-button secondary type="primary">选择</n-button>
     </n-space>
   </div>

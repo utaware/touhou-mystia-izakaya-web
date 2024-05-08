@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Tbookmark } from '@/pinia'
+import type { Tbookmark } from '@/pinia'
 
 import { getIndexWithName, recipes } from '@/material'
 
@@ -11,9 +11,7 @@ interface PropsType extends Tbookmark {
 
 const props = withDefaults(
   defineProps<PropsType>(),
-  {
-    size: 48,
-  }
+  { size: 48 }
 )
 
 const index = getIndexWithName('recipes', props.recipe)

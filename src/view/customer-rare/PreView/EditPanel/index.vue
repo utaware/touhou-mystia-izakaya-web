@@ -10,6 +10,8 @@ import {
   useIngredientsStore,
 } from '@/pinia'
 
+import { generatorUid } from '@/utils'
+
 import SpritePending from '@/components/common/sprite/pending.vue'
 import IconAdd from '@/components/common/icon/add.vue'
 import IngredientsList from './ingredientsList.vue'
@@ -33,11 +35,13 @@ const handleClickSave = () => {
   const recipeName = currentRecipe.value?.name || ''
   const beverageName = currentBeverage.value?.name || ''
   const ingredients = selectRecipeIngredients.value
+  const uuid = generatorUid()
   const bookmark = {
     customer: customerName,
     recipe: recipeName,
     beverage: beverageName,
     ingredients,
+    uuid,
   }
   saveBookmark(bookmark)
 }
