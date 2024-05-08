@@ -21,7 +21,8 @@ const beveragesStore = useBeveragesStore()
 const customerStore = useCustomerRareStore()
 const ingredientsStore = useIngredientsStore()
 
-const { saveBookmark, currentCustomer: { name: customerName } } = customerStore
+const { saveBookmark,  } = customerStore
+const { currentCustomer } = storeToRefs(customerStore)
 const { currentRecipe } = storeToRefs(recipesStore)
 const { currentBeverage } = storeToRefs(beveragesStore)
 const { selectRecipeIngredients } = storeToRefs(ingredientsStore)
@@ -35,6 +36,7 @@ const handleClickSave = () => {
   const recipeName = currentRecipe.value?.name || ''
   const beverageName = currentBeverage.value?.name || ''
   const ingredients = selectRecipeIngredients.value
+  const customerName = currentCustomer.value.name
   const uuid = generatorUid()
   const bookmark = {
     customer: customerName,

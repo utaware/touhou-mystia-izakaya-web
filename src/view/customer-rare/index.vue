@@ -47,11 +47,6 @@ const activeTabName = ref<string>('beverages')
 </template>
 
 <style scoped lang="scss">
-.control {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 .content {
   display: grid;
   column-gap: 12px;
