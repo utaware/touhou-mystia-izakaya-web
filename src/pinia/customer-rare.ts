@@ -12,6 +12,13 @@ import { matchRecipeAndIngredients, type TRecipeMatchResult } from '@/utils/reci
 
 import { getEvaluateColor, getMaxLevel } from '@/utils'
 
+interface Tbookmark {
+  customer: string,
+  recipe: string,
+  beverage: string,
+  ingredients: string[],
+}
+
 interface State {
   allPlace: string[],
   allCustomer: TCustomerRare[],
@@ -21,6 +28,8 @@ interface State {
   // 需求
   demandRecipeTag: string,
   demandBeverageTag: string,
+  // 组合
+  bookmark: Tbookmark[],
 }
 
 export const useCustomerRareStore = defineStore('customerRare', {
@@ -32,6 +41,7 @@ export const useCustomerRareStore = defineStore('customerRare', {
     activeCustomerNames: [],
     demandRecipeTag: '',
     demandBeverageTag: '',
+    bookmark: [],
   }),
   getters: {
     filterCustomerWithName (state): TCustomerRare[] {
@@ -72,6 +82,11 @@ export const useCustomerRareStore = defineStore('customerRare', {
     // 预计评价颜色
     getPreviewColor (): string {
       return getEvaluateColor(this.currentDemandPoint, this.currentDemandMaxLevel)
+    },
+    // 当前角色书签
+    getCurrentBookmark (): Tbookmark[] {
+      const { name } = this.currentCustomer
+      return this.bookmark.filter(({ customer }) => customer === name)
     }
   },
   actions: {
@@ -90,6 +105,9 @@ export const useCustomerRareStore = defineStore('customerRare', {
     setDemandBeverageTag (item: string) {
       this.demandBeverageTag = item
     },
+    saveBookmark (item: Tbookmark) {
+      this.bookmark.push(item)
+    }
   },
   persist: {
     // 仅存储稀客相关选择
@@ -97,8 +115,9 @@ export const useCustomerRareStore = defineStore('customerRare', {
       'currentCustomer',
       'acvitePlace',
       'activeCustomerNames',
+      'bookmark',
     ]
   },
 })
 
-export { type TCustomerRare }
+export type { TCustomerRare, Tbookmark }

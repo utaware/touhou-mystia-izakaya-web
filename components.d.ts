@@ -7,6 +7,7 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    Add: typeof import('./src/components/common/icon/add.vue')['default']
     NAvatar: typeof import('naive-ui')['NAvatar']
     NavHeader: typeof import('./src/components/layout/NavHeader/index.vue')['default']
     NBadge: typeof import('naive-ui')['NBadge']
@@ -33,6 +34,7 @@ declare module 'vue' {
     NRadio: typeof import('naive-ui')['NRadio']
     NScrollbar: typeof import('naive-ui')['NScrollbar']
     NSelect: typeof import('naive-ui')['NSelect']
+    NSpac: typeof import('naive-ui')['NSpac']
     NSpace: typeof import('naive-ui')['NSpace']
     NSwitch: typeof import('naive-ui')['NSwitch']
     NTabPane: typeof import('naive-ui')['NTabPane']

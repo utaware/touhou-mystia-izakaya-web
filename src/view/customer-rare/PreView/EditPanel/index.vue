@@ -1,18 +1,46 @@
 <script setup lang="ts">
+import { computed } from 'vue'
+
 import { storeToRefs } from 'pinia'
 
-import { useRecipesStore, useBeveragesStore } from '@/pinia'
+import {
+  useRecipesStore,
+  useBeveragesStore,
+  useCustomerRareStore,
+  useIngredientsStore,
+} from '@/pinia'
 
 import SpritePending from '@/components/common/sprite/pending.vue'
-import IconAdd from './iconAdd.vue'
+import IconAdd from '@/components/common/icon/add.vue'
 import IngredientsList from './ingredientsList.vue'
 
 const recipesStore = useRecipesStore()
 const beveragesStore = useBeveragesStore()
+const customerStore = useCustomerRareStore()
+const ingredientsStore = useIngredientsStore()
 
+const { saveBookmark, currentCustomer: { name: customerName } } = customerStore
 const { currentRecipe } = storeToRefs(recipesStore)
 const { currentBeverage } = storeToRefs(beveragesStore)
+const { selectRecipeIngredients } = storeToRefs(ingredientsStore)
 
+const saveButtonDisabled = computed(() => {
+  return !(currentRecipe.value && currentBeverage.value)
+})
+
+const handleClickSave = () => {
+  // 顾客 + 菜谱 + 酒水 + 食材
+  const recipeName = currentRecipe.value?.name || ''
+  const beverageName = currentBeverage.value?.name || ''
+  const ingredients = selectRecipeIngredients.value
+  const bookmark = {
+    customer: customerName,
+    recipe: recipeName,
+    beverage: beverageName,
+    ingredients,
+  }
+  saveBookmark(bookmark)
+}
 </script>
 
 <template>
@@ -40,7 +68,14 @@ const { currentBeverage } = storeToRefs(beveragesStore)
         <IngredientsList />
       </n-space>
       <!-- handle -->
-      <n-button type="info" secondary>保存</n-button>
+      <n-button
+        type="info"
+        secondary
+        :disabled="saveButtonDisabled"
+        @click="handleClickSave"
+      >
+        保存
+      </n-button>
     </div>
   </n-card>
 </template>

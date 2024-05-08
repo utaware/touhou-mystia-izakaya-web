@@ -17,7 +17,7 @@ const props = withDefaults(defineProps<{
   index: 0,
   width: 32,
   height: 32,
-  title: '海鲜味噌汤',
+  title: '',
   name: '海鲜味噌汤',
 })
 
