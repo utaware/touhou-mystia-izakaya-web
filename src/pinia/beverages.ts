@@ -33,6 +33,22 @@ export const useBeveragesStore = defineStore('beverages', {
       const { currentCustomer } = useCustomerRareStore()
       return matchBeveragesWithCustomer(this.beverages, currentCustomer)
     },
+    // 当前酒水的所有tag
+    currentBeverageAllTags (): string[] {
+      return this.currentBeverage ? this.currentBeverage.beverage_tags : []
+    },
+    currentBeverageMatchTags (): string[] {
+      return this.currentBeverage ? this.currentBeverage.match_beverage_tags : []
+    },
+    // 当前酒水匹配得分
+    currentBeveragePoint (): number {
+      const { currentBeverageAllTags, currentBeverageMatchTags } = this
+      const { demandBeverageTag } = useCustomerRareStore()
+      const match_point = currentBeverageMatchTags.length
+      const demand_point = currentBeverageAllTags.includes(demandBeverageTag) ? 1 : 0
+      const repeat_point = currentBeverageMatchTags.includes(demandBeverageTag) ? -1 : 0
+      return demand_point + match_point + repeat_point
+    }
   },
   actions: {
     setCurrentBeverage (item: TBeverageMatchItem) {

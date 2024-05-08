@@ -42,6 +42,9 @@ importers:
         specifier: ^4.3.2
         version: 4.3.2(vue@3.4.25(typescript@5.4.5))
     devDependencies:
+      '@types/color':
+        specifier: ^3.0.6
+        version: 3.0.6
       '@types/node':
         specifier: ^20.12.7
         version: 20.12.7
@@ -522,6 +525,15 @@ packages:
     resolution: {integrity: sha512-/BypzV0H1y1HzgYpxqRaXGBRqfodgoBBCcsrujT6QRcakDQdfU+Lq9PENPh5jB4I44YWq+0C2eHsHya+nZY1sA==}
     cpu: [x64]
     os: [win32]
+
+  '@types/color-convert@2.0.3':
+    resolution: {integrity: sha512-2Q6wzrNiuEvYxVQqhh7sXM2mhIhvZR/Paq4FdsQkOMgWsCIkKvSGj8Le1/XalulrmgOzPMqNa0ix+ePY4hTrfg==}
+
+  '@types/color-name@1.1.4':
+    resolution: {integrity: sha512-hulKeREDdLFesGQjl96+4aoJSHY5b2GRjagzzcqCfIrWhe5vkCqIvrLbqzBaI1q94Vg8DNJZZqTR5ocdWmWclg==}
+
+  '@types/color@3.0.6':
+    resolution: {integrity: sha512-NMiNcZFRUAiUUCCf7zkAelY8eV3aKqfbzyFQlXpPIEeoNDbsEHGpb854V3gzTsGKYj830I5zPuOwU/TP5/cW6A==}
 
   '@types/estree@1.0.5':
     resolution: {integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==}
@@ -1581,6 +1593,16 @@ snapshots:
 
   '@rollup/rollup-win32-x64-msvc@4.14.3':
     optional: true
+
+  '@types/color-convert@2.0.3':
+    dependencies:
+      '@types/color-name': 1.1.4
+
+  '@types/color-name@1.1.4': {}
+
+  '@types/color@3.0.6':
+    dependencies:
+      '@types/color-convert': 2.0.3
 
   '@types/estree@1.0.5': {}
 

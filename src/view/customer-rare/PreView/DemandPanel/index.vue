@@ -27,7 +27,6 @@ const { demandRecipeTag, demandBeverageTag } = storeToRefs(customerStore)
       :options="positiveTagOptions"
       placeholder="菜谱需求"
       filterable
-      clearable
     />
     <!-- 酒水需求 -->
     <n-select
@@ -36,7 +35,6 @@ const { demandRecipeTag, demandBeverageTag } = storeToRefs(customerStore)
       :options="beverageTagOptions"
       placeholder="酒水需求"
       filterable
-      clearable
     />
   </div>
 </template>

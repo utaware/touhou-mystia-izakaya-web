@@ -4,6 +4,7 @@ import { ingredients, ingredientsNames } from '@/material'
 import type { TIngredientsItem } from '@/material'
 
 import { FixLengthArray } from '@/utils/object'
+import { getUnionTagsWithNames } from '@/utils/ingredients'
 
 interface State {
   ingredients: TIngredientsItem[],
@@ -18,7 +19,10 @@ export const useIngredientsStore = defineStore('ingredients', {
     selectRecipeIngredients: new FixLengthArray(0),
   }),
   getters: {
-
+    // 当前所选食材的全部tags
+    currentSelectIngredientsTags (): string[] {
+      return this.selectRecipeIngredients.length ? getUnionTagsWithNames(this.selectRecipeIngredients) : []
+    }
   },
   actions: {
     initSelectRecipeIngredients (count: number) {

@@ -1,8 +1,21 @@
+import { isEmpty } from 'lodash'
+
 export interface TGeneratorMap<T> {
   [key: string]: T
 }
 
 export function getMatchResult (target: string[], match: string[]) {
+
+  const hasEmpty = [target, match].some(v => isEmpty(v))
+
+  if (hasEmpty) {
+    return {
+      isMatch: [],
+      noMatch: [...target],
+      unMatch: [...match],
+    }
+  }
+
   const pre = target.reduce((total: TGeneratorMap<number>, current) => {
     total[current] ??= 0
     return total
