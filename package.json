@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@types/lodash": "^4.17.0",
+    "color": "^4.2.3",
     "lodash": "^4.17.21",
     "minireset.css": "^0.0.7",
     "naive-ui": "^2.38.1",
