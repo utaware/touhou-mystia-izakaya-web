@@ -18,8 +18,9 @@ const { getCurrentBookmark } = storeToRefs(customerStore)
         class="item"
         v-for="(item) in getCurrentBookmark"
         v-bind="item"
+        :vertical="true"
         :key="item.uuid"
-        :size="48"
+        :size="36"
       />
     </div>
   </n-card>
@@ -27,7 +28,7 @@ const { getCurrentBookmark } = storeToRefs(customerStore)
 
 <style scoped lang="scss">
 .bookmark-panel {
-  display: grid;
+  display: flex;
   row-gap: 12px;
 }
 </style>
