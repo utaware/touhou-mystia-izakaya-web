@@ -5,15 +5,14 @@ import {
   recipesPositiveTags,
   recipesNegativeTags,
   recipesIndexMaps,
+  mapSelectOptions,
 } from '@/material'
-import type { TRecipeItem } from '@/material'
+import type { TRecipeItem, TSelectOptions } from '@/material'
 
 import { getUnionKeys } from '@/utils'
-import { mapSelectOptions, type TSelectOptions } from '@/utils/options'
 import {
   filterRecipesWithForm,
   getTableDataWithCustomer,
-  sortOrderRecipes,
   composeRecipeTags,
   matchRecipeTagsWithCustomer
 } from '@/utils/recipes'
@@ -21,6 +20,8 @@ import type { TFilterForm, TRecipeMatchItem, TRecipeMatchResult } from '@/utils/
 import type { TSortOrderValue } from '@/utils/order'
 
 import { useCustomerRareStore, useIngredientsStore } from '@/pinia'
+
+import { orderBy } from 'lodash'
 
 interface State {
   recipes: TRecipeItem[];
@@ -55,8 +56,7 @@ export const useRecipesStore = defineStore('recipes', {
     // 条件筛选&排序 - table
     getRecipesTableData (): TRecipeMatchItem[] {
       const filterData = filterRecipesWithForm(this.getRecipesWithCustomerRare, this.filterForm)
-      const orderData = sortOrderRecipes(filterData, this.sortOrder)
-      return orderData
+      return orderBy(filterData, ['match_recipe_point'], this.sortOrder)
     },
     // 匹配度选项 - select
     getMatchPointOptions (): TSelectOptions[] {
