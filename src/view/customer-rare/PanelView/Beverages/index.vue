@@ -4,13 +4,12 @@ import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 
 import { useBeveragesStore } from '@/pinia'
-import type { TBeverageMatchItem } from '@/pinia'
 
 import { SettingOutlined } from '@vicons/antd'
 
 import { createColumns, pagination, getRowKey } from './render/table'
+import { renderExpandIcon } from '@/render/ExpandIcon'
 
-const columns = createColumns({})
 
 const beveragesStore = useBeveragesStore()
 
@@ -24,11 +23,9 @@ const openFilterModal = () => {
   filterModalShow.value = true
 }
 
-const rowProps = (item: TBeverageMatchItem) => {
-  return {
-    onClick: () => setCurrentBeverage(item)
-  }
-}
+const columns = createColumns({
+  handleSelectRow: setCurrentBeverage
+})
 </script>
 
 <template>
@@ -52,7 +49,8 @@ const rowProps = (item: TBeverageMatchItem) => {
       :columns="columns"
       :data="beverages"
       :pagination="pagination"
-      :row-props="rowProps"
+      :render-expand-icon="renderExpandIcon"
+      pagination-behavior-on-filter="first"
     />
   </div>
 </template>
@@ -62,5 +60,8 @@ const rowProps = (item: TBeverageMatchItem) => {
   .beverages-view {
     margin-top: 12px;
   }
+}
+.current-row {
+  background-color: red;
 }
 </style>

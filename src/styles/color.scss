@@ -1,16 +1,15 @@
 :root {
-  --color-common-green: rgb(133, 178, 108);
-  --color-common-orange: rgb(223, 149, 105);
-  --color-common-blue: rgb(126, 161, 185);
-  --color-common-yellow: rgb(223, 194, 99);
-  --color-common-pink: rgb(226, 154, 166);
-  --color-common-brown: rgb(212, 176, 123);
-  --color-light-brown: rgb(251, 239, 203);
-
-  --color-text: rgb(51, 54, 57);
-  --color-price: rgb(255, 217, 103);
-  --color-border: rgb(224, 224, 230);
-  --color-header-extra-text: rgb(118, 124, 130);
-  --color-tab-border: rgb(239, 239, 245);
-  --color-item-pending: rgb(243, 243, 245);
+  // theme
+  --color-primary: #18a058;
+  --color-info: #2080f0;
+  --color-success: #18a058;
+  --color-warning: #f0a020;
+  --color-error: #d03050;
+  // component
+  --color-text: #333639;
+  --color-price: #ffd967;
+  --color-border: #e0e0e6;
+  --color-header-extra-text: #767c82;
+  --color-tab-border: #efeff5;
+  --color-item-pending: #f3f3f5;
 }

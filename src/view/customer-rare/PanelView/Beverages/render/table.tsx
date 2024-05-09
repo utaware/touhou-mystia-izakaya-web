@@ -1,4 +1,4 @@
-import { NBadge, NTag, NSpace } from 'naive-ui'
+import { NTag, NSpace, NButton } from 'naive-ui'
 import type { DataTableColumns } from 'naive-ui'
 
 import SpriteItem from '@/components/common/sprite/index.vue'
@@ -9,8 +9,10 @@ import { beverageLevelOptions } from '@/material/options'
 import type { TBeverageMatchItem } from '@/pinia'
 
 export const createColumns = ({
+  handleSelectRow,
   spriteSize = 32,
 }: {
+  handleSelectRow: (item: TBeverageMatchItem) => void,
   spriteSize?: number,
 }): DataTableColumns<TBeverageMatchItem> => {
   return [
@@ -33,20 +35,12 @@ export const createColumns = ({
       }
     },
     {
-      title: '匹配度',
-      key: 'match_beverage_point',
-      sorter: 'default',
-      className: 'sort-columns',
-      render ({ badge_text }) {
-        return  <NBadge
-          value={badge_text}
-          show-zero
-          type="error"
-        />
-      },
+      title: '名称',
+      key: 'name',
+      className: 'bold'
     },
     {
-      title: '酒水',
+      title: '图标',
       key: 'recipes',
       render ({ index }) {
         return <SpriteItem
@@ -56,19 +50,6 @@ export const createColumns = ({
           type="beverages"
         />
       }
-    },
-    {
-      title: '名称',
-      key: 'name',
-      className: 'bold'
-    },
-    {
-      title: '价格(円)',
-      key: 'price',
-      sorter: 'default',
-      render ({ price }) {
-        return <NTag type="warning" class="bold">{ price }</NTag>
-      },
     },
     {
       title: '等级',
@@ -81,6 +62,34 @@ export const createColumns = ({
         return <NTag type="info">Lv.{ level }</NTag>
       },
     },
+    {
+      title: '价格(円)',
+      key: 'price',
+      sorter: 'default',
+      render ({ price }) {
+        return <NTag type="warning" class="bold">${ price }</NTag>
+      },
+    },
+    {
+      title: '匹配度',
+      key: 'match_beverage_point',
+      sorter: 'default',
+      className: 'sort-columns',
+      render ({ badge_text }) {
+        return <NTag type="error">{ badge_text }</NTag>
+      },
+    },
+    {
+      title: '操作',
+      key: 'handle',
+      titleAlign: 'center',
+      width: 60,
+      render (item) {
+        return (
+          <NButton type="success" quaternary onClick={() => handleSelectRow(item)}>选择</NButton>
+        )
+      }
+    }
   ]
 }
 
