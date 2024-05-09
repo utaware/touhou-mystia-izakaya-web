@@ -6,7 +6,6 @@ import { union } from 'lodash'
 
 import {
   recipes,
-  allTools,
   recipesPositiveTags,
   recipesNegativeTags
 } from '@/material'
@@ -27,7 +26,6 @@ import { useCustomerRareStore, useIngredientsStore } from '@/pinia'
 
 interface State {
   allRecipes: TRecipeItem[],
-  allTools: string[],
   recipesPositiveTags: string[],
   recipesNegativeTags: string[],
   currentRecipe: TRecipeMatchItem | null,
@@ -38,7 +36,6 @@ interface State {
 export const useRecipesStore = defineStore('recipes', {
   state: (): State => ({
     allRecipes: recipes,
-    allTools,
     recipesPositiveTags,
     recipesNegativeTags,
     currentRecipe: null,
@@ -52,22 +49,10 @@ export const useRecipesStore = defineStore('recipes', {
     sortOrder: 'desc',
   }),
   getters: {
-    // 正特性标签 - select
-    positiveTagOptions (): SelectOption[] {
-      return mapSelectOptions(this.recipesPositiveTags)
-    },
-    // 负特性标签 - select
-    negativeTagOptions (): SelectOption[] {
-      return mapSelectOptions(this.recipesNegativeTags)
-    },
     // 标签匹配 - page
     getRecipesWithCustomerRare (): TRecipeMatchItem[] {
       const { currentCustomer } = useCustomerRareStore()
       return getTableDataWithCustomer(this.allRecipes, currentCustomer)
-    },
-    // 厨具选项 - select
-    allToolOptions (state): SelectOption[] {
-      return mapSelectOptions(state.allTools)
     },
     // 条件筛选&排序 - table
     getFilterRecipes (): TRecipeMatchItem[] {

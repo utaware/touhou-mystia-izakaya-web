@@ -1,12 +1,8 @@
-import { SelectOption } from 'naive-ui'
-
 import { defineStore } from 'pinia'
 
 import { useRecipesStore, useIngredientsStore, useBeveragesStore } from '@/pinia'
 
 import { customerPlace, customerRare, type TCustomerRare } from '@/material'
-
-import { mapSelectOptions } from '@/utils/options'
 
 import { matchRecipeAndIngredients, type TRecipeMatchResult } from '@/utils/recipes'
 
@@ -50,9 +46,6 @@ export const useCustomerRareStore = defineStore('customerRare', {
     filterCustomerWithName (state): TCustomerRare[] {
       const { allCustomer, activeCustomerNames } = state
       return allCustomer.filter(({ name }) => activeCustomerNames.includes(name))
-    },
-    selectPlaceOptions (state): SelectOption[] {
-      return mapSelectOptions(state.allPlace)
     },
     getRecipeMatchTags (): TRecipeMatchResult | null {
       const { currentRecipe } = useRecipesStore()

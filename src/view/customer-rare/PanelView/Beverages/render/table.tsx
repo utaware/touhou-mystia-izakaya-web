@@ -16,7 +16,7 @@ export const createColumns = ({
       type: 'expand',
       renderExpand ({ match_beverage_tags, beverage_tags }: TBeverageMatchItem) {
         return (
-          <NSpace>
+          <NSpace justify="center">
           {
             beverage_tags.map((item) => {
               return (<TagItem
@@ -32,7 +32,8 @@ export const createColumns = ({
     },
     {
       title: '匹配度',
-      key: 'match_recipe_point',
+      key: 'match_beverage_point',
+      sorter: 'default',
       className: 'sort-columns',
       render ({ badge_text }) {
         return  <NBadge
@@ -62,17 +63,19 @@ export const createColumns = ({
     {
       title: '价格(円)',
       key: 'price',
+      sorter: 'default',
       render ({ price }) {
         return <NTag type="warning" class="bold">{ price }</NTag>
-      }
+      },
     },
     {
       title: '等级',
       key: 'level',
       className: 'bold',
+      sorter: 'default',
       render ({ level }) {
         return <NTag type="info">Lv.{ level }</NTag>
-      }
+      },
     },
   ]
 }

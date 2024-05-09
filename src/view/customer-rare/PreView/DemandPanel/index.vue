@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 
-import { useBeveragesStore, useRecipesStore, useCustomerRareStore } from '@/pinia'
+import { useRecipesStore, useCustomerRareStore } from '@/pinia'
 
 import { useDemandSelect } from '@/hooks/demand'
+
+import { beverageTagOptions } from '@/material/options'
 
 const { handleChangePositiveTag } = useDemandSelect()
 
 const recipesStore = useRecipesStore()
-const beveragesStore = useBeveragesStore()
 const customerStore = useCustomerRareStore()
 
 const { positiveTagOptions } = recipesStore
-const { beverageTagOptions } = beveragesStore
 
 const { demandRecipeTag, demandBeverageTag } = storeToRefs(customerStore)
 </script>

@@ -5,14 +5,15 @@ import { useRecipesStore } from '@/pinia'
 
 import { renderToolsLabel, renderSelectTags } from './render/select'
 
+import {
+  recipesToolOptions,
+  positiveTagOptions,
+  negativeTagOptions,
+} from '@/material/options'
+
 const recipesStore = useRecipesStore()
 
-const {
-  negativeTagOptions,
-  positiveTagOptions,
-  allToolOptions,
-  filterForm,
-} = recipesStore
+const { filterForm } = recipesStore
 
 const {
   getMatchPointOptions
@@ -66,7 +67,7 @@ const {
           <n-select
             v-model:value="filterForm.selectedTools"
             multiple
-            :options="allToolOptions"
+            :options="recipesToolOptions"
             :render-label="renderToolsLabel"
             clearable
           />

@@ -11,6 +11,8 @@ import TransferPicker from './transfer.vue'
 
 import { getCustomerRareSrc } from '@/utils'
 
+import { customerPlaceOptions } from '@/material/options'
+
 const props = defineProps<{ show: boolean }>()
 
 const emit = defineEmits<{
@@ -21,7 +23,7 @@ const customerRareStore = useCustomerRareStore()
 
 const { activeCustomerNames, acvitePlace } = storeToRefs(customerRareStore)
 
-const { allCustomer, selectPlaceOptions, setActiveCustomer, setActivePlace } = customerRareStore
+const { allCustomer, setActiveCustomer, setActivePlace } = customerRareStore
 
 const enabledPlaceList = ref<string[]>([])
 
@@ -88,7 +90,7 @@ watch(
           multiple
           filterable
           clearable
-          :options="selectPlaceOptions"
+          :options="customerPlaceOptions"
           :max-tag-count="3"
         />
         <!-- transfer -->
