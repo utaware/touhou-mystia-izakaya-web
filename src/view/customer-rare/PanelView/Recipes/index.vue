@@ -15,7 +15,7 @@ import { createColumns, getRowKey, pagination } from './render/table.tsx'
 const recipesStore = useRecipesStore()
 
 const {
-  getFilterRecipes: recipes,
+  getRecipesTableData: recipes,
   sortOrder,
 } = storeToRefs(recipesStore)
 

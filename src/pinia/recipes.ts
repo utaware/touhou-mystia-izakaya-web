@@ -53,7 +53,7 @@ export const useRecipesStore = defineStore('recipes', {
       return getTableDataWithCustomer(this.allRecipes, currentCustomer)
     },
     // 条件筛选&排序 - table
-    getFilterRecipes (): TRecipeMatchItem[] {
+    getRecipesTableData (): TRecipeMatchItem[] {
       const filterData = filterRecipesWithForm(this.getRecipesWithCustomerRare, this.filterForm)
       const orderData = sortOrderRecipes(filterData, this.sortOrder)
       return orderData

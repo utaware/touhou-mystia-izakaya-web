@@ -4,12 +4,8 @@ import { useCustomerRareStore } from '@/pinia'
 import { beverages, beverageTags, beverageNames, beveragesLevel } from '@/material'
 import type { TBeverageItem } from '@/material'
 
-import { matchBeveragesWithCustomer, type TBeverageMatchItem } from '@/utils/beverages'
-
-interface TFilterForm {
-  selectBeverageTags: string[];
-  searchName: string;
-}
+import { matchBeveragesWithCustomer, filterBeveragesWithForm,  } from '@/utils/beverages'
+import type { TBeverageMatchItem, TFilterForm } from '@/utils/beverages'
 
 interface State {
   beverages: TBeverageItem[];
@@ -37,6 +33,10 @@ export const useBeveragesStore = defineStore('beverages', {
     getBeverageWithCurrentCustomer (): TBeverageMatchItem[] {
       const { currentCustomer } = useCustomerRareStore()
       return matchBeveragesWithCustomer(this.beverages, currentCustomer)
+    },
+    // 表单内容 - table
+    getBeverageTableData (): TBeverageMatchItem[] {
+      return filterBeveragesWithForm(this.getBeverageWithCurrentCustomer, this.filterForm)
     },
     // 当前酒水的所有tag
     currentBeverageAllTags (): string[] {

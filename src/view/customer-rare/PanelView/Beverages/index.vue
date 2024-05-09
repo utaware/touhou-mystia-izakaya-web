@@ -11,7 +11,7 @@ import { renderExpandIcon } from '@/render/ExpandIcon'
 
 const beveragesStore = useBeveragesStore()
 
-const { getBeverageWithCurrentCustomer: beverages } = storeToRefs(beveragesStore)
+const { getBeverageTableData: beverages } = storeToRefs(beveragesStore)
 
 const { setCurrentBeverage } = beveragesStore
 
