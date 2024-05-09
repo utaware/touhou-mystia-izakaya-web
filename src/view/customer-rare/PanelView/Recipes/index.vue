@@ -6,9 +6,10 @@ import { storeToRefs } from 'pinia'
 import { SettingOutlined } from '@vicons/antd'
 
 import { useRecipesStore } from '@/pinia'
-import type { TRecipeMatchItem } from '@/pinia'
 
 import filterModal from './filter.vue'
+
+import { renderExpandIcon } from '@/render/ExpandIcon.tsx'
 
 import { createColumns, getRowKey, pagination } from './render/table.tsx'
 
@@ -24,7 +25,7 @@ const {
   setSortOrder,
 } = recipesStore
 
-const columns = createColumns({})
+
 
 const filterModalShow = ref(false)
 
@@ -32,13 +33,9 @@ const openFilterModal = () => {
   filterModalShow.value = true
 }
 
-const rowProps = (item: TRecipeMatchItem) => {
-  return {
-    onClick: () => setCurrentRecipe(item)
-  }
-}
-
 const tableEl = ref()
+
+const columns = createColumns({ handleSelectRow: setCurrentRecipe })
 
 // 排序&筛选后回到第1页
 watch(recipes, () => {
@@ -78,7 +75,7 @@ watch(recipes, () => {
       :columns="columns"
       :data="recipes"
       :pagination="pagination"
-      :row-props="rowProps"
+      :render-expand-icon="renderExpandIcon"
     />
     <!-- modal -->
     <filter-modal

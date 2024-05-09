@@ -40,7 +40,7 @@ export const createColumns = ({
       className: 'bold'
     },
     {
-      title: '图标',
+      title: '酒水',
       key: 'recipes',
       render ({ index }) {
         return <SpriteItem
