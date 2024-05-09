@@ -1,10 +1,12 @@
 import { defineStore } from 'pinia'
 
+import { useRecipesStore } from '@/pinia'
+
 import { ingredients, ingredientsNames } from '@/material'
 import type { TIngredientsItem } from '@/material'
 
 import { FixLengthArray } from '@/utils/object'
-import { getUnionTagsWithNames } from '@/utils/ingredients'
+import { getUnionTagsWithNames, getValidIngredients, type TIngredientResult } from '@/utils/ingredients'
 
 interface State {
   ingredients: TIngredientsItem[],
@@ -22,7 +24,14 @@ export const useIngredientsStore = defineStore('ingredients', {
     // 当前所选食材的全部tags
     currentSelectIngredientsTags (): string[] {
       return this.selectRecipeIngredients.length ? getUnionTagsWithNames(this.selectRecipeIngredients) : []
-    }
+    },
+    // 黑暗料理
+    getVariousIngredients (): TIngredientResult {
+      const { currentRecipe } = useRecipesStore()
+      return currentRecipe
+        ? getValidIngredients(this.ingredients, currentRecipe)
+        : { normal: this.ingredients, danger: [] }
+    },
   },
   actions: {
     initSelectRecipeIngredients (count: number) {

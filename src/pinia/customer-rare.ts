@@ -102,12 +102,12 @@ export const useCustomerRareStore = defineStore('customerRare', {
     setDemandRecipeTag (tag: string | null) {
       const { setFilterForm } = useRecipesStore()
       this.demandRecipeTag = tag
-      tag && setFilterForm('selectedPositiveTags', [tag])
+      setFilterForm('selectedPositiveTags', tag ? [tag] : [])
     },
     setDemandBeverageTag (tag: string | null) {
       const { setFilterForm } = useBeveragesStore()
       this.demandBeverageTag = tag
-      tag && setFilterForm('selectBeverageTags', [tag])
+      setFilterForm('selectBeverageTags', tag ? [tag] : [])
     },
     saveBookmark (item: Tbookmark) {
       this.bookmark.push(item)
