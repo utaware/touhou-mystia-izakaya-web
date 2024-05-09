@@ -23,25 +23,23 @@ const ingredientsStore = useIngredientsStore()
 
 const { saveBookmark,  } = customerStore
 const { currentCustomer } = storeToRefs(customerStore)
-const { currentRecipe } = storeToRefs(recipesStore)
-const { currentBeverage } = storeToRefs(beveragesStore)
+const { currentRecipeName } = storeToRefs(recipesStore)
+const { currentBeverageName } = storeToRefs(beveragesStore)
 const { selectRecipeIngredients } = storeToRefs(ingredientsStore)
 
 const saveButtonDisabled = computed(() => {
-  return !(currentRecipe.value && currentBeverage.value)
+  return !(currentBeverageName.value && currentRecipeName.value)
 })
 
 const handleClickSave = () => {
   // 顾客 + 菜谱 + 酒水 + 食材
-  const recipeName = currentRecipe.value?.name || ''
-  const beverageName = currentBeverage.value?.name || ''
   const ingredients = selectRecipeIngredients.value
   const customerName = currentCustomer.value.name
   const uuid = generatorUid()
   const bookmark = {
     customer: customerName,
-    recipe: recipeName,
-    beverage: beverageName,
+    recipe: currentRecipeName.value,
+    beverage: currentBeverageName.value,
     ingredients,
     uuid,
   }
@@ -57,7 +55,7 @@ const handleClickSave = () => {
         <!-- 料理 -->
         <sprite-pending
           type="recipes"
-          :name="currentRecipe?.name"
+          :name="currentRecipeName"
           :size="48"
         />
         <!-- + -->
@@ -65,7 +63,7 @@ const handleClickSave = () => {
         <!-- 酒水 -->
         <sprite-pending
           type="beverages"
-          :name="currentBeverage?.name"
+          :name="currentBeverageName"
           :size="48"
         />
         <!-- + -->

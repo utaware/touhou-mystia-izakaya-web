@@ -8,16 +8,13 @@ import ConfigView from './config.vue'
 import { createColumns, pagination, getRowKey } from './render/table'
 import { renderExpandIcon } from '@/render/ExpandIcon'
 
-
 const beveragesStore = useBeveragesStore()
 
 const { getBeverageTableData: beverages } = storeToRefs(beveragesStore)
 
 const { setCurrentBeverage } = beveragesStore
 
-const columns = createColumns({
-  handleSelectRow: setCurrentBeverage
-})
+const columns = createColumns({ handleSelectRow: setCurrentBeverage })
 </script>
 
 <template>

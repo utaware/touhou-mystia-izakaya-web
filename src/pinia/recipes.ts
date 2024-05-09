@@ -1,14 +1,14 @@
 import { defineStore } from 'pinia'
 
-import { union } from 'lodash'
-
 import {
   recipes,
   recipesPositiveTags,
-  recipesNegativeTags
+  recipesNegativeTags,
+  recipesIndexMaps,
 } from '@/material'
 import type { TRecipeItem } from '@/material'
 
+import { getUnionKeys } from '@/utils'
 import { mapSelectOptions, type TSelectOptions } from '@/utils/options'
 import {
   filterRecipesWithForm,
@@ -23,20 +23,20 @@ import type { TSortOrderValue } from '@/utils/order'
 import { useCustomerRareStore, useIngredientsStore } from '@/pinia'
 
 interface State {
-  allRecipes: TRecipeItem[],
-  recipesPositiveTags: string[],
-  recipesNegativeTags: string[],
-  currentRecipe: TRecipeMatchItem | null,
-  filterForm: TFilterForm,
-  sortOrder: TSortOrderValue,
+  recipes: TRecipeItem[];
+  recipesPositiveTags: string[];
+  recipesNegativeTags: string[];
+  currentRecipeName: string;
+  filterForm: TFilterForm;
+  sortOrder: TSortOrderValue;
 }
 
 export const useRecipesStore = defineStore('recipes', {
   state: (): State => ({
-    allRecipes: recipes,
+    recipes,
     recipesPositiveTags,
     recipesNegativeTags,
-    currentRecipe: null,
+    currentRecipeName: '',
     filterForm: {
       selectedPositiveTags: [],
       selectedNegativeTags: [],
@@ -50,7 +50,7 @@ export const useRecipesStore = defineStore('recipes', {
     // 标签匹配 - page
     getRecipesWithCustomerRare (): TRecipeMatchItem[] {
       const { currentCustomer } = useCustomerRareStore()
-      return getTableDataWithCustomer(this.allRecipes, currentCustomer)
+      return getTableDataWithCustomer(this.recipes, currentCustomer)
     },
     // 条件筛选&排序 - table
     getRecipesTableData (): TRecipeMatchItem[] {
@@ -58,13 +58,15 @@ export const useRecipesStore = defineStore('recipes', {
       const orderData = sortOrderRecipes(filterData, this.sortOrder)
       return orderData
     },
-    // 匹配度 - select
+    // 匹配度选项 - select
     getMatchPointOptions (): TSelectOptions[] {
-      const items = this.getRecipesWithCustomerRare.map(
-        ({ match_recipe_point }: TRecipeMatchItem) => match_recipe_point
-      )
-      const options = union(items).sort((a, b) => b - a)
-      return mapSelectOptions(options)
+      const items = getUnionKeys(this.getRecipesWithCustomerRare, 'match_recipe_point').sort((a, b) => b - a)
+      return mapSelectOptions(items)
+    },
+    // 当前菜谱
+    currentRecipe (): TRecipeMatchItem | null {
+      const index = recipesIndexMaps[this.currentRecipeName]
+      return index ? this.getRecipesWithCustomerRare[index] : null
     },
     // 当前食材 - preview
     currentRecipeIngredients (): string[] {
@@ -112,9 +114,9 @@ export const useRecipesStore = defineStore('recipes', {
     },
   },
   actions: {
-    setCurrentRecipe (item: TRecipeMatchItem) {
-      this.currentRecipe = item
-      const { ingredients: { length } } = item
+    setCurrentRecipe ({ name, ingredients }: TRecipeMatchItem) {
+      this.currentRecipeName = name
+      const { length } = ingredients
       const { initSelectRecipeIngredients } = useIngredientsStore()
       initSelectRecipeIngredients(5 - length)
     },

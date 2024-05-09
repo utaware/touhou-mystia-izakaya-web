@@ -23,20 +23,20 @@ const customerRareStore = useCustomerRareStore()
 
 const { activeCustomerNames, acvitePlace } = storeToRefs(customerRareStore)
 
-const { allCustomer, setActiveCustomer, setActivePlace } = customerRareStore
+const { customer, setActiveCustomer, setActivePlace } = customerRareStore
 
 const enabledPlaceList = ref<string[]>([])
 
 const enabledCustomer = ref<string[]>([])
 
 const selectCustomerOptions = computed(() => {
-  return allCustomer
+  return customer
     .filter(({ place }) => enabledPlaceList.value.includes(place))
     .map(({ name }) => ({ label: name, value: name }))
 })
 
 const selectCustomerList = computed(() => {
-  return allCustomer
+  return customer
     .filter(({ name }) => enabledCustomer.value.includes(name))
 })
 

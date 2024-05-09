@@ -2,7 +2,8 @@ import { defineStore } from 'pinia'
 
 import { useRecipesStore, useIngredientsStore, useBeveragesStore } from '@/pinia'
 
-import { customerPlace, customerRare, type TCustomerRare } from '@/material'
+import { customerPlace, customerRare, customerRareIndexMap } from '@/material'
+import type { TCustomerRare } from '@/material'
 
 import { matchRecipeAndIngredients, type TRecipeMatchResult } from '@/utils/recipes'
 
@@ -19,23 +20,21 @@ interface Tbookmark {
 }
 
 interface State {
-  allPlace: string[],
-  allCustomer: TCustomerRare[],
-  currentCustomer: TCustomerRare;
-  acvitePlace: string[],
-  activeCustomerNames: string[],
+  customer: TCustomerRare[];
+  currentCustomerName: string;
+  acvitePlace: string[];
+  activeCustomerNames: string[];
   // 需求
-  demandRecipeTag: string,
-  demandBeverageTag: string,
+  demandRecipeTag: string;
+  demandBeverageTag: string;
   // 组合
-  bookmark: Tbookmark[],
+  bookmark: Tbookmark[];
 }
 
 export const useCustomerRareStore = defineStore('customerRare', {
   state: (): State => ({
-    allPlace: customerPlace,
-    allCustomer: customerRare,
-    currentCustomer: customerRare[0],
+    customer: customerRare,
+    currentCustomerName: '',
     acvitePlace: customerPlace,
     activeCustomerNames: [],
     demandRecipeTag: '',
@@ -44,8 +43,8 @@ export const useCustomerRareStore = defineStore('customerRare', {
   }),
   getters: {
     filterCustomerWithName (state): TCustomerRare[] {
-      const { allCustomer, activeCustomerNames } = state
-      return allCustomer.filter(({ name }) => activeCustomerNames.includes(name))
+      const { customer, activeCustomerNames } = state
+      return customer.filter(({ name }) => activeCustomerNames.includes(name))
     },
     getRecipeMatchTags (): TRecipeMatchResult | null {
       const { currentRecipe } = useRecipesStore()
@@ -59,6 +58,11 @@ export const useCustomerRareStore = defineStore('customerRare', {
             extra_ingredients_names: selectRecipeIngredients,
           })
         : null
+    },
+    currentCustomer (): TCustomerRare {
+      const isExsit = Reflect.has(customerRareIndexMap, this.currentCustomerName)
+      const index = customerRareIndexMap[this.currentCustomerName]
+      return isExsit ? customerRare[index] : customerRare[0]
     },
     // 当前评分 - 菜谱 + 酒水
     currentDemandPoint (): number {
@@ -92,8 +96,8 @@ export const useCustomerRareStore = defineStore('customerRare', {
     setActivePlace (value: string[]) {
       this.acvitePlace = value
     },
-    setCurrentCustomer (item: TCustomerRare) {
-      this.currentCustomer = item
+    setCurrentCustomer ({ name }: TCustomerRare) {
+      this.currentCustomerName = name
     },
     setDemandRecipeTag (item: string) {
       this.demandRecipeTag = item
