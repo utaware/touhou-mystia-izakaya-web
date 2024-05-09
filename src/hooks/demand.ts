@@ -1,21 +1,16 @@
-import { useBeveragesStore, useRecipesStore, useCustomerRareStore } from '@/pinia'
+import { useCustomerRareStore } from '@/pinia'
 
 export function useDemandSelect () {
 
-  const recipesStore = useRecipesStore()
-  const beveragesStore = useBeveragesStore()
   const customerStore = useCustomerRareStore()
-
-  const { setFilterForm } = recipesStore
 
   const { setDemandRecipeTag, setDemandBeverageTag } = customerStore
 
-  const handleChangePositiveTag = (value: string) => {
+  const handleChangePositiveTag = (value: string | null) => {
     setDemandRecipeTag(value)
-    setFilterForm('selectedPositiveTags', [value])
   }
 
-  const handleChangeBeverageTag = (value: string) => {
+  const handleChangeBeverageTag = (value: string | null) => {
     setDemandBeverageTag(value)
   }
 

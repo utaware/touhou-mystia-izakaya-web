@@ -103,13 +103,14 @@ export const useRecipesStore = defineStore('recipes', {
     // 当前菜谱得分
     currentRecipePoint(): number {
       const { demandRecipeTag } = useCustomerRareStore()
-      const demandPoint = this.currentRecipeAllTags.includes(demandRecipeTag) ? 1 : 0
+      const tag = demandRecipeTag || ''
+      const demandPoint = this.currentRecipeAllTags.includes(tag) ? 1 : 0
       const { match_like_tags, match_hate_tags } = this.currentRecipeMatchTags
       const like_point = match_like_tags.length
       const hate_point = match_hate_tags.length
-      const repeatCalcPoint = match_like_tags.includes(demandRecipeTag)
+      const repeatCalcPoint = match_like_tags.includes(tag)
         ? -1
-        : match_hate_tags.includes(demandRecipeTag) ? 1 : 0
+        : match_hate_tags.includes(tag) ? 1 : 0
       return like_point - hate_point + demandPoint + repeatCalcPoint
     },
   },

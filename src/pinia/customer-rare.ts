@@ -25,8 +25,8 @@ interface State {
   acvitePlace: string[];
   activeCustomerNames: string[];
   // 需求
-  demandRecipeTag: string;
-  demandBeverageTag: string;
+  demandRecipeTag: string | null;
+  demandBeverageTag: string | null;
   // 组合
   bookmark: Tbookmark[];
 }
@@ -72,11 +72,11 @@ export const useCustomerRareStore = defineStore('customerRare', {
     },
     // 当前评分上限值
     currentDemandMaxLevel (): number {
+      const { demandRecipeTag, demandBeverageTag } = this
       const { currentRecipeAllTags } = useRecipesStore()
       const { currentBeverageAllTags } = useBeveragesStore()
-      const { demandRecipeTag, demandBeverageTag } = this
-      const is_demand_recipe = currentRecipeAllTags.includes(demandRecipeTag)
-      const is_demand_beverage = currentBeverageAllTags.includes(demandBeverageTag)
+      const is_demand_recipe =  !!demandRecipeTag && currentRecipeAllTags.includes(demandRecipeTag)
+      const is_demand_beverage = !!demandBeverageTag && currentBeverageAllTags.includes(demandBeverageTag)
       return getMaxLevel({ is_demand_recipe, is_demand_beverage })
     },
     // 预计评价颜色
@@ -99,11 +99,15 @@ export const useCustomerRareStore = defineStore('customerRare', {
     setCurrentCustomer ({ name }: TCustomerRare) {
       this.currentCustomerName = name
     },
-    setDemandRecipeTag (item: string) {
-      this.demandRecipeTag = item
+    setDemandRecipeTag (tag: string | null) {
+      const { setFilterForm } = useRecipesStore()
+      this.demandRecipeTag = tag
+      tag && setFilterForm('selectedPositiveTags', [tag])
     },
-    setDemandBeverageTag (item: string) {
-      this.demandBeverageTag = item
+    setDemandBeverageTag (tag: string | null) {
+      const { setFilterForm } = useBeveragesStore()
+      this.demandBeverageTag = tag
+      tag && setFilterForm('selectBeverageTags', [tag])
     },
     saveBookmark (item: Tbookmark) {
       this.bookmark.push(item)

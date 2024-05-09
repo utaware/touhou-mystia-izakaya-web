@@ -51,17 +51,21 @@ export const useBeveragesStore = defineStore('beverages', {
     },
     // 当前酒水匹配得分
     currentBeveragePoint (): number {
-      const { currentBeverageAllTags, currentBeverageMatchTags } = this
       const { demandBeverageTag } = useCustomerRareStore()
+      const { currentBeverageAllTags, currentBeverageMatchTags } = this
+      const tag = demandBeverageTag || ''
       const match_point = currentBeverageMatchTags.length
-      const demand_point = currentBeverageAllTags.includes(demandBeverageTag) ? 1 : 0
-      const repeat_point = currentBeverageMatchTags.includes(demandBeverageTag) ? -1 : 0
+      const demand_point = currentBeverageAllTags.includes(tag) ? 1 : 0
+      const repeat_point = currentBeverageMatchTags.includes(tag) ? -1 : 0
       return demand_point + match_point + repeat_point
     }
   },
   actions: {
     setCurrentBeverage ({ name }: TBeverageMatchItem) {
       this.currentBeverageName = name
+    },
+    setFilterForm <T extends TFilterForm, U extends keyof TFilterForm>(key: U, value: T[U]) {
+      this.filterForm[key] = value
     },
   },
 })

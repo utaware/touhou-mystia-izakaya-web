@@ -7,7 +7,7 @@ import { useDemandSelect } from '@/hooks/demand'
 
 import { beverageTagOptions, positiveTagOptions } from '@/material/options'
 
-const { handleChangePositiveTag } = useDemandSelect()
+const { handleChangePositiveTag, handleChangeBeverageTag } = useDemandSelect()
 
 const customerStore = useCustomerRareStore()
 
@@ -17,22 +17,27 @@ const { demandRecipeTag, demandBeverageTag } = storeToRefs(customerStore)
 <template>
   <div class="demand-panel">
     <!-- 菜谱需求 -->
-    <n-select
-      class="left"
-      :value="demandRecipeTag"
-      :on-update:value="handleChangePositiveTag"
-      :options="positiveTagOptions"
-      placeholder="菜谱需求"
-      filterable
-    />
+    <n-form-item class="left" label="料理需求 : " label-placement="left" :show-feedback="false">
+      <n-select
+        :value="demandRecipeTag"
+        :on-update:value="handleChangePositiveTag"
+        :options="positiveTagOptions"
+        clearable
+        placeholder="菜谱需求"
+        filterable
+      />
+    </n-form-item>
     <!-- 酒水需求 -->
-    <n-select
-      class="right"
-      v-model:value="demandBeverageTag"
-      :options="beverageTagOptions"
-      placeholder="酒水需求"
-      filterable
-    />
+    <n-form-item class="right" label="酒水需求 : " label-placement="left" :show-feedback="false">
+      <n-select
+        :value="demandBeverageTag"
+        :on-update:value="handleChangeBeverageTag"
+        :options="beverageTagOptions"
+        clearable
+        placeholder="酒水需求"
+        filterable
+      />
+    </n-form-item>
   </div>
 </template>
 
