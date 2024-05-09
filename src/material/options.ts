@@ -17,4 +17,4 @@ export const negativeTagOptions = mapSelectOptions(recipesNegativeTags)
 export const recipesToolOptions = mapSelectOptions(toolNames)
 // 酒水
 export const beverageTagOptions = mapSelectOptions(beverageTags)
-export const beverageLevelOptions = mapSelectOptions(beveragesLevel)
+export const beverageLevelOptions = mapSelectOptions(beveragesLevel, (v) => ({ label: `Lv.${v}`, value: v }))

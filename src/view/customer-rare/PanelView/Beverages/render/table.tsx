@@ -4,6 +4,8 @@ import type { DataTableColumns } from 'naive-ui'
 import SpriteItem from '@/components/common/sprite/index.vue'
 import TagItem from '@/components/common/tags/index.vue'
 
+import { beverageLevelOptions } from '@/material/options'
+
 import type { TBeverageMatchItem } from '@/pinia'
 
 export const createColumns = ({
@@ -72,7 +74,9 @@ export const createColumns = ({
       title: '等级',
       key: 'level',
       className: 'bold',
-      sorter: 'default',
+      filter: (value, row) => row.level === value,
+      filterOptions: beverageLevelOptions,
+      defaultFilterOptionValues: null,
       render ({ level }) {
         return <NTag type="info">Lv.{ level }</NTag>
       },
