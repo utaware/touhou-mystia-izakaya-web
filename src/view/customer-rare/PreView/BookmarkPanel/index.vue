@@ -12,23 +12,28 @@ const { getCurrentBookmark } = storeToRefs(customerStore)
 </script>
 
 <template>
-  <n-card>
-    <div class="bookmark-panel">
-      <bookmark-item
-        class="item"
-        v-for="(item) in getCurrentBookmark"
-        v-bind="item"
-        :vertical="true"
-        :key="item.uuid"
-        :size="36"
-      />
-    </div>
+  <n-card content-style="padding: 12px;">
+    <n-scrollbar style="width: calc(50vw - 60px)" x-scrollable>
+      <div class="bookmark-panel">
+        <bookmark-item
+          class="item"
+          v-for="(item) in getCurrentBookmark"
+          v-bind="item"
+          :vertical="true"
+          :key="item.uuid"
+          :size="36"
+        />
+      </div>
+    </n-scrollbar>
   </n-card>
 </template>
 
 <style scoped lang="scss">
 .bookmark-panel {
   display: flex;
-  row-gap: 12px;
+  flex-wrap: nowrap;
+  .item + .item {
+    margin-left: 12px;
+  }
 }
 </style>

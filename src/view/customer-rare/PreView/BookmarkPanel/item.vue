@@ -34,19 +34,9 @@ const empty = 5 - recipe_ingredients.length - extra_ingredients.length
     <!-- preview -->
     <n-space :vertical="vertical" class="wrapper">
       <!-- 料理 -->
-      <sprite-item
-        type="recipes"
-        :name="recipe"
-        :size="size"
-        :title="recipe"
-      />
+      <sprite-item type="recipes" :name="recipe" :size="size" :title="recipe" />
       <!-- 酒水 -->
-      <sprite-item
-        type="beverages"
-        :name="beverage"
-        :size="size"
-        :title="beverage"
-      />
+      <sprite-item type="beverages" :name="beverage" :size="size" :title="beverage" />
       <!-- 食材 -->
       <sprite-item
         v-for="(item, index) in recipe_ingredients"
@@ -66,10 +56,7 @@ const empty = 5 - recipe_ingredients.length - extra_ingredients.length
         :title="item"
       />
       <!-- empty -->
-      <span class="empty"
-        v-for="item in empty"
-        :key="`empty-${item}`"
-      ></span>
+      <span class="empty" v-for="item in empty" :key="`empty-${item}`"></span>
     </n-space>
     <!-- handler -->
     <n-space :vertical="vertical">

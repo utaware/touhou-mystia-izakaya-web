@@ -13,7 +13,13 @@ import NavHeader from '@/components/layout/NavHeader/index.vue';
 </template>
 
 <style scoped lang="scss">
+.main {
+  display: flex;
+  flex-direction: column;
+}
 .page-wapper {
+  position: relative;
   padding: 12px;
+  flex: 1;
 }
 </style>

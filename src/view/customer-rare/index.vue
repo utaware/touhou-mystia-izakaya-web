@@ -50,6 +50,7 @@ const activeTabName = ref<string>('beverages')
 .content {
   display: grid;
   column-gap: 12px;
-  grid-template-columns: 1fr 1fr;
+  min-height: calc(100vh - 78px);
+  grid-template-columns: repeat(2, 1fr);
 }
 </style>
