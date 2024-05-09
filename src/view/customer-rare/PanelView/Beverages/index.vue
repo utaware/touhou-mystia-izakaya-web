@@ -1,8 +1,12 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+
 import { storeToRefs } from 'pinia'
 
 import { useBeveragesStore } from '@/pinia'
 import type { TBeverageMatchItem } from '@/pinia'
+
+import { SettingOutlined } from '@vicons/antd'
 
 import { createColumns, pagination, getRowKey } from './render/table'
 
@@ -13,6 +17,12 @@ const beveragesStore = useBeveragesStore()
 const { getBeverageWithCurrentCustomer: beverages } = storeToRefs(beveragesStore)
 
 const { setCurrentBeverage } = beveragesStore
+
+const filterModalShow = ref(false)
+
+const openFilterModal = () => {
+  filterModalShow.value = true
+}
 
 const rowProps = (item: TBeverageMatchItem) => {
   return {
@@ -26,8 +36,12 @@ const rowProps = (item: TBeverageMatchItem) => {
   <div class="wrapper">
     <!-- config -->
     <div class="config">
-      <!-- 标签选择 -->
-      <!-- <n-select v-model:value="value" :options="options" /> -->
+      <!-- 设置 -->
+      <n-button class="config" @click="openFilterModal">
+        <n-space>
+          <n-icon :component="SettingOutlined"/>设置
+        </n-space>
+      </n-button>
     </div>
     <!-- view -->
     <n-data-table

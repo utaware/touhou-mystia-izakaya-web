@@ -7,7 +7,7 @@ import TagItem from '@/components/common/tags/index.vue'
 import type { TBeverageMatchItem } from '@/pinia'
 
 export const createColumns = ({
-  spriteSize = 28,
+  spriteSize = 32,
 }: {
   spriteSize?: number,
 }): DataTableColumns<TBeverageMatchItem> => {
