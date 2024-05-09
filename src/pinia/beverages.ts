@@ -6,12 +6,18 @@ import type { TBeverageItem } from '@/material'
 
 import { matchBeveragesWithCustomer, type TBeverageMatchItem } from '@/utils/beverages'
 
+interface TFilterForm {
+  selectBeverageTags: string[];
+  searchName: string;
+}
+
 interface State {
-  beverages: TBeverageItem[],
-  beverageNames: string[],
-  beveragesLevel: number[],
-  beverageTags: string[],
-  currentBeverage: TBeverageMatchItem | null,
+  beverages: TBeverageItem[];
+  beverageNames: string[];
+  beveragesLevel: number[];
+  beverageTags: string[];
+  currentBeverage: TBeverageMatchItem | null;
+  filterForm: TFilterForm;
 }
 
 export const useBeveragesStore = defineStore('beverages', {
@@ -21,6 +27,10 @@ export const useBeveragesStore = defineStore('beverages', {
     beveragesLevel,
     beverageTags,
     currentBeverage: null,
+    filterForm: {
+      selectBeverageTags: [],
+      searchName: ''
+    }
   }),
   getters: {
     // 标签匹配 - page

@@ -112,7 +112,6 @@ export const useCustomerRareStore = defineStore('customerRare', {
   persist: {
     // 仅存储稀客相关选择
     paths: [
-      'currentCustomer',
       'acvitePlace',
       'activeCustomerNames',
       'bookmark',

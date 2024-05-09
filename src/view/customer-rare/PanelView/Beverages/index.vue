@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-
 import { storeToRefs } from 'pinia'
 
 import { useBeveragesStore } from '@/pinia'
 
-import { SettingOutlined } from '@vicons/antd'
+import ConfigView from './config.vue'
 
 import { createColumns, pagination, getRowKey } from './render/table'
 import { renderExpandIcon } from '@/render/ExpandIcon'
@@ -17,12 +15,6 @@ const { getBeverageWithCurrentCustomer: beverages } = storeToRefs(beveragesStore
 
 const { setCurrentBeverage } = beveragesStore
 
-const filterModalShow = ref(false)
-
-const openFilterModal = () => {
-  filterModalShow.value = true
-}
-
 const columns = createColumns({
   handleSelectRow: setCurrentBeverage
 })
@@ -32,14 +24,7 @@ const columns = createColumns({
   <!-- wrapper -->
   <div class="wrapper">
     <!-- config -->
-    <div class="config">
-      <!-- 设置 -->
-      <n-button class="config" @click="openFilterModal">
-        <n-space>
-          <n-icon :component="SettingOutlined"/>设置
-        </n-space>
-      </n-button>
-    </div>
+    <config-view />
     <!-- view -->
     <n-data-table
       class="beverages-view"
@@ -56,12 +41,7 @@ const columns = createColumns({
 </template>
 
 <style scoped lang="scss">
-.wrapper {
-  .beverages-view {
-    margin-top: 12px;
-  }
-}
-.current-row {
-  background-color: red;
+.beverages-view {
+  margin-top: 12px;
 }
 </style>

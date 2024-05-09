@@ -1,7 +1,5 @@
 import { defineStore } from 'pinia'
 
-import type { SelectOption } from 'naive-ui'
-
 import { union } from 'lodash'
 
 import {
@@ -11,7 +9,7 @@ import {
 } from '@/material'
 import type { TRecipeItem } from '@/material'
 
-import { mapSelectOptions } from '@/utils/options'
+import { mapSelectOptions, type TSelectOptions } from '@/utils/options'
 import {
   filterRecipesWithForm,
   getTableDataWithCustomer,
@@ -61,7 +59,7 @@ export const useRecipesStore = defineStore('recipes', {
       return orderData
     },
     // 匹配度 - select
-    getMatchPointOptions (): SelectOption[] {
+    getMatchPointOptions (): TSelectOptions[] {
       const items = this.getRecipesWithCustomerRare.map(
         ({ match_recipe_point }: TRecipeMatchItem) => match_recipe_point
       )
