@@ -5,20 +5,21 @@ import { useRecipesStore } from '@/pinia'
 import { ingredients, ingredientsNames } from '@/material'
 import type { TIngredientsItem } from '@/material'
 
-import { FixLengthArray } from '@/utils/object'
 import { getUnionTagsWithNames, getValidIngredients, type TIngredientResult } from '@/utils/ingredients'
 
 interface State {
   ingredients: TIngredientsItem[],
   ingredientsNames: string[],
-  extraIngredientsNames: FixLengthArray,
+  extraMaxCount: number,
+  extraIngredientsNames: string[],
 }
 
 export const useIngredientsStore = defineStore('ingredients', {
   state: (): State => ({
     ingredients,
     ingredientsNames,
-    extraIngredientsNames: new FixLengthArray(0),
+    extraMaxCount: 0,
+    extraIngredientsNames: [],
   }),
   getters: {
     // 当前所选食材的全部tags
@@ -35,13 +36,18 @@ export const useIngredientsStore = defineStore('ingredients', {
   },
   actions: {
     addExtraIngredients (item: string) {
-      this.extraIngredientsNames.add(item)
+      const { extraMaxCount, extraIngredientsNames } = this
+      const len = extraIngredientsNames.length
+      if (len < extraMaxCount) {
+        this.extraIngredientsNames.push(item)
+      }
     },
     removeExtraIngredients (index: number) {
-      this.extraIngredientsNames.remove(index)
+      this.extraIngredientsNames.splice(index, 1)
     },
-    setExtraIngredients (max: number, init: string[]) {
-      this.extraIngredientsNames = new FixLengthArray(max, init)
+    setExtraIngredients (max: number, extra: string[]) {
+      this.extraMaxCount = max
+      this.extraIngredientsNames = [ ...extra ]
     },
   }
 })

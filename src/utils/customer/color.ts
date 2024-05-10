@@ -14,8 +14,8 @@ export const evaluateColors = [
     alpha: 0.35,
   },
   {
-    color: 'coral',
-    alpha: 0.35,
+    color: 'orange',
+    alpha: 0.5,
   },
   {
     color: 'deeppink',

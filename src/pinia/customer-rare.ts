@@ -45,7 +45,7 @@ export const useCustomerRareStore = defineStore('customerRare', {
   state: (): State => ({
     customer: customerRare,
     currentCustomer: customerRare[0],
-    currentCustomerName: '',
+    currentCustomerName: '莉格露',
     acvitePlace: customerPlace,
     activeCustomerNames: [],
     demandRecipeTag: '',
@@ -89,9 +89,10 @@ export const useCustomerRareStore = defineStore('customerRare', {
     },
     // bookmark - 保存按钮是否禁用
     getSaveButtonIsDisabled (): boolean {
+      const { demandRecipeTag, demandBeverageTag } = this
       const { currentRecipeName } = useRecipesStore()
       const { currentBeverageName } = useBeveragesStore()
-      return !(currentBeverageName && currentRecipeName)
+      return !(currentBeverageName && currentRecipeName && demandRecipeTag && demandBeverageTag)
     },
     // 当前角色书签
     getCurrentBookmark (): Tbookmark[] {
@@ -151,14 +152,12 @@ export const useCustomerRareStore = defineStore('customerRare', {
       const index = findIndex(this.bookmark, { uuid })
       pullAt(this.bookmark, index)
     },
-    selectBookmark (item: Tbookmark) {
+    restoreBookmark (item: Tbookmark) {
       const { recipe, beverage, ingredients, extra = [], demandRecipeTag, demandBeverageTag } = item
       const { setCurrentRecipe } = useRecipesStore()
       const { setCurrentBeverage } = useBeveragesStore()
-      const { setExtraIngredients } = useIngredientsStore()
       setCurrentRecipe({ name: recipe, ingredients, extra })
       setCurrentBeverage(beverage)
-      setExtraIngredients(ingredients.length, extra)
       this.demandRecipeTag = demandRecipeTag
       this.demandBeverageTag = demandBeverageTag
     }

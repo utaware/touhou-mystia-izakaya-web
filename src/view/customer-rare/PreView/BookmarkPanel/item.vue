@@ -17,7 +17,7 @@ const props = defineProps<propsType>()
 
 const customerStore = useCustomerRareStore()
 
-const { deleteBookmark, selectBookmark } = customerStore
+const { deleteBookmark, restoreBookmark } = customerStore
 
 const { ingredients, extra } = props
 
@@ -65,7 +65,7 @@ const empty = getEmptyIngredientsCount(ingredients.length, extra.length)
     <!-- handler -->
     <n-space :vertical="vertical">
       <n-button size="small" quaternary type="error" @click="deleteBookmark(uuid)">删除</n-button>
-      <n-button size="small" quaternary type="primary" @click="selectBookmark(props)">选择</n-button>
+      <n-button size="small" quaternary type="primary" @click="restoreBookmark(props)">选择</n-button>
     </n-space>
   </div>
 </template>
