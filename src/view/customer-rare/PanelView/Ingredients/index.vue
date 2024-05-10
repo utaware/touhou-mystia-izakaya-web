@@ -7,7 +7,7 @@ import SpriteItem from '@/components/common/sprite/index.vue'
 
 const ingredientsStore = useIngredientsStore()
 
-const { addSelectRecipeIngredients } = ingredientsStore
+const { addExtraIngredients } = ingredientsStore
 
 const { getVariousIngredients } = storeToRefs(ingredientsStore)
 </script>
@@ -23,7 +23,7 @@ const { getVariousIngredients } = storeToRefs(ingredientsStore)
         class="item"
         v-for="(item, index) in getVariousIngredients.normal"
         :key="index"
-        @click="addSelectRecipeIngredients(item.name)"
+        @click="addExtraIngredients(item.name)"
       >
         <sprite-item
           :index="item.index"

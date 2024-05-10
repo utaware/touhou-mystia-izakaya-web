@@ -15,7 +15,7 @@ const tabPanes = [
   { name: 'ingredients', tab: '食材', component: IngredientsView },
 ]
 
-const activeTabName = ref<string>('beverages')
+const activeTabName = ref<string>('customer')
 </script>
 
 <template>
@@ -33,7 +33,7 @@ const activeTabName = ref<string>('beverages')
         <n-tab-pane
           v-for="(item) in tabPanes"
           :key="item.name"
-          display-directive="show"
+          display-directive="show:lazy"
           :name="item.name"
           :tab="item.tab"
         >

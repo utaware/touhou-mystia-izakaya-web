@@ -12,7 +12,7 @@ export const createColumns = ({
   handleSelectRow,
   spriteSize = 32,
 }: {
-  handleSelectRow: (item: TBeverageMatchItem) => void,
+  handleSelectRow: (name: string) => void,
   spriteSize?: number,
 }): DataTableColumns<TBeverageMatchItem> => {
   return [
@@ -84,9 +84,9 @@ export const createColumns = ({
       key: 'handle',
       titleAlign: 'center',
       width: 60,
-      render (item) {
+      render ({ name }) {
         return (
-          <NButton type="success" quaternary onClick={() => handleSelectRow(item)}>选择</NButton>
+          <NButton type="success" quaternary onClick={() => handleSelectRow(name)}>选择</NButton>
         )
       }
     }

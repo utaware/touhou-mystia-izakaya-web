@@ -11,19 +11,19 @@ import { getUnionTagsWithNames, getValidIngredients, type TIngredientResult } fr
 interface State {
   ingredients: TIngredientsItem[],
   ingredientsNames: string[],
-  selectRecipeIngredients: FixLengthArray<string>,
+  extraIngredientsNames: FixLengthArray,
 }
 
 export const useIngredientsStore = defineStore('ingredients', {
   state: (): State => ({
     ingredients,
     ingredientsNames,
-    selectRecipeIngredients: new FixLengthArray(0),
+    extraIngredientsNames: new FixLengthArray(0),
   }),
   getters: {
     // 当前所选食材的全部tags
-    currentSelectIngredientsTags (): string[] {
-      return this.selectRecipeIngredients.length ? getUnionTagsWithNames(this.selectRecipeIngredients) : []
+    extraIngredientsTags (): string[] {
+      return this.extraIngredientsNames.length ? getUnionTagsWithNames(this.extraIngredientsNames) : []
     },
     // 黑暗料理
     getVariousIngredients (): TIngredientResult {
@@ -34,15 +34,15 @@ export const useIngredientsStore = defineStore('ingredients', {
     },
   },
   actions: {
-    initSelectRecipeIngredients (count: number) {
-      this.selectRecipeIngredients = new FixLengthArray(count)
+    addExtraIngredients (item: string) {
+      this.extraIngredientsNames.add(item)
     },
-    addSelectRecipeIngredients (item: string) {
-      this.selectRecipeIngredients.add(item)
+    removeExtraIngredients (index: number) {
+      this.extraIngredientsNames.remove(index)
     },
-    removeSelectRecipeIngredients (index: number) {
-      this.selectRecipeIngredients.remove(index)
-    }
+    setExtraIngredients (max: number, init: string[]) {
+      this.extraIngredientsNames = new FixLengthArray(max, init)
+    },
   }
 })
 

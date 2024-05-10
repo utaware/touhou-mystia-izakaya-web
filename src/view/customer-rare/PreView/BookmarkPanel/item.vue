@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { getIndexWithName, recipes } from '@/material'
-
 import { useCustomerRareStore } from '@/pinia'
 
 import type { Tbookmark } from '@/pinia'
 
 import SpriteItem from '@/components/common/sprite/index.vue'
+
+import { getEmptyIngredientsCount } from '@/utils/recipes'
 
 interface propsType extends Tbookmark {
   size: number;
@@ -16,15 +16,11 @@ const props = defineProps<propsType>()
 
 const customerStore = useCustomerRareStore()
 
-const { deleteBookmark } = customerStore
+const { deleteBookmark, selectBookmark } = customerStore
 
-const index = getIndexWithName('recipes', props.recipe)
+const { ingredients, extra } = props
 
-const recipe_ingredients = recipes[index].ingredients
-
-const extra_ingredients = props.ingredients
-
-const empty = 5 - recipe_ingredients.length - extra_ingredients.length
+const empty = getEmptyIngredientsCount(ingredients.length, extra.length)
 </script>
 
 <template>
@@ -39,7 +35,7 @@ const empty = 5 - recipe_ingredients.length - extra_ingredients.length
       <sprite-item type="beverages" :name="beverage" :size="size" :title="beverage" />
       <!-- 食材 -->
       <sprite-item
-        v-for="(item, index) in recipe_ingredients"
+        v-for="(item, index) in ingredients"
         type="ingredients"
         :name="item"
         :key="`recipe-${index}`"
@@ -48,7 +44,7 @@ const empty = 5 - recipe_ingredients.length - extra_ingredients.length
       />
       <!-- 可选 -->
       <sprite-item
-        v-for="(item, index) in extra_ingredients"
+        v-for="(item, index) in extra"
         type="ingredients"
         :name="item"
         :key="`ingredient-${index}`"
@@ -61,7 +57,7 @@ const empty = 5 - recipe_ingredients.length - extra_ingredients.length
     <!-- handler -->
     <n-space :vertical="vertical">
       <n-button size="small" quaternary type="error" @click="deleteBookmark(uuid)">删除</n-button>
-      <n-button size="small" quaternary type="primary">选择</n-button>
+      <n-button size="small" quaternary type="primary" @click="selectBookmark(props)">选择</n-button>
     </n-space>
   </div>
 </template>

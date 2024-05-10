@@ -4,7 +4,7 @@ import {
   recipes,
   recipesPositiveTags,
   recipesNegativeTags,
-  recipesIndexMaps,
+  getIndexWithName,
   mapSelectOptions,
 } from '@/material'
 import type { TRecipeItem, TSelectOptions } from '@/material'
@@ -14,7 +14,9 @@ import {
   filterRecipesWithForm,
   getTableDataWithCustomer,
   composeRecipeTags,
-  matchRecipeTagsWithCustomer
+  matchRecipeTagsWithCustomer,
+  getEmptyIngredientsCount,
+  getExtraIngredientsCount,
 } from '@/utils/recipes'
 import type { TFilterForm, TRecipeMatchItem, TRecipeMatchResult } from '@/utils/recipes'
 import type { TSortOrderValue } from '@/utils/order'
@@ -27,6 +29,7 @@ interface State {
   recipes: TRecipeItem[];
   recipesPositiveTags: string[];
   recipesNegativeTags: string[];
+  currentRecipe: null | TRecipeMatchItem;
   currentRecipeName: string;
   filterForm: TFilterForm;
   sortOrder: TSortOrderValue;
@@ -37,6 +40,7 @@ export const useRecipesStore = defineStore('recipes', {
     recipes,
     recipesPositiveTags,
     recipesNegativeTags,
+    currentRecipe: null,
     currentRecipeName: '',
     filterForm: {
       selectedPositiveTags: [],
@@ -63,11 +67,6 @@ export const useRecipesStore = defineStore('recipes', {
       const items = getUnionKeys(this.getRecipesWithCustomerRare, 'match_recipe_point').sort((a, b) => b - a)
       return mapSelectOptions(items)
     },
-    // 当前菜谱
-    currentRecipe (): TRecipeMatchItem | null {
-      const index = recipesIndexMaps[this.currentRecipeName]
-      return index ? this.getRecipesWithCustomerRare[index] : null
-    },
     // 当前食材 - preview
     currentRecipeIngredients (): string[] {
       return this.currentRecipe ? this.currentRecipe.ingredients : []
@@ -76,6 +75,14 @@ export const useRecipesStore = defineStore('recipes', {
     currentRecipePositiveTags (): string[] {
       return this.currentRecipe ? this.currentRecipe.positive_tags : []
     },
+    // 当前食材剩余空位数量
+    currentRecipeEmptyCount (): number {
+      const { extraIngredientsNames } = useIngredientsStore()
+      return getEmptyIngredientsCount(
+        this.currentRecipeIngredients.length,
+        extraIngredientsNames.length
+      )
+    },
     // 当前菜谱全部tag - 菜谱 + 额外食材
     // 1. 没选菜谱 - []
     // 2. 选了菜谱
@@ -83,16 +90,16 @@ export const useRecipesStore = defineStore('recipes', {
     // 2.2 选了食材 - composeRecipeTags()
     currentRecipeAllTags (): string[] {
       const {
-        currentSelectIngredientsTags: extra_ingredients_tags,
-        selectRecipeIngredients: extra_ingredients_names,
+        extraIngredientsNames,
+        extraIngredientsTags,
       } = useIngredientsStore()
-      const recipe_positive_tags = this.currentRecipePositiveTags
-      const recipe_ingredients_names = this.currentRecipeIngredients
+      const recipePositiveTags = this.currentRecipePositiveTags
+      const recipeIngredientsNames = this.currentRecipeIngredients
       return composeRecipeTags({
-              recipe_positive_tags,
-              recipe_ingredients_names,
-              extra_ingredients_tags,
-              extra_ingredients_names,
+              recipePositiveTags,
+              recipeIngredientsNames,
+              extraIngredientsNames,
+              extraIngredientsTags,
             })
     },
     // 当前菜谱匹配的tag - 菜谱 + 额外食材
@@ -115,11 +122,22 @@ export const useRecipesStore = defineStore('recipes', {
     },
   },
   actions: {
-    setCurrentRecipe ({ name, ingredients }: TRecipeMatchItem) {
+    setCurrentRecipe ({
+      name,
+      ingredients,
+      extra = [],
+    }: {
+      name: string,
+      ingredients: string[],
+      extra?: string[],
+    }) {
+      const { setExtraIngredients } = useIngredientsStore()
+      const index = getIndexWithName('recipes', name)
+      const item = this.getRecipesWithCustomerRare[index]
+      this.currentRecipe = item
       this.currentRecipeName = name
-      const { length } = ingredients
-      const { initSelectRecipeIngredients } = useIngredientsStore()
-      initSelectRecipeIngredients(5 - length)
+      const max = getExtraIngredientsCount(ingredients.length)
+      setExtraIngredients(max, extra)
     },
     setFilterForm <T extends TFilterForm, U extends keyof TFilterForm>(key: U, value: T[U]) {
       this.filterForm[key] = value

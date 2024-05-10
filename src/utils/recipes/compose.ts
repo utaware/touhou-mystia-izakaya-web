@@ -25,29 +25,29 @@ export function handleCoverTags (set_tags: Set<string>, options: Record<string, 
 }
 
 export function composeRecipeTags ({
-    recipe_positive_tags,
-    recipe_ingredients_names,
-    extra_ingredients_tags,
-    extra_ingredients_names,
+    recipePositiveTags,
+    recipeIngredientsNames,
+    extraIngredientsNames,
+    extraIngredientsTags,
   } : {
-    recipe_positive_tags: string[],
-    recipe_ingredients_names: string[],
-    extra_ingredients_tags: string[],
-    extra_ingredients_names: string[],
+    recipePositiveTags: string[],
+    recipeIngredientsNames: string[],
+    extraIngredientsNames: string[],
+    extraIngredientsTags: string[],
   }) {
     // recipe - null
-    if (isEmpty(recipe_positive_tags)) {
+    if (isEmpty(recipePositiveTags)) {
       return []
     }
 
     // ingredients - []
-    if (isEmpty(extra_ingredients_names)) {
-      return recipe_positive_tags
+    if (isEmpty(extraIngredientsNames)) {
+      return recipePositiveTags
     }
 
-    const unionTags = new Set<string>([...recipe_positive_tags, ...extra_ingredients_tags])
+    const unionTags = new Set<string>([...recipePositiveTags, ...extraIngredientsTags])
 
-    const totalIngredientsCount = recipe_ingredients_names.length + extra_ingredients_names.length
+    const totalIngredientsCount = recipeIngredientsNames.length + extraIngredientsNames.length
     // 食材数量 = 5, 添加大份
     if (totalIngredientsCount >= 5) {
       unionTags.add('大份')
@@ -69,28 +69,28 @@ export function composeRecipeTags ({
 export function matchRecipeAndIngredients ({
   customer,
   recipe,
-  extra_ingredients_names,
-  extra_ingredients_tags,
+  extraIngredientsNames,
+  extraIngredientsTags,
 }: {
   customer: TCustomerRare,
   recipe: TRecipeMatchItem,
-  extra_ingredients_tags: string[],
-  extra_ingredients_names: string[]
+  extraIngredientsNames: string[],
+  extraIngredientsTags: string[],
 }): TRecipeMatchResult {
 
-  if (!extra_ingredients_names.length) {
+  if (!extraIngredientsNames.length) {
 
     return pick(recipe, ['match_like_tags', 'match_hate_tags'])
 
   }
   // 正特性(喜好匹配 √) + 负特性(黑暗料理 x)
-  const { positive_tags: recipe_positive_tags, ingredients: recipe_ingredients_names } = recipe
+  const { positive_tags: recipePositiveTags, ingredients: recipeIngredientsNames } = recipe
 
   const union_tags = composeRecipeTags({
-    recipe_positive_tags,
-    recipe_ingredients_names,
-    extra_ingredients_tags,
-    extra_ingredients_names,
+    recipePositiveTags,
+    recipeIngredientsNames,
+    extraIngredientsNames,
+    extraIngredientsTags,
   })
 
   return pick(matchRecipeTagsWithCustomer(union_tags, customer))

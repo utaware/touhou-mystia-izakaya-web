@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-
 import { storeToRefs } from 'pinia'
 
 import { useRecipesStore, useIngredientsStore } from '@/pinia'
@@ -17,14 +15,10 @@ withDefaults(defineProps<{
 const recipesStore = useRecipesStore()
 const ingredientsStore = useIngredientsStore()
 
-const { currentRecipeIngredients } = storeToRefs(recipesStore)
-const { selectRecipeIngredients } = storeToRefs(ingredientsStore)
+const { currentRecipeIngredients, currentRecipeEmptyCount } = storeToRefs(recipesStore)
+const { extraIngredientsNames } = storeToRefs(ingredientsStore)
 
-const { removeSelectRecipeIngredients } = ingredientsStore
-
-const emptyCount = computed(() => {
-  return 5 - currentRecipeIngredients.value.length - selectRecipeIngredients.value.length
-})
+const { removeExtraIngredients } = ingredientsStore
 </script>
 
 <template>
@@ -41,16 +35,16 @@ const emptyCount = computed(() => {
       />
       <!-- 可选 -->
       <sprite-pending
-        v-for="(item, index) in selectRecipeIngredients"
+        v-for="(item, index) in extraIngredientsNames"
         type="ingredients"
         :name="item"
         :key="`ingredient-${index}`"
         :size="size"
-        @click="removeSelectRecipeIngredients(index)"
+        @click="removeExtraIngredients(index)"
       />
       <!-- 占位 -->
       <sprite-unknow
-        v-for="item in emptyCount"
+        v-for="item in currentRecipeEmptyCount"
         :key="`unknow-${item}`"
         :size="size"
       />

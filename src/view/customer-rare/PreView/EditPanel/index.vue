@@ -1,16 +1,11 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-
 import { storeToRefs } from 'pinia'
 
 import {
   useRecipesStore,
   useBeveragesStore,
   useCustomerRareStore,
-  useIngredientsStore,
 } from '@/pinia'
-
-import { generatorUid } from '@/utils'
 
 import SpritePending from '@/components/common/sprite/pending.vue'
 import IconAdd from '@/components/common/icon/add.vue'
@@ -19,32 +14,11 @@ import IngredientsList from './ingredientsList.vue'
 const recipesStore = useRecipesStore()
 const beveragesStore = useBeveragesStore()
 const customerStore = useCustomerRareStore()
-const ingredientsStore = useIngredientsStore()
 
-const { saveBookmark,  } = customerStore
-const { currentCustomer } = storeToRefs(customerStore)
+const { saveBookmark } = customerStore
+const { getSaveButtonIsDisabled: disabled } = storeToRefs(customerStore)
 const { currentRecipeName } = storeToRefs(recipesStore)
 const { currentBeverageName } = storeToRefs(beveragesStore)
-const { selectRecipeIngredients } = storeToRefs(ingredientsStore)
-
-const saveButtonDisabled = computed(() => {
-  return !(currentBeverageName.value && currentRecipeName.value)
-})
-
-const handleClickSave = () => {
-  // 顾客 + 菜谱 + 酒水 + 食材
-  const ingredients = selectRecipeIngredients.value
-  const customerName = currentCustomer.value.name
-  const uuid = generatorUid()
-  const bookmark = {
-    customer: customerName,
-    recipe: currentRecipeName.value,
-    beverage: currentBeverageName.value,
-    ingredients,
-    uuid,
-  }
-  saveBookmark(bookmark)
-}
 </script>
 
 <template>
@@ -75,8 +49,8 @@ const handleClickSave = () => {
       <n-button
         type="info"
         secondary
-        :disabled="saveButtonDisabled"
-        @click="handleClickSave"
+        :disabled="disabled"
+        @click="saveBookmark"
       >
         保存
       </n-button>

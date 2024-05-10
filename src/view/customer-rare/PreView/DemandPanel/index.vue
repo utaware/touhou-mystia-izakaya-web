@@ -23,7 +23,7 @@ const { demandRecipeTag, demandBeverageTag } = storeToRefs(customerStore)
         :on-update:value="handleChangePositiveTag"
         :options="positiveTagOptions"
         clearable
-        placeholder="菜谱需求"
+        placeholder="料理需求"
         filterable
       />
     </n-form-item>

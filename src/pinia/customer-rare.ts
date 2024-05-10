@@ -2,12 +2,12 @@ import { defineStore } from 'pinia'
 
 import { useRecipesStore, useIngredientsStore, useBeveragesStore } from '@/pinia'
 
-import { customerPlace, customerRare, customerRareIndexMap } from '@/material'
+import { customerPlace, customerRare } from '@/material'
 import type { TCustomerRare } from '@/material'
 
 import { matchRecipeAndIngredients, type TRecipeMatchResult } from '@/utils/recipes'
 
-import { getEvaluateColor, getMaxLevel } from '@/utils'
+import { getEvaluateColor, getMaxLevel, generatorUid } from '@/utils'
 
 import { findIndex, pullAt } from 'lodash'
 
@@ -16,11 +16,15 @@ interface Tbookmark {
   recipe: string,
   beverage: string,
   uuid: string,
+  // 自身的食材
   ingredients: string[],
+  // 额外的食材
+  extra: string[],
 }
 
 interface State {
   customer: TCustomerRare[];
+  currentCustomer: TCustomerRare;
   currentCustomerName: string;
   acvitePlace: string[];
   activeCustomerNames: string[];
@@ -34,6 +38,7 @@ interface State {
 export const useCustomerRareStore = defineStore('customerRare', {
   state: (): State => ({
     customer: customerRare,
+    currentCustomer: customerRare[0],
     currentCustomerName: '',
     acvitePlace: customerPlace,
     activeCustomerNames: [],
@@ -49,20 +54,15 @@ export const useCustomerRareStore = defineStore('customerRare', {
     getRecipeMatchTags (): TRecipeMatchResult | null {
       const { currentRecipe } = useRecipesStore()
       const { currentCustomer } = useCustomerRareStore()
-      const { selectRecipeIngredients, currentSelectIngredientsTags } = useIngredientsStore()
+      const { extraIngredientsNames, extraIngredientsTags } = useIngredientsStore()
       return currentRecipe
         ? matchRecipeAndIngredients({
             customer: currentCustomer,
             recipe: currentRecipe,
-            extra_ingredients_tags: currentSelectIngredientsTags,
-            extra_ingredients_names: selectRecipeIngredients,
+            extraIngredientsNames,
+            extraIngredientsTags,
           })
         : null
-    },
-    currentCustomer (): TCustomerRare {
-      const isExsit = Reflect.has(customerRareIndexMap, this.currentCustomerName)
-      const index = customerRareIndexMap[this.currentCustomerName]
-      return isExsit ? customerRare[index] : customerRare[0]
     },
     // 当前评分 - 菜谱 + 酒水
     currentDemandPoint (): number {
@@ -83,10 +83,15 @@ export const useCustomerRareStore = defineStore('customerRare', {
     getPreviewColor (): string {
       return getEvaluateColor(this.currentDemandPoint, this.currentDemandMaxLevel)
     },
+    // bookmark - 保存按钮是否禁用
+    getSaveButtonIsDisabled (): boolean {
+      const { currentRecipeName } = useRecipesStore()
+      const { currentBeverageName } = useBeveragesStore()
+      return !(currentBeverageName && currentRecipeName)
+    },
     // 当前角色书签
     getCurrentBookmark (): Tbookmark[] {
-      const { name } = this.currentCustomer
-      return this.bookmark.filter(({ customer }) => customer === name)
+      return this.bookmark.filter(({ customer }) => customer === this.currentCustomerName)
     }
   },
   actions: {
@@ -96,7 +101,9 @@ export const useCustomerRareStore = defineStore('customerRare', {
     setActivePlace (value: string[]) {
       this.acvitePlace = value
     },
-    setCurrentCustomer ({ name }: TCustomerRare) {
+    setCurrentCustomer (item: TCustomerRare) {
+      const { name } = item
+      this.currentCustomer = item
       this.currentCustomerName = name
     },
     setDemandRecipeTag (tag: string | null) {
@@ -109,12 +116,33 @@ export const useCustomerRareStore = defineStore('customerRare', {
       this.demandBeverageTag = tag
       setFilterForm('selectBeverageTags', tag ? [tag] : [])
     },
-    saveBookmark (item: Tbookmark) {
-      this.bookmark.push(item)
+    saveBookmark () {
+      const { currentRecipe } = useRecipesStore()
+      const { currentBeverage } = useBeveragesStore()
+      const { extraIngredientsNames } = useIngredientsStore()
+      if (!currentRecipe || !currentBeverage) {
+        return false
+      }
+      const { name: recipe, ingredients } = currentRecipe
+      const { name: beverage } = currentBeverage
+      const extra = extraIngredientsNames
+      const customer = this.currentCustomerName
+      const uuid = generatorUid()
+      const bookmark: Tbookmark = { customer, recipe, beverage, ingredients, extra, uuid }
+      this.bookmark.push(bookmark)
     },
     deleteBookmark (uuid: string) {
       const index = findIndex(this.bookmark, { uuid })
       pullAt(this.bookmark, index)
+    },
+    selectBookmark (item: Tbookmark) {
+      const { recipe, beverage, ingredients, extra = [] } = item
+      const { setCurrentRecipe } = useRecipesStore()
+      const { setCurrentBeverage } = useBeveragesStore()
+      const { setExtraIngredients } = useIngredientsStore()
+      setCurrentRecipe({ name: recipe, ingredients, extra })
+      setCurrentBeverage(beverage)
+      setExtraIngredients(ingredients.length, extra)
     }
   },
   persist: {
