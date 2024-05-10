@@ -4,6 +4,7 @@ import { useCustomerRareStore } from '@/pinia'
 import type { Tbookmark } from '@/pinia'
 
 import SpriteItem from '@/components/common/sprite/index.vue'
+import TagItem from '@/components/common/tags/index.vue'
 
 import { getEmptyIngredientsCount } from '@/utils/recipes'
 
@@ -25,10 +26,17 @@ const empty = getEmptyIngredientsCount(ingredients.length, extra.length)
 
 <template>
   <div class="container">
+    <!-- point -->
+    <div class="point" :style="{backgroundColor: color}"></div>
     <!-- bar -->
-    <div class="bar"></div>
+    <div class="bar" :style="{backgroundColor: color}"></div>
     <!-- preview -->
-    <n-space :vertical="vertical" class="wrapper">
+    <n-space :vertical="vertical" align="center" class="wrapper">
+      <!-- 需求 -->
+      <n-space :vertical="vertical" align="center" class="demand">
+        <tag-item category="like" :value="demandRecipeTag" />
+        <tag-item category="beverage" :value="demandBeverageTag" />
+      </n-space>
       <!-- 料理 -->
       <sprite-item type="recipes" :name="recipe" :size="size" :title="recipe" />
       <!-- 酒水 -->
@@ -65,13 +73,20 @@ const empty = getEmptyIngredientsCount(ingredients.length, extra.length)
 <style scoped lang="scss">
 .container {
   position: relative;
-  padding: 8px 4px;
+  padding: 20px 4px 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   border-radius: 8px;
   background-color: #ecf8ff;
+  .point {
+    position: absolute;
+    top: 18px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
   .wrapper {
     padding: 8px 4px;
   }
@@ -84,11 +99,14 @@ const empty = getEmptyIngredientsCount(ingredients.length, extra.length)
     height: 6px;
     border-radius: 8px 8px 0 0;
   }
+  .demand {
+    margin: 12px 0;
+  }
+  .empty {
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+  }
 }
 
-.empty {
-  display: inline-block;
-  width: 36px;
-  height: 36px;
-}
 </style>
