@@ -4,13 +4,13 @@ import beveragesJSON from '@/json/beverages.json'
 import ingredientsJSON from '@/json/ingredients.json'
 import toolsJSON from '@/json/tools.json'
 
-import { getUnionTags, getUnionKeys, getNames, getIndexMaps, extendItemIndex } from '@/utils'
+import { getUnionTags, getUnionKeys, getNames, getIndexMaps, setItemIndex } from '@/utils/material'
 
-export const customerRare = extendItemIndex(customerRareJSON)
-export const recipes = extendItemIndex(recipesJSON)
-export const beverages = extendItemIndex(beveragesJSON)
-export const ingredients = extendItemIndex(ingredientsJSON)
-export const tools = extendItemIndex(toolsJSON)
+export const customerRare = setItemIndex(customerRareJSON)
+export const recipes = setItemIndex(recipesJSON)
+export const beverages = setItemIndex(beveragesJSON)
+export const ingredients = setItemIndex(ingredientsJSON)
+export const tools = setItemIndex(toolsJSON)
 
 export const customerDLC = getUnionKeys(customerRare, 'dlc')
 export const customerPlace = getUnionKeys(customerRare, 'place')
@@ -34,6 +34,7 @@ export const ingredientsIndexMaps = getIndexMaps(ingredients)
 export const toolsIndexMaps = getIndexMaps(tools)
 
 export type TCustomerTagType = 'like' | 'hate' | 'beverage'
+export type TSortOrderValue = 'desc' | 'asc' | false
 
 export type TRecipeItem = typeof recipes[number]
 export type TBeverageItem = typeof beverages[number]

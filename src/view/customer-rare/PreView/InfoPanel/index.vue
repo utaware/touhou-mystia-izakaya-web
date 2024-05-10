@@ -5,7 +5,7 @@ import TagItem from '@/components/common/tags/index.vue'
 
 import { useCustomerRareStore, useRecipesStore, useBeveragesStore } from '@/pinia'
 
-import { getCustomerRareSrc } from '@/utils'
+import { getCustomerRareSrc } from '@/utils/pub-use'
 
 import { useDemandSelect } from '@/hooks/demand'
 

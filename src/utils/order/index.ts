@@ -1,1 +1,0 @@
-export type TSortOrderValue = 'desc' | 'asc' | false

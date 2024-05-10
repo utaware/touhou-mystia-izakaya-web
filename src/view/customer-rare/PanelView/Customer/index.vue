@@ -10,7 +10,7 @@ import store from '@/pinia'
 
 import FilterModal from './FilterModal/index.vue'
 
-import { getCustomerRareSrc } from '@/utils'
+import { getCustomerRareSrc } from '@/utils/pub-use'
 
 const customerRareStore = useCustomerRareStore(store)
 

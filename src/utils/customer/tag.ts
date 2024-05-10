@@ -36,7 +36,3 @@ export function getMatchResult (target: string[], match: string[]) {
     unMatch: options.filter(([, count]) => count < 0).map(([key]) => key),
   }
 }
-
-export function isMatchItem (item: string, target: string[] | null | undefined): boolean {
-  return !!target && target.includes(item)
-}

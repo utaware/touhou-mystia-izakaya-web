@@ -7,7 +7,7 @@ import type { TCustomerRare } from '@/material'
 
 import { matchRecipeAndIngredients, type TRecipeMatchResult } from '@/utils/recipes'
 
-import { getEvaluateColor, getMaxLevel, generatorUid } from '@/utils'
+import { getEvaluateColor, getMaxLevel, generatorUid } from '@/utils/customer'
 
 import { findIndex, pullAt } from 'lodash'
 
@@ -81,9 +81,7 @@ export const useCustomerRareStore = defineStore('customerRare', {
       const { demandRecipeTag, demandBeverageTag } = this
       const { currentRecipeAllTags } = useRecipesStore()
       const { currentBeverageAllTags } = useBeveragesStore()
-      const is_demand_recipe =  !!demandRecipeTag && currentRecipeAllTags.includes(demandRecipeTag)
-      const is_demand_beverage = !!demandBeverageTag && currentBeverageAllTags.includes(demandBeverageTag)
-      return getMaxLevel({ is_demand_recipe, is_demand_beverage })
+      return getMaxLevel({ demandRecipeTag, demandBeverageTag, currentRecipeAllTags, currentBeverageAllTags })
     },
     // 预计评价颜色
     getPreviewColor (): string {

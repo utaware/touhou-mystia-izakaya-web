@@ -93,6 +93,6 @@ export function matchRecipeAndIngredients ({
     extraIngredientsTags,
   })
 
-  return pick(matchRecipeTagsWithCustomer(union_tags, customer))
+  return matchRecipeTagsWithCustomer(union_tags, customer)
 
 }

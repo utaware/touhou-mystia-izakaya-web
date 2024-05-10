@@ -1,4 +1,4 @@
-import { maxIngredientsCount } from '@/utils/constant'
+export const maxIngredientsCount = 5
 
 export function getExtraIngredientsCount (ingredientsCount: number) {
   return maxIngredientsCount - ingredientsCount

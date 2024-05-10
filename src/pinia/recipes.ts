@@ -7,9 +7,9 @@ import {
   getIndexWithName,
   mapSelectOptions,
 } from '@/material'
-import type { TRecipeItem, TSelectOptions } from '@/material'
+import type { TRecipeItem, TSelectOptions, TSortOrderValue } from '@/material'
 
-import { getUnionKeys } from '@/utils'
+import { getUnionKeys } from '@/utils/material'
 import {
   filterRecipesWithForm,
   getTableDataWithCustomer,
@@ -19,7 +19,6 @@ import {
   getExtraIngredientsCount,
 } from '@/utils/recipes'
 import type { TFilterForm, TRecipeMatchItem, TRecipeMatchResult } from '@/utils/recipes'
-import type { TSortOrderValue } from '@/utils/order'
 
 import { useCustomerRareStore, useIngredientsStore } from '@/pinia'
 
@@ -84,10 +83,6 @@ export const useRecipesStore = defineStore('recipes', {
       )
     },
     // 当前菜谱全部tag - 菜谱 + 额外食材
-    // 1. 没选菜谱 - []
-    // 2. 选了菜谱
-    // 2.1 没选食材 - positive_tags
-    // 2.2 选了食材 - composeRecipeTags()
     currentRecipeAllTags (): string[] {
       const {
         extraIngredientsNames,

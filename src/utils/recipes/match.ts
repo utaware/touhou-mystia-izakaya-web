@@ -1,6 +1,6 @@
 import type { TRecipeItem, TCustomerRare } from '@/material'
 
-import { getMatchResult } from '@/utils/tag'
+import { getMatchResult } from '@/utils/customer'
 interface TRecipeMatchItem extends TRecipeItem {
   match_like_tags: string[],
   match_hate_tags: string[],

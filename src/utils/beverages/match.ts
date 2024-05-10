@@ -1,6 +1,6 @@
 import type { TCustomerRare, TBeverageItem } from '@/material'
 
-import { getMatchResult } from '@/utils/tag'
+import { getMatchResult } from '@/utils/customer'
 
 interface TBeverageMatchItem extends TBeverageItem {
   match_beverage_tags: string[],

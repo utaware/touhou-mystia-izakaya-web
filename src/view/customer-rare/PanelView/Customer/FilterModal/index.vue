@@ -9,7 +9,7 @@ import { CloseCircleFilled } from '@vicons/antd'
 
 import TransferPicker from './transfer.vue'
 
-import { getCustomerRareSrc } from '@/utils'
+import { getCustomerRareSrc } from '@/utils/pub-use'
 
 import { customerPlaceOptions } from '@/material/options'
 
