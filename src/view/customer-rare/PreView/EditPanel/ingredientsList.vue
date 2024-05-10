@@ -6,6 +6,10 @@ import { useRecipesStore, useIngredientsStore } from '@/pinia'
 import SpriteUnknow from '@/components/common/sprite/unknow.vue'
 import SpritePending from '@/components/common/sprite/pending.vue'
 
+import InsetModal from '@/components/common/insetModal/index.vue'
+
+import { CloseCircleFilled } from '@vicons/antd'
+
 withDefaults(defineProps<{
   size?: number,
 }>(), {
@@ -34,14 +38,14 @@ const { removeExtraIngredients } = ingredientsStore
         :size="size"
       />
       <!-- 可选 -->
-      <sprite-pending
-        v-for="(item, index) in extraIngredientsNames"
-        type="ingredients"
-        :name="item"
-        :key="`ingredient-${index}`"
-        :size="size"
-        @click="removeExtraIngredients(index)"
-      />
+      <inset-modal v-for="(item, index) in extraIngredientsNames" :key="`ingredient-${index}`">
+        <sprite-pending type="ingredients" :name="item" :size="size" />
+        <template #modal>
+          <n-icon class="pointer" size="24" color="white" @click="removeExtraIngredients(index)">
+            <CloseCircleFilled />
+          </n-icon>
+        </template>
+      </inset-modal>
       <!-- 占位 -->
       <sprite-unknow
         v-for="item in currentRecipeEmptyCount"
