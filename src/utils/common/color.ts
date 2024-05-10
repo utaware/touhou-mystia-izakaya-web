@@ -1,8 +1,8 @@
 import Color from 'color'
 
-const colors = ['black', 'purple', 'green', 'orange', 'pink']
+const colors = ['black', 'purple', 'green', 'coral', 'deeppink']
 
-const alphas = [0.25, 0.25, 0.35, 0.5, 0.85]
+const alphas = [0.2, 0.35, 0.35, 0.35, 0.35]
 
 const len = colors.length
 
