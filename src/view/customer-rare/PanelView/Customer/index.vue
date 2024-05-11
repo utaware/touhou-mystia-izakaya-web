@@ -14,7 +14,7 @@ import { getCustomerRareSrc } from '@/utils/pub-use'
 
 const customerRareStore = useCustomerRareStore(store)
 
-const { filterCustomerWithName } = storeToRefs(customerRareStore)
+const { filterCustomerWithName, currentCustomerName } = storeToRefs(customerRareStore)
 
 const { setCurrentCustomer } = customerRareStore
 
@@ -45,11 +45,12 @@ const handlerClickCustomer = (item: TCustomerRare) => {
         v-for="(item, index) in filterCustomerWithName"
         :key="index"
         class="item"
+        :class="{ active: item.name === currentCustomerName }"
         @click="handlerClickCustomer(item)"
       >
         <n-avatar
           class="avatar"
-          :size="84"
+          :size="88"
           :src="getCustomerRareSrc(item)"
           :alt="item.name"
           :title="item.name"
@@ -72,14 +73,18 @@ const handlerClickCustomer = (item: TCustomerRare) => {
   gap: 8px;
   .item {
     display: inline-block;
-    padding: 8px;
+    padding: 6px;
     width: 100px;
     height: 100px;
-    background: url('@/assets/bg.png') no-repeat;
     background-size: 100%;
+    background-color: #2e1b0d;
+    border-radius: 4px;
     cursor: pointer;
     &.disabled {
       opacity: 0.5;
+    }
+    &.active {
+      background-color: #409eff;
     }
   }
 }
