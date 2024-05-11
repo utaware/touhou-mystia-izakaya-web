@@ -25,8 +25,8 @@ const {
   <!-- wrapper -->
   <n-drawer
     :width="320"
-    :show-mask="false"
-    :mask-closable="false"
+    show-mask="transparent"
+    mask-closable
     display-directive="show"
   >
     <!-- card -->
