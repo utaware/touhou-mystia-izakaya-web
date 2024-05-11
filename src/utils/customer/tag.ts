@@ -32,7 +32,7 @@ export function getMatchResult (target: string[], match: string[]) {
   const options = Object.entries(next)
   return {
     isMatch: options.filter(([, count]) => count > 0).map(([key]) => key),
-    noMatch: options.filter(([, count]) => count = 0).map(([key]) => key),
+    noMatch: options.filter(([, count]) => count === 0).map(([key]) => key),
     unMatch: options.filter(([, count]) => count < 0).map(([key]) => key),
   }
 }
