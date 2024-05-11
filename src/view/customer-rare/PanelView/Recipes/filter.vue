@@ -9,6 +9,7 @@ import {
   recipesToolOptions,
   positiveTagOptions,
   negativeTagOptions,
+  ingredientsOptions,
 } from '@/material/options'
 
 const recipesStore = useRecipesStore()
@@ -43,23 +44,46 @@ const {
         :show-feedback="false"
       >
         <!-- 正特性 -->
-        <n-form-item label="正特性 : ">
+        <n-form-item label="正特性(包含) : ">
           <n-select
             v-model:value="filterForm.selectedPositiveTags"
             multiple
             :options="positiveTagOptions"
             :render-tag="renderSelectTags({ category: 'like' })"
             clearable
+            filterable
+          />
+        </n-form-item>
+        <!-- 正特性 -->
+        <n-form-item label="正特性(不包含) : ">
+          <n-select
+            v-model:value="filterForm.selectedNoPositiveTags"
+            multiple
+            :options="positiveTagOptions"
+            :render-tag="renderSelectTags({ category: 'like' })"
+            clearable
+            filterable
           />
         </n-form-item>
         <!-- 反特性 -->
-        <n-form-item label="反特性 : ">
+        <n-form-item label="反特性(包含) : ">
           <n-select
             v-model:value="filterForm.selectedNegativeTags"
             multiple
             :options="negativeTagOptions"
             :render-tag="renderSelectTags({ category: 'hate' })"
             clearable
+            filterable
+          />
+        </n-form-item>
+        <n-form-item label="反特性(不包含) : ">
+          <n-select
+            v-model:value="filterForm.selectedNoNegativeTags"
+            multiple
+            :options="negativeTagOptions"
+            :render-tag="renderSelectTags({ category: 'hate' })"
+            clearable
+            filterable
           />
         </n-form-item>
         <!-- 厨具 -->
@@ -79,6 +103,25 @@ const {
             multiple
             :options="getMatchPointOptions"
             clearable
+          />
+        </n-form-item>
+        <!-- 食材 -->
+        <n-form-item label="食材(包含) : ">
+          <n-select
+            v-model:value="filterForm.selectedIngredients"
+            multiple
+            :options="ingredientsOptions"
+            clearable
+            filterable
+          />
+        </n-form-item>
+        <n-form-item label="食材(不包含) : ">
+          <n-select
+            v-model:value="filterForm.selectedNoIngredients"
+            multiple
+            :options="ingredientsOptions"
+            clearable
+            filterable
           />
         </n-form-item>
         <!-- 输入筛选 -->

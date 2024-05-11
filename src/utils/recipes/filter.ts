@@ -1,12 +1,16 @@
 import type { TRecipeMatchItem } from '@/pinia'
 
-import { isEmpty, difference } from 'lodash'
+import { isEmpty } from 'lodash'
 
-import { getKeys } from '@/utils/object'
+import { getKeys, hasRepeatItem, hasAllItem } from '@/utils/object'
 
 interface TFilterForm {
   selectedPositiveTags: string[],
+  selectedNoPositiveTags: string[],
   selectedNegativeTags: string[],
+  selectedNoNegativeTags: string[],
+  selectedIngredients: string[],
+  selectedNoIngredients: string[],
   selectedTools: string[],
   selectedMatchPoints: number[],
   searchName: string,
@@ -23,11 +27,27 @@ export function getRecipeFilterMethod (form: TFilterForm): TRecpieFilterFunc[] {
       switch (key) {
         case 'selectedPositiveTags':
           return ({ positive_tags }: TRecipeMatchItem) => {
-            return difference(form[key], positive_tags).length === 0
+            return hasAllItem(positive_tags, form[key])
+          }
+        case 'selectedNoPositiveTags':
+          return ({ positive_tags }: TRecipeMatchItem) => {
+            return !hasRepeatItem(form[key], positive_tags)
           }
         case 'selectedNegativeTags':
           return ({ negative_tags }: TRecipeMatchItem) => {
-            return difference(form[key], negative_tags).length === 0
+            return hasAllItem(negative_tags, form[key])
+          }
+        case 'selectedNoNegativeTags':
+          return ({ negative_tags }: TRecipeMatchItem) => {
+            return !hasRepeatItem(form[key], negative_tags)
+          }
+        case 'selectedIngredients':
+          return ({ ingredients }: TRecipeMatchItem) => {
+            return hasAllItem(ingredients, form[key])
+          }
+        case 'selectedNoIngredients':
+          return ({ ingredients }: TRecipeMatchItem) => {
+            return !hasRepeatItem(form[key], ingredients)
           }
         case 'selectedTools':
           return ({ tool }: TRecipeMatchItem) => {
@@ -48,6 +68,5 @@ export function getRecipeFilterMethod (form: TFilterForm): TRecpieFilterFunc[] {
 }
 
 export function filterRecipesWithForm (recipes: TRecipeMatchItem[], form: TFilterForm): TRecipeMatchItem[] {
-  const filterMethods = getRecipeFilterMethod(form)
-  return recipes.filter((item) => filterMethods.every((fn) => fn(item)))
+  return getRecipeFilterMethod(form).reduce((total, method) => total.filter(method), recipes)
 }

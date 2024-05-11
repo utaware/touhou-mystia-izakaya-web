@@ -43,7 +43,11 @@ export const useRecipesStore = defineStore('recipes', {
     currentRecipeName: '',
     filterForm: {
       selectedPositiveTags: [],
+      selectedNoPositiveTags: [],
       selectedNegativeTags: [],
+      selectedNoNegativeTags: [],
+      selectedIngredients: [],
+      selectedNoIngredients: [],
       selectedTools: [],
       selectedMatchPoints: [],
       searchName: '',

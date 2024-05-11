@@ -5,6 +5,7 @@ import {
   toolNames,
   beverageTags,
   beveragesLevel,
+  ingredientsNames,
 } from '@/material/base'
 
 interface TSelectOptions {
@@ -41,3 +42,5 @@ export const recipesToolOptions = mapSelectOptions(toolNames, { class: 'bold' })
 // 酒水
 export const beverageTagOptions = mapSelectOptions(beverageTags, { class: 'bold' })
 export const beverageLevelOptions = mapSelectOptions(beveragesLevel, (v) => ({ label: `Lv.${v}`, value: v }))
+// 食材
+export const ingredientsOptions = mapSelectOptions(ingredientsNames, { class: 'bold' })

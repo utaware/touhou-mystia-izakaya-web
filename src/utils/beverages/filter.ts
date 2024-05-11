@@ -1,8 +1,8 @@
 import type { TBeverageMatchItem } from '@/pinia'
 
-import { isEmpty, difference } from 'lodash'
+import { isEmpty } from 'lodash'
 
-import { getKeys } from '@/utils/object'
+import { getKeys, hasAllItem } from '@/utils/object'
 
 interface TFilterForm {
   selectBeverageTags: string[],
@@ -14,8 +14,7 @@ type TRecpieFilterFunc = (item: TBeverageMatchItem) => boolean
 export type { TFilterForm }
 
 export function filterBeveragesWithForm (beverages: TBeverageMatchItem[], form: TFilterForm) {
-  const filterMethods = getRecipeFilterMethod(form)
-  return beverages.filter((item) => filterMethods.every((fn) => fn(item)))
+  return getRecipeFilterMethod(form).reduce((total, method) => total.filter(method), beverages)
 }
 
 export function getRecipeFilterMethod (form: TFilterForm): TRecpieFilterFunc[] {
@@ -25,7 +24,7 @@ export function getRecipeFilterMethod (form: TFilterForm): TRecpieFilterFunc[] {
       switch (key) {
         case 'selectBeverageTags':
           return ({ beverage_tags }: TBeverageMatchItem) => {
-            return difference(form[key], beverage_tags).length === 0
+            return hasAllItem(beverage_tags, form[key])
           }
         case 'searchName':
           return ({ name }: TBeverageMatchItem) => {
