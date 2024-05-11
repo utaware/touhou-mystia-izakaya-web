@@ -56,9 +56,6 @@ const computedStyles = computed(() => {
   vertical-align: middle;
   background-repeat: no-repeat;
 }
-.customer-rare {
-  background-image: url('@/assets/sprite/character-rare-sprite.png');
-}
 .customer-normal {
   background-image: url('@/assets/sprite/character-normal-sprite.webp');
 }
