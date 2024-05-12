@@ -1,4 +1,8 @@
+import type { TCustomerTagType, TCustomerTagsTypeFn } from '@/material'
+
 import { isEmpty } from 'lodash'
+
+import { getKeys } from '@/utils/object'
 
 export interface TGeneratorMap<T> {
   [key: string]: T
@@ -35,4 +39,20 @@ export function getMatchResult (target: string[], match: string[]) {
     noMatch: options.filter(([, count]) => count === 0).map(([key]) => key),
     unMatch: options.filter(([, count]) => count < 0).map(([key]) => key),
   }
+}
+
+export const getCustomerTagType: TCustomerTagsTypeFn = (tag, customer) => {
+  const { like_tags = [], hate_tags = [], beverage_tags = [] } = customer
+  const options = {
+    like: like_tags,
+    hate: hate_tags,
+    beverage: beverage_tags,
+  }
+  const keys = getKeys(options)
+  let result: TCustomerTagType = 'default'
+  keys.some((catogory) => {
+    const tags = options[catogory]
+    return tags.includes(tag) && (result = catogory)
+  })
+  return result
 }

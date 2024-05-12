@@ -4,8 +4,7 @@ import { NSpace, NIcon, NButton } from 'naive-ui'
 
 import { PlusSquareFilled, MinusSquareFilled, CheckSquareFilled } from '@vicons/antd'
 
-import type { TCustomerRare } from '@/material'
-import type { TMatchIngredientsItem } from '@/utils/ingredients'
+import type { TCustomerRare, TMatchIngredientsItem, TCustomerTagType } from '@/material'
 
 import SpriteItem from '@/components/common/sprite/index.vue'
 import TagItem from '@/components/common/tags/index.vue'
@@ -13,33 +12,44 @@ import TagItem from '@/components/common/tags/index.vue'
 import '../style/notification.scss'
 import color from '@/styles/color.module.scss'
 
+import { getCustomerTagType } from '@/utils/customer'
+
+type TTagTypeFn = (tag: string) => TCustomerTagType
+
 export function iconRender (icon: Component) {
   return (
     <NIcon size={24} depth={1} color={color.primary} component={icon}/>
   )
 }
 
-export function tagsRender (tags: string[]) {
+export function tagsRender (tags: string[], getTagType: TTagTypeFn) {
   return (
     <NSpace>
       {
         tags.length
-          ? tags.map((item) => <TagItem category='like' value={item} />)
-          : <TagItem value="-" />
+          ? tags.map((item) => <TagItem category={getTagType(item)} value={item} />)
+          : <TagItem category="default" value="-" />
       }
     </NSpace>
   )
 }
 
-export function formItemRender (tags: string[], icon: Component, text: string) {
+export function formItemRender ({
+  tags, icon, label, getTagType
+}: {
+  tags: string[],
+  icon: Component,
+  label: string,
+  getTagType: TTagTypeFn
+}) {
   return (
     <div class="form-item">
       <div class="form-item-header">
         <span class="icon">{ iconRender(icon) }</span>
-        <span class="bold">{ text }</span>
+        <span class="bold">{ label }</span>
       </div>
       <div class="form-item-content">
-        { tagsRender(tags) }
+        { tagsRender(tags, getTagType) }
       </div>
     </div>
   )
@@ -47,10 +57,11 @@ export function formItemRender (tags: string[], icon: Component, text: string) {
 
 export function createNotification (item: TMatchIngredientsItem, customer: TCustomerRare) {
   const { index, name, add_tags, remove_tags, fix_tags } = item
+  const getTagType = (tag: string) => getCustomerTagType(tag, customer)
   const options = [
-    { tag: fix_tags, icon: CheckSquareFilled, label: '保留', },
-    { tag: add_tags, icon: PlusSquareFilled, label: '添加', },
-    { tag: remove_tags, icon: MinusSquareFilled, label: '覆盖', },
+    { tags: fix_tags, icon: CheckSquareFilled, label: '保留', },
+    { tags: add_tags, icon: PlusSquareFilled, label: '添加', },
+    { tags: remove_tags, icon: MinusSquareFilled, label: '覆盖', },
   ]
   return {
     title: () => {
@@ -65,7 +76,7 @@ export function createNotification (item: TMatchIngredientsItem, customer: TCust
     content: () => {
       return (
         <NSpace vertical>
-          { options.map(({ tag, icon, label }) => formItemRender(tag, icon, label) ) }
+          { options.map(({ tags, icon, label }) => formItemRender({ tags, icon, label, getTagType }) ) }
         </NSpace>
       )
     },

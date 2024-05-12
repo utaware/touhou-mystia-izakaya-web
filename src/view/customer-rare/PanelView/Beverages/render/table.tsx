@@ -24,7 +24,7 @@ export const createColumns = ({
           {
             beverage_tags.map((item) => {
               return (<TagItem
-                disabled={!match_beverage_tags.includes(item)}
+                active={match_beverage_tags.includes(item)}
                 category="beverage"
                 value={item}
               />)

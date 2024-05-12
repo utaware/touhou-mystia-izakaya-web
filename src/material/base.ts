@@ -33,8 +33,11 @@ export const beveragesIndexMaps = getIndexMaps(beverages)
 export const ingredientsIndexMaps = getIndexMaps(ingredients)
 export const toolsIndexMaps = getIndexMaps(tools)
 
-export type TCustomerTagType = 'like' | 'hate' | 'beverage'
 export type TSortOrderValue = 'desc' | 'asc' | false
+
+export type TCustomerTags = Pick<TCustomerRare, 'like_tags' | 'hate_tags' | 'beverage_tags'>
+export type TCustomerTagType = 'like' | 'hate' | 'beverage' | 'default'
+export type TCustomerTagsTypeFn = (tag: string, customer: TCustomerTags) => TCustomerTagType
 
 export type TRecipeItem = typeof recipes[number]
 export type TBeverageItem = typeof beverages[number]

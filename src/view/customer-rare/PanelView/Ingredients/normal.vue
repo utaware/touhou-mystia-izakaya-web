@@ -5,8 +5,7 @@ import { storeToRefs } from 'pinia'
 
 import { useIngredientsStore, useRecipesStore, useCustomerRareStore } from '@/pinia'
 
-import type { TCustomerRare } from '@/material'
-import type { TMatchIngredientsItem } from '@/utils/ingredients'
+import type { TCustomerRare, TMatchIngredientsItem } from '@/material'
 
 import { createNotification } from './render/notification'
 

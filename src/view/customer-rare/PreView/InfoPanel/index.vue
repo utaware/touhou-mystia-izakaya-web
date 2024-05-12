@@ -47,7 +47,7 @@ const { currentCustomer: customer, getPreviewColor } = storeToRefs(customerRareS
         <!-- like -->
         <n-space>
           <tag-item
-            :disabled="!currentRecipeAllTags.includes(item)"
+            :active="currentRecipeAllTags.includes(item)"
             :value="item"
             category="like"
             v-for="(item) in customer.like_tags"
@@ -58,7 +58,7 @@ const { currentCustomer: customer, getPreviewColor } = storeToRefs(customerRareS
         <!-- hate -->
         <n-space>
           <tag-item
-            :disabled="!currentRecipeAllTags.includes(item)"
+            :active="currentRecipeAllTags.includes(item)"
             :value="item"
             category="hate"
             v-for="(item) in customer.hate_tags"
@@ -68,7 +68,7 @@ const { currentCustomer: customer, getPreviewColor } = storeToRefs(customerRareS
         <!-- beverage -->
         <n-space>
           <tag-item
-            :disabled="!currentBeverageAllTags.includes(item)"
+            :active="currentBeverageAllTags.includes(item)"
             :value="item"
             category="beverage"
             v-for="(item) in customer.beverage_tags"

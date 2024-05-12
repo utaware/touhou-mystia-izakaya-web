@@ -1,21 +1,30 @@
 <script setup lang="ts">
-import type { TagProps } from 'naive-ui'
+import type { TCustomerTagType } from '@/material'
 
-import { TCustomerTagType } from '@/material'
-
-interface PropsType extends /*@vue-ignore*/ TagProps {
+interface PropsType {
   category?: TCustomerTagType;
   value?: string;
+  active?: boolean,
+  bordered?: boolean,
 }
 
-defineProps<PropsType>()
+withDefaults(defineProps<PropsType>(), {
+  category: 'default',
+  active: true,
+  value: '',
+  bordered: false,
+})
+
 </script>
 
 <template>
   <n-tag
     class="item"
-    :bordered="false"
-    :class="category"
+    :bordered="bordered"
+    :class="[
+      category,
+      active ? 'is-active' : 'no-active',
+    ]"
   >
     <slot>{{ value }}</slot>
   </n-tag>
@@ -23,27 +32,25 @@ defineProps<PropsType>()
 
 <style scoped lang="scss">
 .item {
-  border-width: 2px;
-  border-style: solid;
   font-weight: bold;
   cursor: pointer;
-  &.n-tag--disabled {
-    cursor: pointer !important;
+  &.is-active {
+    opacity: 1;
+  }
+  &.no-active {
+    opacity: 0.5;
   }
 }
 .like {
   background-color: rgb(230, 180, 166);
-  border-color: rgb(157, 84, 55);
   color: rgb(131, 0, 0);
 }
 .hate {
   background-color: rgb(93, 69, 58);
-  border-color: rgb(0, 0, 0);
   color: rgb(229, 13, 13);
 }
 .beverage {
   background-color: rgb(176, 207, 215);
-  border-color: rgb(90, 126, 135);
   color: rgb(155, 89, 37);
 }
 </style>

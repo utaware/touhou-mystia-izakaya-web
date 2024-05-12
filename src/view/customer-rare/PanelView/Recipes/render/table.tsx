@@ -6,6 +6,8 @@ import TagItem from '@/components/common/tags/index.vue'
 
 import type { TRecipeMatchItem } from '@/material'
 
+import { getCustomerTagType } from '@/utils/customer'
+
 export const createColumns = ({
   handleSelectRow,
   spriteSize = 32,
@@ -17,20 +19,14 @@ export const createColumns = ({
     {
       type: 'expand',
       renderExpand ({ positive_tags, match_like_tags, match_hate_tags }: TRecipeMatchItem) {
-        const match_tags = [match_like_tags, match_hate_tags].flat()
-        const isNoMatchTag = (item: string): boolean => !match_tags.includes(item)
-        const isHateTag = (item: string): boolean => match_hate_tags.includes(item)
+        const customer = {
+          like_tags: match_like_tags,
+          hate_tags: match_hate_tags,
+          beverage_tags: [],
+        }
         return (
-          <NSpace>
-          {
-            positive_tags.map((item) => {
-              return (<TagItem
-                disabled={isNoMatchTag(item)}
-                category={isHateTag(item) ? 'hate' : 'like'}
-                value={item}
-              />)
-            })
-          }
+          <NSpace justify="center">
+          { positive_tags.map((item) => <TagItem category={getCustomerTagType(item, customer)} value={item} />) }
           </NSpace>
         )
       }

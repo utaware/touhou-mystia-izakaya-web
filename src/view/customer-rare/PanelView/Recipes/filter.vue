@@ -3,7 +3,8 @@ import { storeToRefs } from 'pinia'
 
 import { useRecipesStore } from '@/pinia'
 
-import { renderToolsLabel, renderSelectTags } from './render/select'
+import { renderSelectTags } from '@/render/SelectTags'
+import { renderSelectToolsLabel } from '@/render/SelectToolsLabel'
 
 import {
   recipesToolOptions,
@@ -92,7 +93,7 @@ const {
             v-model:value="filterForm.selectedTools"
             multiple
             :options="recipesToolOptions"
-            :render-label="renderToolsLabel"
+            :render-label="renderSelectToolsLabel"
             clearable
           />
         </n-form-item>
