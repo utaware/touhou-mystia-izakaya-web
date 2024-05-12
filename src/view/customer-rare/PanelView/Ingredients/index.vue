@@ -3,11 +3,10 @@ import { storeToRefs } from 'pinia'
 
 import { useIngredientsStore } from '@/pinia'
 
-import SpriteItem from '@/components/common/sprite/index.vue'
+import DangerIngredients from './danger.vue'
+import NormalIngredients from './normal.vue'
 
 const ingredientsStore = useIngredientsStore()
-
-const { addExtraIngredients } = ingredientsStore
 
 const { getVariousIngredients } = storeToRefs(ingredientsStore)
 </script>
@@ -15,51 +14,17 @@ const { getVariousIngredients } = storeToRefs(ingredientsStore)
 <template>
   <!-- wrapper -->
   <div class="wrapper">
-    <!-- config -->
     <!-- view -->
-    <ul class="ingredients-view">
-      <!-- 正常料理 -->
-      <li
-        class="item"
-        v-for="(item, index) in getVariousIngredients.normal"
-        :key="index"
-        @click="addExtraIngredients(item.name)"
-      >
-        <sprite-item
-          :index="item.index"
-          :width="48"
-          :height="48"
-          :title="item.name"
-          type="ingredients"
-        />
-      </li>
-    </ul>
+    <n-notification-provider>
+      <normal-ingredients :ingredients="getVariousIngredients.normal" />
+    </n-notification-provider>
     <!-- 分割线 -->
     <n-divider>前方可是地狱</n-divider>
     <!-- 黑暗料理 -->
-    <ul class="ingredients-view">
-      <li
-        class="item"
-        v-for="(item, index) in getVariousIngredients.danger"
-        :key="index"
-      >
-        <sprite-item
-          :index="item.index"
-          :width="48"
-          :height="48"
-          :title="item.name"
-          type="ingredients"
-        />
-      </li>
-    </ul>
+    <danger-ingredients :ingredients="getVariousIngredients.danger" />
   </div>
 </template>
 
 <style scoped lang="scss">
-.ingredients-view {
-  display: grid;
-  gap: 12px;
-  grid-template-columns: repeat(auto-fill, 48px);
-  justify-content: space-between;
-}
+
 </style>

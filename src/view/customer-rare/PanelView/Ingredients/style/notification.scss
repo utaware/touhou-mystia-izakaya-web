@@ -1,0 +1,16 @@
+.title {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.form-item {
+  display: grid;
+  grid-template-rows: repeat(2, auto);
+  &-header {
+    display: flex;
+    .icon {
+      margin-right: 12px;
+    }
+  }
+}

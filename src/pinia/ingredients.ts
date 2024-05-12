@@ -5,7 +5,13 @@ import { useRecipesStore } from '@/pinia'
 import { ingredients, ingredientsNames } from '@/material'
 import type { TIngredientsItem } from '@/material'
 
-import { getUnionTagsWithNames, getValidIngredients, type TIngredientResult } from '@/utils/ingredients'
+import {
+  getUnionTagsWithNames,
+  getValidIngredients,
+  getIngredientsStatus,
+} from '@/utils/ingredients'
+
+import type { TMatchIngredientsResult } from '@/utils/ingredients'
 
 interface State {
   ingredients: TIngredientsItem[],
@@ -26,12 +32,18 @@ export const useIngredientsStore = defineStore('ingredients', {
     extraIngredientsTags (): string[] {
       return this.extraIngredientsNames.length ? getUnionTagsWithNames(this.extraIngredientsNames) : []
     },
-    // 黑暗料理
-    getVariousIngredients (): TIngredientResult {
-      const { currentRecipe } = useRecipesStore()
-      return currentRecipe
-        ? getValidIngredients(this.ingredients, currentRecipe)
-        : { normal: this.ingredients, danger: [] }
+    // 食材展示
+    getVariousIngredients (): TMatchIngredientsResult {
+      const { ingredients, extraIngredientsNames } = this
+      const { currentRecipe, currentRecipeAllTags } = useRecipesStore()
+      const { normal, danger } = getValidIngredients(currentRecipe, ingredients)
+      const enhanceNormal = getIngredientsStatus({
+        normal,
+        recipe: currentRecipe,
+        extra: extraIngredientsNames,
+        originAllTags: currentRecipeAllTags,
+      })
+      return { normal: enhanceNormal, danger }
     },
   },
   actions: {

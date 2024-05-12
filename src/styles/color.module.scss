@@ -1,0 +1,31 @@
+$primary: #18a058;
+$info: #2080f0;
+$success: #18a058;
+$warning: #f0a020;
+$error: #d03050;
+
+:root {
+  // theme
+  --color-primary: $primary;
+  --color-info: $info;
+  --color-success: $success;
+  --color-warning: $warning;
+  --color-error: $error;
+  // component
+  --color-text: #333639;
+  --color-border: #e0e0e6;
+  --color-modal: rgba(0, 0, 0, 0.4);
+  --color-header-extra-text: #767c82;
+  --color-tab-border: #efeff5;
+  --color-price: #ffd967;
+  // hover 背景色
+  --color-item-pending: #f3f3f5;
+}
+
+:export {
+  primary: $primary;
+  info: $info;
+  success: $success;
+  warning: $warning;
+  error: $error;
+}

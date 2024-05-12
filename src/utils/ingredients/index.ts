@@ -1,8 +1,9 @@
 import { ingredientsIndexMaps, ingredients } from '@/material'
+import type { TIngredientsItem, TRecipeItem } from '@/material'
 
 import { hasRepeatItem } from '@/utils/object'
-
-import type { TIngredientsItem, TRecipeItem } from '@/material'
+import { composeRecipeTags } from '@/utils/recipes'
+import { getMatchResult } from '@/utils/customer'
 
 import { union } from 'lodash'
 
@@ -24,13 +25,16 @@ export interface TIngredientResult {
   danger: TIngredientsItem[];
 }
 
-export function getValidIngredients(
+export function getValidIngredients (
+  recipe: TRecipeItem | null,
   ingredients: TIngredientsItem[],
-  recipe: TRecipeItem,
 ): TIngredientResult {
+  const defaultResult: TIngredientResult  = { normal: [], danger: [] }
+  if (!recipe) {
+    return { ...defaultResult, normal: ingredients }
+  }
   const { negative_tags } = recipe
-  const normal: TIngredientsItem[] = []
-  const danger: TIngredientsItem[] = []
+  const { normal, danger } = defaultResult
   ingredients.forEach((item) => {
     const { ingredient_tags } = item
     const isDarkCuisine = hasRepeatItem(ingredient_tags, negative_tags)
@@ -38,4 +42,52 @@ export function getValidIngredients(
     target.push(item)
   })
   return { normal, danger }
+}
+
+export interface TMatchIngredientsItem extends TIngredientsItem {
+  remove_tags: string[];
+  add_tags: string[];
+  fix_tags: string[];
+}
+
+export interface TMatchIngredientsResult {
+  normal: TMatchIngredientsItem[];
+  danger: TIngredientsItem[];
+}
+
+export function getIngredientsStatus ({
+  normal,
+  recipe,
+  extra,
+  originAllTags,
+}: {
+  normal: TIngredientsItem[],
+  recipe: TRecipeItem | null,
+  extra: string[],
+  originAllTags: string[]
+}) {
+  if (!recipe) {
+    return normal.map(item => ({ ...item, remove_tags: [], add_tags: [], fix_tags: [] }))
+  }
+  const {
+    positive_tags: recipePositiveTags,
+    ingredients: recipeIngredientsNames,
+  } = recipe
+  return normal.map((item) => {
+    const { name } = item
+    const extraIngredientsNames = [ ...extra, name ]
+    const extraIngredientsTags = getUnionTagsWithNames(extraIngredientsNames)
+    const currentAllTags = composeRecipeTags({
+      recipePositiveTags,
+      recipeIngredientsNames,
+      extraIngredientsNames,
+      extraIngredientsTags,
+    })
+    const {
+      isMatch: fix_tags,
+      noMatch: remove_tags,
+      unMatch: add_tags,
+    } = getMatchResult(originAllTags, currentAllTags)
+    return { ...item, remove_tags, add_tags, fix_tags }
+  })
 }
