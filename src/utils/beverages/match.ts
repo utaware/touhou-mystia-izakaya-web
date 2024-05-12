@@ -1,12 +1,6 @@
-import type { TCustomerRare, TBeverageItem } from '@/material'
+import type { TCustomerRare, TBeverageItem, TBeverageMatchItem } from '@/material'
 
 import { getMatchResult } from '@/utils/customer'
-
-interface TBeverageMatchItem extends TBeverageItem {
-  match_beverage_tags: string[],
-  match_beverage_point: number,
-  badge_text: string,
-}
 
 export function matchBeveragesWithCustomer (beverages: TBeverageItem[], customer: TCustomerRare): TBeverageMatchItem[] {
   const { beverage_tags: customer_tags } = customer
@@ -18,5 +12,3 @@ export function matchBeveragesWithCustomer (beverages: TBeverageItem[], customer
     return { ...item, match_beverage_tags, match_beverage_point, badge_text}
   })
 }
-
-export type { TBeverageMatchItem }

@@ -8,27 +8,20 @@ import {
   beveragesLevel,
   getIndexWithName,
 } from '@/material'
-import type { TBeverageItem } from '@/material'
+import type {
+  TBeverageState,
+  TBeverageMatchItem,
+  TBeverageFilterForm
+} from '@/material'
 
 import {
   matchBeveragesWithCustomer,
   filterBeveragesWithForm,
   getBeveragePoint,
 } from '@/utils/beverages'
-import type { TBeverageMatchItem, TFilterForm } from '@/utils/beverages'
-
-interface State {
-  beverages: TBeverageItem[];
-  beverageNames: string[];
-  beveragesLevel: number[];
-  beverageTags: string[];
-  currentBeverage: null | TBeverageMatchItem,
-  currentBeverageName: string;
-  filterForm: TFilterForm;
-}
 
 export const useBeveragesStore = defineStore('beverages', {
-  state: (): State => ({
+  state: (): TBeverageState => ({
     beverages,
     beverageNames,
     beveragesLevel,
@@ -75,10 +68,8 @@ export const useBeveragesStore = defineStore('beverages', {
       this.currentBeverage = item
       this.currentBeverageName = name
     },
-    setFilterForm <T extends TFilterForm, U extends keyof TFilterForm>(key: U, value: T[U]) {
+    setFilterForm <T extends TBeverageFilterForm, U extends keyof TBeverageFilterForm>(key: U, value: T[U]) {
       this.filterForm[key] = value
     },
   },
 })
-
-export type { TBeverageItem, TBeverageMatchItem }

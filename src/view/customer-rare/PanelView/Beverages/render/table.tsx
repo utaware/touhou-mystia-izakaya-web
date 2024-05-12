@@ -6,7 +6,7 @@ import TagItem from '@/components/common/tags/index.vue'
 
 import { beverageLevelOptions } from '@/material/options'
 
-import type { TBeverageMatchItem } from '@/pinia'
+import type { TBeverageMatchItem } from '@/material'
 
 export const createColumns = ({
   handleSelectRow,
