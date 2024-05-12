@@ -4,6 +4,7 @@ import { NSpace, NIcon, NButton } from 'naive-ui'
 
 import { PlusSquareFilled, MinusSquareFilled, CheckSquareFilled } from '@vicons/antd'
 
+import type { TCustomerRare } from '@/material'
 import type { TMatchIngredientsItem } from '@/utils/ingredients'
 
 import SpriteItem from '@/components/common/sprite/index.vue'
@@ -24,7 +25,7 @@ export function tagsRender (tags: string[]) {
       {
         tags.length
           ? tags.map((item) => <TagItem category='like' value={item} />)
-          : <TagItem category='like' value="-" />
+          : <TagItem value="-" />
       }
     </NSpace>
   )
@@ -44,7 +45,7 @@ export function formItemRender (tags: string[], icon: Component, text: string) {
   )
 }
 
-export function createNotification (item: TMatchIngredientsItem) {
+export function createNotification (item: TMatchIngredientsItem, customer: TCustomerRare) {
   const { index, name, add_tags, remove_tags, fix_tags } = item
   const options = [
     { tag: fix_tags, icon: CheckSquareFilled, label: '保留', },

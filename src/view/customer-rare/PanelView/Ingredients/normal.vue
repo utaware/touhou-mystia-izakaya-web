@@ -1,27 +1,44 @@
 <script setup lang="ts">
-import { useNotification } from 'naive-ui'
+import { createDiscreteApi } from 'naive-ui'
 
-import { useIngredientsStore } from '@/pinia'
+import { storeToRefs } from 'pinia'
 
+import { useIngredientsStore, useRecipesStore, useCustomerRareStore } from '@/pinia'
+
+import type { TCustomerRare } from '@/pinia'
 import type { TMatchIngredientsItem } from '@/utils/ingredients'
 
 import { createNotification } from './render/notification'
 
 import SpriteItem from '@/components/common/sprite/index.vue'
 
-const notification = useNotification()
+const { notification } = createDiscreteApi(['notification'])
 
+const customerStore = useCustomerRareStore()
+const reipesStore = useRecipesStore()
 const ingredientsStore = useIngredientsStore()
 
+const { currentCustomer } = storeToRefs(customerStore)
+const { currentRecipeName, currentRecipeEmptyCount } = storeToRefs(reipesStore)
 const { addExtraIngredients } = ingredientsStore
 
 defineProps<{
-  ingredients: TMatchIngredientsItem[]
+  ingredients: TMatchIngredientsItem[],
 }>()
 
-const handleViewIngredients = (item: TMatchIngredientsItem) => {
-  const instance = createNotification(item)
-  const n = notification.create(instance)
+const handleViewIngredients = ({
+  item, customer, recipe, count,
+} : {
+  item: TMatchIngredientsItem,
+  customer: TCustomerRare,
+  recipe: string,
+  count: number,
+}) => {
+  if (!(recipe && count)) {
+    return false
+  }
+  const options = createNotification(item, customer)
+  notification.create(options)
 }
 </script>
 
@@ -32,9 +49,19 @@ const handleViewIngredients = (item: TMatchIngredientsItem) => {
       class="item"
       v-for="(item, index) in ingredients"
       :key="index"
-      @click="handleViewIngredients(item)"
     >
-      <sprite-item :index="item.index" :size="48" :title="item.name" type="ingredients" />
+      <sprite-item
+        :index="item.index"
+        :size="48"
+        :title="item.name"
+        type="ingredients"
+        @click="handleViewIngredients({
+          item,
+          customer: currentCustomer,
+          recipe: currentRecipeName,
+          count: currentRecipeEmptyCount,
+        })"
+      />
     </li>
   </ul>
 </template>

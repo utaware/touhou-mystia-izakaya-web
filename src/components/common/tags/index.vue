@@ -4,8 +4,8 @@ import type { TagProps } from 'naive-ui'
 import { TCustomerTagType } from '@/material'
 
 interface PropsType extends /*@vue-ignore*/ TagProps {
-  category: TCustomerTagType;
-  value: string;
+  category?: TCustomerTagType;
+  value?: string;
 }
 
 defineProps<PropsType>()

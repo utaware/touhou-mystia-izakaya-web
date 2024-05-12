@@ -15,9 +15,7 @@ const { getVariousIngredients } = storeToRefs(ingredientsStore)
   <!-- wrapper -->
   <div class="wrapper">
     <!-- view -->
-    <n-notification-provider>
-      <normal-ingredients :ingredients="getVariousIngredients.normal" />
-    </n-notification-provider>
+    <normal-ingredients :ingredients="getVariousIngredients.normal" />
     <!-- 分割线 -->
     <n-divider>前方可是地狱</n-divider>
     <!-- 黑暗料理 -->
