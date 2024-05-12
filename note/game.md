@@ -67,3 +67,7 @@
   - 预算范围内 - 正常
   - 超预算，但不超容忍 - 绿色
   - 超容忍 - 黑色 + 惩罚
+
+## material
+
+[wiki](https://thwiki.cc/%E4%B8%9C%E6%96%B9%E5%A4%9C%E9%9B%80%E9%A3%9F%E5%A0%82_-_Touhou_Mystia%27s_Izakaya)
