@@ -4,3 +4,4 @@ export * from './match'
 export * from './compose'
 // 食材组合的数量相关
 export * from './calc'
+export * from './point'

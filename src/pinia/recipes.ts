@@ -17,12 +17,13 @@ import {
   matchRecipeTagsWithCustomer,
   getEmptyIngredientsCount,
   getExtraIngredientsCount,
+  getRecipePoint,
 } from '@/utils/recipes'
 import type { TFilterForm, TRecipeMatchItem, TRecipeMatchResult } from '@/utils/recipes'
 
 import { useCustomerRareStore, useIngredientsStore } from '@/pinia'
 
-import { orderBy, without } from 'lodash'
+import { orderBy } from 'lodash'
 
 interface State {
   recipes: TRecipeItem[];
@@ -109,13 +110,14 @@ export const useRecipesStore = defineStore('recipes', {
     // 当前菜谱得分
     currentRecipePoint(): number {
       const { demandRecipeTag } = useCustomerRareStore()
-      const tag = demandRecipeTag || ''
-      const demandPoint = this.currentRecipeAllTags.includes(tag) ? 1 : 0
-      const { match_like_tags, match_hate_tags } = this.currentRecipeMatchTags
-      const [ like_point, hate_point ] = [ match_like_tags, match_hate_tags ]
-        .map(v => demandPoint ? without(v, tag) : v)
-        .map(v => v.length)
-      return demandPoint + like_point - hate_point
+      const { currentRecipeAllTags, currentRecipeMatchTags } = this
+      const { match_like_tags, match_hate_tags } = currentRecipeMatchTags
+      return getRecipePoint({
+        match_like_tags,
+        match_hate_tags,
+        recipeAllTags: currentRecipeAllTags,
+        demandRecipeTag,
+      })
     },
   },
   actions: {

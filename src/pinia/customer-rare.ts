@@ -82,7 +82,12 @@ export const useCustomerRareStore = defineStore('customerRare', {
       const { demandRecipeTag, demandBeverageTag } = this
       const { currentRecipeAllTags } = useRecipesStore()
       const { currentBeverageAllTags } = useBeveragesStore()
-      return getMaxLevel({ demandRecipeTag, demandBeverageTag, currentRecipeAllTags, currentBeverageAllTags })
+      return getMaxLevel({
+        demandRecipeTag,
+        demandBeverageTag,
+        currentRecipeAllTags,
+        currentBeverageAllTags,
+      })
     },
     // 预计评价颜色
     getPreviewColor (): string {
