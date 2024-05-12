@@ -3,7 +3,11 @@ import { defineStore } from 'pinia'
 import { useRecipesStore } from '@/pinia'
 
 import { ingredients, ingredientsNames } from '@/material'
-import type { TIngredientsItem } from '@/material'
+import type {
+  TIngredientsItem,
+  TMatchIngredientsResult,
+  TIngredientState,
+} from '@/material'
 
 import {
   getUnionTagsWithNames,
@@ -11,17 +15,8 @@ import {
   getIngredientsStatus,
 } from '@/utils/ingredients'
 
-import type { TMatchIngredientsResult } from '@/utils/ingredients'
-
-interface State {
-  ingredients: TIngredientsItem[],
-  ingredientsNames: string[],
-  extraMaxCount: number,
-  extraIngredientsNames: string[],
-}
-
 export const useIngredientsStore = defineStore('ingredients', {
-  state: (): State => ({
+  state: (): TIngredientState => ({
     ingredients,
     ingredientsNames,
     extraMaxCount: 0,

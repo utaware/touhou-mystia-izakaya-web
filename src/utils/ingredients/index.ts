@@ -1,5 +1,5 @@
 import { ingredientsIndexMaps, ingredients } from '@/material'
-import type { TIngredientsItem, TRecipeItem } from '@/material'
+import type { TIngredientsItem, TRecipeItem, TIngredientResult } from '@/material'
 
 import { hasRepeatItem } from '@/utils/object'
 import { composeRecipeTags } from '@/utils/recipes'
@@ -20,11 +20,6 @@ export function getUnionTagsWithNames (list: string[]): string[] {
   return union(getTagsWithNames(list).flat())
 }
 
-export interface TIngredientResult {
-  normal: TIngredientsItem[];
-  danger: TIngredientsItem[];
-}
-
 export function getValidIngredients (
   recipe: TRecipeItem | null,
   ingredients: TIngredientsItem[],
@@ -42,17 +37,6 @@ export function getValidIngredients (
     target.push(item)
   })
   return { normal, danger }
-}
-
-export interface TMatchIngredientsItem extends TIngredientsItem {
-  remove_tags: string[];
-  add_tags: string[];
-  fix_tags: string[];
-}
-
-export interface TMatchIngredientsResult {
-  normal: TMatchIngredientsItem[];
-  danger: TIngredientsItem[];
 }
 
 export function getIngredientsStatus ({
