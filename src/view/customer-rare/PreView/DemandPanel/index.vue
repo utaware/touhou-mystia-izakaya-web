@@ -12,6 +12,8 @@ const { handleChangePositiveTag, handleChangeBeverageTag } = useDemandSelect()
 const customerStore = useCustomerRareStore()
 
 const { demandRecipeTag, demandBeverageTag } = storeToRefs(customerStore)
+
+const recipeTagOptions = positiveTagOptions.concat({ label: '夜雀厨具', value: '夜雀厨具', class: 'bold' })
 </script>
 
 <template>
@@ -21,7 +23,7 @@ const { demandRecipeTag, demandBeverageTag } = storeToRefs(customerStore)
       <n-select
         :value="demandRecipeTag"
         :on-update:value="handleChangePositiveTag"
-        :options="positiveTagOptions"
+        :options="recipeTagOptions"
         clearable
         placeholder="料理需求"
         filterable
