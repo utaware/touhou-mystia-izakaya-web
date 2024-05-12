@@ -5,14 +5,14 @@ import { storeToRefs } from 'pinia'
 
 import { SettingOutlined } from '@vicons/antd'
 
-import { useCustomerRareStore, type TCustomerRare } from '@/pinia'
-import store from '@/pinia'
+import type { TCustomerRare } from '@/material'
+import { useCustomerRareStore } from '@/pinia'
 
 import FilterModal from './FilterModal/index.vue'
 
 import { getCustomerRareSrc } from '@/utils/pub-use'
 
-const customerRareStore = useCustomerRareStore(store)
+const customerRareStore = useCustomerRareStore()
 
 const { filterCustomerWithName, currentCustomerName } = storeToRefs(customerRareStore)
 

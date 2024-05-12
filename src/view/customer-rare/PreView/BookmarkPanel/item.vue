@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { useCustomerRareStore } from '@/pinia'
 
-import type { Tbookmark } from '@/pinia'
+import type { TBookmark } from '@/material'
 
 import SpriteItem from '@/components/common/sprite/index.vue'
 import TagItem from '@/components/common/tags/index.vue'
 
 import { getEmptyIngredientsCount } from '@/utils/recipes'
 
-interface propsType extends Tbookmark {
+interface propsType extends TBookmark {
   size: number;
   vertical: boolean;
 }

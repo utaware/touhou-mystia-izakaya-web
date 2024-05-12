@@ -3,47 +3,21 @@ import { defineStore } from 'pinia'
 import { useRecipesStore, useIngredientsStore, useBeveragesStore } from '@/pinia'
 
 import { customerPlace, customerRare } from '@/material'
-import type { TCustomerRare } from '@/material'
+import type {
+  TCustomerRare,
+  TBookmark,
+  TRecipeMatchResult,
+  TCustomerRareState,
+} from '@/material'
 
-import { matchRecipeAndIngredients, type TRecipeMatchResult } from '@/utils/recipes'
+import { matchRecipeAndIngredients } from '@/utils/recipes'
 
 import { getEvaluateColor, getMaxLevel, generatorUid } from '@/utils/customer'
 
 import { findIndex, pullAt } from 'lodash'
 
-interface Tbookmark {
-  customer: string;
-  recipe: string;
-  tool: string;
-  beverage: string;
-  uuid: string;
-  // 自身的食材
-  ingredients: string[];
-  // 额外的食材
-  extra: string[];
-  // 需求
-  demandRecipeTag: string;
-  demandBeverageTag: string;
-  // 颜色
-  color: string;
-}
-
-interface State {
-  customer: TCustomerRare[];
-  currentCustomer: TCustomerRare;
-  currentCustomerName: string;
-  acvitePlace: string[];
-  activeCustomerNames: string[];
-  // 需求
-  demandRecipeTag: string | null;
-  demandBeverageTag: string | null;
-  // 组合
-  bookmark: Tbookmark[];
-  // 评分
-}
-
 export const useCustomerRareStore = defineStore('customerRare', {
-  state: (): State => ({
+  state: (): TCustomerRareState => ({
     customer: customerRare,
     currentCustomer: customerRare[0],
     currentCustomerName: '莉格露',
@@ -101,7 +75,7 @@ export const useCustomerRareStore = defineStore('customerRare', {
       return !(currentBeverageName && currentRecipeName && demandRecipeTag && demandBeverageTag)
     },
     // 当前角色书签
-    getCurrentBookmark (): Tbookmark[] {
+    getCurrentBookmark (): TBookmark[] {
       return this.bookmark.filter(({ customer }) => customer === this.currentCustomerName)
     }
   },
@@ -137,7 +111,7 @@ export const useCustomerRareStore = defineStore('customerRare', {
       const extra = extraIngredientsNames
       const customer = this.currentCustomerName
       const uuid = generatorUid()
-      const bookmark: Tbookmark = {
+      const bookmark: TBookmark = {
         customer,
         recipe,
         tool,
@@ -155,7 +129,7 @@ export const useCustomerRareStore = defineStore('customerRare', {
       const index = findIndex(this.bookmark, { uuid })
       pullAt(this.bookmark, index)
     },
-    restoreBookmark (item: Tbookmark) {
+    restoreBookmark (item: TBookmark) {
       const { recipe, beverage, ingredients, extra = [], demandRecipeTag, demandBeverageTag } = item
       const { setCurrentRecipe } = useRecipesStore()
       const { setCurrentBeverage } = useBeveragesStore()
@@ -175,4 +149,4 @@ export const useCustomerRareStore = defineStore('customerRare', {
   },
 })
 
-export type { TCustomerRare, Tbookmark }
+export type { TCustomerRare, TBookmark }

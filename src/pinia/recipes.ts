@@ -9,7 +9,6 @@ import {
 } from '@/material'
 import type {
   TRecipeState,
-  TRecipeItem,
   TRecipeMatchItem,
   TRecipeMatchResult,
   TRecipeFilterForm,

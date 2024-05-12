@@ -3,15 +3,16 @@ import { ref, computed, watch } from 'vue'
 
 import { storeToRefs } from 'pinia'
 
-import { useCustomerRareStore, type TCustomerRare } from '@/pinia'
+import { useCustomerRareStore } from '@/pinia'
 
 import { CloseCircleFilled } from '@vicons/antd'
 
-import TransferPicker from './transfer.vue'
-
 import { getCustomerRareSrc } from '@/utils/pub-use'
 
-import { customerPlaceOptions } from '@/material/options'
+import { customerPlaceOptions } from '@/material'
+import type { TCustomerRare } from '@/material'
+
+import TransferPicker from './transfer.vue'
 
 const props = defineProps<{ show: boolean }>()
 
