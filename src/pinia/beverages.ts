@@ -13,6 +13,8 @@ import type { TBeverageItem } from '@/material'
 import { matchBeveragesWithCustomer, filterBeveragesWithForm,  } from '@/utils/beverages'
 import type { TBeverageMatchItem, TFilterForm } from '@/utils/beverages'
 
+import { without } from 'lodash'
+
 interface State {
   beverages: TBeverageItem[];
   beverageNames: string[];
@@ -58,10 +60,10 @@ export const useBeveragesStore = defineStore('beverages', {
       const { demandBeverageTag } = useCustomerRareStore()
       const { currentBeverageAllTags, currentBeverageMatchTags } = this
       const tag = demandBeverageTag || ''
-      const match_point = currentBeverageMatchTags.length
       const demand_point = currentBeverageAllTags.includes(tag) ? 1 : 0
-      const repeat_point = currentBeverageMatchTags.includes(tag) ? -1 : 0
-      return demand_point + match_point + repeat_point
+      const match_point = without(currentBeverageMatchTags, tag).length
+      // 需求分 + 匹配分
+      return demand_point + match_point
     }
   },
   actions: {

@@ -22,7 +22,7 @@ import type { TFilterForm, TRecipeMatchItem, TRecipeMatchResult } from '@/utils/
 
 import { useCustomerRareStore, useIngredientsStore } from '@/pinia'
 
-import { orderBy } from 'lodash'
+import { orderBy, without } from 'lodash'
 
 interface State {
   recipes: TRecipeItem[];
@@ -112,12 +112,10 @@ export const useRecipesStore = defineStore('recipes', {
       const tag = demandRecipeTag || ''
       const demandPoint = this.currentRecipeAllTags.includes(tag) ? 1 : 0
       const { match_like_tags, match_hate_tags } = this.currentRecipeMatchTags
-      const like_point = match_like_tags.length
-      const hate_point = match_hate_tags.length
-      const repeatCalcPoint = match_like_tags.includes(tag)
-        ? -1
-        : match_hate_tags.includes(tag) ? 1 : 0
-      return like_point - hate_point + demandPoint + repeatCalcPoint
+      const [ like_point, hate_point ] = [ match_like_tags, match_hate_tags ]
+        .map(v => demandPoint ? without(v, tag) : v)
+        .map(v => v.length)
+      return demandPoint + like_point - hate_point
     },
   },
   actions: {
