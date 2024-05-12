@@ -56,3 +56,24 @@ export const getCustomerTagType: TCustomerTagsTypeFn = (tag, customer) => {
   })
   return result
 }
+
+export function calcPointChange ({
+  like_tags, hate_tags, add_tags, remove_tags,
+}: {
+  like_tags: string[],
+  hate_tags: string[],
+  add_tags: string[],
+  remove_tags: string[],
+}): number {
+  const options: [string[], string[], number][] = [
+    [add_tags, like_tags, 1],
+    [add_tags, hate_tags, -1],
+    [remove_tags, like_tags, -1],
+    [remove_tags, hate_tags, 1],
+  ]
+  return options.reduce((t, c) => {
+    const [item, target, score] = c
+    const inner = item.reduce((total, tag) => total += (target.includes(tag) ? score : 0), 0)
+    return t += inner
+  }, 0)
+}

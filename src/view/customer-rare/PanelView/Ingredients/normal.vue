@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { computed } from 'vue'
+
 import { createDiscreteApi } from 'naive-ui'
 
 import { storeToRefs } from 'pinia'
@@ -25,18 +27,27 @@ defineProps<{
   ingredients: TMatchIngredientsItem[],
 }>()
 
-const handleViewIngredients = ({
-  item, customer, recipe, count,
-} : {
+const handleActionClick = (name: string) => {
+  addExtraIngredients(name)
+  notification.destroyAll()
+}
+
+const isCanSelect = computed(() => {
+  return Boolean(currentRecipeName.value && currentRecipeEmptyCount.value)
+})
+
+const handleViewIngredients = (
   item: TMatchIngredientsItem,
   customer: TCustomerRare,
-  recipe: string,
-  count: number,
-}) => {
-  if (!(recipe && count)) {
+) => {
+  if (!isCanSelect.value) {
     return false
   }
-  const options = createNotification(item, customer)
+  const options = createNotification({
+    item,
+    customer,
+    handleActionClick,
+  })
   notification.create(options)
 }
 </script>
@@ -49,18 +60,15 @@ const handleViewIngredients = ({
       v-for="(item, index) in ingredients"
       :key="index"
     >
-      <sprite-item
-        :index="item.index"
-        :size="48"
-        :title="item.name"
-        type="ingredients"
-        @click="handleViewIngredients({
-          item,
-          customer: currentCustomer,
-          recipe: currentRecipeName,
-          count: currentRecipeEmptyCount,
-        })"
-      />
+      <n-badge :value="item.badge_text" :show="isCanSelect" show-zero>
+        <sprite-item
+          :index="item.index"
+          :size="48"
+          :title="item.name"
+          type="ingredients"
+          @click="handleViewIngredients(item, currentCustomer)"
+        />
+      </n-badge>
     </li>
   </ul>
 </template>

@@ -1,8 +1,9 @@
 import { defineStore } from 'pinia'
 
-import { useRecipesStore } from '@/pinia'
+import { useRecipesStore, useCustomerRareStore } from '@/pinia'
 
 import { ingredients, ingredientsNames } from '@/material'
+
 import type {
   TIngredientsItem,
   TMatchIngredientsResult,
@@ -31,9 +32,11 @@ export const useIngredientsStore = defineStore('ingredients', {
     getVariousIngredients (): TMatchIngredientsResult {
       const { ingredients, extraIngredientsNames } = this
       const { currentRecipe, currentRecipeAllTags } = useRecipesStore()
+      const { currentCustomer } = useCustomerRareStore()
       const { normal, danger } = getValidIngredients(currentRecipe, ingredients)
       const enhanceNormal = getIngredientsStatus({
         normal,
+        customer: currentCustomer,
         recipe: currentRecipe,
         extra: extraIngredientsNames,
         originAllTags: currentRecipeAllTags,

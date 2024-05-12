@@ -55,8 +55,14 @@ export function formItemRender ({
   )
 }
 
-export function createNotification (item: TMatchIngredientsItem, customer: TCustomerRare) {
-  const { index, name, add_tags, remove_tags, fix_tags } = item
+export function createNotification ({
+  item, customer, handleActionClick,
+}: {
+  item: TMatchIngredientsItem,
+  customer: TCustomerRare,
+  handleActionClick(name: string): void
+}) {
+  const { index, name, add_tags, remove_tags, fix_tags, type } = item
   const getTagType = (tag: string) => getCustomerTagType(tag, customer)
   const options = [
     { tags: fix_tags, icon: CheckSquareFilled, label: '保留', },
@@ -73,6 +79,7 @@ export function createNotification (item: TMatchIngredientsItem, customer: TCust
       )
     },
     description: `继续选择${name}后菜谱 tag 改变情况 : `,
+    meta: `食材类别 : ${type}`,
     content: () => {
       return (
         <NSpace vertical>
@@ -82,7 +89,7 @@ export function createNotification (item: TMatchIngredientsItem, customer: TCust
     },
     action: () => {
       return (
-        <NButton text type="primary" onClick={() => {}}>确定</NButton>
+        <NButton type="info" dashed size="small" onClick={() => handleActionClick(name)}>添加</NButton>
       )
     }
   }

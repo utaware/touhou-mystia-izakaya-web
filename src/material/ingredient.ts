@@ -16,6 +16,7 @@ export interface TMatchIngredientsItem extends TIngredientsItem {
   remove_tags: string[];
   add_tags: string[];
   fix_tags: string[];
+  badge_text: string;
 }
 
 export interface TMatchIngredientsResult {

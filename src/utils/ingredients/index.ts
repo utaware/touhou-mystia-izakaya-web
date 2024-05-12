@@ -1,9 +1,9 @@
 import { ingredientsIndexMaps, ingredients } from '@/material'
-import type { TIngredientsItem, TRecipeItem, TIngredientResult } from '@/material'
+import type { TIngredientsItem, TRecipeItem, TIngredientResult, TCustomerRare } from '@/material'
 
 import { hasRepeatItem } from '@/utils/object'
-import { composeRecipeTags } from '@/utils/recipes'
-import { getMatchResult } from '@/utils/customer'
+import { composeRecipeTags, getEmptyIngredientsCountWithArray } from '@/utils/recipes'
+import { getMatchResult, calcPointChange } from '@/utils/customer'
 
 import { union } from 'lodash'
 
@@ -40,23 +40,32 @@ export function getValidIngredients (
 }
 
 export function getIngredientsStatus ({
-  normal,
+  customer,
   recipe,
+  normal,
   extra,
   originAllTags,
 }: {
-  normal: TIngredientsItem[],
+  customer: TCustomerRare,
   recipe: TRecipeItem | null,
+  normal: TIngredientsItem[],
   extra: string[],
   originAllTags: string[]
 }) {
-  if (!recipe) {
-    return normal.map(item => ({ ...item, remove_tags: [], add_tags: [], fix_tags: [] }))
+  if (!recipe || !getEmptyIngredientsCountWithArray(recipe.ingredients, extra)) {
+    return normal.map(item => ({
+      ...item,
+      remove_tags: [],
+      add_tags: [],
+      fix_tags: [],
+      badge_text: '',
+    }))
   }
   const {
     positive_tags: recipePositiveTags,
     ingredients: recipeIngredientsNames,
   } = recipe
+  const { like_tags, hate_tags } = customer
   return normal.map((item) => {
     const { name } = item
     const extraIngredientsNames = [ ...extra, name ]
@@ -72,6 +81,9 @@ export function getIngredientsStatus ({
       noMatch: remove_tags,
       unMatch: add_tags,
     } = getMatchResult(originAllTags, currentAllTags)
-    return { ...item, remove_tags, add_tags, fix_tags }
+    const point = calcPointChange({ like_tags, hate_tags, add_tags, remove_tags })
+    const mark = point > 0 ? '+' : ''
+    const badge_text = mark + point
+    return { ...item, remove_tags, add_tags, fix_tags, badge_text }
   })
 }
