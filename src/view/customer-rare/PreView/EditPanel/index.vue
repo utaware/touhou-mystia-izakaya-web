@@ -11,6 +11,8 @@ import SpritePending from '@/components/common/sprite/pending.vue'
 import IconAdd from '@/components/common/icon/add.vue'
 import IngredientsList from './ingredientsList.vue'
 
+import { useCustomerActiveTab } from '@/hooks/customer-tabs'
+
 const recipesStore = useRecipesStore()
 const beveragesStore = useBeveragesStore()
 const customerStore = useCustomerRareStore()
@@ -19,6 +21,8 @@ const { saveBookmark } = customerStore
 const { getSaveButtonIsDisabled: disabled } = storeToRefs(customerStore)
 const { currentRecipeName } = storeToRefs(recipesStore)
 const { currentBeverageName } = storeToRefs(beveragesStore)
+
+const { setActiveTabName } = useCustomerActiveTab()
 </script>
 
 <template>
@@ -31,6 +35,7 @@ const { currentBeverageName } = storeToRefs(beveragesStore)
           type="recipes"
           :name="currentRecipeName"
           :size="48"
+          @click="() => setActiveTabName('recipes')"
         />
         <!-- + -->
         <IconAdd />
@@ -39,6 +44,7 @@ const { currentBeverageName } = storeToRefs(beveragesStore)
           type="beverages"
           :name="currentBeverageName"
           :size="48"
+          @click="() => setActiveTabName('beverages')"
         />
         <!-- + -->
         <IconAdd />

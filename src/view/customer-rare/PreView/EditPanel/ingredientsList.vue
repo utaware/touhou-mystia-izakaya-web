@@ -10,6 +10,8 @@ import InsetModal from '@/components/common/insetModal/index.vue'
 
 import { CloseCircleFilled } from '@vicons/antd'
 
+import { useCustomerActiveTab } from '@/hooks/customer-tabs'
+
 withDefaults(defineProps<{
   size?: number,
 }>(), {
@@ -23,6 +25,8 @@ const { currentRecipeIngredients, currentRecipeEmptyCount } = storeToRefs(recipe
 const { extraIngredientsNames } = storeToRefs(ingredientsStore)
 
 const { removeExtraIngredients } = ingredientsStore
+
+const { setActiveTabName } = useCustomerActiveTab()
 </script>
 
 <template>
@@ -51,6 +55,7 @@ const { removeExtraIngredients } = ingredientsStore
         v-for="item in currentRecipeEmptyCount"
         :key="`unknow-${item}`"
         :size="size"
+        @click="() => setActiveTabName('ingredients')"
       />
     </n-space>
   </div>

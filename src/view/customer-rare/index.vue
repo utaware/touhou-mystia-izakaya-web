@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { storeToRefs } from 'pinia'
+
+import { useCustomerRareStore } from '@/pinia'
 
 import PreView from './PreView/index.vue'
 
@@ -8,14 +10,16 @@ import RecipesView from './PanelView/Recipes/index.vue'
 import BeveragesView from './PanelView/Beverages/index.vue'
 import IngredientsView from './PanelView/Ingredients/index.vue'
 
+const customerStore = useCustomerRareStore()
+
+const { activeTabName } = storeToRefs(customerStore)
+
 const tabPanes = [
   { name: 'customer', tab: '顾客', component: CustomerView },
   { name: 'recipes', tab: '料理', component: RecipesView },
   { name: 'beverages', tab: '酒水', component: BeveragesView },
   { name: 'ingredients', tab: '食材', component: IngredientsView },
 ]
-
-const activeTabName = ref<string>('customer')
 </script>
 
 <template>

@@ -17,8 +17,11 @@ export interface TBookmark {
   color: string;
 }
 
+export type TCustomerTabNames = 'customer' | 'recipes' | 'beverages' | 'ingredients'
+
 export interface TCustomerRareState {
   customer: TCustomerRare[];
+  activeTabName: TCustomerTabNames;
   currentCustomer: TCustomerRare;
   currentCustomerName: string;
   acvitePlace: string[];

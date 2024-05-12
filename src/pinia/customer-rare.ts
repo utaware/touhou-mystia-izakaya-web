@@ -8,6 +8,7 @@ import type {
   TBookmark,
   TRecipeMatchResult,
   TCustomerRareState,
+  TCustomerTabNames,
 } from '@/material'
 
 import { matchRecipeAndIngredients } from '@/utils/recipes'
@@ -19,6 +20,7 @@ import { findIndex, pullAt } from 'lodash'
 export const useCustomerRareStore = defineStore('customerRare', {
   state: (): TCustomerRareState => ({
     customer: customerRare,
+    activeTabName: 'customer',
     currentCustomer: customerRare[0],
     currentCustomerName: '莉格露',
     acvitePlace: customerPlace,
@@ -85,6 +87,9 @@ export const useCustomerRareStore = defineStore('customerRare', {
     },
     setActivePlace (value: string[]) {
       this.acvitePlace = value
+    },
+    setActiveTabName (name: TCustomerTabNames) {
+      this.activeTabName = name
     },
     setCurrentCustomer (item: TCustomerRare) {
       const { name } = item

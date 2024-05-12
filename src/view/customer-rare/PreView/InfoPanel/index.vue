@@ -9,6 +9,8 @@ import { getCustomerRareSrc } from '@/utils/pub-use'
 
 import { useDemandSelect } from '@/hooks/demand'
 
+import { useCustomerActiveTab } from '@/hooks/customer-tabs'
+
 const customerRareStore = useCustomerRareStore()
 const recipesStore = useRecipesStore()
 const beveragesStore = useBeveragesStore()
@@ -19,6 +21,8 @@ const { currentBeverageAllTags } = storeToRefs(beveragesStore)
 const { handleChangePositiveTag, handleChangeBeverageTag } = useDemandSelect()
 
 const { currentCustomer: customer, getPreviewColor } = storeToRefs(customerRareStore)
+
+const { setActiveTabName } = useCustomerActiveTab()
 </script>
 
 <template>
@@ -29,9 +33,11 @@ const { currentCustomer: customer, getPreviewColor } = storeToRefs(customerRareS
       <div class="header">
         <!-- avatar -->
         <n-avatar
+          class="pointer"
           :src="getCustomerRareSrc(customer)"
           :size="64"
           round
+          @click="setActiveTabName('customer')"
         />
         <!-- name -->
         <h2 class="name bold">{{ customer.name }}</h2>
