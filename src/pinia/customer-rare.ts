@@ -14,6 +14,7 @@ import { findIndex, pullAt } from 'lodash'
 interface Tbookmark {
   customer: string;
   recipe: string;
+  tool: string;
   beverage: string;
   uuid: string;
   // 自身的食材
@@ -112,14 +113,10 @@ export const useCustomerRareStore = defineStore('customerRare', {
       this.currentCustomerName = name
     },
     setDemandRecipeTag (tag: string | null) {
-      const { setFilterForm } = useRecipesStore()
       this.demandRecipeTag = tag
-      setFilterForm('selectedPositiveTags', tag ? [tag] : [])
     },
     setDemandBeverageTag (tag: string | null) {
-      const { setFilterForm } = useBeveragesStore()
       this.demandBeverageTag = tag
-      setFilterForm('selectBeverageTags', tag ? [tag] : [])
     },
     saveBookmark () {
       const { demandBeverageTag, demandRecipeTag, getPreviewColor: color } = this
@@ -130,7 +127,7 @@ export const useCustomerRareStore = defineStore('customerRare', {
       if (!isEveryExist) {
         return false
       }
-      const { name: recipe, ingredients } = currentRecipe
+      const { name: recipe, ingredients, tool } = currentRecipe
       const { name: beverage } = currentBeverage
       const extra = extraIngredientsNames
       const customer = this.currentCustomerName
@@ -138,6 +135,7 @@ export const useCustomerRareStore = defineStore('customerRare', {
       const bookmark: Tbookmark = {
         customer,
         recipe,
+        tool,
         beverage,
         ingredients,
         extra,

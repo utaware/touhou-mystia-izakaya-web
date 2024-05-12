@@ -31,36 +31,50 @@ const empty = getEmptyIngredientsCount(ingredients.length, extra.length)
     <!-- bar -->
     <div class="bar" :style="{backgroundColor: color}"></div>
     <!-- preview -->
-    <n-space :vertical="vertical" align="center" class="wrapper">
+    <n-space :vertical="vertical" align="center" class="wrapper" :wrap-item="false">
       <!-- 需求 -->
       <n-space :vertical="vertical" align="center" class="demand">
         <tag-item category="like" :value="demandRecipeTag" />
         <tag-item category="beverage" :value="demandBeverageTag" />
       </n-space>
-      <!-- 料理 -->
-      <sprite-item type="recipes" :name="recipe" :size="size" :title="recipe" />
-      <!-- 酒水 -->
-      <sprite-item type="beverages" :name="beverage" :size="size" :title="beverage" />
-      <!-- 食材 -->
-      <sprite-item
-        v-for="(item, index) in ingredients"
-        type="ingredients"
-        :name="item"
-        :key="`recipe-${index}`"
-        :size="size"
-        :title="item"
-      />
-      <!-- 可选 -->
-      <sprite-item
-        v-for="(item, index) in extra"
-        type="ingredients"
-        :name="item"
-        :key="`ingredient-${index}`"
-        :size="size"
-        :title="item"
-      />
-      <!-- empty -->
-      <span class="empty" v-for="item in empty" :key="`empty-${item}`"></span>
+      <!-- 信息 -->
+      <n-space :vertical="vertical" :wrap-item="false">
+        <!-- 厨具 -->
+        <sprite-item type="tools" :name="tool" :size="size" :title="tool" />
+        <!-- line -->
+        <span class="line"></span>
+        <!-- 料理 -->
+        <sprite-item type="recipes" :name="recipe" :size="size" :title="recipe" />
+        <!-- line -->
+        <span class="line"></span>
+        <!-- 酒水 -->
+        <sprite-item type="beverages" :name="beverage" :size="size" :title="beverage" />
+        <!-- line -->
+        <span class="line"></span>
+        <!-- 食材 -->
+        <n-space :vertical="vertical" class="ingredients">
+          <!-- 食材 -->
+          <sprite-item
+            v-for="(item, index) in ingredients"
+            type="ingredients"
+            :name="item"
+            :key="`recipe-${index}`"
+            :size="size"
+            :title="item"
+          />
+          <!-- 额外选择 -->
+          <sprite-item
+            v-for="(item, index) in extra"
+            type="ingredients"
+            :name="item"
+            :key="`ingredient-${index}`"
+            :size="size"
+            :title="item"
+          />
+          <!-- empty -->
+          <span class="empty" v-for="item in empty" :key="`empty-${item}`"></span>
+        </n-space>
+      </n-space>
     </n-space>
     <!-- handler -->
     <n-space :vertical="vertical">
@@ -100,13 +114,17 @@ const empty = getEmptyIngredientsCount(ingredients.length, extra.length)
     border-radius: 8px 8px 0 0;
   }
   .demand {
-    margin: 12px 0;
+    margin-top: 12px;
   }
   .empty {
     display: inline-block;
     width: 36px;
     height: 36px;
   }
+  .line {
+    display: inline-block;
+    width: 100%;
+    border-bottom: 1px dashed purple;
+  }
 }
-
 </style>
