@@ -7,7 +7,15 @@ import {
   getIndexWithName,
   mapSelectOptions,
 } from '@/material'
-import type { TRecipeItem, TSelectOptions, TSortOrderValue } from '@/material'
+import type {
+  TRecipeState,
+  TRecipeItem,
+  TRecipeMatchItem,
+  TRecipeMatchResult,
+  TRecipeFilterForm,
+  TSelectOptions,
+  TSortOrderValue
+} from '@/material'
 
 import { getUnionKeys } from '@/utils/material'
 import {
@@ -19,24 +27,13 @@ import {
   getExtraIngredientsCount,
   getRecipePoint,
 } from '@/utils/recipes'
-import type { TFilterForm, TRecipeMatchItem, TRecipeMatchResult } from '@/utils/recipes'
 
 import { useCustomerRareStore, useIngredientsStore } from '@/pinia'
 
 import { orderBy } from 'lodash'
 
-interface State {
-  recipes: TRecipeItem[];
-  recipesPositiveTags: string[];
-  recipesNegativeTags: string[];
-  currentRecipe: null | TRecipeMatchItem;
-  currentRecipeName: string;
-  filterForm: TFilterForm;
-  sortOrder: TSortOrderValue;
-}
-
 export const useRecipesStore = defineStore('recipes', {
-  state: (): State => ({
+  state: (): TRecipeState => ({
     recipes,
     recipesPositiveTags,
     recipesNegativeTags,
@@ -138,7 +135,7 @@ export const useRecipesStore = defineStore('recipes', {
       const max = getExtraIngredientsCount(ingredients.length)
       setExtraIngredients(max, extra)
     },
-    setFilterForm <T extends TFilterForm, U extends keyof TFilterForm>(key: U, value: T[U]) {
+    setFilterForm <T extends TRecipeFilterForm, U extends keyof TRecipeFilterForm>(key: U, value: T[U]) {
       this.filterForm[key] = value
     },
     setSortOrder (value: TSortOrderValue) {
@@ -146,5 +143,3 @@ export const useRecipesStore = defineStore('recipes', {
     }
   }
 })
-
-export type { TRecipeItem, TRecipeMatchItem, TFilterForm }

@@ -4,7 +4,7 @@ import type { DataTableColumns } from 'naive-ui'
 import SpriteItem from '@/components/common/sprite/index.vue'
 import TagItem from '@/components/common/tags/index.vue'
 
-import type { TRecipeMatchItem } from '@/pinia'
+import type { TRecipeMatchItem } from '@/material'
 
 export const createColumns = ({
   handleSelectRow,

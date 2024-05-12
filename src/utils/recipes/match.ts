@@ -1,19 +1,6 @@
-import type { TRecipeItem, TCustomerRare } from '@/material'
+import type { TRecipeItem, TCustomerRare, TRecipeMatchItem, TRecipeMatchResult } from '@/material'
 
 import { getMatchResult } from '@/utils/customer'
-interface TRecipeMatchItem extends TRecipeItem {
-  match_like_tags: string[],
-  match_hate_tags: string[],
-  match_recipe_point: number,
-  badge_text: string,
-}
-
-interface TRecipeMatchResult {
-  match_like_tags: string[],
-  match_hate_tags: string[]
-}
-
-export type { TRecipeMatchItem, TRecipeMatchResult }
 
 export function matchRecipeTagsWithCustomer (positive_tags: string[], customer: TCustomerRare): TRecipeMatchResult {
   const { like_tags, hate_tags } = customer

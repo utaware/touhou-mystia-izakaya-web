@@ -1,26 +1,12 @@
-import type { TRecipeMatchItem } from '@/pinia'
+import type { TRecipeMatchItem, TRecipeFilterForm } from '@/material'
 
 import { isEmpty } from 'lodash'
 
 import { getKeys, hasRepeatItem, hasAllItem } from '@/utils/object'
 
-interface TFilterForm {
-  selectedPositiveTags: string[],
-  selectedNoPositiveTags: string[],
-  selectedNegativeTags: string[],
-  selectedNoNegativeTags: string[],
-  selectedIngredients: string[],
-  selectedNoIngredients: string[],
-  selectedTools: string[],
-  selectedMatchPoints: number[],
-  searchName: string,
-}
-
 type TRecpieFilterFunc = (item: TRecipeMatchItem) => boolean
 
-export type { TFilterForm }
-
-export function getRecipeFilterMethod (form: TFilterForm): TRecpieFilterFunc[] {
+export function getRecipeFilterMethod (form: TRecipeFilterForm): TRecpieFilterFunc[] {
   return getKeys(form)
     .filter((key) => !isEmpty(form[key]))
     .map((key) => {
@@ -67,6 +53,6 @@ export function getRecipeFilterMethod (form: TFilterForm): TRecpieFilterFunc[] {
     })
 }
 
-export function filterRecipesWithForm (recipes: TRecipeMatchItem[], form: TFilterForm): TRecipeMatchItem[] {
+export function filterRecipesWithForm (recipes: TRecipeMatchItem[], form: TRecipeFilterForm): TRecipeMatchItem[] {
   return getRecipeFilterMethod(form).reduce((total, method) => total.filter(method), recipes)
 }

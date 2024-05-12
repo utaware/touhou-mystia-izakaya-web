@@ -1,8 +1,6 @@
 import { matchRecipeTagsWithCustomer } from '@/utils/recipes'
 
-import type { TRecipeMatchItem, TRecipeMatchResult } from '@/utils/recipes'
-
-import type { TCustomerRare } from '@/material'
+import type { TCustomerRare, TRecipeMatchItem, TRecipeMatchResult } from '@/material'
 
 import { pick, isEmpty } from 'lodash'
 
