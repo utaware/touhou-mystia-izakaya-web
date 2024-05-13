@@ -52,6 +52,7 @@ const tabPanes = [
 
 <style scoped lang="scss">
 .content {
+  padding: 12px;
   display: grid;
   column-gap: 12px;
   min-height: calc(100vh - 78px);

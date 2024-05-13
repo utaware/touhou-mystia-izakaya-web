@@ -23,7 +23,7 @@ const handleRouterChange = (path: RouteLocationRaw) => {
 <template>
   <div class="nav-header">
     <!-- prefix -->
-    <div class="nav-header-prefix">
+    <div class="nav-header-prefix" @click="handleRouterChange('/')">
       <span class="logo"></span>
       <h3 class="title">
         Touhou Mystia Izakaya
