@@ -29,7 +29,7 @@ import {
 
 import { useCustomerRareStore, useIngredientsStore } from '@/pinia'
 
-import { orderBy } from 'lodash'
+import { orderBy, cloneDeep } from 'lodash'
 
 export const useRecipesStore = defineStore('recipes', {
   state: (): TRecipeState => ({
@@ -129,7 +129,8 @@ export const useRecipesStore = defineStore('recipes', {
       const { setExtraIngredients } = useIngredientsStore()
       const index = getIndexWithName('recipes', name)
       const item = this.getRecipesWithCustomerRare[index]
-      this.currentRecipe = item
+      const clone = cloneDeep(item)
+      this.currentRecipe = clone
       this.currentRecipeName = name
       const max = getExtraIngredientsCount(ingredients.length)
       setExtraIngredients(max, extra)

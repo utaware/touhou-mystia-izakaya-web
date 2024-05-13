@@ -15,7 +15,7 @@ import { matchRecipeAndIngredients } from '@/utils/recipes'
 
 import { getEvaluateColor, getMaxLevel, generatorUid } from '@/utils/customer'
 
-import { findIndex, pullAt } from 'lodash'
+import { findIndex, pullAt, cloneDeep } from 'lodash'
 
 export const useCustomerRareStore = defineStore('customerRare', {
   state: (): TCustomerRareState => ({
@@ -93,7 +93,8 @@ export const useCustomerRareStore = defineStore('customerRare', {
     },
     setCurrentCustomer (item: TCustomerRare) {
       const { name } = item
-      this.currentCustomer = item
+      const clone = cloneDeep(item)
+      this.currentCustomer = clone
       this.currentCustomerName = name
     },
     setDemandRecipeTag (tag: string | null) {

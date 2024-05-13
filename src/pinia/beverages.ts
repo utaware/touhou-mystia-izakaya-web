@@ -20,6 +20,8 @@ import {
   getBeveragePoint,
 } from '@/utils/beverages'
 
+import { cloneDeep } from 'lodash'
+
 export const useBeveragesStore = defineStore('beverages', {
   state: (): TBeverageState => ({
     beverages,
@@ -65,7 +67,8 @@ export const useBeveragesStore = defineStore('beverages', {
     setCurrentBeverage (name: string) {
       const index = getIndexWithName('beverages', name)
       const item = this.getBeverageWithCurrentCustomer[index]
-      this.currentBeverage = item
+      const clone = cloneDeep(item)
+      this.currentBeverage = clone
       this.currentBeverageName = name
     },
     setFilterForm <T extends TBeverageFilterForm, U extends keyof TBeverageFilterForm>(key: U, value: T[U]) {
