@@ -13,7 +13,7 @@ const customerStore = useCustomerRareStore()
 
 const { demandRecipeTag, demandBeverageTag } = storeToRefs(customerStore)
 
-const recipeTagOptions = positiveTagOptions.concat({ label: '夜雀厨具', value: '夜雀厨具', class: 'bold' })
+const recipeTagOptions = positiveTagOptions.concat({ label: '厨具『夜雀』', value: '厨具『夜雀』', class: 'bold' })
 </script>
 
 <template>

@@ -1,4 +1,4 @@
-const specialRecipeDemand = ['夜雀厨具']
+const specialRecipeDemand = ['厨具『夜雀』']
 
 export function isSpecialRecipeDemand (item: string) {
   return specialRecipeDemand.includes(item)
