@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { useBeveragesStore } from '@/pinia'
 
+import SpriteItem from '@/components/common/sprite/index.vue'
+
 const beveragesStore = useBeveragesStore()
 
 const { beverages } = beveragesStore
@@ -11,13 +13,6 @@ const { beverages } = beveragesStore
   <div class="beverages-page">
     <!-- card -->
     <n-card>
-      <!-- filter -->
-      <!-- tags -->
-      <n-space>
-        <n-tag>清除</n-tag>
-      </n-space>
-      <!-- divider -->
-      <n-divider />
       <!-- content -->
       <ul class="beverages-list">
         <li
@@ -25,10 +20,10 @@ const { beverages } = beveragesStore
           v-for="(item, index) in beverages"
           :key="index"
         >
-          <n-badge :value="item.level" type="info">
-            <i :class="item.namePY" class="beverages-sprite-item"></i>
-          </n-badge>
-          <span>{{ item.name }}</span>
+          <!-- icon -->
+          <SpriteItem :index="item.index" type="beverages" :size="64" :value="item.name" :title="item.name" />
+          <!-- text -->
+          <span class="label">{{ item.name }}</span>
         </li>
       </ul>
     </n-card>
@@ -38,13 +33,18 @@ const { beverages } = beveragesStore
 <style scoped lang="scss">
 .beverages-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 84px);
-  gap: 16px;
+  grid-template-columns: repeat(auto-fill, 120px);
+  gap: 24px;
   justify-content: space-between;
   .item {
-    font-weight: bolder;
-    text-align: center;
-    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .label {
+      font-weight: bolder;
+      text-align: center;
+    }
   }
 }
 </style>
