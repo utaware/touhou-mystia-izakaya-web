@@ -1,21 +1,21 @@
 <script setup lang="ts">
 import { createDiscreteApi } from 'naive-ui'
 
-import { useBeveragesStore } from '@/pinia'
+import { useRecipesStore } from '@/pinia'
 
-import type { TBeverageItem } from '@/material'
+import type { TRecipeItem } from '@/material'
 
 import SpriteItem from '@/components/common/sprite/index.vue'
 
 import { createNotification } from './render/notification'
 
-const beveragesStore = useBeveragesStore()
+const recipesStore = useRecipesStore()
 
-const { beverages } = beveragesStore
+const { recipes } = recipesStore
 
 const { notification } = createDiscreteApi(['notification'])
 
-const handleItemClick = (item: TBeverageItem) => {
+const handleItemClick = (item: TRecipeItem) => {
   const options = createNotification(item)
   notification.create(options)
 }
@@ -30,12 +30,12 @@ const handleItemClick = (item: TBeverageItem) => {
       <ul class="beverages-list">
         <li
           class="item"
-          v-for="(item, index) in beverages"
+          v-for="(item, index) in recipes"
           :key="index"
           @click="handleItemClick(item)"
         >
           <!-- icon -->
-          <SpriteItem :index="item.index" type="beverages" :size="64" :value="item.name" :title="item.name" />
+          <SpriteItem :index="item.index" type="recipes" :size="64" :value="item.name" :title="item.name" />
           <!-- text -->
           <span class="label">{{ item.name }}</span>
         </li>

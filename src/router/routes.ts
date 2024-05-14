@@ -4,6 +4,7 @@ import layout from '@/layout/index.vue'
 
 import Home from '@/view/home/index.vue'
 import customerRare from '@/view/customer-rare/index.vue'
+import recipes from '@/view/recipes/index.vue'
 import beverages from '@/view/beverages/index.vue'
 
 const routes: RouteRecordRaw[] = [
@@ -21,6 +22,11 @@ const routes: RouteRecordRaw[] = [
         path: 'customer-rare',
         name: 'customer-rare',
         component: customerRare
+      },
+      {
+        path: 'recipes',
+        name: 'recipes',
+        component: recipes
       },
       {
         path: 'beverages',
