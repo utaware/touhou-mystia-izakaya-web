@@ -6,6 +6,7 @@ import Home from '@/view/home/index.vue'
 import customerRare from '@/view/customer-rare/index.vue'
 import recipes from '@/view/recipes/index.vue'
 import beverages from '@/view/beverages/index.vue'
+import ingredients from '@/view/ingredients/index.vue'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -32,6 +33,11 @@ const routes: RouteRecordRaw[] = [
         path: 'beverages',
         name: 'beverages',
         component: beverages
+      },
+      {
+        path: 'ingredients',
+        name: 'ingredients',
+        component: ingredients
       },
     ]
   }

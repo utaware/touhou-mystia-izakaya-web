@@ -7,7 +7,7 @@ import type { TBeverageItem } from '@/material'
 
 import SpriteItem from '@/components/common/sprite/index.vue'
 
-import { createNotification } from './render/notification'
+import { createNotification } from './render/notification.tsx'
 
 const beveragesStore = useBeveragesStore()
 
@@ -27,7 +27,7 @@ const handleItemClick = (item: TBeverageItem) => {
     <!-- card -->
     <n-card>
       <!-- content -->
-      <ul class="beverages-list">
+      <ul class="material-list">
         <li
           class="item"
           v-for="(item, index) in beverages"
@@ -45,20 +45,5 @@ const handleItemClick = (item: TBeverageItem) => {
 </template>
 
 <style scoped lang="scss">
-.beverages-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 120px);
-  gap: 24px;
-  justify-content: space-between;
-  .item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    .label {
-      font-weight: bolder;
-      text-align: center;
-    }
-  }
-}
+@import url('@/styles/material.scss');
 </style>
