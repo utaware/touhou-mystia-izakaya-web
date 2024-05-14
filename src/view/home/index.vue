@@ -9,7 +9,7 @@
       <div class="firefly" id="firefly"></div>
     </div>
     <!-- music -->
-    <audio id="music" autoplay controls class="play">
+    <audio id="music" autoplay class="play">
       <source src="@/assets/media/welcome.mp3" type="audio/mpeg" />
     </audio>
   </div>

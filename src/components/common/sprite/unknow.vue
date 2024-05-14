@@ -19,7 +19,7 @@ const styles = {
 .unknow {
   display: inline-block;
   vertical-align: middle;
-  background: url('@/assets/unknown.jpg') no-repeat;
+  background: url('@/assets/bg/unknown.jpg') no-repeat;
   background-size: cover;
 }
 </style>
