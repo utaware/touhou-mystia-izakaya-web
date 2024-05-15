@@ -22,7 +22,7 @@ function renderIngredients (ingredients: string[]) {
 }
 
 export function createNotification (item: TRecipeItem) {
-  const { index, name, level, tool, from, positive_tags, negative_tags, ingredients } = item
+  const { index, name, level, tool, from, positive_tags, negative_tags, ingredients, price } = item
   return {
     title: () => {
       return (
@@ -40,9 +40,10 @@ export function createNotification (item: TRecipeItem) {
       </NSpace>
     },
     meta: () => {
-      return <>
-        获取来源 : { from }
-      </>
+      return <NSpace vertical>
+        <span class="price">价格 : ${ price }</span>
+        <span class="from">获取来源 : { from }</span>
+      </NSpace>
     },
     content: () => {
       return (
