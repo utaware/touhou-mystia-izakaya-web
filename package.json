@@ -27,6 +27,7 @@
     "@types/color": "^3.0.6",
     "@types/node": "^20.12.7",
     "@vicons/antd": "^0.12.0",
+    "@vicons/fluent": "^0.12.0",
     "@vicons/utils": "^0.1.4",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vitejs/plugin-vue-jsx": "^3.1.0",

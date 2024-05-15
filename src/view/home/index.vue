@@ -1,10 +1,25 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
+
+import CustomAudio from '@/components/common/customAudio/index.vue'
+
+import { MusicNote2Play20Filled } from '@vicons/fluent'
+
+import { getAssetsUrl } from '@/utils/pub-use'
+
 import { animate } from './animate'
+
+const url = getAssetsUrl('media/welcome.mp3')
+
+const visible = ref(false)
 
 onMounted(() => {
   animate()
 })
+
+const handleToggleVisible = () => {
+  visible.value = !visible.value
+}
 </script>
 
 <template>
@@ -13,36 +28,25 @@ onMounted(() => {
     <div class="particles">
       <div class="firefly" id="firefly"></div>
     </div>
-    <!-- music -->
-    <audio id="music" autoplay loop class="play">
-      <source src="@/assets/media/welcome.mp3" type="audio/mpeg" />
-    </audio>
+    <!-- audio -->
+    <div class="custom-audio">
+      <Transition name="fade">
+        <custom-audio v-show="visible" :src="url" loop />
+      </Transition>
+      <n-icon-wrapper
+        class="icon-wrapper"
+        :size="36"
+        :border-radius="10"
+      >
+        <n-icon size="28" @click="handleToggleVisible">
+          <MusicNote2Play20Filled />
+        </n-icon>
+      </n-icon-wrapper>
+    </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-.home-page {
-  .particles {
-    position: relative;
-    width: 100%;
-    height: calc(100vh - 54px);
-    background-image: url('@/assets/bg/dream.png');
-    background-size: cover;
-    background-position: center;
-    .firefly {
-      position: absolute;
-      left: 20px;
-      top: 20px;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: radial-gradient(rgba(255, 252, 0, 0.75), rgba(200, 197, 12, 0.4), rgba(255, 255, 235, 0.05), rgba(255, 255, 255, 0));
-    }
-  }
-  .play {
-    position: absolute;
-    right: 48px;
-    bottom: 48px;
-  }
-}
+@import url('./styles/animate.scss');
+@import url('./styles/audio.scss');
 </style>
