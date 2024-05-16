@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { useRouter, RouteLocationRaw } from 'vue-router'
 
+import { GithubFilled } from '@vicons/antd'
+
 const router = useRouter()
 
 interface TNavItem {
@@ -31,14 +33,29 @@ const handleRouterChange = (path: RouteLocationRaw) => {
     </div>
     <!-- list -->
     <n-space class="nav-header-list">
+      <!-- path -->
       <n-button
         v-for="({ text, path }, index) in navList"
         class="item"
         :key="index"
-        quaternary
+        :quaternary="true"
         @click="handleRouterChange(path)"
       >
         {{ text }}
+      </n-button>
+      <!-- icon -->
+      <n-button
+        tag="a"
+        :bordered="false"
+        :focusable="false"
+        target="open"
+        href="https://github.com/utaware/touhou-mystia-izakaya-web"
+      >
+        <template #icon>
+          <n-icon size="24">
+            <GithubFilled />
+          </n-icon>
+        </template>
       </n-button>
     </n-space>
   </div>
@@ -66,11 +83,9 @@ const handleRouterChange = (path: RouteLocationRaw) => {
     }
   }
   &-list {
-    display: flex;
+    margin-right: 12px;
     align-items: center;
-    height: 100%;
     .item {
-      margin-right: 16px;
       font-size: 16px;
       color: var(--color-text);
     }
