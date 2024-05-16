@@ -29,7 +29,7 @@ import {
 
 import { useCustomerRareStore, useIngredientsStore } from '@/pinia'
 
-import { orderBy, cloneDeep } from 'lodash'
+import { cloneDeep } from 'lodash'
 
 export const useRecipesStore = defineStore('recipes', {
   state: (): TRecipeState => ({
@@ -59,8 +59,7 @@ export const useRecipesStore = defineStore('recipes', {
     },
     // 条件筛选&排序 - table
     getRecipesTableData (): TRecipeMatchItem[] {
-      const filterData = filterRecipesWithForm(this.getRecipesWithCustomerRare, this.filterForm)
-      return orderBy(filterData, ['match_recipe_point'], this.sortOrder)
+      return filterRecipesWithForm(this.getRecipesWithCustomerRare, this.filterForm)
     },
     // 匹配度选项 - select
     getMatchPointOptions (): TSelectOptions[] {

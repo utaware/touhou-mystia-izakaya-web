@@ -15,17 +15,9 @@ import { createColumns, getRowKey, pagination } from './render/table.tsx'
 
 const recipesStore = useRecipesStore()
 
-const {
-  getRecipesTableData: recipes,
-  sortOrder,
-} = storeToRefs(recipesStore)
+const { getRecipesTableData: recipes } = storeToRefs(recipesStore)
 
-const {
-  setCurrentRecipe,
-  setSortOrder,
-} = recipesStore
-
-
+const { setCurrentRecipe } = recipesStore
 
 const filterModalShow = ref(false)
 
@@ -49,22 +41,11 @@ watch(recipes, () => {
     <!-- config -->
     <div class="config">
       <!-- 设置 -->
-      <n-button class="config" @click="openFilterModal">
+      <n-button @click="openFilterModal">
         <n-space>
           <n-icon :component="SettingOutlined"/>设置
         </n-space>
       </n-button>
-      <!-- 排序 -->
-      <n-space>
-        <n-button text>匹配度({{ sortOrder }})</n-button>
-        <n-switch
-          :round="false"
-          checked-value="desc"
-          unchecked-value="asc"
-          :value="sortOrder"
-          :on-update:value="setSortOrder"
-        />
-      </n-space>
     </div>
     <!-- view -->
     <n-data-table

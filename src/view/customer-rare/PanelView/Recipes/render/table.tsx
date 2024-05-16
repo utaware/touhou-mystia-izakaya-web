@@ -80,9 +80,18 @@ export const createColumns = ({
       }
     },
     {
+      title: '价格(円)',
+      sorter: 'default',
+      key: 'price',
+      render ({ price }) {
+        return <NTag type="warning" class="bold">${ price }</NTag>
+      },
+    },
+    {
       title: '匹配度',
       key: 'match_recipe_point',
       className: 'sort-columns',
+      sorter: 'default',
       render ({ badge_text }) {
         return <NTag type="error">{ badge_text }</NTag>
       },
