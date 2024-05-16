@@ -1,9 +1,43 @@
-# Vue 3 + TypeScript + Vite
+# 东方夜雀食堂
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+[在线地址](https://mystia-izakaya.top)
 
-## Recommended Setup
+## 说明
 
-- [VS Code](https://code.visualstudio.com/) + [Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (previously Volar) and disable Vetur
+> 这是一个兴趣使然的个人项目，图片和资料的来源主要是[B站专栏](cv33098171)的EXCEL表格版，经过个人的提取和修正，可能存在信息差或数据核对问题，对此还请见谅。功能方面主要围绕稀客菜谱酒水的自定义选择和加料以及评价为核心，实现更好的结合个人情况，针对游戏中稀客的搭配做自定义选择，并提供书签功能方便本地持久化。页面交互设计上纯个人异想天开，如有相关资源、信息、交互、功能上的改进和建议，欢迎提出并联系，本人会尽可能在能力范围内提供跟进，希望这个工具能有帮到你。
 
-- Use [vue-tsc](https://github.com/vuejs/language-tools/tree/master/packages/tsc) for performing the same type checking from the command line, or for generating d.ts files for SFCs.
+## 功能
+
+[x] 稀客个性化选择
+[x] 菜谱、酒水选择
+[x] 加料选择对比
+[x] 需求选择评分
+[x] 选择信息存储
+[x] 菜谱、酒水、食材信息展示
+
+> 菜谱、酒水、食材的页面现阶段主要目的是信息预览，出于游戏进度原因（~~上次游戏打开时间: 16天前~~），以及设计水平有限，还没有想出更好的功能点补充。
+
+- [ ] DLC选择
+  - 内容筛选，简化部分DLC玩家的信息干扰
+- [ ] 菜谱、酒水、食材的个性化禁用
+  - 方便尚未入手或食材入手困难等因素不予以考虑的禁用筛选
+  - 预想中是打算在菜谱、酒水、食材的页面提供操作
+- [ ] 普通顾客
+  - ~~普通人也需要享有应有的权利吗，还是...资本的阴谋！~~
+- [ ] 流行喜爱·厌恶tag
+  - 稀客部分原本可以加入，但我觉得这更像是一个在单独的菜谱页面比较适合加入的选项
+- [ ] 符卡、任务、好感度、设定信息、容忍度、预算等内容
+  - ~~真的有这个必要吗，你不会游戏里自己看啊！?但确实有考虑过~~
+  - 最大阻碍：UI交互苦手
+- [] 其他
+  - 想到什么再补充，或者有心人再跟进好了，~~今天已经很努力了，明天也...~~
+
+## wiki
+
+> 虽然缺少DLC4、5的内容，部分地方也存在错误
+
+*总之先放这里以备不时之需*
+
+[wiki](https://thwiki.cc/%E4%B8%9C%E6%96%B9%E5%A4%9C%E9%9B%80%E9%A3%9F%E5%A0%82_-_Touhou_Mystia%27s_Izakaya)
+
+[cv33098171]: https://www.bilibili.com/read/cv33098171/
