@@ -23,7 +23,7 @@ const handleItemClick = (item: TBeverageItem) => {
 
 <template>
   <!-- page -->
-  <div class="beverages-page">
+  <div class="beverages-page pd12">
     <!-- card -->
     <n-card>
       <!-- content -->

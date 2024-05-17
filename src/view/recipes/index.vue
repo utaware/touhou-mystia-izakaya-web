@@ -23,7 +23,7 @@ const handleItemClick = (item: TRecipeItem) => {
 
 <template>
   <!-- page -->
-  <div class="recipes-page">
+  <div class="recipes-page pd12">
     <!-- card -->
     <n-card>
       <!-- content -->
