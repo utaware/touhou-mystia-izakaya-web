@@ -91,6 +91,7 @@ const { setActiveTabName } = useCustomerActiveTab()
 .wrapper {
   padding: 12px;
   border-radius: 4px;
+  transition: all 0.5s ease-in;
 }
 .info-panel {
   padding: 16px;
