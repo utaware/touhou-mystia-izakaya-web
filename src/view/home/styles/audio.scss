@@ -4,11 +4,17 @@
   justify-content: center;
   bottom: 60px;
   right: 60px;
-  .icon-wrapper {
-    margin-left: 12px;
-    align-self: flex-end;
-    backdrop-filter: blur(40px);
-    background-color: rgba(255, 255, 255, 0.4);
+  .icon-group {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-self: self-end;
+    height: 104px;
+    .icon-wrapper {
+      margin-left: 12px;
+      backdrop-filter: blur(40px);
+      background-color: rgba(255, 255, 255, 0.4);
+    }
   }
 }
 

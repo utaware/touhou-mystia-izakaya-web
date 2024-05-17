@@ -12,6 +12,10 @@
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background: radial-gradient(rgba(255, 252, 0, 0.75), rgba(200, 197, 12, 0.4), rgba(255, 255, 235, 0.05), rgba(255, 255, 255, 0));
+    background: radial-gradient(
+      rgba(255, 252, 0, 0.75),
+      rgba(200, 197, 12, 0.4),
+      rgba(0, 255, 255, 0.1),
+      rgba(255, 255, 235, 0.05));
   }
 }
