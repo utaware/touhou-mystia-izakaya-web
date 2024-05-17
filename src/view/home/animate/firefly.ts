@@ -3,6 +3,7 @@ import { MotionPathPlugin } from 'gsap/all'
 
 gsap.registerPlugin(MotionPathPlugin)
 
+// 启发：https://www.hereitis.cn/soundCodeView/
 export class Firefly {
 
   total = 60
@@ -11,28 +12,34 @@ export class Firefly {
   width = window.innerWidth
   height = window.innerHeight - 200
 
-  particles = document.querySelector(".particles")!
-  firefly = document.querySelector('#firefly')!
+  particles = document.querySelector('.particles')!
+  firefly = document.querySelector('.firefly')!
 
   active = true
 
   minScale = 0.25
   maxScale = 3
 
-  stacks = Array<gsap.core.Timeline>()
+  gsapStacks = Array<gsap.core.Timeline>()
+  cloneNodes = Array<Node>()
 
   constructor () {
-    this.init()
+    this.domInit()
+    this.gsapInit()
   }
 
   play () {
-    this.stacks.forEach((item) => item.play())
+    this.gsapStacks.forEach((item) => item.play())
     this.active = true
   }
 
   pause () {
-    this.stacks.forEach((item) => item.pause())
+    this.gsapStacks.forEach((item) => item.pause())
     this.active = false
+  }
+
+  clear () {
+    this.gsapStacks.forEach((item) => item.clear())
   }
 
   toggle () {
@@ -43,20 +50,27 @@ export class Firefly {
     return Number((fixRatio * base + rangeRatio * base * Math.random()).toFixed(2)) - pad
   }
 
-  init () {
-    const {
-      time, total,
-      minScale, maxScale,
-      particles, firefly,
-      width, height, random
-    } = this
+  domInit () {
+    const { firefly, particles, total } = this
+    const fragement = document.createDocumentFragment()
+    this.cloneNodes = Array.from({ length: total }, () => {
+      const node = firefly.cloneNode(false)
+      fragement.appendChild(node)
+      return node
+    })
+    particles.appendChild(fragement)
+  }
+
+  gsapInit () {
+    const { time, total, minScale, maxScale, width, height, random } = this
+
     gsap.set(".firefly", { scale: 0 })
-    this.stacks = Array.from({ length: total }, (_, index) => {
-      const target = firefly.cloneNode(false) as HTMLElement
-      target.id = 'firefly_' + index
-      particles!.appendChild(target);
+
+    this.gsapStacks = this.cloneNodes.map((node, index) => {
+
       const tl = gsap.timeline()
-      tl.fromTo(target, {
+
+      tl.fromTo(node, {
         x: random(0.42, 0.52, width),
         y: random(0.43, 0.4, height),
         scale: random(minScale, maxScale - minScale, 1),
@@ -86,7 +100,9 @@ export class Firefly {
           ],
         },
         ease: 'sine.inOut',
-      }).progress(index / total).to(target,
+      })
+      .progress(index / total)
+      .to(node,
         {
           ease: 'sine.inOut',
           duration: time,
@@ -124,6 +140,7 @@ export class Firefly {
       )
       return tl
     })
+
   }
 
 }

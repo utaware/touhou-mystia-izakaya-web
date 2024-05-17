@@ -32,7 +32,7 @@ const handleToggleAnimate = () => {
   <div class="home-page">
     <!-- particles -->
     <div class="particles">
-      <div class="firefly" id="firefly"></div>
+      <div class="firefly"></div>
     </div>
     <!-- audio -->
     <div class="custom-audio">
