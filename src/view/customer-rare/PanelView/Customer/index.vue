@@ -19,16 +19,13 @@ const { filterCustomerWithName, currentCustomerName } = storeToRefs(customerRare
 const { setCurrentCustomer, resetSelectMenu } = customerRareStore
 
 const modalFilterShow = ref(false)
-const isCheckedReset = ref(false)
 
 const openFilterModal = () => {
   modalFilterShow.value = true
 }
 
 const handlerClickCustomer = (item: TCustomerRare) => {
-  if (isCheckedReset.value) {
-    resetSelectMenu()
-  }
+  resetSelectMenu()
   setCurrentCustomer(item)
 }
 </script>
@@ -44,10 +41,6 @@ const handlerClickCustomer = (item: TCustomerRare) => {
           <n-icon :component="Settings32Filled"/>设置
         </n-space>
       </n-button>
-      <!-- 重置选项 -->
-      <n-checkbox v-model:checked="isCheckedReset">
-        <n-button text title="选择角色后当前菜谱、酒水、食材、需求将会被重置">重置</n-button>
-      </n-checkbox>
     </n-space>
     <!-- view -->
     <div class="customer-view">
