@@ -27,6 +27,7 @@ export const useCustomerRareStore = defineStore('customerRare', {
     activeCustomerNames: [],
     demandRecipeTag: '',
     demandBeverageTag: '',
+    demandSyncFilter: true,
     bookmark: [],
   }),
   getters: {

@@ -33,8 +33,8 @@ const { filterForm } = storeToRefs(beverageStore)
 <style scoped lang="scss">
 .config-view {
   display: grid;
-  grid-template-areas: 'l m r r';
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-areas: 'l m r';
+  grid-template-columns: repeat(3, 1fr);
   .left {
     grid-area: l;
   }

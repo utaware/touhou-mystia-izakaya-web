@@ -29,7 +29,7 @@ export interface TCustomerRareState {
   // 需求
   demandRecipeTag: string | null;
   demandBeverageTag: string | null;
+  demandSyncFilter: boolean;
   // 组合
   bookmark: TBookmark[];
-  // 评分
 }
