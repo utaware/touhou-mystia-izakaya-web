@@ -59,6 +59,10 @@ export const useIngredientsStore = defineStore('ingredients', {
       this.extraMaxCount = max
       this.extraIngredientsNames = [ ...extra ]
     },
+    clearExtraIngredients () {
+      this.extraMaxCount = 0
+      this.extraIngredientsNames = []
+    }
   }
 })
 

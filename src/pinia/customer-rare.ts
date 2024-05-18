@@ -143,6 +143,17 @@ export const useCustomerRareStore = defineStore('customerRare', {
       setCurrentBeverage(beverage)
       this.demandRecipeTag = demandRecipeTag
       this.demandBeverageTag = demandBeverageTag
+    },
+    resetSelectMenu () {
+      // 菜谱 + 酒水 + 需求
+      const { clearCurrentRecipe } = useRecipesStore()
+      const { clearCurrentBeverage } = useBeveragesStore()
+      const { clearExtraIngredients } = useIngredientsStore()
+      clearCurrentRecipe()
+      clearCurrentBeverage()
+      clearExtraIngredients()
+      this.demandRecipeTag = null
+      this.demandBeverageTag = null
     }
   },
   persist: {

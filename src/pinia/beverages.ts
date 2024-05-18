@@ -71,6 +71,10 @@ export const useBeveragesStore = defineStore('beverages', {
       this.currentBeverage = clone
       this.currentBeverageName = name
     },
+    clearCurrentBeverage () {
+      this.currentBeverage = null
+      this.currentBeverageName = ''
+    },
     setFilterForm <T extends TBeverageFilterForm, U extends keyof TBeverageFilterForm>(key: U, value: T[U]) {
       this.filterForm[key] = value
     },

@@ -3,7 +3,7 @@ import { ref } from 'vue'
 
 import { storeToRefs } from 'pinia'
 
-import { SettingOutlined } from '@vicons/antd'
+import { Settings32Filled } from '@vicons/fluent'
 
 import type { TCustomerRare } from '@/material'
 import { useCustomerRareStore } from '@/pinia'
@@ -16,15 +16,19 @@ const customerRareStore = useCustomerRareStore()
 
 const { filterCustomerWithName, currentCustomerName } = storeToRefs(customerRareStore)
 
-const { setCurrentCustomer } = customerRareStore
+const { setCurrentCustomer, resetSelectMenu } = customerRareStore
 
 const modalFilterShow = ref(false)
+const isCheckedReset = ref(false)
 
 const openFilterModal = () => {
   modalFilterShow.value = true
 }
 
 const handlerClickCustomer = (item: TCustomerRare) => {
+  if (isCheckedReset.value) {
+    resetSelectMenu()
+  }
   setCurrentCustomer(item)
 }
 </script>
@@ -33,11 +37,18 @@ const handlerClickCustomer = (item: TCustomerRare) => {
   <!-- wrapper -->
   <div class="wrapper">
     <!-- button -->
-    <n-button class="config" @click="openFilterModal">
-      <n-space>
-        <n-icon :component="SettingOutlined"/>设置
-      </n-space>
-    </n-button>
+    <n-space justify="space-between" align="center">
+      <!-- 设置 -->
+      <n-button class="config" @click="openFilterModal">
+        <n-space align="center">
+          <n-icon :component="Settings32Filled"/>设置
+        </n-space>
+      </n-button>
+      <!-- 重置选项 -->
+      <n-checkbox v-model:checked="isCheckedReset">
+        <n-button text title="选择角色后当前菜谱、酒水、食材、需求将会被重置">重置</n-button>
+      </n-checkbox>
+    </n-space>
     <!-- view -->
     <div class="customer-view">
       <!-- avatar -->

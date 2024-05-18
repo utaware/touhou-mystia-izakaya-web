@@ -118,7 +118,7 @@ export const useRecipesStore = defineStore('recipes', {
   actions: {
     setCurrentRecipe ({
       name,
-      ingredients,
+      ingredients = [],
       extra = [],
     }: {
       name: string,
@@ -133,6 +133,10 @@ export const useRecipesStore = defineStore('recipes', {
       this.currentRecipeName = name
       const max = getExtraIngredientsCount(ingredients.length)
       setExtraIngredients(max, extra)
+    },
+    clearCurrentRecipe () {
+      this.currentRecipe = null
+      this.currentRecipeName = ''
     },
     setFilterForm <T extends TRecipeFilterForm, U extends keyof TRecipeFilterForm>(key: U, value: T[U]) {
       this.filterForm[key] = value

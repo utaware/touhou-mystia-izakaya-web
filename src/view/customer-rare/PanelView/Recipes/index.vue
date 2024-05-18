@@ -3,7 +3,7 @@ import { ref, watch } from 'vue'
 
 import { storeToRefs } from 'pinia'
 
-import { SettingOutlined } from '@vicons/antd'
+import { Settings32Filled } from '@vicons/fluent'
 
 import { useRecipesStore } from '@/pinia'
 
@@ -43,7 +43,7 @@ watch(recipes, () => {
       <!-- 设置 -->
       <n-button @click="openFilterModal">
         <n-space>
-          <n-icon :component="SettingOutlined"/>设置
+          <n-icon :component="Settings32Filled"/>设置
         </n-space>
       </n-button>
     </div>
