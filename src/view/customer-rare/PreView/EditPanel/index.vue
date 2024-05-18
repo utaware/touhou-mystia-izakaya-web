@@ -19,7 +19,7 @@ const customerStore = useCustomerRareStore()
 
 const { saveBookmark } = customerStore
 const { getSaveButtonIsDisabled: disabled } = storeToRefs(customerStore)
-const { currentRecipeName } = storeToRefs(recipesStore)
+const { currentRecipe } = storeToRefs(recipesStore)
 const { currentBeverageName } = storeToRefs(beveragesStore)
 
 const { setActiveTabName } = useCustomerActiveTab()
@@ -29,11 +29,16 @@ const { setActiveTabName } = useCustomerActiveTab()
   <n-card>
     <div class="edit-panel">
       <!-- preview -->
-      <n-space class="config">
+      <n-space align="center" class="config">
         <!-- 料理 -->
         <sprite-pending
+          type="tools"
+          :name="currentRecipe?.tool"
+          :size="36"
+        />
+        <sprite-pending
           type="recipes"
-          :name="currentRecipeName"
+          :name="currentRecipe?.name"
           :size="48"
           @click="() => setActiveTabName('recipes')"
         />
