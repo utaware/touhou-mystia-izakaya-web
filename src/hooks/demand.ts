@@ -2,6 +2,8 @@ import { storeToRefs } from 'pinia'
 
 import { useCustomerRareStore, useBeveragesStore, useRecipesStore } from '@/pinia'
 
+import { isSpecialRecipeDemand } from '@/utils/customer'
+
 export function useDemandSelect () {
 
   const customerStore = useCustomerRareStore()
@@ -17,8 +19,11 @@ export function useDemandSelect () {
 
   const handleChangePositiveTag = (value: string | null) => {
     if (demandSyncFilter.value) {
-      const val = value ? [value] : []
-      setRecipesFilter('selectedPositiveTags', val)
+      if (!value || isSpecialRecipeDemand(value)) {
+        setRecipesFilter('selectedPositiveTags', [])
+      } else {
+        setRecipesFilter('selectedPositiveTags', [value])
+      }
     }
     setDemandRecipeTag(value)
   }
