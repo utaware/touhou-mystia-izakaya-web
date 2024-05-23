@@ -32,13 +32,13 @@ const handleRouterChange = (path: RouteLocationRaw) => {
       </h3>
     </div>
     <!-- list -->
-    <n-space class="nav-header-list">
+    <n-space align="center" class="nav-header-list">
       <!-- path -->
       <n-button
         v-for="({ text, path }, index) in navList"
-        class="item"
+        class="item bold"
         :key="index"
-        :quaternary="true"
+        quaternary
         @click="handleRouterChange(path)"
       >
         {{ text }}
@@ -47,12 +47,13 @@ const handleRouterChange = (path: RouteLocationRaw) => {
       <n-button
         tag="a"
         :bordered="false"
-        :focusable="false"
         target="open"
+        aria-label="github"
+        rel="nofollow"
         href="https://github.com/utaware/touhou-mystia-izakaya-web"
       >
         <template #icon>
-          <n-icon size="24">
+          <n-icon size="20">
             <GithubFilled />
           </n-icon>
         </template>
