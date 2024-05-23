@@ -88,7 +88,7 @@ const handlerClickCustomer = (item: TCustomerRare) => {
       opacity: 0.5;
     }
     &.active {
-      background-color: #409eff;
+      background: linear-gradient(140deg, #cf2f98, #6a3dec);
     }
   }
 }
