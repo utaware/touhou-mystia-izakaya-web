@@ -2,20 +2,14 @@ import { NSpace } from 'naive-ui'
 
 import type { TBeverageItem } from '@/material'
 
-import SpriteItem from '@/components/common/sprite/index.vue'
 import TagItem from '@/components/common/tags/index.vue'
 
+import { renderNotificationTitle } from '@/render/Notification/CommonTitle'
+
 export function createNotification (item: TBeverageItem) {
-  const { index, name, beverage_tags, level, price, dlc } = item
+  const { beverage_tags, price, dlc } = item
   return {
-    title: () => {
-      return (
-        <div class="title">
-          <SpriteItem index={index} size={28} title={name} type="beverages" />
-          <div class="bold">{ name }【Lv.{ level }】</div>
-        </div>
-      )
-    },
+    title: renderNotificationTitle(item, { type: 'beverages' }),
     description: () => {
       return <NSpace class="description">
         <span class="price">售价 : ${price}</span>

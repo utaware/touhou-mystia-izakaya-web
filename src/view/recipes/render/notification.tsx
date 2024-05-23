@@ -5,6 +5,8 @@ import type { TRecipeItem, TCustomerTagType } from '@/material'
 import SpriteItem from '@/components/common/sprite/index.vue'
 import TagItem from '@/components/common/tags/index.vue'
 
+import { renderNotificationTitle } from '@/render/Notification/CommonTitle'
+
 function renderTags (tags: string[], category: TCustomerTagType) {
   return (
     <>
@@ -22,16 +24,9 @@ function renderIngredients (ingredients: string[]) {
 }
 
 export function createNotification (item: TRecipeItem) {
-  const { index, name, level, tool, from, positive_tags, negative_tags, ingredients, price } = item
+  const { tool, from, positive_tags, negative_tags, ingredients, price } = item
   return {
-    title: () => {
-      return (
-        <NSpace align="center">
-          <SpriteItem index={index} size={28} title={name} type="recipes" />
-          <div class="bold">{ name }【Lv.{ level }】</div>
-        </NSpace>
-      )
-    },
+    title: renderNotificationTitle(item, { type: 'recipes' }),
     description: () => {
       return <NSpace align="center">
         <SpriteItem name={tool} size={28} title={tool} type="tools" />
