@@ -111,7 +111,6 @@ const handleToggleVolume = () => {
     <audio
       class="play"
       ref="audioEl"
-      preload="metadata"
       :loop="audio.loop"
       @durationchange="handleDurationChange"
       @timeupdate="handleTimeupdate"
