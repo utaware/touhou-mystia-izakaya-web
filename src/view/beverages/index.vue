@@ -7,7 +7,7 @@ import type { TBeverageItem } from '@/material'
 
 import SpriteItem from '@/components/common/sprite/index.vue'
 
-import { createNotification } from './render/notification.tsx'
+import { createNotification } from '@/render/Notification/Beverages'
 
 const beveragesStore = useBeveragesStore()
 

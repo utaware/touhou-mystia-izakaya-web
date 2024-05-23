@@ -7,7 +7,7 @@ import type { TRecipeItem } from '@/material'
 
 import SpriteItem from '@/components/common/sprite/index.vue'
 
-import { createNotification } from './render/notification.tsx'
+import { createNotification } from '@/render/Notification/Recipes'
 
 const recipesStore = useRecipesStore()
 
