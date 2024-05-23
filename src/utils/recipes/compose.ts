@@ -5,10 +5,11 @@ import type { TCustomerRare, TRecipeMatchItem, TRecipeMatchResult } from '@/mate
 import { pick, isEmpty } from 'lodash'
 
 const coverOptionsMap = {
-  '饱腹': '下酒',
+  '大份': '小巧',
+  '灼热': '凉爽',
   '重油': '清淡',
+  '饱腹': '下酒',
   '肉': '素',
-  '大份': '小巧'
 }
  // tag 覆盖
 export function handleCoverTags (set_tags: Set<string>, options: Record<string, string>): string[] {
