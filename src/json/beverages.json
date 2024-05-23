@@ -1,5 +1,6 @@
 [
   {
+    "id": 0,
     "dlc": "DLC0",
     "name": "绿茶",
     "namePY": "lvcha",
@@ -13,6 +14,7 @@
     ]
   },
   {
+    "id": 12,
     "dlc": "DLC0",
     "name": "雀酒",
     "namePY": "quejiu",
@@ -30,6 +32,7 @@
     ]
   },
   {
+    "id": 1,
     "dlc": "DLC0",
     "name": "果味High Ball",
     "namePY": "guoweiHighBall",
@@ -49,6 +52,7 @@
     ]
   },
   {
+    "id": 2,
     "dlc": "DLC0",
     "name": "果味SOUR",
     "namePY": "guoweiSOUR",
@@ -68,6 +72,7 @@
     ]
   },
   {
+    "id": 3,
     "dlc": "DLC0",
     "name": "淇",
     "namePY": "qi",
@@ -88,6 +93,7 @@
     ]
   },
   {
+    "id": 10,
     "dlc": "DLC0",
     "name": "水濑祭",
     "namePY": "shuilaiji",
@@ -107,6 +113,7 @@
     ]
   },
   {
+    "id": 6,
     "dlc": "DLC0",
     "name": "梅酒",
     "namePY": "meijiu",
@@ -124,6 +131,7 @@
     ]
   },
   {
+    "id": 26,
     "dlc": "DLC0",
     "name": "波子汽水",
     "namePY": "boziqishui",
@@ -139,6 +147,7 @@
     ]
   },
   {
+    "id": 4,
     "dlc": "DLC0",
     "name": "超ZUN啤酒",
     "namePY": "chaoZUNpijiu",
@@ -155,6 +164,7 @@
     ]
   },
   {
+    "id": 5,
     "dlc": "DLC0",
     "name": "日月星",
     "namePY": "riyuexing",
@@ -172,6 +182,7 @@
     ]
   },
   {
+    "id": 11,
     "dlc": "DLC0",
     "name": "晓",
     "namePY": "xiao",
@@ -190,6 +201,7 @@
     ]
   },
   {
+    "id": 20,
     "dlc": "DLC0",
     "name": "十四夜",
     "namePY": "shisiye",
@@ -210,6 +222,7 @@
     ]
   },
   {
+    "id": 21,
     "dlc": "DLC0",
     "name": "火鼠裘",
     "namePY": "huoshuqiu",
@@ -228,6 +241,7 @@
     ]
   },
   {
+    "id": 19,
     "dlc": "DLC0",
     "name": "冬酿",
     "namePY": "dongniang",
@@ -245,6 +259,7 @@
     ]
   },
   {
+    "id": 17,
     "dlc": "DLC0",
     "name": "教父",
     "namePY": "jiaofu",
@@ -265,6 +280,7 @@
     ]
   },
   {
+    "id": 22,
     "dlc": "DLC0",
     "name": "玉露茶",
     "namePY": "yulucha",
@@ -281,6 +297,7 @@
     ]
   },
   {
+    "id": 8,
     "dlc": "DLC0",
     "name": "猩红恶魔",
     "namePY": "xinghongemo",
@@ -297,6 +314,7 @@
     ]
   },
   {
+    "id": 16,
     "dlc": "DLC0",
     "name": "尼格罗尼",
     "namePY": "nigeluoni",
@@ -316,6 +334,7 @@
     ]
   },
   {
+    "id": 18,
     "dlc": "DLC0",
     "name": "风祝",
     "namePY": "fengzhu",
@@ -335,6 +354,7 @@
     ]
   },
   {
+    "id": 7,
     "dlc": "DLC0",
     "name": "天狗踊",
     "namePY": "tiangouyong",
@@ -352,6 +372,7 @@
     ]
   },
   {
+    "id": 9,
     "dlc": "DLC0",
     "name": "神之麦",
     "namePY": "shenzhimai",
@@ -369,6 +390,7 @@
     ]
   },
   {
+    "id": 24,
     "dlc": "DLC0",
     "name": "牛奶",
     "namePY": "niunai",
@@ -383,6 +405,7 @@
     ]
   },
   {
+    "id": 25,
     "dlc": "DLC0",
     "name": "红柚果汁",
     "namePY": "hongyouguozhi",
@@ -397,6 +420,7 @@
     ]
   },
   {
+    "id": 14,
     "dlc": "DLC0",
     "name": "阿芙加朵",
     "namePY": "afujiaduo",
@@ -414,6 +438,7 @@
     ]
   },
   {
+    "id": 27,
     "dlc": "DLC0",
     "name": "冰山毛玉冻饮",
     "namePY": "bingshanmaoyudongyin",
@@ -433,6 +458,7 @@
     ]
   },
   {
+    "id": 15,
     "dlc": "DLC0",
     "name": "红雾",
     "namePY": "hongwu",
@@ -448,6 +474,7 @@
     ]
   },
   {
+    "id": 13,
     "dlc": "DLC0",
     "name": "红魔馆红茶",
     "namePY": "hongmoguanhongcha",
@@ -464,6 +491,7 @@
     ]
   },
   {
+    "id": 28,
     "dlc": "DLC0",
     "name": "大冰棍儿",
     "namePY": "dabingguner",
@@ -480,6 +508,7 @@
     ]
   },
   {
+    "id": 23,
     "dlc": "DLC0",
     "name": "月面火箭",
     "namePY": "yuemianhuojian",
@@ -496,6 +525,7 @@
     ]
   },
   {
+    "id": 1003,
     "dlc": "DLC1",
     "name": "古法奶油冰沙",
     "namePY": "gufanaiyoubingsha",
@@ -512,6 +542,7 @@
     ]
   },
   {
+    "id": 1004,
     "dlc": "DLC1",
     "name": "普通健身茶",
     "namePY": "putongjianshencha",
@@ -528,6 +559,7 @@
     ]
   },
   {
+    "id": 1001,
     "dlc": "DLC1",
     "name": "咖啡",
     "namePY": "kafei",
@@ -546,6 +578,7 @@
     ]
   },
   {
+    "id": 1002,
     "dlc": "DLC1",
     "name": "妖精雨露",
     "namePY": "yaojingyulu",
@@ -561,6 +594,7 @@
     ]
   },
   {
+    "id": 1000,
     "dlc": "DLC1",
     "name": "大吟酿",
     "namePY": "dayinniang",
@@ -580,6 +614,7 @@
     ]
   },
   {
+    "id": 2000,
     "dlc": "DLC2",
     "name": "鬼杀",
     "namePY": "guisha",
@@ -597,6 +632,7 @@
     ]
   },
   {
+    "id": 2001,
     "dlc": "DLC2",
     "name": "气保健",
     "namePY": "qibaojian",
@@ -613,6 +649,7 @@
     ]
   },
   {
+    "id": 2002,
     "dlc": "DLC2",
     "name": "古明地冰激凌",
     "namePY": "gumingdibingjiling",
@@ -629,6 +666,7 @@
     ]
   },
   {
+    "id": 3000,
     "dlc": "DLC3",
     "name": "杨枝甘露",
     "namePY": "yangzhiganlu",
@@ -644,6 +682,7 @@
     ]
   },
   {
+    "id": 3001,
     "dlc": "DLC3",
     "name": "麒麟",
     "namePY": "qilin",
@@ -659,6 +698,7 @@
     ]
   },
   {
+    "id": 4000,
     "dlc": "DLC4",
     "name": "天地无用",
     "namePY": "tiandiwuyong",
@@ -674,6 +714,7 @@
     ]
   },
   {
+    "id": 4001,
     "dlc": "DLC4",
     "name": "伶人醉",
     "namePY": "lingrenzui",
@@ -692,6 +733,7 @@
     ]
   },
   {
+    "id": 5000,
     "dlc": "DLC5",
     "name": "海的女儿",
     "namePY": "haidenver",
@@ -708,6 +750,7 @@
     ]
   },
   {
+    "id": 5001,
     "dlc": "DLC5",
     "name": "魔界咖啡",
     "namePY": "mojiekafei",
@@ -725,6 +768,7 @@
     ]
   },
   {
+    "id": 5002,
     "dlc": "DLC5",
     "name": "莫吉托爆浆球",
     "namePY": "mojituobaojiangqiu",
@@ -741,6 +785,7 @@
     ]
   },
   {
+    "id": 5003,
     "dlc": "DLC5",
     "name": "太空啤酒",
     "namePY": "taikongpijiu",
@@ -757,6 +802,7 @@
     ]
   },
   {
+    "id": 5004,
     "dlc": "DLC5",
     "name": "卫星冰咖啡",
     "namePY": "weixingbingkafei",

@@ -1,5 +1,6 @@
 [
   {
+    "id": 10,
     "dlc": "DLC0",
     "name": "海苔",
     "namePY": "haitai",
@@ -16,6 +17,7 @@
     "price": 3
   },
   {
+    "id": 29,
     "dlc": "DLC0",
     "name": "黄油",
     "namePY": "huangyou",
@@ -30,6 +32,7 @@
     "price": 8
   },
   {
+    "id": 30,
     "dlc": "DLC0",
     "name": "面粉",
     "namePY": "mianfen",
@@ -44,6 +47,7 @@
     "price": 10
   },
   {
+    "id": 1,
     "dlc": "DLC0",
     "name": "猪肉",
     "namePY": "zhurou",
@@ -59,6 +63,7 @@
     "price": 10
   },
   {
+    "id": 5,
     "dlc": "DLC0",
     "name": "豆腐",
     "namePY": "doufu",
@@ -75,6 +80,7 @@
     "price": 8
   },
   {
+    "id": 0,
     "dlc": "DLC0",
     "name": "鸡蛋",
     "namePY": "jidan",
@@ -90,6 +96,7 @@
     "price": 4
   },
   {
+    "id": 27,
     "dlc": "DLC0",
     "name": "露水",
     "namePY": "lushui",
@@ -105,6 +112,7 @@
     "price": 10
   },
   {
+    "id": 17,
     "dlc": "DLC0",
     "name": "蘑菇",
     "namePY": "mogu",
@@ -122,6 +130,7 @@
     "price": 18
   },
   {
+    "id": 25,
     "dlc": "DLC0",
     "name": "蝉蜕",
     "namePY": "chantui",
@@ -136,6 +145,7 @@
     "price": 5
   },
   {
+    "id": 2,
     "dlc": "DLC0",
     "name": "牛肉",
     "namePY": "niurou",
@@ -150,6 +160,7 @@
     "price": 15
   },
   {
+    "id": 7,
     "dlc": "DLC0",
     "name": "洋葱",
     "namePY": "yangcong",
@@ -166,6 +177,7 @@
     "price": 12
   },
   {
+    "id": 24,
     "dlc": "DLC0",
     "name": "蜂蜜",
     "namePY": "fengmi",
@@ -181,6 +193,7 @@
     "price": 15
   },
   {
+    "id": 32,
     "dlc": "DLC0",
     "name": "糯米",
     "namePY": "nuomi",
@@ -193,6 +206,7 @@
     "price": 15
   },
   {
+    "id": 33,
     "dlc": "DLC0",
     "name": "月光草",
     "namePY": "yueguangcao",
@@ -212,6 +226,7 @@
     "price": 70
   },
   {
+    "id": 9,
     "dlc": "DLC0",
     "name": "萝卜",
     "namePY": "luobu",
@@ -228,6 +243,7 @@
     "price": 16
   },
   {
+    "id": 6,
     "dlc": "DLC0",
     "name": "土豆",
     "namePY": "tudou",
@@ -244,6 +260,7 @@
     "price": 10
   },
   {
+    "id": 12,
     "dlc": "DLC0",
     "name": "八目鳗",
     "namePY": "bamuman",
@@ -261,6 +278,7 @@
     "price": 14
   },
   {
+    "id": 35,
     "dlc": "DLC0",
     "name": "辣椒",
     "namePY": "lajiao",
@@ -276,6 +294,7 @@
     "price": 2
   },
   {
+    "id": 28,
     "dlc": "DLC0",
     "name": "竹笋",
     "namePY": "zhusun",
@@ -292,6 +311,7 @@
     "price": 40
   },
   {
+    "id": 26,
     "dlc": "DLC0",
     "name": "虾",
     "namePY": "xia",
@@ -307,6 +327,7 @@
     "price": 30
   },
   {
+    "id": 21,
     "dlc": "DLC0",
     "name": "桃子",
     "namePY": "taozi",
@@ -323,6 +344,7 @@
     "price": 10
   },
   {
+    "id": 34,
     "dlc": "DLC0",
     "name": "冰块",
     "namePY": "bingkuai",
@@ -338,6 +360,7 @@
     "price": 2
   },
   {
+    "id": 11,
     "dlc": "DLC0",
     "name": "鳟鱼",
     "namePY": "zunyu",
@@ -354,6 +377,7 @@
     "price": 8
   },
   {
+    "id": 4,
     "dlc": "DLC0",
     "name": "野猪肉",
     "namePY": "yezhurou",
@@ -369,6 +393,7 @@
     "price": 25
   },
   {
+    "id": 31,
     "dlc": "DLC0",
     "name": "竹子",
     "namePY": "zhuzi",
@@ -384,6 +409,7 @@
     "price": 15
   },
   {
+    "id": 19,
     "dlc": "DLC0",
     "name": "极上金枪鱼",
     "namePY": "jishangjinqiangyu",
@@ -404,6 +430,7 @@
     "price": 34
   },
   {
+    "id": 8,
     "dlc": "DLC0",
     "name": "南瓜",
     "namePY": "nangua",
@@ -420,6 +447,7 @@
     "price": 14
   },
   {
+    "id": 13,
     "dlc": "DLC0",
     "name": "三文鱼",
     "namePY": "sanwenyu",
@@ -437,6 +465,7 @@
     "price": 24
   },
   {
+    "id": 22,
     "dlc": "DLC0",
     "name": "白果",
     "namePY": "baiguo",
@@ -452,6 +481,7 @@
     "price": 7
   },
   {
+    "id": 16,
     "dlc": "DLC0",
     "name": "和牛",
     "namePY": "heniu",
@@ -470,6 +500,7 @@
     "price": 40
   },
   {
+    "id": 15,
     "dlc": "DLC0",
     "name": "黑毛猪肉",
     "namePY": "heimaozhurou",
@@ -487,6 +518,7 @@
     "price": 35
   },
   {
+    "id": 18,
     "dlc": "DLC0",
     "name": "松露",
     "namePY": "songlu",
@@ -508,6 +540,7 @@
     "price": 50
   },
   {
+    "id": 20,
     "dlc": "DLC0",
     "name": "河豚",
     "namePY": "hetun",
@@ -526,6 +559,7 @@
     "price": 42
   },
   {
+    "id": 26,
     "dlc": "DLC0",
     "name": "幻昙华",
     "namePY": "huantanhua",
@@ -544,6 +578,7 @@
     "price": 70
   },
   {
+    "id": 3,
     "dlc": "DLC0",
     "name": "鹿肉",
     "namePY": "lurou",
@@ -559,6 +594,7 @@
     "price": 20
   },
   {
+    "id": 14,
     "dlc": "DLC0",
     "name": "金枪鱼",
     "namePY": "jinqiangyu",
@@ -576,6 +612,7 @@
     "price": 30
   },
   {
+    "id": 1000,
     "dlc": "DLC1",
     "name": "黄瓜",
     "namePY": "huanggua",
@@ -593,6 +630,7 @@
     "price": 7
   },
   {
+    "id": 1003,
     "dlc": "DLC1",
     "name": "黑盐",
     "namePY": "heiyan",
@@ -608,6 +646,7 @@
     "price": 3
   },
   {
+    "id": 1004,
     "dlc": "DLC1",
     "name": "奶油",
     "namePY": "naiyou",
@@ -624,6 +663,7 @@
     "price": 9
   },
   {
+    "id": 1001,
     "dlc": "DLC1",
     "name": "章鱼",
     "namePY": "zhangyu",
@@ -641,6 +681,7 @@
     "price": 12
   },
   {
+    "id": 36,
     "dlc": "DLC0",
     "name": "葡萄",
     "namePY": "putao",
@@ -656,6 +697,7 @@
     "price": 5
   },
   {
+    "id": 1005,
     "dlc": "DLC1",
     "name": "螃蟹",
     "namePY": "pangxie",
@@ -673,6 +715,7 @@
     "price": 10
   },
   {
+    "id": 1002,
     "dlc": "DLC1",
     "name": "海胆",
     "namePY": "haidan",
@@ -692,6 +735,7 @@
     "price": 18
   },
   {
+    "id": 2002,
     "dlc": "DLC2",
     "name": "芝士",
     "namePY": "zhishi",
@@ -709,6 +753,7 @@
     "price": 18
   },
   {
+    "id": 2001,
     "dlc": "DLC2",
     "name": "柠檬",
     "namePY": "ningmeng",
@@ -725,6 +770,7 @@
     "price": 8
   },
   {
+    "id": 3001,
     "dlc": "DLC3",
     "name": "地瓜",
     "namePY": "digua",
@@ -740,6 +786,7 @@
     "price": 8
   },
   {
+    "id": 3003,
     "dlc": "DLC3",
     "name": "板栗",
     "namePY": "banli",
@@ -756,6 +803,7 @@
     "price": 10
   },
   {
+    "id": 3002,
     "dlc": "DLC3",
     "name": "松子",
     "namePY": "songzi",
@@ -773,6 +821,7 @@
     "price": 15
   },
   {
+    "id": 3000,
     "dlc": "DLC3",
     "name": "莲子",
     "namePY": "lianzi",
@@ -789,6 +838,7 @@
     "price": 22
   },
   {
+    "id": 2000,
     "dlc": "DLC2",
     "name": "并蒂莲",
     "namePY": "bingdilian",
@@ -807,6 +857,7 @@
     "price": 36
   },
   {
+    "id": 4004,
     "dlc": "DLC4",
     "name": "西红柿",
     "namePY": "xihongshi",
@@ -821,6 +872,7 @@
     "price": 8
   },
   {
+    "id": 4001,
     "dlc": "DLC4",
     "name": "红豆",
     "namePY": "hongdou",
@@ -836,6 +888,7 @@
     "price": 18
   },
   {
+    "id": 4000,
     "dlc": "DLC4",
     "name": "梅子",
     "namePY": "meizi",
@@ -852,6 +905,7 @@
     "price": 12
   },
   {
+    "id": 4002,
     "dlc": "DLC4",
     "name": "鲜花",
     "namePY": "xianhua",
@@ -868,6 +922,7 @@
     "price": 45
   },
   {
+    "id": 4003,
     "dlc": "DLC4",
     "name": "香椿",
     "namePY": "xiangchun",
@@ -884,6 +939,7 @@
     "price": 20
   },
   {
+    "id": 5003,
     "dlc": "DLC5",
     "name": "薜茘",
     "namePY": "bili",
@@ -897,6 +953,7 @@
     "price": 21
   },
   {
+    "id": 5000,
     "dlc": "DLC5",
     "name": "可可豆",
     "namePY": "kekedou",
@@ -910,6 +967,7 @@
     "price": 22
   },
   {
+    "id": 5004,
     "dlc": "DLC5",
     "name": "银耳",
     "namePY": "yiner",
@@ -923,6 +981,7 @@
     "price": 14
   },
   {
+    "id": 5001,
     "dlc": "DLC5",
     "name": "西兰花",
     "namePY": "xilanhua",
