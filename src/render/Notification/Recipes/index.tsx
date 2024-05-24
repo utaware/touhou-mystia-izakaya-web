@@ -24,19 +24,26 @@ function renderIngredients (ingredients: string[]) {
 }
 
 export function createNotification (item: TRecipeItem) {
-  const { tool, from, positive_tags, negative_tags, ingredients, price } = item
+  const { tool, from, positive_tags, negative_tags, ingredients, price, level } = item
   return {
     title: renderNotificationTitle(item, { type: 'recipes' }),
     description: () => {
-      return <NSpace align="center">
-        <SpriteItem name={tool} size={28} title={tool} type="tools" />
-        <NDivider vertical />
-        { renderIngredients(ingredients) }
-      </NSpace>
+      return (
+        <NSpace vertical>
+          <NSpace align="center">
+            <SpriteItem name={tool} size={28} title={tool} type="tools" />
+            <NDivider vertical />
+            { renderIngredients(ingredients) }
+          </NSpace>
+          <NSpace>
+            <span>售价 : ${price}</span>
+            <span>等级 : Lv.{level}</span>
+          </NSpace>
+        </NSpace>
+      )
     },
     meta: () => {
       return <NSpace vertical>
-        <span class="price">价格 : ${ price }</span>
         <span class="from">获取来源 : { from }</span>
       </NSpace>
     },

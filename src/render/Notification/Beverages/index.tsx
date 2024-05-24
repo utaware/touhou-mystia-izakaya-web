@@ -7,15 +7,22 @@ import TagItem from '@/components/common/tags/index.vue'
 import { renderNotificationTitle } from '@/render/Notification/CommonTitle'
 
 export function createNotification (item: TBeverageItem) {
-  const { beverage_tags, price, dlc } = item
+  const { beverage_tags, from, price, level } = item
   return {
     title: renderNotificationTitle(item, { type: 'beverages' }),
     description: () => {
-      return <NSpace class="description">
-        <span class="price">售价 : ${price}</span>
+      return (
+        <NSpace>
+          <span>售价 : ${price}</span>
+          <span>等级 : Lv.{level}</span>
+        </NSpace>
+      )
+    },
+    meta: () => {
+      return <NSpace vertical>
+        { from.map(v => v) }
       </NSpace>
     },
-    meta: dlc,
     content: () => {
       return (
         <NSpace>

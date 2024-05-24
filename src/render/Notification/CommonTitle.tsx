@@ -17,13 +17,12 @@ interface TRenderOption {
 }
 
 export function renderNotificationTitle(item: TRenderItem, options: TRenderOption) {
-  const { index, name, level, dlc } = item
+  const { index, name, dlc } = item
   const { size = 28, type } = options
   return () => (
     <NSpace align="center">
       <SpriteItem index={index} size={size} title={name} type={type} />
       <div class="bold">【{dlc}】{ name }</div>
-      <span class="tip">(Lv.{level})</span>
     </NSpace>
   )
 }
