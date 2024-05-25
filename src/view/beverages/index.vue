@@ -35,7 +35,9 @@ const handleItemClick = (item: TBeverageItem) => {
           @click="handleItemClick(item)"
         >
           <!-- icon -->
-          <SpriteItem :index="item.index" type="beverages" :size="64" :value="item.name" :title="item.name" />
+          <n-badge type="success" :value="item.price">
+            <SpriteItem :index="item.index" type="beverages" :size="64" :value="item.name" :title="item.name" />
+          </n-badge>
           <!-- text -->
           <span class="label">{{ item.name }}</span>
         </li>

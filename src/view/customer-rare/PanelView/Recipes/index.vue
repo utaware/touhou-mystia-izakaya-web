@@ -51,10 +51,6 @@ watch(recipes, () => {
       :pagination="pagination"
       :render-expand-icon="renderExpandIcon"
     />
-    <!-- modal -->
-    <filter-modal
-      v-model:show="filterModalShow"
-    />
   </div>
 </template>
 
