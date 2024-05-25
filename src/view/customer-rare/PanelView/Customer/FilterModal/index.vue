@@ -7,7 +7,7 @@ import { useCustomerRareStore } from '@/pinia'
 
 import { CloseCircleFilled } from '@vicons/antd'
 
-import { getCustomerRareSrc } from '@/utils/pub-use'
+import { getPublicAssets } from '@/utils/pub-use'
 
 import { customerPlaceOptions } from '@/material'
 import type { TCustomerRare } from '@/material'
@@ -108,7 +108,7 @@ watch(
               :key="index">
               <!-- avatar -->
               <n-avatar
-                :src="getCustomerRareSrc(item)"
+                :src="getPublicAssets('customer', item.name)"
                 :title="item.name"
                 :size="64"
                 round

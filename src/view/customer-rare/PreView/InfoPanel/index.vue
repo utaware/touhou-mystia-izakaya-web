@@ -5,7 +5,7 @@ import TagItem from '@/components/common/tags/index.vue'
 
 import { useCustomerRareStore, useRecipesStore, useBeveragesStore } from '@/pinia'
 
-import { getCustomerRareSrc } from '@/utils/pub-use'
+import { getPublicAssets } from '@/utils/pub-use'
 
 import { useDemandSelect } from '@/hooks/demand'
 
@@ -34,7 +34,7 @@ const { setActiveTabName } = useCustomerActiveTab()
         <!-- avatar -->
         <n-avatar
           class="pointer"
-          :src="getCustomerRareSrc(customer)"
+          :src="getPublicAssets('customer', customer.name)"
           :size="64"
           round
           @click="setActiveTabName('customer')"

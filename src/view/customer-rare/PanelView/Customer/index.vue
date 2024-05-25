@@ -10,7 +10,7 @@ import { useCustomerRareStore } from '@/pinia'
 
 import FilterModal from './FilterModal/index.vue'
 
-import { getCustomerRareSrc } from '@/utils/pub-use'
+import { getPublicAssets } from '@/utils/pub-use'
 
 const customerRareStore = useCustomerRareStore()
 
@@ -55,7 +55,7 @@ const handlerClickCustomer = (item: TCustomerRare) => {
         <n-avatar
           class="avatar"
           :size="88"
-          :src="getCustomerRareSrc(item)"
+          :src="getPublicAssets('customer', item.name)"
           :alt="item.name"
           :title="item.name"
         />

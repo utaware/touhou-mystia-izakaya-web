@@ -79,7 +79,4 @@ const handleItemClick = (item: TRecipeItem) => {
 
 <style scoped lang="scss">
 @import url('@/styles/material.scss');
-.sprite {
-  width: 64px;
-}
 </style>
