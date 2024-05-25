@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { reactive, watchEffect } from 'vue'
 
-import { useIngredientsStore } from '@/pinia'
-
+import { ingredients } from '@/material'
 import {
   dlcOptions,
   ingredientsTagOptions,
@@ -11,10 +10,6 @@ import {
 
 import { renderSelectTags } from '@/render/SelectTags'
 import { filterIngredientsWithForm } from '@/utils/ingredients/filter'
-
-const ingredientsStore = useIngredientsStore()
-
-const { ingredients } = ingredientsStore
 
 const emit = defineEmits<{
   'update:value': [value: number[]]

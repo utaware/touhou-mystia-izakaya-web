@@ -3,8 +3,7 @@ import { ref } from 'vue'
 
 import { createDiscreteApi } from 'naive-ui'
 
-import { useIngredientsStore } from '@/pinia'
-
+import { ingredients } from '@/material'
 import type { TIngredientsItem } from '@/material'
 
 import SpriteItem from '@/components/common/sprite/index.vue'
@@ -15,11 +14,7 @@ import { CalendarWeekStart20Regular } from '@vicons/fluent'
 
 import FilterModal from './filter.vue'
 
-const ingredientsStore = useIngredientsStore()
-
 const filterVisible = ref(false)
-
-const { ingredients } = ingredientsStore
 
 const allIngredientsIndex = ingredients.map(({ index }) => index)
 

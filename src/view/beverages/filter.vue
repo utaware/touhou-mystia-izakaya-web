@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { reactive, watchEffect } from 'vue'
 
-import { useBeveragesStore } from '@/pinia'
+import { beverages } from '@/material'
 
 import {
   dlcOptions,
@@ -11,10 +11,6 @@ import {
 
 import { renderSelectTags } from '@/render/SelectTags'
 import { filterBeveragesWithForm } from '@/utils/beverages/filter'
-
-const beveragesStore = useBeveragesStore()
-
-const { beverages } = beveragesStore
 
 const emit = defineEmits<{
   'update:value': [value: number[]]

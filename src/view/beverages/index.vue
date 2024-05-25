@@ -3,8 +3,7 @@ import { ref } from 'vue'
 
 import { createDiscreteApi } from 'naive-ui'
 
-import { useBeveragesStore } from '@/pinia'
-
+import { beverages } from '@/material'
 import type { TBeverageItem } from '@/material'
 
 import SpriteItem from '@/components/common/sprite/index.vue'
@@ -14,10 +13,6 @@ import { createNotification } from '@/render/Notification/Beverages'
 import { CalendarWeekStart20Regular } from '@vicons/fluent'
 
 import FilterModal from './filter.vue'
-
-const beveragesStore = useBeveragesStore()
-
-const { beverages } = beveragesStore
 
 const filterVisible = ref(false)
 
