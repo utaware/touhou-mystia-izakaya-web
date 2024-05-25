@@ -2,7 +2,6 @@ import { NSpace, NDivider } from 'naive-ui'
 
 import type { TRecipeItem, TCustomerTagType } from '@/material'
 
-import SpriteItem from '@/components/common/sprite/index.vue'
 import TagItem from '@/components/common/tags/index.vue'
 
 import { renderNotificationTitle } from '@/render/Notification/CommonTitle'
@@ -18,7 +17,7 @@ function renderTags (tags: string[], category: TCustomerTagType) {
 function renderIngredients (ingredients: string[]) {
   return (
     <NSpace>
-      { ingredients.map((name) => <SpriteItem type="ingredients" name={name} size={28} />) }
+      { ingredients.map((name) => <img src={`/public/ingredients/${name}.png`} width="28" title={name} />) }
     </NSpace>
   )
 }
@@ -31,7 +30,7 @@ export function createNotification (item: TRecipeItem) {
       return (
         <NSpace vertical>
           <NSpace align="center">
-            <SpriteItem name={tool} size={28} title={tool} type="tools" />
+            <img src={`/public/tools/${tool}.png`} width="28" title={tool} />
             <NDivider vertical />
             { renderIngredients(ingredients) }
           </NSpace>

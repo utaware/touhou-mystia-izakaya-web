@@ -6,8 +6,6 @@ import { createDiscreteApi } from 'naive-ui'
 import { recipes } from '@/material'
 import type { TRecipeItem } from '@/material'
 
-import SpriteItem from '@/components/common/sprite/index.vue'
-
 import { createNotification } from '@/render/Notification/Recipes'
 
 import { CalendarWeekStart20Regular } from '@vicons/fluent'
@@ -48,7 +46,12 @@ const handleItemClick = (item: TRecipeItem) => {
         >
           <!-- icon -->
           <n-badge type="success" :value="item.price">
-            <SpriteItem :index="item.index" type="recipes" :size="64" :value="item.name" :title="item.name" />
+            <img
+              width="64"
+              :src="`/public/recipes/${item.name}.png`"
+              :alt="item.name"
+              :title="item.name"
+            >
           </n-badge>
           <!-- text -->
           <span class="label">{{ item.name }}</span>
@@ -74,4 +77,7 @@ const handleItemClick = (item: TRecipeItem) => {
 
 <style scoped lang="scss">
 @import url('@/styles/material.scss');
+.sprite {
+  width: 64px;
+}
 </style>

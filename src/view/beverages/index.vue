@@ -6,8 +6,6 @@ import { createDiscreteApi } from 'naive-ui'
 import { beverages } from '@/material'
 import type { TBeverageItem } from '@/material'
 
-import SpriteItem from '@/components/common/sprite/index.vue'
-
 import { createNotification } from '@/render/Notification/Beverages'
 
 import { CalendarWeekStart20Regular } from '@vicons/fluent'
@@ -48,7 +46,12 @@ const handleItemClick = (item: TBeverageItem) => {
         >
           <!-- icon -->
           <n-badge type="success" :value="item.price">
-            <SpriteItem :index="item.index" type="beverages" :size="64" :value="item.name" :title="item.name" />
+            <img
+              width="64"
+              :src="`/public/beverages/${item.name}.png`"
+              :alt="item.name"
+              :title="item.name"
+            >
           </n-badge>
           <!-- text -->
           <span class="label">{{ item.name }}</span>

@@ -1,7 +1,5 @@
 import { NSpace } from 'naive-ui'
 
-import SpriteItem from '@/components/common/sprite/index.vue'
-
 import type { TSpriteType } from '@/material'
 
 interface TRenderItem {
@@ -17,11 +15,11 @@ interface TRenderOption {
 }
 
 export function renderNotificationTitle(item: TRenderItem, options: TRenderOption) {
-  const { index, name, dlc } = item
+  const { name, dlc } = item
   const { size = 28, type } = options
   return () => (
     <NSpace align="center">
-      <SpriteItem index={index} size={size} title={name} type={type} />
+      <img width={size} src={`/public/${type}/${name}.png`} alt={name} title={name} />
       <div class="bold">【{dlc}】{ name }</div>
     </NSpace>
   )
