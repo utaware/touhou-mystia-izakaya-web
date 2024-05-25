@@ -4,9 +4,9 @@ import { isEmpty } from 'lodash'
 
 import { getKeys, hasAllItem, hasRepeatItem } from '@/utils/object'
 
-type TRecpieFilterFunc = (item: TBeverageItem) => boolean
+type TFilterFunc = (item: TBeverageItem) => boolean
 
-export function getBeverageFilterMethod (form: TBeverageFilterForm): TRecpieFilterFunc[] {
+export function getFilterMethod (form: TBeverageFilterForm): TFilterFunc[] {
   return getKeys(form)
     .filter((key) => !isEmpty(form[key]))
     .map((key) => {
@@ -38,5 +38,5 @@ export function getBeverageFilterMethod (form: TBeverageFilterForm): TRecpieFilt
 }
 
 export function filterBeveragesWithForm <T extends TBeverageItem>(beverages: T[], form: TBeverageFilterForm): T[] {
-  return getBeverageFilterMethod(form).reduce((total, method) => total.filter(method), beverages)
+  return getFilterMethod(form).reduce((total, method) => total.filter(method), beverages)
 }

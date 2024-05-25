@@ -1,20 +1,20 @@
 <script setup lang="ts">
 import { reactive, watchEffect } from 'vue'
 
-import { useBeveragesStore } from '@/pinia'
+import { useIngredientsStore } from '@/pinia'
 
 import {
   dlcOptions,
-  beverageLevelOptions,
-  beverageTagOptions,
+  ingredientsTagOptions,
+  ingredientsLevelOptions,
 } from '@/material/options'
 
 import { renderSelectTags } from '@/render/SelectTags'
-import { filterBeveragesWithForm } from '@/utils/beverages/filter'
+import { filterIngredientsWithForm } from '@/utils/ingredients/filter'
 
-const beveragesStore = useBeveragesStore()
+const ingredientsStore = useIngredientsStore()
 
-const { beverages } = beveragesStore
+const { ingredients } = ingredientsStore
 
 const emit = defineEmits<{
   'update:value': [value: number[]]
@@ -23,13 +23,13 @@ const emit = defineEmits<{
 const filterForm = reactive({
   dlc: [],
   name: '',
-  beverageTags: [],
-  noBeverageTags: [],
+  ingredientsTags: [],
+  noIngredientTags: [],
   levels: [],
 })
 
 watchEffect(() => {
-  const filterBeverages = filterBeveragesWithForm(beverages, filterForm)
+  const filterBeverages = filterIngredientsWithForm(ingredients, filterForm)
   const visibleIndex = filterBeverages.map(({ index }) => index)
   emit('update:value', visibleIndex)
 })
@@ -38,7 +38,7 @@ watchEffect(() => {
 <template>
   <!-- content -->
   <n-drawer-content
-    title="酒水筛选"
+    title="食材筛选"
     :bordered="false"
     :segmented="false"
     closable
@@ -52,23 +52,23 @@ watchEffect(() => {
         </n-checkbox-group>
       </n-form-item>
       <!-- 正特性 -->
-      <n-form-item label="酒水标签(包含) : ">
+      <n-form-item label="食材标签(包含) : ">
         <n-select
-          v-model:value="filterForm.beverageTags"
+          v-model:value="filterForm.ingredientsTags"
           multiple
-          :options="beverageTagOptions"
-          :render-tag="renderSelectTags({ category: 'beverage' })"
+          :options="ingredientsTagOptions"
+          :render-tag="renderSelectTags({ category: 'like' })"
           max-tag-count="responsive"
           clearable
           filterable
         />
       </n-form-item>
-      <n-form-item label="酒水标签(不包含) : ">
+      <n-form-item label="食材标签(不包含) : ">
         <n-select
-          v-model:value="filterForm.noBeverageTags"
+          v-model:value="filterForm.noIngredientTags"
           multiple
-          :options="beverageTagOptions"
-          :render-tag="renderSelectTags({ category: 'beverage' })"
+          :options="ingredientsTagOptions"
+          :render-tag="renderSelectTags({ category: 'like' })"
           max-tag-count="responsive"
           clearable
           filterable
@@ -79,7 +79,7 @@ watchEffect(() => {
         <n-select
           v-model:value="filterForm.levels"
           multiple
-          :options="beverageLevelOptions"
+          :options="ingredientsLevelOptions"
           max-tag-count="responsive"
           clearable
         />

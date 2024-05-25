@@ -4,9 +4,9 @@ import { isEmpty } from 'lodash'
 
 import { getKeys, hasRepeatItem, hasAllItem } from '@/utils/object'
 
-type TRecpieFilterFunc = (item: TRecipeItem) => boolean
+type TFilterFunc = (item: TRecipeItem) => boolean
 
-export function getRecipeFilterMethod (form: TRecipeFilterForm): TRecpieFilterFunc[] {
+export function getFilterMethod (form: TRecipeFilterForm): TFilterFunc[] {
   return getKeys(form)
     .filter((key) => !isEmpty(form[key]))
     .map((key) => {
@@ -58,5 +58,5 @@ export function getRecipeFilterMethod (form: TRecipeFilterForm): TRecpieFilterFu
 }
 
 export function filterRecipesWithForm <T extends TRecipeItem>(recipes: T[], form: TRecipeFilterForm): T[] {
-  return getRecipeFilterMethod(form).reduce((total, method) => total.filter(method), recipes)
+  return getFilterMethod(form).reduce((total, method) => total.filter(method), recipes)
 }

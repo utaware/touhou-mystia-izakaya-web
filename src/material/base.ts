@@ -18,11 +18,12 @@ export const customerPlace = getUnionKeys(customerRare, 'place')
 export const recipesPositiveTags = getUnionTags(recipes, 'positive_tags')
 export const recipesNegativeTags = getUnionTags(recipes, 'negative_tags')
 export const beverageTags = getUnionTags(beverages, 'beverage_tags')
-
-export const recipeslevel = getUnionKeys(recipes, 'level')
-export const toolNames = getUnionKeys(tools, 'name')
-export const beveragesLevel = getUnionKeys(beverages, 'level')
 export const ingredientsTags = getUnionTags(ingredients, 'ingredient_tags')
+
+export const recipeslevel = getUnionKeys(recipes, 'level').sort()
+export const beveragesLevel = getUnionKeys(beverages, 'level').sort()
+export const ingredientsLevel = getUnionKeys(ingredients, 'level').sort()
+export const toolNames = getUnionKeys(tools, 'name')
 
 export const recipesNames = getNames(recipes)
 export const beverageNames = getNames(beverages)

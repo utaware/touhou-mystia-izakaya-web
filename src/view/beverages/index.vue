@@ -47,7 +47,7 @@ const handleItemClick = (item: TBeverageItem) => {
         <li
           class="item"
           v-for="(item, index) in beverages"
-          v-show="filterBeverages.includes(index)"
+          v-show="filterBeverages.includes(item.index)"
           :key="index"
           @click="handleItemClick(item)"
         >
