@@ -1,8 +1,6 @@
 import { NSpace } from 'naive-ui'
 
-import type { TSpriteType } from '@/material'
-
-import { getPublicAssets } from '@/utils/pub-use'
+import { getPublicAssets, type TPublicDirName } from '@/utils/pub-use'
 
 interface TRenderItem {
   index: number,
@@ -13,7 +11,7 @@ interface TRenderItem {
 
 interface TRenderOption {
   size?: number;
-  type: TSpriteType
+  type: TPublicDirName
 }
 
 export function renderNotificationTitle(item: TRenderItem, options: TRenderOption) {

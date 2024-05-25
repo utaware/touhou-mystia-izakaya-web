@@ -1,13 +1,11 @@
 <script setup lang="ts">
 import SpriteUnknow from '@/components/common/sprite/unknow.vue'
 
-import type { TSpriteType } from '@/material'
-
-import { getPublicAssets } from '@/utils/pub-use'
+import { getPublicAssets, type TPublicDirName } from '@/utils/pub-use'
 
 interface Propstype {
   size?: number;
-  type: TSpriteType;
+  type: TPublicDirName;
   name: undefined | string;
 }
 

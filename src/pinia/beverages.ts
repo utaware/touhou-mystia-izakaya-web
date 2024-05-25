@@ -6,7 +6,7 @@ import {
   beverageTags,
   beverageNames,
   beveragesLevel,
-  getIndexWithName,
+  beveragesIndexMaps,
 } from '@/material'
 import type {
   TBeverageState,
@@ -65,7 +65,7 @@ export const useBeveragesStore = defineStore('beverages', {
   },
   actions: {
     setCurrentBeverage (name: string) {
-      const index = getIndexWithName('beverages', name)
+      const index = beveragesIndexMaps[name]
       const item = this.getBeverageWithCurrentCustomer[index]
       const clone = cloneDeep(item)
       this.currentBeverage = clone

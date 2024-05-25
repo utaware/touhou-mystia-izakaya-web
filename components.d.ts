@@ -33,7 +33,6 @@ declare module 'vue' {
     NScrollbar: typeof import('naive-ui')['NScrollbar']
     NSelect: typeof import('naive-ui')['NSelect']
     NSpace: typeof import('naive-ui')['NSpace']
-    NSwitch: typeof import('naive-ui')['NSwitch']
     NTabPane: typeof import('naive-ui')['NTabPane']
     NTabs: typeof import('naive-ui')['NTabs']
     NTag: typeof import('naive-ui')['NTag']
@@ -41,7 +40,6 @@ declare module 'vue' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Slider: typeof import('./src/components/common/customAudio/slider.vue')['default']
-    Sprite: typeof import('./src/components/common/sprite/index.vue')['default']
     Tags: typeof import('./src/components/common/tags/index.vue')['default']
     Unknow: typeof import('./src/components/common/sprite/unknow.vue')['default']
   }

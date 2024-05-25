@@ -7,8 +7,8 @@ export function getCustomerRareSrc ({ namePY }: { namePY: string }) {
 }
 
 
-type TPublicDirName = 'beverages' | 'ingredients' | 'recipes' | 'tools'
+export type TPublicDirName = 'beverages' | 'ingredients' | 'recipes' | 'tools'
 
 export function getPublicAssets (type: TPublicDirName, name: string, ext: string = '.png') {
-  return ['/public', type, name + ext].join('/')
+  return ['', type, name + ext].join('/')
 }

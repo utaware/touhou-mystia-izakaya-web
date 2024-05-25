@@ -4,7 +4,7 @@ import {
   recipes,
   recipesPositiveTags,
   recipesNegativeTags,
-  getIndexWithName,
+  recipesIndexMaps,
   mapSelectOptions,
 } from '@/material'
 import type {
@@ -119,7 +119,7 @@ export const useRecipesStore = defineStore('recipes', {
       extra?: string[],
     }) {
       const { setExtraIngredients } = useIngredientsStore()
-      const index = getIndexWithName('recipes', name)
+      const index = recipesIndexMaps[name]
       const item = this.getRecipesWithCustomerRare[index]
       const clone = cloneDeep(item)
       this.currentRecipe = clone
