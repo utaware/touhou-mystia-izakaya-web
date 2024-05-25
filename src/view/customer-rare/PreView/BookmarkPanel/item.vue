@@ -3,10 +3,11 @@ import { useCustomerRareStore } from '@/pinia'
 
 import type { TBookmark } from '@/material'
 
-import SpriteItem from '@/components/common/sprite/index.vue'
 import TagItem from '@/components/common/tags/index.vue'
 
 import { getEmptyIngredientsCount } from '@/utils/recipes'
+
+import { getPublicAssets } from '@/utils/pub-use'
 
 interface propsType extends TBookmark {
   size: number;
@@ -40,37 +41,37 @@ const empty = getEmptyIngredientsCount(ingredients.length, extra.length)
       <!-- 信息 -->
       <n-space :vertical="vertical" :wrap-item="false">
         <!-- 厨具 -->
-        <sprite-item type="tools" :name="tool" :size="size" :title="tool" />
+        <img :width="size" :src="getPublicAssets('tools', tool)" :alt="tool" :title="tool">
         <!-- line -->
         <span class="line"></span>
         <!-- 料理 -->
-        <sprite-item type="recipes" :name="recipe" :size="size" :title="recipe" />
+        <img :width="size" :src="getPublicAssets('recipes', recipe)" :alt="recipe" :title="recipe">
         <!-- line -->
         <span class="line"></span>
         <!-- 酒水 -->
-        <sprite-item type="beverages" :name="beverage" :size="size" :title="beverage" />
+        <img :width="size" :src="getPublicAssets('beverages', beverage)" :alt="beverage" :title="beverage">
         <!-- line -->
         <span class="line"></span>
         <!-- 食材 -->
         <n-space :vertical="vertical" class="ingredients">
           <!-- 食材 -->
-          <sprite-item
+          <img
             v-for="(item, index) in ingredients"
-            type="ingredients"
-            :name="item"
+            :width="size"
+            :src="getPublicAssets('ingredients', item)"
+            :alt="beverage"
+            :title="beverage"
             :key="`recipe-${index}`"
-            :size="size"
-            :title="item"
-          />
+          >
           <!-- 额外选择 -->
-          <sprite-item
+          <img
             v-for="(item, index) in extra"
-            type="ingredients"
-            :name="item"
-            :key="`ingredient-${index}`"
-            :size="size"
-            :title="item"
-          />
+            :width="size"
+            :src="getPublicAssets('ingredients', item)"
+            :alt="beverage"
+            :title="beverage"
+            :key="`extra-${index}`"
+          >
           <!-- empty -->
           <span class="empty" v-for="item in empty" :key="`empty-${item}`"></span>
         </n-space>

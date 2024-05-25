@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { TIngredientsItem } from '@/material'
 
-import SpriteItem from '@/components/common/sprite/index.vue'
+import { getPublicAssets } from '@/utils/pub-use'
 
 defineProps<{
   ingredients: TIngredientsItem[]
@@ -16,13 +16,7 @@ defineProps<{
       v-for="(item, index) in ingredients"
       :key="index"
     >
-      <sprite-item
-        :index="item.index"
-        :width="48"
-        :height="48"
-        :title="item.name"
-        type="ingredients"
-      />
+      <img width="48" :src="getPublicAssets('ingredients', item.name)" :alt="item.name" :title="item.name" />
     </li>
   </ul>
 </template>

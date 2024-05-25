@@ -1,6 +1,7 @@
 .ingredients-view {
+  padding-top: 12px;
   display: grid;
   gap: 24px;
-  grid-template-columns: repeat(auto-fill, 48px);
+  grid-template-columns: repeat(auto-fill, 64px);
   justify-content: space-between;
 }

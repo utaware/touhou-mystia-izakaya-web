@@ -1,12 +1,13 @@
 import { NTag, NSpace, NButton } from 'naive-ui'
 import type { DataTableColumns } from 'naive-ui'
 
-import SpriteItem from '@/components/common/sprite/index.vue'
 import TagItem from '@/components/common/tags/index.vue'
 
 import { beverageLevelOptions } from '@/material/options'
 
 import type { TBeverageMatchItem } from '@/material'
+
+import { getPublicAssets } from '@/utils/pub-use'
 
 export const createColumns = ({
   handleSelectRow,
@@ -41,14 +42,9 @@ export const createColumns = ({
     },
     {
       title: '酒水',
-      key: 'recipes',
-      render ({ index }) {
-        return <SpriteItem
-          index={index}
-          width={spriteSize}
-          height={spriteSize}
-          type="beverages"
-        />
+      key: 'beverage',
+      render ({ name }) {
+        return <img width={spriteSize} src={getPublicAssets('beverages', name)} alt={name} title={name} />
       }
     },
     {

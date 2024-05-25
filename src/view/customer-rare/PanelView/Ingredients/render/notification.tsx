@@ -6,13 +6,14 @@ import { PlusSquareFilled, MinusSquareFilled, CheckSquareFilled } from '@vicons/
 
 import type { TCustomerRare, TMatchIngredientsItem, TCustomerTagType } from '@/material'
 
-import SpriteItem from '@/components/common/sprite/index.vue'
 import TagItem from '@/components/common/tags/index.vue'
 
 import '../style/notification.scss'
 import color from '@/styles/color.module.scss'
 
 import { getCustomerTagType } from '@/utils/customer'
+
+import { getPublicAssets } from '@/utils/pub-use'
 
 type TTagTypeFn = (tag: string) => TCustomerTagType
 
@@ -62,7 +63,7 @@ export function createNotification ({
   customer: TCustomerRare,
   handleActionClick(name: string): void
 }) {
-  const { index, name, add_tags, remove_tags, fix_tags, type } = item
+  const { name, add_tags, remove_tags, fix_tags, type } = item
   const getTagType = (tag: string) => getCustomerTagType(tag, customer)
   const options = [
     { tags: fix_tags, icon: CheckSquareFilled, label: '保留', },
@@ -73,7 +74,7 @@ export function createNotification ({
     title: () => {
       return (
         <div class="title">
-          <SpriteItem index={index} size={28} title={name} type="ingredients" />
+          <img width="28" src={getPublicAssets('ingredients', name)} alt={name} title={name} />
           <div style="margin-left: 12px;" class="bold">{ name }</div>
         </div>
       )

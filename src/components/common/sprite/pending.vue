@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import SpriteUnknow from '@/components/common/sprite/unknow.vue'
-import SpriteItem from '@/components/common/sprite/index.vue'
 
 import type { TSpriteType } from '@/material'
+
+import { getPublicAssets } from '@/utils/pub-use'
 
 interface Propstype {
   size?: number;
@@ -14,12 +15,12 @@ defineProps<Propstype>()
 </script>
 
 <template>
-  <sprite-item
+  <img
     v-if="name"
-    :type="type"
-    :name="name"
+    :width="size"
+    :src="getPublicAssets(type, name)"
+    :alt="name"
     :title="name"
-    :size="size"
   />
   <sprite-unknow
     v-else

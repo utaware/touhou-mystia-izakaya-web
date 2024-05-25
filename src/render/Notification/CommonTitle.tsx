@@ -2,6 +2,8 @@ import { NSpace } from 'naive-ui'
 
 import type { TSpriteType } from '@/material'
 
+import { getPublicAssets } from '@/utils/pub-use'
+
 interface TRenderItem {
   index: number,
   name: string,
@@ -19,7 +21,7 @@ export function renderNotificationTitle(item: TRenderItem, options: TRenderOptio
   const { size = 28, type } = options
   return () => (
     <NSpace align="center">
-      <img width={size} src={`/public/${type}/${name}.png`} alt={name} title={name} />
+      <img width={size} src={getPublicAssets(type, name)} alt={name} title={name} />
       <div class="bold">【{dlc}】{ name }</div>
     </NSpace>
   )

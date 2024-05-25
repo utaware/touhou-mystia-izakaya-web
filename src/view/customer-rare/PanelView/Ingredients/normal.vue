@@ -11,7 +11,7 @@ import type { TCustomerRare, TMatchIngredientsItem } from '@/material'
 
 import { createNotification } from './render/notification'
 
-import SpriteItem from '@/components/common/sprite/index.vue'
+import { getPublicAssets } from '@/utils/pub-use'
 
 const { notification } = createDiscreteApi(['notification'])
 
@@ -59,15 +59,10 @@ const handleViewIngredients = (
       class="item"
       v-for="(item, index) in ingredients"
       :key="index"
+      @click="handleViewIngredients(item, currentCustomer)"
     >
       <n-badge :value="item.badge_text" :show="isCanSelect" show-zero>
-        <sprite-item
-          :index="item.index"
-          :size="48"
-          :title="item.name"
-          type="ingredients"
-          @click="handleViewIngredients(item, currentCustomer)"
-        />
+        <img width="48" :src="getPublicAssets('ingredients', item.name)" :alt="item.name" :title="item.name" />
       </n-badge>
     </li>
   </ul>

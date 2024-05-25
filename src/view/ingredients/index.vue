@@ -12,6 +12,8 @@ import { CalendarWeekStart20Regular } from '@vicons/fluent'
 
 import FilterModal from './filter.vue'
 
+import { getPublicAssets } from '@/utils/pub-use'
+
 const filterVisible = ref(false)
 
 const allIngredientsIndex = ingredients.map(({ index }) => index)
@@ -48,7 +50,7 @@ const handleItemClick = (item: TIngredientsItem) => {
           <n-badge :value="item.ingredient_tags.length" :show-zero="true">
             <img
               width="64"
-              :src="`/public/ingredients/${item.name}.png`"
+              :src="getPublicAssets('ingredients', item.name)"
               :alt="item.name"
               :title="item.name"
             >

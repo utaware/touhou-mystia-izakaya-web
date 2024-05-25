@@ -1,12 +1,13 @@
 import { NTag, NSpace, NButton } from 'naive-ui'
 import type { DataTableColumns } from 'naive-ui'
 
-import SpriteItem from '@/components/common/sprite/index.vue'
 import TagItem from '@/components/common/tags/index.vue'
 
 import type { TRecipeMatchItem } from '@/material'
 
 import { getCustomerTagType } from '@/utils/customer'
+
+import { getPublicAssets } from '@/utils/pub-use'
 
 export const createColumns = ({
   handleSelectRow,
@@ -39,11 +40,12 @@ export const createColumns = ({
     {
       title: '料理',
       key: 'recipes',
-      render ({ index }) {
-        return <SpriteItem
-          index={index}
-          size={spriteSize}
-          type="recipes"
+      render ({ name }) {
+        return <img
+          width={spriteSize}
+          src={getPublicAssets('recipes', name)}
+          alt={name}
+          title={name}
         />
       }
     },
@@ -51,11 +53,11 @@ export const createColumns = ({
       title: '厨具',
       key: 'tool',
       render ({ tool }) {
-        return <SpriteItem
-          name={tool}
-          size={spriteSize}
+        return <img
+          width={spriteSize}
+          src={getPublicAssets('tools', tool)}
+          alt={tool}
           title={tool}
-          type="tools"
         />
       },
     },
@@ -67,11 +69,11 @@ export const createColumns = ({
           <>
           {
             ingredients.map((ingredient) => (
-              <SpriteItem
-                name={ingredient}
-                size={spriteSize}
+              <img
+                width={spriteSize}
+                src={getPublicAssets('ingredients', ingredient)}
+                alt={ingredient}
                 title={ingredient}
-                type="ingredients"
               />)
             )
           }

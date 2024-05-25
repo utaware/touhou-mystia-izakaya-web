@@ -12,6 +12,8 @@ import { CalendarWeekStart20Regular } from '@vicons/fluent'
 
 import FilterModal from './filter.vue'
 
+import { getPublicAssets } from '@/utils/pub-use'
+
 const filterVisible = ref(false)
 
 const allBeverageIndex = beverages.map(({ index }) => index)
@@ -48,7 +50,7 @@ const handleItemClick = (item: TBeverageItem) => {
           <n-badge type="success" :value="item.price">
             <img
               width="64"
-              :src="`/public/beverages/${item.name}.png`"
+              :src="getPublicAssets('beverages', item.name)"
               :alt="item.name"
               :title="item.name"
             >

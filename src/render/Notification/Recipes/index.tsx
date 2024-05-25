@@ -6,6 +6,8 @@ import TagItem from '@/components/common/tags/index.vue'
 
 import { renderNotificationTitle } from '@/render/Notification/CommonTitle'
 
+import { getPublicAssets } from '@/utils/pub-use'
+
 function renderTags (tags: string[], category: TCustomerTagType) {
   return (
     <>
@@ -17,7 +19,7 @@ function renderTags (tags: string[], category: TCustomerTagType) {
 function renderIngredients (ingredients: string[]) {
   return (
     <NSpace>
-      { ingredients.map((name) => <img src={`/public/ingredients/${name}.png`} width="28" title={name} />) }
+      { ingredients.map((name) => <img src={getPublicAssets('ingredients', name)} width="28" title={name} />) }
     </NSpace>
   )
 }
@@ -30,7 +32,7 @@ export function createNotification (item: TRecipeItem) {
       return (
         <NSpace vertical>
           <NSpace align="center">
-            <img src={`/public/tools/${tool}.png`} width="28" title={tool} />
+            <img src={getPublicAssets('tools', tool)} width="28" title={tool} />
             <NDivider vertical />
             { renderIngredients(ingredients) }
           </NSpace>
