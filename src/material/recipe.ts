@@ -11,15 +11,16 @@ export interface TRecipeMatchItem extends TRecipeItem, TRecipeMatchResult {
 }
 
 export interface TRecipeFilterForm {
-  selectedPositiveTags: string[],
-  selectedNoPositiveTags: string[],
-  selectedNegativeTags: string[],
-  selectedNoNegativeTags: string[],
-  selectedIngredients: string[],
-  selectedNoIngredients: string[],
-  selectedTools: string[],
-  selectedMatchPoints: number[],
-  searchName: string,
+  dlc?: string[],
+  name?: string,
+  positiveTags?: string[],
+  noPositiveTags?: string[],
+  negativeTags?: string[],
+  noNegativeTags?: string[],
+  tools?: string[],
+  levels?: number[],
+  ingredients?: string[],
+  noIngredients?: string[],
 }
 
 export interface TRecipeState {

@@ -7,7 +7,7 @@ import { Settings32Filled } from '@vicons/fluent'
 
 import { useRecipesStore } from '@/pinia'
 
-import filterModal from './filter.vue'
+import ConfigView from './config.vue'
 
 import { renderExpandIcon } from '@/render/ExpandIcon.tsx'
 
@@ -39,14 +39,7 @@ watch(recipes, () => {
   <!-- wrapper -->
   <div class="wrapper">
     <!-- config -->
-    <div class="config">
-      <!-- 设置 -->
-      <n-button @click="openFilterModal">
-        <n-space>
-          <n-icon :component="Settings32Filled"/>设置
-        </n-space>
-      </n-button>
-    </div>
+    <config-view />
     <!-- view -->
     <n-data-table
       class="view"

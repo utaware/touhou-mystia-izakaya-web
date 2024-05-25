@@ -20,9 +20,9 @@ export function useDemandSelect () {
   const handleChangePositiveTag = (value: string | null) => {
     if (demandSyncFilter.value) {
       if (!value || isSpecialRecipeDemand(value)) {
-        setRecipesFilter('selectedPositiveTags', [])
+        setRecipesFilter('positiveTags', [])
       } else {
-        setRecipesFilter('selectedPositiveTags', [value])
+        setRecipesFilter('positiveTags', [value])
       }
     }
     setDemandRecipeTag(value)

@@ -1,50 +1,54 @@
-import type { TRecipeMatchItem, TRecipeFilterForm } from '@/material'
+import type { TRecipeItem, TRecipeFilterForm } from '@/material'
 
 import { isEmpty } from 'lodash'
 
 import { getKeys, hasRepeatItem, hasAllItem } from '@/utils/object'
 
-type TRecpieFilterFunc = (item: TRecipeMatchItem) => boolean
+type TRecpieFilterFunc = (item: TRecipeItem) => boolean
 
 export function getRecipeFilterMethod (form: TRecipeFilterForm): TRecpieFilterFunc[] {
   return getKeys(form)
     .filter((key) => !isEmpty(form[key]))
     .map((key) => {
       switch (key) {
-        case 'selectedPositiveTags':
-          return ({ positive_tags }: TRecipeMatchItem) => {
+        case 'dlc':
+          return ({ dlc }: TRecipeItem) => {
+            return form[key].includes(dlc)
+          }
+        case 'positiveTags':
+          return ({ positive_tags }: TRecipeItem) => {
             return hasAllItem(positive_tags, form[key])
           }
-        case 'selectedNoPositiveTags':
-          return ({ positive_tags }: TRecipeMatchItem) => {
+        case 'noPositiveTags':
+          return ({ positive_tags }: TRecipeItem) => {
             return !hasRepeatItem(form[key], positive_tags)
           }
-        case 'selectedNegativeTags':
-          return ({ negative_tags }: TRecipeMatchItem) => {
+        case 'negativeTags':
+          return ({ negative_tags }: TRecipeItem) => {
             return hasAllItem(negative_tags, form[key])
           }
-        case 'selectedNoNegativeTags':
-          return ({ negative_tags }: TRecipeMatchItem) => {
+        case 'noNegativeTags':
+          return ({ negative_tags }: TRecipeItem) => {
             return !hasRepeatItem(form[key], negative_tags)
           }
-        case 'selectedIngredients':
-          return ({ ingredients }: TRecipeMatchItem) => {
+        case 'ingredients':
+          return ({ ingredients }: TRecipeItem) => {
             return hasAllItem(ingredients, form[key])
           }
-        case 'selectedNoIngredients':
-          return ({ ingredients }: TRecipeMatchItem) => {
+        case 'noIngredients':
+          return ({ ingredients }: TRecipeItem) => {
             return !hasRepeatItem(form[key], ingredients)
           }
-        case 'selectedTools':
-          return ({ tool }: TRecipeMatchItem) => {
+        case 'levels':
+          return ({ level }: TRecipeItem) => {
+            return form[key].includes(level)
+          }
+        case 'tools':
+          return ({ tool }: TRecipeItem) => {
             return form[key].includes(tool)
           }
-        case 'selectedMatchPoints':
-          return ({ match_recipe_point }: TRecipeMatchItem) => {
-            return form[key].includes(match_recipe_point)
-          }
-        case 'searchName':
-          return ({ name }: TRecipeMatchItem) => {
+        case 'name':
+          return ({ name }: TRecipeItem) => {
             return name.includes(form[key])
           }
         default:
@@ -53,6 +57,6 @@ export function getRecipeFilterMethod (form: TRecipeFilterForm): TRecpieFilterFu
     })
 }
 
-export function filterRecipesWithForm (recipes: TRecipeMatchItem[], form: TRecipeFilterForm): TRecipeMatchItem[] {
+export function filterRecipesWithForm (recipes: TRecipeItem[], form: TRecipeFilterForm): TRecipeItem[] {
   return getRecipeFilterMethod(form).reduce((total, method) => total.filter(method), recipes)
 }
