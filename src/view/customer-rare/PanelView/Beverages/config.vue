@@ -16,11 +16,11 @@ const { filterForm } = storeToRefs(beverageStore)
   <!-- view -->
   <div class="config-view">
     <!-- 名称 -->
-    <n-input class="left" v-model:value="filterForm.searchName" clearable />
+    <n-input class="left" v-model:value="filterForm.name" clearable />
     <!-- 酒水标签 -->
     <n-select
       class="right"
-      v-model:value="filterForm.selectBeverageTags"
+      v-model:value="filterForm.beverageTags"
       multiple
       :options="beverageTagOptions"
       :render-tag="renderSelectTags({ category: 'beverage' })"

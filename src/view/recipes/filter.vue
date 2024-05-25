@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { reactive, watchEffect } from 'vue'
 
+import { useRecipesStore } from '@/pinia'
+
 import {
   dlcOptions,
   recipesToolOptions,
@@ -10,21 +12,17 @@ import {
   ingredientsOptions,
 } from '@/material/options'
 
-import type { TRecipeItem } from '@/material'
-
 import { renderSelectTags } from '@/render/SelectTags'
 import { renderSelectToolsLabel } from '@/render/SelectToolsLabel'
 import { filterRecipesWithForm } from '@/utils/recipes/filter'
 
-const props = defineProps<{
-  value: TRecipeItem[]
-}>()
+const recipesStore = useRecipesStore()
+
+const { recipes } = recipesStore
 
 const emit = defineEmits<{
-  'update:value': [value: TRecipeItem[]]
+  'update:value': [value: number[]]
 }>()
-
-const defaultRecipes = props.value
 
 const filterForm = reactive({
   dlc: [],
@@ -40,8 +38,9 @@ const filterForm = reactive({
 })
 
 watchEffect(() => {
-  const filterRecipes = filterRecipesWithForm(defaultRecipes, filterForm)
-  emit('update:value', filterRecipes)
+  const filterRecipes = filterRecipesWithForm(recipes, filterForm)
+  const visibleIndex = filterRecipes.map(({ index }) => index)
+  emit('update:value', visibleIndex)
 })
 </script>
 

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+
 import { createDiscreteApi } from 'naive-ui'
 
 import { useBeveragesStore } from '@/pinia'
@@ -9,11 +11,25 @@ import SpriteItem from '@/components/common/sprite/index.vue'
 
 import { createNotification } from '@/render/Notification/Beverages'
 
+import { CalendarWeekStart20Regular } from '@vicons/fluent'
+
+import FilterModal from './filter.vue'
+
 const beveragesStore = useBeveragesStore()
 
 const { beverages } = beveragesStore
 
+const filterVisible = ref(false)
+
+const allBeverageIndex = beverages.map(({ index }) => index)
+
+const filterBeverages = ref(allBeverageIndex)
+
 const { notification } = createDiscreteApi(['notification'])
+
+const handleToggleVisible = () => {
+  filterVisible.value = !filterVisible.value
+}
 
 const handleItemClick = (item: TBeverageItem) => {
   const options = createNotification(item)
@@ -31,6 +47,7 @@ const handleItemClick = (item: TBeverageItem) => {
         <li
           class="item"
           v-for="(item, index) in beverages"
+          v-show="filterBeverages.includes(index)"
           :key="index"
           @click="handleItemClick(item)"
         >
@@ -42,6 +59,20 @@ const handleItemClick = (item: TBeverageItem) => {
           <span class="label">{{ item.name }}</span>
         </li>
       </ul>
+      <!-- button -->
+      <div class="fixed" @click="handleToggleVisible">
+        <n-icon size="26" :component="CalendarWeekStart20Regular" />
+      </div>
+      <!-- filter -->
+      <n-drawer
+        v-model:show="filterVisible"
+        :width="320"
+        placement="left"
+        mask-closable
+        display-directive="show"
+      >
+        <filter-modal v-model:value="filterBeverages" />
+      </n-drawer>
     </n-card>
   </div>
 </template>

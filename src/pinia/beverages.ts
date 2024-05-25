@@ -31,8 +31,8 @@ export const useBeveragesStore = defineStore('beverages', {
     currentBeverage: null,
     currentBeverageName: '',
     filterForm: {
-      selectBeverageTags: [],
-      searchName: ''
+      beverageTags: [],
+      name: ''
     }
   }),
   getters: {

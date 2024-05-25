@@ -21,7 +21,9 @@ const recipesStore = useRecipesStore()
 
 const { recipes } = recipesStore
 
-const filterRecipes = ref([...recipes])
+const allRecipesIndex = recipes.map(({ index }) => index)
+
+const filterRecipes = ref(allRecipesIndex)
 
 const { notification } = createDiscreteApi(['notification'])
 
@@ -44,7 +46,8 @@ const handleItemClick = (item: TRecipeItem) => {
       <ul class="material-list">
         <li
           class="item"
-          v-for="(item, index) in filterRecipes"
+          v-for="(item, index) in recipes"
+          v-show="filterRecipes.includes(index)"
           :key="index"
           @click="handleItemClick(item)"
         >
@@ -76,19 +79,4 @@ const handleItemClick = (item: TRecipeItem) => {
 
 <style scoped lang="scss">
 @import url('@/styles/material.scss');
-.fixed {
-  position: fixed;
-  display: flex;
-  width: 44px;
-  height: 44px;
-  right: 60px;
-  bottom: 60px;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 8px 0px;
-  color: rgb(51, 54, 57);
-  cursor: pointer;
-  background-color: white;
-}
 </style>

@@ -1,30 +1,42 @@
-import type { TBeverageMatchItem, TBeverageFilterForm } from '@/material'
+import type { TBeverageItem, TBeverageFilterForm } from '@/material'
 
 import { isEmpty } from 'lodash'
 
-import { getKeys, hasAllItem } from '@/utils/object'
+import { getKeys, hasAllItem, hasRepeatItem } from '@/utils/object'
 
-type TRecpieFilterFunc = (item: TBeverageMatchItem) => boolean
+type TRecpieFilterFunc = (item: TBeverageItem) => boolean
 
-export function filterBeveragesWithForm (beverages: TBeverageMatchItem[], form: TBeverageFilterForm) {
-  return getRecipeFilterMethod(form).reduce((total, method) => total.filter(method), beverages)
-}
-
-export function getRecipeFilterMethod (form: TBeverageFilterForm): TRecpieFilterFunc[] {
+export function getBeverageFilterMethod (form: TBeverageFilterForm): TRecpieFilterFunc[] {
   return getKeys(form)
     .filter((key) => !isEmpty(form[key]))
     .map((key) => {
       switch (key) {
-        case 'selectBeverageTags':
-          return ({ beverage_tags }: TBeverageMatchItem) => {
-            return hasAllItem(beverage_tags, form[key])
+        case 'dlc':
+          return ({ dlc }: TBeverageItem) => {
+            return form[key]!.includes(dlc)
           }
-        case 'searchName':
-          return ({ name }: TBeverageMatchItem) => {
-            return name.includes(form[key])
+        case 'beverageTags':
+          return ({ beverage_tags }: TBeverageItem) => {
+            return hasAllItem(beverage_tags, form[key]!)
+          }
+        case 'noBeverageTags':
+          return ({ beverage_tags }: TBeverageItem) => {
+            return !hasRepeatItem(form[key]!, beverage_tags)
+          }
+        case 'name':
+          return ({ name }: TBeverageItem) => {
+            return name.includes(form[key]!)
+          }
+        case 'levels':
+          return ({ level }: TBeverageItem) => {
+            return form[key]!.includes(level)
           }
         default:
           throw new Error('undefined filter method name')
       }
     })
+}
+
+export function filterBeveragesWithForm <T extends TBeverageItem>(beverages: T[], form: TBeverageFilterForm): T[] {
+  return getBeverageFilterMethod(form).reduce((total, method) => total.filter(method), beverages)
 }

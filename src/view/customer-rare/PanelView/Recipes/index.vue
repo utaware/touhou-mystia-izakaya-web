@@ -3,8 +3,6 @@ import { ref, watch } from 'vue'
 
 import { storeToRefs } from 'pinia'
 
-import { Settings32Filled } from '@vicons/fluent'
-
 import { useRecipesStore } from '@/pinia'
 
 import ConfigView from './config.vue'
@@ -18,12 +16,6 @@ const recipesStore = useRecipesStore()
 const { getRecipesTableData: recipes } = storeToRefs(recipesStore)
 
 const { setCurrentRecipe } = recipesStore
-
-const filterModalShow = ref(false)
-
-const openFilterModal = () => {
-  filterModalShow.value = true
-}
 
 const tableEl = ref()
 

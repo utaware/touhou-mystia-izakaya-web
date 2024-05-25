@@ -1,14 +1,17 @@
 import type { TBeverageItem } from './base'
 
 export interface TBeverageFilterForm {
-  selectBeverageTags: string[],
-  searchName: string,
+  dlc?: string[];
+  beverageTags?: string[];
+  noBeverageTags?: string[];
+  name?: string;
+  levels?: number[];
 }
 
 export interface TBeverageMatchItem extends TBeverageItem {
-  match_beverage_tags: string[],
-  match_beverage_point: number,
-  badge_text: string,
+  match_beverage_tags: string[];
+  match_beverage_point: number;
+  badge_text: string;
 }
 
 export interface TBeverageState {

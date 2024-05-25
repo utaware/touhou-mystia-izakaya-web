@@ -31,7 +31,7 @@ export function useDemandSelect () {
   const handleChangeBeverageTag = (value: string | null) => {
     if (demandSyncFilter.value) {
       const val = value ? [value] : []
-      setBeveragesFilter('selectBeverageTags', val)
+      setBeveragesFilter('beverageTags', val)
     }
     setDemandBeverageTag(value)
   }
