@@ -5,7 +5,11 @@ import NavHeader from '@/components/layout/NavHeader/index.vue';
 <template>
   <div class="main">
     <NavHeader/>
-    <router-view></router-view>
+    <router-view v-slot="{ Component }">
+      <keep-alive>
+        <component :is="Component" />
+      </keep-alive>
+    </router-view>
   </div>
 </template>
 
