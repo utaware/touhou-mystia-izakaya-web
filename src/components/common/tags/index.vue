@@ -42,15 +42,15 @@ withDefaults(defineProps<PropsType>(), {
   }
 }
 .like {
-  background-color: rgb(230, 180, 166);
-  color: rgb(131, 0, 0);
+  background-color: #EBB7A9;
+  color: #830000;
 }
 .hate {
-  background-color: rgb(93, 69, 58);
-  color: rgb(229, 13, 13);
+  background-color: #121212;
+  color: #FF0F0F;
 }
 .beverage {
-  background-color: rgb(176, 207, 215);
-  color: rgb(155, 89, 37);
+  background-color: #C5E6F0;
+  color: #830000;
 }
 </style>
