@@ -25,7 +25,8 @@
       "@/*": [
         "src/*"
       ]
-    }
+    },
+    "jsxImportSource": "vue"
   },
   "include": [
     "src/**/*.ts",
