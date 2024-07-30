@@ -118,7 +118,7 @@ export const useCustomerRareStore = defineStore('customerRare', {
       const extra = extraIngredientsNames
       const customer = this.currentCustomerName
       const uuid = generatorUid()
-      const bookmark: TBookmark = {
+      const bookmark: TBookmark = cloneDeep({
         customer,
         recipe,
         tool,
@@ -129,7 +129,7 @@ export const useCustomerRareStore = defineStore('customerRare', {
         demandBeverageTag,
         demandRecipeTag,
         color,
-      }
+      })
       this.bookmark.push(bookmark)
     },
     deleteBookmark (uuid: string) {
